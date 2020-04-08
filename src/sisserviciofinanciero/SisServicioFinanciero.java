@@ -5,6 +5,8 @@
  */
 package sisserviciofinanciero;
 
+import static java.sql.DriverManager.println;
+
 /**
  *
  * @author Alejandro
@@ -16,6 +18,7 @@ public class SisServicioFinanciero {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        println("kol");
     }
     
 }
