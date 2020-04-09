@@ -5,6 +5,7 @@
  */
 package sisserviciofinanciero;
 
+import controladores.Conexion;
 import static java.sql.DriverManager.println;
 
 /**
@@ -21,6 +22,9 @@ public class SisServicioFinanciero {
         println("kol");
         println("Sirve");
         System.out.println("Hola Ya sirve");
+        
+        Conexion conexion = new Conexion();
+        conexion.Conectar();
         
     }
     
