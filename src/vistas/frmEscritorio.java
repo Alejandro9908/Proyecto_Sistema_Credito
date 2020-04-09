@@ -29,26 +29,71 @@ public class frmEscritorio extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jmEmpresa = new javax.swing.JMenu();
+        jmiDepartamentos = new javax.swing.JMenuItem();
+        jmiNuevoDepartamento = new javax.swing.JMenuItem();
+        jmiCargos = new javax.swing.JMenuItem();
+        jmiNuevoCargo = new javax.swing.JMenuItem();
+        jmiEmpleados = new javax.swing.JMenuItem();
+        jmiNuevoEmpleado = new javax.swing.JMenuItem();
+        jmiUsuarios = new javax.swing.JMenuItem();
+        jmiNuevoUsuario = new javax.swing.JMenuItem();
+        jmiSucursal = new javax.swing.JMenuItem();
+        jmiNuevaSucursal = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1034, Short.MAX_VALUE)
+            .addGap(0, 1329, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
         );
 
         getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jmEmpresa.setText("Empresa");
+
+        jmiDepartamentos.setText("Departamentos");
+        jmEmpresa.add(jmiDepartamentos);
+
+        jmiNuevoDepartamento.setText("Nuevo Departamento");
+        jmEmpresa.add(jmiNuevoDepartamento);
+
+        jmiCargos.setText("Cargos");
+        jmEmpresa.add(jmiCargos);
+
+        jmiNuevoCargo.setText("Nuevo Cargo");
+        jmEmpresa.add(jmiNuevoCargo);
+
+        jmiEmpleados.setText("Empleados");
+        jmEmpresa.add(jmiEmpleados);
+
+        jmiNuevoEmpleado.setText("Nuevo Empleado");
+        jmEmpresa.add(jmiNuevoEmpleado);
+
+        jmiUsuarios.setText("Usuarios");
+        jmEmpresa.add(jmiUsuarios);
+
+        jmiNuevoUsuario.setText("Nuevo Usuario");
+        jmEmpresa.add(jmiNuevoUsuario);
+
+        jmiSucursal.setText("Sucursal");
+        jmEmpresa.add(jmiSucursal);
+
+        jmiNuevaSucursal.setText("Nueva Sucursal");
+        jmEmpresa.add(jmiNuevaSucursal);
+
+        jMenuBar1.add(jmEmpresa);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
@@ -95,8 +140,18 @@ public class frmEscritorio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jmEmpresa;
+    private javax.swing.JMenuItem jmiCargos;
+    private javax.swing.JMenuItem jmiDepartamentos;
+    private javax.swing.JMenuItem jmiEmpleados;
+    private javax.swing.JMenuItem jmiNuevaSucursal;
+    private javax.swing.JMenuItem jmiNuevoCargo;
+    private javax.swing.JMenuItem jmiNuevoDepartamento;
+    private javax.swing.JMenuItem jmiNuevoEmpleado;
+    private javax.swing.JMenuItem jmiNuevoUsuario;
+    private javax.swing.JMenuItem jmiSucursal;
+    private javax.swing.JMenuItem jmiUsuarios;
     // End of variables declaration//GEN-END:variables
 }
