@@ -6,7 +6,10 @@
 package sisserviciofinanciero;
 
 import controladores.Conexion;
+import java.awt.Frame;
 import static java.sql.DriverManager.println;
+import javax.swing.JFrame;
+import vistas.frmEscritorio;
 
 /**
  *
@@ -25,6 +28,12 @@ public class SisServicioFinanciero {
         
         Conexion conexion = new Conexion();
         conexion.Conectar();
+        
+        frmEscritorio frm_Escritorio1 = new frmEscritorio();
+        frm_Escritorio1.setTitle("Sistema de Creditos");
+        frm_Escritorio1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frm_Escritorio1.setExtendedState(Frame.MAXIMIZED_BOTH);
+        frm_Escritorio1.setVisible(true);
         
     }
     
