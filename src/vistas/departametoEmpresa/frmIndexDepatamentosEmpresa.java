@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas;
+package vistas.departametoEmpresa;
 
+import vistas.departametoEmpresa.frmMostrarDepartamentoEmpresa;
+import vistas.departametoEmpresa.frmNuevoDepartamentoEmpresa;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

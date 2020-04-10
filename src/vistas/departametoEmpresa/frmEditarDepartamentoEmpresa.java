@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas;
+package vistas.departametoEmpresa;
 
+import vistas.departametoEmpresa.frmMostrarDepartamentoEmpresa;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,37 +15,36 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  *
  * @author Alejandro
  */
-public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame implements ActionListener{
+public class frmEditarDepartamentoEmpresa extends javax.swing.JInternalFrame implements ActionListener{
 
     /**
-     * Creates new form frmMostrarDepartamentoEmpresa
+     * Creates new form frmEditarDepartamentoEmpresa
      */
-    public frmMostrarDepartamentoEmpresa() {
+    public frmEditarDepartamentoEmpresa() {
         initComponents();
         
-        //AGREGAR BOTONES AL ACTION LISTENER
-        
-        btnEditar.addActionListener(this);
-        btnEliminar.addActionListener(this);
+        //AGREGAR LOS BOTONES AL ACTION LISTENER
+        btnGuardar.addActionListener(this);
+        btnCancelar.addActionListener(this);
     }
 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==btnEditar){
-            frmEditarDepartamentoEmpresa frmEditarDep = new frmEditarDepartamentoEmpresa();
-            dpnlEscritorio.add(frmEditarDep);
+        if(btnCancelar == e.getSource()){
+            frmMostrarDepartamentoEmpresa frmMostrarDep = new frmMostrarDepartamentoEmpresa();
+            dpnlEscritorio.add(frmMostrarDep);
             Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmEditarDep.getSize();
-            frmEditarDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmEditarDep.setVisible(true);
-            //cerramos el form mostrar departamento
+            Dimension FrameSize = frmMostrarDep.getSize();
+            frmMostrarDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+            frmMostrarDep.setVisible(true);
+            //cerramos la ventana editar
             this.dispose();
         }
-        if(e.getSource()== btnEliminar){
-            //AQUI MANDAR A LLAMAR UN JOPTIONPANE
-            //CON DOS BOTONES
-            //UNA PARA CANCELAR
-            //Y OTRO PARA CONFIRMAR ELIMINACION
+        if(btnGuardar == e.getSource()){
+            //SE PUEDE MANDAR A LLAMAR UN JOPTIONPANE PARA CONFIRMAR
+            //LUEGO REDIRIGIR A LA VENTANA DE MOSTRAR DEPARTEMTO
+            //PARA ESTO SE PUEDE USAR EL MISMO CODIGO DEL EVENTO CANCELAR
         }
     }
     
@@ -76,8 +76,8 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         txtFecha = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -88,12 +88,9 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre.setText("Nombre del Departamento");
 
-        txtNombre.setEditable(false);
-
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre1.setText("Descripción");
 
-        txtDescripcion.setEditable(false);
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtDescripcion);
@@ -131,7 +128,7 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addContainerGap()
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -147,7 +144,7 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                             .addComponent(lblNombre)
                             .addComponent(lblNombre2)
                             .addComponent(lblNombre4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre5)
                             .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -184,15 +181,15 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         );
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Detalles del Departamento");
+        jLabel1.setText("Editar del Departamento");
 
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
-        btnEditar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnEditar.setText("Editar");
+        btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnGuardar.setText("Guardar Cambios");
 
-        btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnEliminar.setText("Eliminar");
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnCancelar.setText("Cancelar");
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
@@ -208,9 +205,9 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardar)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
         pnlBaseLayout.setVerticalGroup(
@@ -222,8 +219,8 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(35, 35, 35)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar))
                 .addGap(26, 26, 26))
         );
 
@@ -238,8 +235,8 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
@@ -258,4 +255,5 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
+    
 }
