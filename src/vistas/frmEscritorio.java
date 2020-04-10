@@ -5,6 +5,8 @@
  */
 package vistas;
 
+import vistas.departametoEmpresa.frmIndexDepatamentosEmpresa;
+import vistas.departametoEmpresa.frmNuevoDepartamentoEmpresa;
 import java.awt.Dimension;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
