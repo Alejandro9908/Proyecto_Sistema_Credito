@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import vistas.cargo.frmIndexCargo;
 
 /**
  *
@@ -25,9 +26,9 @@ public class frmEscritorio extends javax.swing.JFrame {
         try{
             JFrame.setDefaultLookAndFeelDecorated(true);
             JDialog.setDefaultLookAndFeelDecorated(true);
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
         }catch (Exception e){
             e.printStackTrace();
@@ -97,6 +98,11 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmEmpresa.add(jmiNuevoDepartamento);
 
         jmiCargos.setText("Cargos");
+        jmiCargos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCargosActionPerformed(evt);
+            }
+        });
         jmEmpresa.add(jmiCargos);
 
         jmiNuevoCargo.setText("Nuevo Cargo");
@@ -144,7 +150,6 @@ public class frmEscritorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNuevoDepartamentoActionPerformed
 
     private void jmiDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDepartamentosActionPerformed
-        // TODO add your handling code here:
         frmIndexDepatamentosEmpresa frmIndex =new frmIndexDepatamentosEmpresa();
         dpnlEscritorio.add(frmIndex);
         Dimension desktopSize = dpnlEscritorio.getSize();
@@ -152,6 +157,15 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmIndex.setVisible(true);
     }//GEN-LAST:event_jmiDepartamentosActionPerformed
+
+    private void jmiCargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCargosActionPerformed
+        frmIndexCargo frmIndex =new frmIndexCargo();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiCargosActionPerformed
 
     /**
      * @param args the command line arguments

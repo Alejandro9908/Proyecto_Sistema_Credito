@@ -3,54 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas;
-
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import static vistas.frmEscritorio.dpnlEscritorio;
+package vistas.cargo;
 
 /**
  *
  * @author Alejandro
  */
-public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame implements ActionListener{
+public class frmMostrarCargo extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmMostrarDepartamentoEmpresa
+     * Creates new form frmMostrarCargo
      */
-    public frmMostrarDepartamentoEmpresa() {
+    public frmMostrarCargo() {
         initComponents();
-        
-        //AGREGAR BOTONES AL ACTION LISTENER
-        
-        btnEditar.addActionListener(this);
-        btnEliminar.addActionListener(this);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==btnEditar){
-            frmEditarDepartamentoEmpresa frmEditarDep = new frmEditarDepartamentoEmpresa();
-            dpnlEscritorio.add(frmEditarDep);
-            Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmEditarDep.getSize();
-            frmEditarDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmEditarDep.setVisible(true);
-            //cerramos el form mostrar departamento
-            this.dispose();
-        }
-        if(e.getSource()== btnEliminar){
-            //AQUI MANDAR A LLAMAR UN JOPTIONPANE
-            //CON DOS BOTONES
-            //UNA PARA CANCELAR
-            //Y OTRO PARA CONFIRMAR ELIMINACION
-        }
-    }
-    
-    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,6 +42,8 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         lblNombre5 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
+        lblNombre6 = new javax.swing.JLabel();
+        txtNombre1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -86,7 +55,7 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         pnlFormulario.setBackground(new java.awt.Color(255, 255, 255));
 
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre.setText("Nombre del Departamento");
+        lblNombre.setText("Nombre del Cargo");
 
         txtNombre.setEditable(false);
 
@@ -123,6 +92,11 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
 
         txtHora.setEditable(false);
 
+        lblNombre6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre6.setText("Departamento");
+
+        txtNombre1.setEditable(false);
+
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
         pnlFormularioLayout.setHorizontalGroup(
@@ -131,7 +105,7 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addContainerGap()
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -143,14 +117,19 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNombre1)
                             .addComponent(lblNombre)
                             .addComponent(lblNombre2)
                             .addComponent(lblNombre4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre5)
-                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtNombre1)
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombre6)
+                            .addComponent(lblNombre1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlFormularioLayout.setVerticalGroup(
@@ -169,10 +148,14 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNombre6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre4)
                     .addComponent(lblNombre5))
@@ -180,11 +163,11 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Detalles del Departamento");
+        jLabel1.setText("Detalles del Cargo");
 
         btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -219,8 +202,8 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(35, 35, 35)
+                .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnEliminar))
@@ -248,6 +231,7 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
     private javax.swing.JLabel lblNombre3;
     private javax.swing.JLabel lblNombre4;
     private javax.swing.JLabel lblNombre5;
+    private javax.swing.JLabel lblNombre6;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
     private javax.swing.JTextArea txtDescripcion;
@@ -256,6 +240,6 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre1;
     // End of variables declaration//GEN-END:variables
-
 }
