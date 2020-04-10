@@ -35,6 +35,8 @@ public class SisServicioFinanciero {
         frm_Escritorio1.setExtendedState(Frame.MAXIMIZED_BOTH);
         frm_Escritorio1.setVisible(true);
         
+        System.out.println("Hola soy kevin");
+        
     }
     
 }
