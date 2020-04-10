@@ -92,10 +92,9 @@ public class frmEditarDepartamentoEmpresa extends javax.swing.JInternalFrame imp
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
-        txtDescripcion.setEnabled(false);
         jScrollPane1.setViewportView(txtDescripcion);
 
-        txtId.setEnabled(false);
+        txtId.setEditable(false);
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
@@ -111,14 +110,14 @@ public class frmEditarDepartamentoEmpresa extends javax.swing.JInternalFrame imp
         lblNombre4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre4.setText("Fecha de Creación");
 
-        txtEstado.setEnabled(false);
+        txtEstado.setEditable(false);
 
         lblNombre5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre5.setText("Hora de Creación");
 
-        txtFecha.setEnabled(false);
+        txtFecha.setEditable(false);
 
-        txtHora.setEnabled(false);
+        txtHora.setEditable(false);
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);

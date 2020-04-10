@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas;
+package vistas.cargo;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -14,35 +14,29 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  *
  * @author Alejandro
  */
-public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame implements ActionListener{
+public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionListener{
 
     /**
-     * Creates new form frmIndexDepatamentosEmpresa
+     * Creates new form frmIndexCargo
      */
-    public frmIndexDepatamentosEmpresa() {
+    public frmIndexCargo() {
         initComponents();
         
-        //Añadir los botones al ActionListener
-        btnNuevoDep.addActionListener(this);
+        //AGREGAR BOTONES AL ACTION LISTENER
+        btnNuevo.addActionListener(this);
         btnActualizar.addActionListener(this);
         btnReporte.addActionListener(this);
         btnBuscar.addActionListener(this);
         
-        
-    }
-    
-     @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==btnNuevoDep){
-            frmNuevoDepartamentoEmpresa frmNuevoDep = new frmNuevoDepartamentoEmpresa();
-            dpnlEscritorio.add(frmNuevoDep);
-            Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmNuevoDep.getSize();
-            frmNuevoDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmNuevoDep.setVisible(true);
-        }
     }
 
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       if(btnNuevo == e.getSource()){
+           
+       }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,7 +60,7 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
         tblDatos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
-        btnNuevoDep = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
 
@@ -77,7 +71,7 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Departamentos de empresa");
+        jLabel1.setText("Cargos de Empleados");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -117,7 +111,7 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(808, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(rbId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbNombre))
@@ -177,13 +171,13 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
         );
         pnlIndexLayout.setVerticalGroup(
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -191,9 +185,9 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
                 .addContainerGap())
         );
 
-        btnNuevoDep.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevoDep.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevoDep.setText("Nuevo Departamento");
+        btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnNuevo.setText("Nuevo Departamento");
 
         btnReporte.setBackground(new java.awt.Color(255, 255, 255));
         btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -211,7 +205,7 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
                 .addGap(30, 30, 30)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addComponent(btnNuevoDep)
+                        .addComponent(btnNuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -235,12 +229,12 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevoDep)
+                    .addComponent(btnNuevo)
                     .addComponent(btnReporte)
                     .addComponent(btnActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
 
         getContentPane().add(pnlBase, java.awt.BorderLayout.CENTER);
@@ -253,19 +247,19 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        frmMostrarDepartamentoEmpresa frmMostrarDep = new frmMostrarDepartamentoEmpresa();
-        dpnlEscritorio.add(frmMostrarDep);
+        frmMostrarCargo frmMostrar = new frmMostrarCargo();
+        dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
-        Dimension FrameSize = frmMostrarDep.getSize();
-        frmMostrarDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-        frmMostrarDep.setVisible(true);
+        Dimension FrameSize = frmMostrar.getSize();
+        frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmMostrar.setVisible(true);
     }//GEN-LAST:event_tblDatosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnNuevoDep;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -282,5 +276,5 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 
-   
+    
 }
