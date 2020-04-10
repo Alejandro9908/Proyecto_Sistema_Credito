@@ -25,9 +25,9 @@ public class frmEscritorio extends javax.swing.JFrame {
         try{
             JFrame.setDefaultLookAndFeelDecorated(true);
             JDialog.setDefaultLookAndFeelDecorated(true);
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
         }catch (Exception e){
             e.printStackTrace();
@@ -81,6 +81,11 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmEmpresa.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         jmiDepartamentos.setText("Departamentos");
+        jmiDepartamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDepartamentosActionPerformed(evt);
+            }
+        });
         jmEmpresa.add(jmiDepartamentos);
 
         jmiNuevoDepartamento.setText("Nuevo Departamento");
@@ -138,6 +143,16 @@ public class frmEscritorio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmiNuevoDepartamentoActionPerformed
 
+    private void jmiDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDepartamentosActionPerformed
+        // TODO add your handling code here:
+        frmIndexDepatamentosEmpresa frmIndex =new frmIndexDepatamentosEmpresa();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiDepartamentosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,7 +189,7 @@ public class frmEscritorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane dpnlEscritorio;
+    public static javax.swing.JDesktopPane dpnlEscritorio;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jmEmpresa;

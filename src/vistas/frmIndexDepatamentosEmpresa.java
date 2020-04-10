@@ -5,17 +5,42 @@
  */
 package vistas;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import static vistas.frmEscritorio.dpnlEscritorio;
+
 /**
  *
  * @author Alejandro
  */
-public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame {
+public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame implements ActionListener{
 
     /**
      * Creates new form frmIndexDepatamentosEmpresa
      */
     public frmIndexDepatamentosEmpresa() {
         initComponents();
+        
+        //Añadir los botones al ActionListener
+        btnNuevoDep.addActionListener(this);
+        btnActualizar.addActionListener(this);
+        btnReporte.addActionListener(this);
+        btnBuscar.addActionListener(this);
+        
+        
+    }
+    
+     @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnNuevoDep){
+            frmNuevoDepartamentoEmpresa frmNuevoDep = new frmNuevoDepartamentoEmpresa();
+            dpnlEscritorio.add(frmNuevoDep);
+            Dimension desktopSize = dpnlEscritorio.getSize();
+            Dimension FrameSize = frmNuevoDep.getSize();
+            frmNuevoDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+            frmNuevoDep.setVisible(true);
+        }
     }
 
     /**
@@ -31,11 +56,19 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        txtbuscar = new javax.swing.JTextField();
-        btnbuscar = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         rbNombre = new javax.swing.JRadioButton();
-        rbCarnet = new javax.swing.JRadioButton();
+        rbId = new javax.swing.JRadioButton();
+        pnlIndex = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDatos = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JTextField();
+        btnNuevoDep = new javax.swing.JButton();
+        btnReporte = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -52,30 +85,30 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        txtbuscar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtbuscar.setBorder(null);
-        txtbuscar.addCaretListener(new javax.swing.event.CaretListener() {
+        txtBuscar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtBuscar.setBorder(null);
+        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtbuscarCaretUpdate(evt);
+                txtBuscarCaretUpdate(evt);
             }
         });
-        jPanel1.add(txtbuscar);
+        jPanel1.add(txtBuscar);
 
-        btnbuscar.setBackground(new java.awt.Color(255, 255, 255));
-        btnbuscar.setText("   ");
-        btnbuscar.setBorder(null);
-        jPanel1.add(btnbuscar);
+        btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("   ");
+        btnBuscar.setBorder(null);
+        jPanel1.add(btnBuscar);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Buscar");
 
         rbNombre.setBackground(new java.awt.Color(255, 255, 255));
-        rbNombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        rbNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbNombre.setText("Nombre");
 
-        rbCarnet.setBackground(new java.awt.Color(255, 255, 255));
-        rbCarnet.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        rbCarnet.setText("Id");
+        rbId.setBackground(new java.awt.Color(255, 255, 255));
+        rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbId.setText("Id");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,8 +117,8 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(794, Short.MAX_VALUE)
-                        .addComponent(rbCarnet)
+                        .addContainerGap(804, Short.MAX_VALUE)
+                        .addComponent(rbId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbNombre))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -97,15 +130,78 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbNombre)
-                    .addComponent(rbCarnet)))
+                    .addComponent(rbId)))
         );
+
+        pnlIndex.setBackground(new java.awt.Color(255, 255, 255));
+
+        tblDatos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblDatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblDatos);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Total de Registros");
+
+        javax.swing.GroupLayout pnlIndexLayout = new javax.swing.GroupLayout(pnlIndex);
+        pnlIndex.setLayout(pnlIndexLayout);
+        pnlIndexLayout.setHorizontalGroup(
+            pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlIndexLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1)
+        );
+        pnlIndexLayout.setVerticalGroup(
+            pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlIndexLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jLabel2))
+                .addGap(28, 28, 28))
+        );
+
+        btnNuevoDep.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevoDep.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnNuevoDep.setText("Nuevo Departamento");
+
+        btnReporte.setBackground(new java.awt.Color(255, 255, 255));
+        btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnReporte.setText("Reporte");
+
+        btnActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnActualizar.setText("Actualizar");
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
@@ -114,9 +210,21 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame {
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27))
+                    .addGroup(pnlBaseLayout.createSequentialGroup()
+                        .addComponent(btnNuevoDep)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
+                        .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBaseLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27))))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +233,14 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(481, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevoDep)
+                    .addComponent(btnReporte)
+                    .addComponent(btnActualizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
 
         getContentPane().add(pnlBase, java.awt.BorderLayout.CENTER);
@@ -133,20 +248,39 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtbuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtbuscarCaretUpdate
+    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         //buscar();
-    }//GEN-LAST:event_txtbuscarCaretUpdate
+    }//GEN-LAST:event_txtBuscarCaretUpdate
+
+    private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
+        frmMostrarDepartamentoEmpresa frmMostrarDep = new frmMostrarDepartamentoEmpresa();
+        dpnlEscritorio.add(frmMostrarDep);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmMostrarDep.getSize();
+        frmMostrarDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmMostrarDep.setVisible(true);
+    }//GEN-LAST:event_tblDatosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnNuevoDep;
+    private javax.swing.JButton btnReporte;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlBase;
-    private javax.swing.JRadioButton rbCarnet;
+    private javax.swing.JPanel pnlIndex;
+    private javax.swing.JRadioButton rbId;
     private javax.swing.JRadioButton rbNombre;
-    private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTable tblDatos;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+   
 }
