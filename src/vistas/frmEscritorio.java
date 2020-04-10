@@ -5,6 +5,11 @@
  */
 package vistas;
 
+import java.awt.Dimension;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+
 /**
  *
  * @author Alejandro
@@ -16,6 +21,17 @@ public class frmEscritorio extends javax.swing.JFrame {
      */
     public frmEscritorio() {
         initComponents();
+        
+        try{
+            JFrame.setDefaultLookAndFeelDecorated(true);
+            JDialog.setDefaultLookAndFeelDecorated(true);
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -27,7 +43,7 @@ public class frmEscritorio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        dpnlEscritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmEmpresa = new javax.swing.JMenu();
         jmiDepartamentos = new javax.swing.JMenuItem();
@@ -44,29 +60,35 @@ public class frmEscritorio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+        dpnlEscritorio.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout dpnlEscritorioLayout = new javax.swing.GroupLayout(dpnlEscritorio);
+        dpnlEscritorio.setLayout(dpnlEscritorioLayout);
+        dpnlEscritorioLayout.setHorizontalGroup(
+            dpnlEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1329, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        dpnlEscritorioLayout.setVerticalGroup(
+            dpnlEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 676, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(dpnlEscritorio, java.awt.BorderLayout.CENTER);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
 
         jmEmpresa.setText("Empresa");
+        jmEmpresa.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         jmiDepartamentos.setText("Departamentos");
         jmEmpresa.add(jmiDepartamentos);
 
         jmiNuevoDepartamento.setText("Nuevo Departamento");
+        jmiNuevoDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoDepartamentoActionPerformed(evt);
+            }
+        });
         jmEmpresa.add(jmiNuevoDepartamento);
 
         jmiCargos.setText("Cargos");
@@ -96,12 +118,25 @@ public class frmEscritorio extends javax.swing.JFrame {
         jMenuBar1.add(jmEmpresa);
 
         jMenu2.setText("Edit");
+        jMenu2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmiNuevoDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoDepartamentoActionPerformed
+        // TODO add your handling code here:
+        
+        frmNuevoDepartamentoEmpresa frmNuevoDep = new frmNuevoDepartamentoEmpresa();
+        dpnlEscritorio.add(frmNuevoDep);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevoDep.getSize();
+        frmNuevoDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevoDep.setVisible(true);
+        
+    }//GEN-LAST:event_jmiNuevoDepartamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,7 +174,7 @@ public class frmEscritorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane dpnlEscritorio;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jmEmpresa;
