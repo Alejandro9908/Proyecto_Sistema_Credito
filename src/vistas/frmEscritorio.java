@@ -15,6 +15,8 @@ import vistas.cargo.frmIndexCargo;
 import vistas.cargo.frmNuevoCargo;
 import vistas.empleado.frmIndexEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
+import vistas.sucursal.frmIndexSucursal;
+import vistas.sucursal.frmNuevoSucursal;
 
 /**
  *
@@ -31,9 +33,9 @@ public class frmEscritorio extends javax.swing.JFrame {
         try{
             JFrame.setDefaultLookAndFeelDecorated(true);
             JDialog.setDefaultLookAndFeelDecorated(true);
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
         }catch (Exception e){
             e.printStackTrace();
@@ -141,9 +143,19 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmEmpresa.add(jmiNuevoUsuario);
 
         jmiSucursal.setText("Sucursal");
+        jmiSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSucursalActionPerformed(evt);
+            }
+        });
         jmEmpresa.add(jmiSucursal);
 
         jmiNuevaSucursal.setText("Nueva Sucursal");
+        jmiNuevaSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevaSucursalActionPerformed(evt);
+            }
+        });
         jmEmpresa.add(jmiNuevaSucursal);
 
         jMenuBar1.add(jmEmpresa);
@@ -213,6 +225,24 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiNuevoEmpleadoActionPerformed
+
+    private void jmiSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSucursalActionPerformed
+        frmIndexSucursal frmIndex =new frmIndexSucursal();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiSucursalActionPerformed
+
+    private void jmiNuevaSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevaSucursalActionPerformed
+        frmNuevoSucursal frmNuevo = new frmNuevoSucursal();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevaSucursalActionPerformed
 
     /**
      * @param args the command line arguments
