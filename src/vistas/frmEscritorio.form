@@ -79,11 +79,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sucursal"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiSucursalActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiNuevaSucursal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nueva Sucursal"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiNuevaSucursalActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

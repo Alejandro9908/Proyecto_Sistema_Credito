@@ -3,23 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas.empleado;
+package vistas.sucursal;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vistas.cargo.frmNuevoCargo;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
  *
  * @author Alejandro
  */
-public class frmIndexEmpleado extends javax.swing.JInternalFrame implements ActionListener{
+public class frmIndexSucursal extends javax.swing.JInternalFrame implements ActionListener{
 
-  
-    public frmIndexEmpleado() {
+    /**
+     * Creates new form frmIndexSucursal
+     */
+    public frmIndexSucursal() {
         initComponents();
-        //AGREGAR BOTONES AL ACTION LISTENER
+        
         btnNuevo.addActionListener(this);
         btnActualizar.addActionListener(this);
         btnReporte.addActionListener(this);
@@ -28,8 +31,8 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(btnNuevo == e.getSource()){
-            frmNuevoEmpleado frmNuevo = new frmNuevoEmpleado();
+       if(btnNuevo == e.getSource()){
+            frmNuevoSucursal frmNuevo = new frmNuevoSucursal();
             dpnlEscritorio.add(frmNuevo);
             Dimension desktopSize = dpnlEscritorio.getSize();
             Dimension FrameSize = frmNuevo.getSize();
@@ -72,7 +75,7 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Empleados");
+        jLabel1.setText("Sucursales");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -172,13 +175,13 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
         );
         pnlIndexLayout.setVerticalGroup(
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -188,7 +191,7 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
 
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevo.setText("Nuevo Empleado");
+        btnNuevo.setText("Nueva Sucursal");
 
         btnReporte.setBackground(new java.awt.Color(255, 255, 255));
         btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -248,7 +251,7 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        frmMostrarEmpleado frmMostrar = new frmMostrarEmpleado();
+        frmMostrarSucursal frmMostrar = new frmMostrarSucursal();
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
@@ -276,6 +279,4 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
-
-    
 }

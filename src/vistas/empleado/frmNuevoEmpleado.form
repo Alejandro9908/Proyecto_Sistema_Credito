@@ -113,28 +113,28 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtNombre3" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="txtApellido2" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
                                           <Component id="lblNombre10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cbDepartamentos1" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="cbEstadoCivil" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
                                           <Component id="lblNombre6" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="lblNombre1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtNombre6" min="-2" pref="178" max="-2" attributes="0"/>
-                                          <Component id="cbDepartamentos" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="txtApellidoCasado" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="cbGenero" min="-2" pref="178" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtNombre4" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="txtNombre3" min="-2" pref="178" max="-2" attributes="0"/>
                                           <Component id="lblNombre5" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lblNombre9" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblNombre7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtNombre5" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="txtApellido1" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="lblNombre8" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -142,7 +142,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="txtId" min="-2" pref="178" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="txtNombre1" max="32767" attributes="0"/>
+                                          <Component id="txtDpi" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lblNombre2" min="-2" max="-2" attributes="0"/>
@@ -156,13 +156,13 @@
                                                   <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" attributes="0">
-                                                  <Component id="txtNombre2" max="32767" attributes="0"/>
+                                                  <Component id="txtNombre1" max="32767" attributes="0"/>
                                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lblNombre4" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtNombre" min="-2" pref="178" max="-2" attributes="0"/>
+                                              <Component id="txtNombre2" min="-2" pref="178" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -170,16 +170,16 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jPanel1" max="32767" attributes="0"/>
-                                  <Component id="jButton1" max="32767" attributes="0"/>
+                                  <Component id="btnFoto" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="lblNombre11" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtNombre7" min="-2" pref="374" max="-2" attributes="0"/>
+                              <Component id="txtProfesion" min="-2" pref="374" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblNombre13" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNombre9" min="-2" pref="178" max="-2" attributes="0"/>
+                                  <Component id="txtFechaNacimiento" min="-2" pref="178" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -200,7 +200,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtId" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtNombre1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtDpi" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -211,8 +211,8 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtNombre" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                   <Component id="txtNombre2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="txtNombre1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -221,8 +221,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtNombre4" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="txtNombre5" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="txtNombre3" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="txtApellido1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -231,8 +231,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtNombre3" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="txtNombre6" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="txtApellido2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="txtApellidoCasado" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
@@ -244,9 +244,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbDepartamentos" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="cbDepartamentos1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="cbGenero" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="cbEstadoCivil" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnFoto" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -255,8 +255,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombre7" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtNombre9" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtProfesion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtFechaNacimiento" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -272,7 +272,7 @@
                 <Property name="text" type="java.lang.String" value="Primer Nombre"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre">
+            <Component class="javax.swing.JTextField" name="txtNombre2">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre1">
               <Properties>
@@ -306,7 +306,7 @@
                 <Property name="text" type="java.lang.String" value="Profesi&#xf3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbDepartamentos">
+            <Component class="javax.swing.JComboBox" name="cbGenero">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
@@ -328,7 +328,7 @@
                 <Property name="text" type="java.lang.String" value="DPI"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre1">
+            <Component class="javax.swing.JTextField" name="txtDpi">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre4">
               <Properties>
@@ -338,7 +338,7 @@
                 <Property name="text" type="java.lang.String" value="Segundo Nombre"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre2">
+            <Component class="javax.swing.JTextField" name="txtNombre1">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre5">
               <Properties>
@@ -348,7 +348,7 @@
                 <Property name="text" type="java.lang.String" value="Tercer Nombre"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre3">
+            <Component class="javax.swing.JTextField" name="txtApellido2">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre7">
               <Properties>
@@ -358,7 +358,7 @@
                 <Property name="text" type="java.lang.String" value="Primer Apellido"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre4">
+            <Component class="javax.swing.JTextField" name="txtNombre3">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre8">
               <Properties>
@@ -368,7 +368,7 @@
                 <Property name="text" type="java.lang.String" value="Segundo Apellido"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre5">
+            <Component class="javax.swing.JTextField" name="txtApellido1">
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel1">
 
@@ -393,9 +393,9 @@
                 <Property name="text" type="java.lang.String" value="Apellido de Casado"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre6">
+            <Component class="javax.swing.JTextField" name="txtApellidoCasado">
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnFoto">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -414,7 +414,7 @@
                 <Property name="text" type="java.lang.String" value="Estado Civil"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbDepartamentos1">
+            <Component class="javax.swing.JComboBox" name="cbEstadoCivil">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -437,7 +437,7 @@
                 <Property name="text" type="java.lang.String" value="Datos del empleado"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre7">
+            <Component class="javax.swing.JTextField" name="txtProfesion">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre13">
               <Properties>
@@ -447,7 +447,7 @@
                 <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre9">
+            <Component class="javax.swing.JTextField" name="txtFechaNacimiento">
             </Component>
           </SubComponents>
         </Container>
@@ -488,7 +488,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtNombre11" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtDireccion" alignment="0" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblNombre15" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -499,26 +499,26 @@
                                       <Component id="lblNombre16" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtNombre8" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                                              <Component id="txtTelefono" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
                                               <Component id="lblNombre19" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lblNombre20" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtNombre10" min="-2" pref="178" max="-2" attributes="0"/>
+                                              <Component id="txtCorreo" min="-2" pref="178" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cbDepartamentos2" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="cbDepartamento" min="-2" pref="178" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cbDepartamentos3" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="cbMunicipio" min="-2" pref="178" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblNombre21" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbDepartamentos4" min="-2" pref="178" max="-2" attributes="0"/>
+                                  <Component id="cbTipoCasa" min="-2" pref="178" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -548,8 +548,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombre8" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtNombre10" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtTelefono" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtCorreo" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -558,8 +558,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbDepartamentos2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="cbDepartamentos3" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="cbDepartamento" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="cbMunicipio" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -568,8 +568,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombre11" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="cbDepartamentos4" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtDireccion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="cbTipoCasa" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -603,7 +603,7 @@
                 <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre8">
+            <Component class="javax.swing.JTextField" name="txtTelefono">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre12">
               <Properties>
@@ -613,7 +613,7 @@
                 <Property name="text" type="java.lang.String" value="Correo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre10">
+            <Component class="javax.swing.JTextField" name="txtCorreo">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre16">
               <Properties>
@@ -623,7 +623,7 @@
                 <Property name="text" type="java.lang.String" value="Direccion"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre11">
+            <Component class="javax.swing.JTextField" name="txtDireccion">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre17">
               <Properties>
@@ -640,7 +640,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea1">
+                <Component class="javax.swing.JTextArea" name="txtDescripcion">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
@@ -663,7 +663,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea2">
+                <Component class="javax.swing.JTextArea" name="txtReferencia">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
@@ -687,7 +687,7 @@
                 <Property name="text" type="java.lang.String" value="Municipio"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbDepartamentos2">
+            <Component class="javax.swing.JComboBox" name="cbDepartamento">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -702,7 +702,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbDepartamentos3">
+            <Component class="javax.swing.JComboBox" name="cbMunicipio">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -725,7 +725,7 @@
                 <Property name="text" type="java.lang.String" value="Tipo de Casa"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbDepartamentos4">
+            <Component class="javax.swing.JComboBox" name="cbTipoCasa">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -756,18 +756,18 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="txtNombre12" min="-2" pref="368" max="-2" attributes="0"/>
+                              <Component id="txtSucursal" min="-2" pref="368" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnGuardar1" max="32767" attributes="0"/>
+                              <Component id="btnSucursal" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtNombre13" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Component id="txtDepartamentoEmpresa" min="-2" pref="250" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnGuardar2" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="btnDepartamento" min="-2" pref="19" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtNombre14" max="32767" attributes="0"/>
+                              <Component id="txtCargo" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnGuardar3" min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="btnCargo" min="-2" pref="21" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -797,8 +797,8 @@
                       <Component id="lblNombre23" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombre12" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="btnGuardar1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtSucursal" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnSucursal" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -807,10 +807,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombre13" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="btnGuardar2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtNombre14" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="btnGuardar3" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtDepartamentoEmpresa" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnDepartamento" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtCargo" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnCargo" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblNombre26" min="-2" max="-2" attributes="0"/>
@@ -830,7 +830,7 @@
                 <Property name="text" type="java.lang.String" value="Datos de empleo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnGuardar1">
+            <Component class="javax.swing.JButton" name="btnSucursal">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -849,7 +849,7 @@
                 <Property name="text" type="java.lang.String" value="Sucursal"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre12">
+            <Component class="javax.swing.JTextField" name="txtSucursal">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre24">
               <Properties>
@@ -867,11 +867,11 @@
                 <Property name="text" type="java.lang.String" value="Cargo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre13">
+            <Component class="javax.swing.JTextField" name="txtDepartamentoEmpresa">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre14">
+            <Component class="javax.swing.JTextField" name="txtCargo">
             </Component>
-            <Component class="javax.swing.JButton" name="btnGuardar2">
+            <Component class="javax.swing.JButton" name="btnDepartamento">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -882,7 +882,7 @@
                 <Property name="text" type="java.lang.String" value="..."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnGuardar3">
+            <Component class="javax.swing.JButton" name="btnCargo">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
