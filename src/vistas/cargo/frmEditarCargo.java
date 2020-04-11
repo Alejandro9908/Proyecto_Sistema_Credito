@@ -8,49 +8,44 @@ package vistas.cargo;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vistas.departametoEmpresa.frmEditarDepartamentoEmpresa;
+import vistas.departametoEmpresa.frmMostrarDepartamentoEmpresa;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
  *
  * @author Alejandro
  */
-public class frmMostrarCargo extends javax.swing.JInternalFrame implements ActionListener{
+public class frmEditarCargo extends javax.swing.JInternalFrame implements  ActionListener{
 
     /**
-     * Creates new form frmMostrarCargo
+     * Creates new form frmEditarCargo
      */
-    public frmMostrarCargo() {
+    public frmEditarCargo() {
         initComponents();
-        
         //AGREGAR LOS BOTONES AL ACTION LISTENER
-        btnEditar.addActionListener(this);
-        btnEliminar.addActionListener(this);
+        btnGuardar.addActionListener(this);
+        btnCancelar.addActionListener(this);
     }
-
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(btnEditar == e.getSource()){
-            frmEditarCargo frmEditar = new frmEditarCargo();
-            dpnlEscritorio.add(frmEditar);
+        if(btnCancelar == e.getSource()){
+            frmMostrarCargo frmMostrar = new frmMostrarCargo();
+            dpnlEscritorio.add(frmMostrar);
             Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmEditar.getSize();
-            frmEditar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmEditar.setVisible(true);
-            //cerramos el form mostrar departamento
+            Dimension FrameSize = frmMostrar.getSize();
+            frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+            frmMostrar.setVisible(true);
+            //cerramos la ventana editar
             this.dispose();
         }
-        
-        if(e.getSource()== btnEliminar){
-            //AQUI MANDAR A LLAMAR UN JOPTIONPANE
-            //CON DOS BOTONES
-            //UNA PARA CANCELAR
-            //Y OTRO PARA CONFIRMAR ELIMINACION
+        if(btnGuardar == e.getSource()){
+            //SE PUEDE MANDAR A LLAMAR UN JOPTIONPANE PARA CONFIRMAR
+            //LUEGO REDIRIGIR A LA VENTANA DE MOSTRAR DEPARTEMTO
+            //PARA ESTO SE PUEDE USAR EL MISMO CODIGO DEL EVENTO CANCELAR
         }
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,12 +71,10 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
         txtFecha = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
         lblNombre6 = new javax.swing.JLabel();
-        txtDepartamento = new javax.swing.JTextField();
+        cbDepartamentos = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-
-        setClosable(true);
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -90,12 +83,9 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre.setText("Nombre del Cargo");
 
-        txtNombre.setEditable(false);
-
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre1.setText("Descripción");
 
-        txtDescripcion.setEditable(false);
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtDescripcion);
@@ -128,7 +118,7 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
         lblNombre6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre6.setText("Departamento");
 
-        txtDepartamento.setEditable(false);
+        cbDepartamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Se crean objetos", "Los objetos son registros de la db", "objetos contienen id_dep y nombre_dep", "Se llena el combobox de objetos" }));
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
@@ -153,16 +143,16 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
                             .addComponent(lblNombre)
                             .addComponent(lblNombre2)
                             .addComponent(lblNombre4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre5)
                             .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtDepartamento)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre6)
                             .addComponent(lblNombre1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cbDepartamentos, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlFormularioLayout.setVerticalGroup(
@@ -183,7 +173,7 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,19 +186,19 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Detalles del Cargo");
+        jLabel1.setText("Editar Cargo");
 
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
-        btnEditar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnEditar.setText("Editar");
+        btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnGuardar.setText("Guardar Cambios");
 
-        btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnEliminar.setText("Eliminar");
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnCancelar.setText("Cancelar");
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
@@ -224,9 +214,9 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardar)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
         pnlBaseLayout.setVerticalGroup(
@@ -236,10 +226,10 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar))
                 .addGap(26, 26, 26))
         );
 
@@ -254,8 +244,9 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cbDepartamentos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
@@ -267,7 +258,6 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
     private javax.swing.JLabel lblNombre6;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
-    private javax.swing.JTextField txtDepartamento;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFecha;

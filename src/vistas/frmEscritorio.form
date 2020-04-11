@@ -45,16 +45,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nuevo Cargo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiNuevoCargoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiEmpleados">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Empleados"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiEmpleadosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiNuevoEmpleado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nuevo Empleado"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiNuevoEmpleadoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiUsuarios">
               <Properties>

@@ -12,6 +12,9 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import vistas.cargo.frmIndexCargo;
+import vistas.cargo.frmNuevoCargo;
+import vistas.empleado.frmIndexEmpleado;
+import vistas.empleado.frmNuevoEmpleado;
 
 /**
  *
@@ -108,12 +111,27 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmEmpresa.add(jmiCargos);
 
         jmiNuevoCargo.setText("Nuevo Cargo");
+        jmiNuevoCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoCargoActionPerformed(evt);
+            }
+        });
         jmEmpresa.add(jmiNuevoCargo);
 
         jmiEmpleados.setText("Empleados");
+        jmiEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiEmpleadosActionPerformed(evt);
+            }
+        });
         jmEmpresa.add(jmiEmpleados);
 
         jmiNuevoEmpleado.setText("Nuevo Empleado");
+        jmiNuevoEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoEmpleadoActionPerformed(evt);
+            }
+        });
         jmEmpresa.add(jmiNuevoEmpleado);
 
         jmiUsuarios.setText("Usuarios");
@@ -168,6 +186,33 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmIndex.setVisible(true);
     }//GEN-LAST:event_jmiCargosActionPerformed
+
+    private void jmiNuevoCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoCargoActionPerformed
+        frmNuevoCargo frmNuevo = new frmNuevoCargo();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoCargoActionPerformed
+
+    private void jmiEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEmpleadosActionPerformed
+        frmIndexEmpleado frmIndex =new frmIndexEmpleado();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiEmpleadosActionPerformed
+
+    private void jmiNuevoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoEmpleadoActionPerformed
+        frmNuevoEmpleado frmNuevo = new frmNuevoEmpleado();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments

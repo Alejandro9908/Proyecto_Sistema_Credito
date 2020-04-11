@@ -3,45 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas.cargo;
-
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import static vistas.frmEscritorio.dpnlEscritorio;
+package vistas.empleado;
 
 /**
  *
  * @author Alejandro
  */
-public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionListener{
+public class frmIndexEmpleado extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmIndexCargo
+     * Creates new form frmIndexEmpleado
      */
-    public frmIndexCargo() {
+    public frmIndexEmpleado() {
         initComponents();
-        
-        //AGREGAR BOTONES AL ACTION LISTENER
-        btnNuevo.addActionListener(this);
-        btnActualizar.addActionListener(this);
-        btnReporte.addActionListener(this);
-        btnBuscar.addActionListener(this);
-        
     }
 
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-       if(btnNuevo == e.getSource()){
-            frmNuevoCargo frmNuevo = new frmNuevoCargo();
-            dpnlEscritorio.add(frmNuevo);
-            Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmNuevo.getSize();
-            frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmNuevo.setVisible(true);
-       }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,7 +52,7 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Cargos de Empleados");
+        jLabel1.setText("Empleados");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -176,13 +152,13 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE)
         );
         pnlIndexLayout.setVerticalGroup(
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -192,7 +168,7 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
 
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevo.setText("Nuevo Cargo");
+        btnNuevo.setText("Nuevo Empleado");
 
         btnReporte.setBackground(new java.awt.Color(255, 255, 255));
         btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -252,12 +228,12 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        frmMostrarCargo frmMostrar = new frmMostrarCargo();
+       /* frmMostrarCargo frmMostrar = new frmMostrarCargo();
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-        frmMostrar.setVisible(true);
+        frmMostrar.setVisible(true);*/
     }//GEN-LAST:event_tblDatosMouseClicked
 
 
@@ -280,6 +256,4 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
-
-    
 }
