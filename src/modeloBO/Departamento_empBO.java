@@ -16,7 +16,7 @@ import modelo.DepartamentoEmpresa;
  */
 public class Departamento_empBO {
     
-     private String mensaje = "";
+     /*private String mensaje = "";
      public FDepartamentos_emp fdepartamento = new FDepartamentos_emp();
      
      public void agregarDepartamentoEm(DepartamentoEmpresa departamentoempresa){
@@ -42,7 +42,7 @@ public class Departamento_empBO {
             }            
         }   
      
-     }
+     }*/
     
     
 }

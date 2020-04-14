@@ -20,9 +20,12 @@ import modeloBO.Departamento_empBO;
  */
 public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame implements ActionListener{
 
-    Conexion cn = new Conexion();
-    Connection conn = Conexion.getConnection();
+    //Conexion cn = new Conexion();
+    //Connection conn = Conexion.getConnection();
+    //FDepartamentos_emp funcion = new FDepartamentos_emp();
+    
     FDepartamentos_emp funcion = new FDepartamentos_emp();
+    
     int id_usuario = 1;
     
      Conexion link = new Conexion();
@@ -38,35 +41,32 @@ public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame impl
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== btnGuardar){
-            guardarDepartamento_emp();
+            guardarDepartamento();
         }
         
     }
     
-    private void guardarDepartamento_emp(){
+    private void guardarDepartamento(){
+    
+    try{
         
-        try{
-         Departamento_empBO cbo = new Departamento_empBO();
-         DepartamentoEmpresa departamentoempresa = new DepartamentoEmpresa();
-         
+        DepartamentoEmpresa departamentoempresa = new DepartamentoEmpresa();
         departamentoempresa.setNombre_departamento(txtNombre.getText());
         departamentoempresa.setDescripcion(txtDescripcion.getText());
         departamentoempresa.setId_usuario(id_usuario);
         
-        cbo.agregarDepartamentoEm(departamentoempresa);
+        funcion.agregarDepartamentoEm(departamentoempresa);
         
         JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
-        
-        
-        
-        }catch(Exception e){
-        
-         JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifique");
-        
-        }
-      
+    
+    
+    }catch(Exception e){
+     JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
+    }
     
     }
+      
+
     
 
     /**
