@@ -24,39 +24,38 @@ import vistas.departametoEmpresa.frmNuevoDepartamentoEmpresa;
  * @author DELL
  */
 public class FDepartamentos_emp {
-    
-    int id_usuario = 1;
+     
+    public Conexion sqlSERVER = new Conexion();
+    public Connection cn = sqlSERVER.Conectar();
     
     String sql = "";
     public Integer totalRegistros = 0;
     String mensaje = "";
     
-    public void agregarDepartamentoEm(Connection con,DepartamentoEmpresa departamentoempresa){
+    public void agregarDepartamentoEm(DepartamentoEmpresa departamentoempresa){
     
-        PreparedStatement pst = null;
-        
-        sql = "INSERT INTO TBL_DEPARTAMENTO_EMP(Id_departamento_emp,Nombre_departamento,Descripcion,Id_usuario) VALUES(NEXT VALUE FOR DEPARTAMENTO_EMP, ?,?,?)";
-        
         try{
+        
+            if(cn != null ){
             
-            pst = con.prepareStatement(sql);
-            pst.setString(2, departamentoempresa.getNombre_departamento());
-            pst.setString(3, departamentoempresa.getDescripcion());
-            pst.setInt(4, departamentoempresa.getId_usuario());
+            sql = "INSERT INTO TBL_DEPARTAMENTO_EMP(Id_departamento_emp,Nombre_departamento,Descripcion,Id_usuario) VALUES(NEXT VALUE FOR DEPARTAMENTO_EMP,?,?,?)";
+            PreparedStatement pst = cn.prepareStatement(sql);
             
-            mensaje = "Guardado correctamente";
-            System.out.println("Guardado correctamente");
+            pst.setString(1, departamentoempresa.getNombre_departamento());
+            pst.setString(2, departamentoempresa.getDescripcion());
+            pst.setInt(3, departamentoempresa.getId_usuario());
             pst.execute();
-            pst.close();
             
-            
+            }else{
+                    JOptionPane.showMessageDialog(null, "Error al guardar el registro");
+                }
+        
         
         }catch(SQLException e){
-            mensaje = "No se pudo guardar correctamente: Error: " + e.getMessage();
-            System.out.println(mensaje);
+        
+        JOptionPane.showMessageDialog(null,"Error al realizar la conexión por"+ e.getMessage() );
             
         }
-    
     
     
     }
