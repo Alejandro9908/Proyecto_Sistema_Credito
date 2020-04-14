@@ -29,7 +29,7 @@ public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame impl
     int id_usuario = 1;
     
      Conexion link = new Conexion();
-    
+     String accion = "guardar";
     
     public frmNuevoDepartamentoEmpresa() {
         initComponents();
@@ -41,8 +41,19 @@ public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame impl
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== btnGuardar){
-            guardarDepartamento();
+         accion = "guardar";
         }
+        
+        if(e.getSource()== btnGuardar){
+         if((txtNombre.getText().length()==0)||(txtDescripcion.getText().length()==0)){
+           JOptionPane.showMessageDialog(null, "Por Favor llena todos los campos necearios");
+         }else{
+            if(accion == "guardar"){
+            guardarDepartamento();
+            }
+         }
+        }
+        
         
     }
     
@@ -58,11 +69,18 @@ public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame impl
         funcion.agregarDepartamentoEm(departamentoempresa);
         
         JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
-    
+        limpiar();
     
     }catch(Exception e){
      JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
     }
+    
+    }
+    
+    private void limpiar(){
+    
+        txtNombre.setText("");
+        txtDescripcion.setText("");
     
     }
       
