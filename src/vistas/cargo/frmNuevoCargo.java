@@ -5,8 +5,11 @@
  */
 package vistas.cargo;
 
+import controladores.FCargo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import modelo.Cargo;
 
 /**
  *
@@ -14,20 +17,79 @@ import java.awt.event.ActionListener;
  */
 public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionListener{
 
-    /**
-     * Creates new form frmNuevoCargo
-     */
+    FCargo funcion = new FCargo();
+    String accion = "guardar";
+    int id_usuario =1;
+    
+    
     public frmNuevoCargo() {
         initComponents();
         
         //AGREGAR BOTONES AL ACTION LISTENER
         btnGuardar.addActionListener(this);
         btnCancelar.addActionListener(this);
+        
+        //Metodo llenado combobox
+        llenarComboBoxDepartamentos();
+        
+        //TXT NO VISIBLE
+        txtIdepartamento.setVisible(false);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         
+        if(e.getSource()== btnGuardar){
+         accion = "guardar";
+        }
+        if(e.getSource()== btnGuardar){
+         if((txtNombre.getText().length()==0)||(txtDescripcion.getText().length()==0)){
+           JOptionPane.showMessageDialog(null, "Por Favor llena todos los campos necearios");
+         }else{
+            if(accion == "guardar"){
+            guardaCargo();
+            }
+         }
+        }
+        
+    }
+    
+    public void guardaCargo(){
+    
+        try{
+       
+        Cargo cargo = new Cargo();
+        
+        
+        cargo.setNombre_cargo(txtNombre.getText());
+        cargo.setId_departamento_emp(Integer.parseInt(txtIdepartamento.getText()));
+        cargo.setDescripcion(txtDescripcion.getText());
+        cargo.setId_usuario(id_usuario);
+        
+        funcion.agregarCargo(cargo);
+        
+        limpiar();
+        JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+        
+        
+       }catch(Exception e){
+       
+       JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
+       
+       }
+    
+        
+    }
+    
+    public void limpiar(){
+    
+        txtNombre.setText("");
+        txtDescripcion.setText("");
+    
+    }
+    
+    public void llenarComboBoxDepartamentos(){
+        funcion.consultarDepartamento(cbDepartamentos);
     }
 
     /**
@@ -50,6 +112,7 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
         lblNombre2 = new javax.swing.JLabel();
         lblNombre6 = new javax.swing.JLabel();
         cbDepartamentos = new javax.swing.JComboBox<>();
+        txtIdepartamento = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -83,7 +146,11 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
         lblNombre6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre6.setText("Departamento");
 
-        cbDepartamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Se crean objetos", "Los objetos son registros de la db", "objetos contienen id_dep y nombre_dep", "Se llena el combobox de objetos" }));
+        cbDepartamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDepartamentosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
@@ -92,16 +159,19 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbDepartamentos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbDepartamentos, 0, 414, Short.MAX_VALUE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblNombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombre6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre1, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(lblNombre1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtIdepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -111,7 +181,9 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
                 .addContainerGap()
                 .addComponent(lblNombre2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -180,6 +252,12 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
+    private void cbDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDepartamentosActionPerformed
+        // TODO add your handling code here:
+       String seleccionado = cbDepartamentos.getSelectedItem().toString();
+       funcion.consultarIdepartamento(txtIdepartamento, seleccionado);
+    }//GEN-LAST:event_cbDepartamentosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -195,6 +273,7 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
     private javax.swing.JPanel pnlFormulario;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtIdepartamento;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 

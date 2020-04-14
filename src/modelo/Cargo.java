@@ -12,6 +12,34 @@ package modelo;
 public class Cargo {
 
     /**
+     * @return the fecha
+     */
+    public String getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * @return the hora
+     */
+    public String getHora() {
+        return hora;
+    }
+
+    /**
+     * @param hora the hora to set
+     */
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    /**
      * @return the id_cargo
      */
     public int getId_cargo() {
@@ -81,6 +109,9 @@ public class Cargo {
         this.id_usuario = id_usuario;
     }
     
+    
+    private String hora;
+    private String fecha;
     private int id_cargo;
     private String nombre_cargo;
     private int id_departamento_emp;
