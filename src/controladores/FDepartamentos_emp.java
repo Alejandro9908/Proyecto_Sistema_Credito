@@ -12,11 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import controladores.Conexion;
 import modelo.DepartamentoEmpresa;
-import vistas.departametoEmpresa.frmNuevoDepartamentoEmpresa;
 
 
 /**
@@ -63,8 +60,10 @@ public class FDepartamentos_emp {
      public DefaultTableModel mostrarDepartamento(String buscar){
             DefaultTableModel modelo;
             
-    String [] encabezado = {"ID","DEPARTAMENTO","DESCRIPCION","ESTADO"};   
-    String [] registros = new String [4];
+            totalRegistros=0; //para que no se sumen los registros
+            
+    String [] encabezado = {"ID","DEPARTAMENTO","DESCRIPCION","ESTADO", "FECHA_COMMIT", "HORA_COMMIT", "ID_USUARIO"};   
+    String [] registros = new String [7];
     
     modelo = new DefaultTableModel(null,encabezado);
     String sql = buscar;
@@ -80,6 +79,13 @@ public class FDepartamentos_emp {
              registros[1] = rs.getString("Nombre_departamento");
              registros[2] = rs.getString("Descripcion");
              registros[3] = Integer.toString(rs.getInt("Estado"));
+             registros[4] = rs.getString("Fecha_commit");
+             registros[5] = rs.getString("Hora_commit");
+             registros[6] = Integer.toString(rs.getInt("Id_usuario"));
+        
+             
+           
+           
              
              totalRegistros += 1;
              modelo.addRow(registros);
@@ -100,5 +106,38 @@ public class FDepartamentos_emp {
      
      
      }
+     
+     
+      public void editarDepartamentoEm(DepartamentoEmpresa departamentoEmpresa, String buscar){
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_DEPARTAMENTO_EMP set Id_departamento_emp='"+departamentoEmpresa.getId_departamento_emp()+"',Nombre_departamento='"+departamentoEmpresa.getNombre_departamento()+"',Descripcion='"+departamentoEmpresa.getDescripcion()+"' where Id_departamento_emp="+buscar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible editar la informacion");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al editar, motivo:"+ex.getMessage());
+        } 
+    }
+     
+      
+      public void eliminarDepartamentoEm(String idEliminar){
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_DEPARTAMENTO_EMP set Estado=0 where Id_departamento_emp="+idEliminar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible eliminar el registro");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al eliminar, motivo:"+ex.getMessage());
+        } 
+    }
+     
+     
+     
     
 }

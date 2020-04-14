@@ -11,7 +11,9 @@ import vistas.departametoEmpresa.frmNuevoDepartamentoEmpresa;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -23,12 +25,26 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
 
     DefaultTableModel modelo;
     FDepartamentos_emp funcion = new FDepartamentos_emp();
+ 
     
-    String query = "SELECT Id_departamento_emp,Nombre_departamento,Descripcion,Estado FROM  TBL_DEPARTAMENTO_EMP";
+    String query = "SELECT Id_departamento_emp,Nombre_departamento,Descripcion,Estado, Fecha_commit, Hora_commit, Id_usuario FROM  TBL_DEPARTAMENTO_EMP WHERE Estado = 1";
     
     public frmIndexDepatamentosEmpresa() {
         initComponents();
+        
+        //CONDICIONES CADA VEZ QUE SE ABRE UNA VENTANA (SUPER IMPORTANTES)
+        tblDatos.getTableHeader().setReorderingAllowed(false) ; //ESTO ES PARA QUE NO PERMITA MOVER LAS COLUMNAS, DE ALLI TOMO LOS DATOS
+        
+       
+        
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbNombre);
+        rbNombre.setSelected(true); //prefiero que se busque por nombre por defecto
         mostrar(query);
+        
+        
+        //======================================================================
         
         //Añadir los botones al ActionListener
         btnNuevoDep.addActionListener(this);
@@ -49,6 +65,12 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
             frmNuevoDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             frmNuevoDep.setVisible(true);
         }
+        
+        if(e.getSource()==btnActualizar){
+            actualizar();
+        }
+        
+        
     }
     
     private void mostrar(String buscar){    
@@ -56,10 +78,36 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
             modelo = funcion.mostrarDepartamento(buscar);
             
             tblDatos.setModel(modelo);
-            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));       
+            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));
+            
+             ocultarColumnas(tblDatos,3); //para ocultar la columna del estado
+             ocultarColumnas(tblDatos,4); //para ocultar la columna de Fecha de creacion
+             ocultarColumnas(tblDatos,5); //para ocultar la columna de Hora de creacion
+             ocultarColumnas(tblDatos,6); //para ocultar la columna del ID de Usuario que hizo eso
+             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
         }
+    }
+    
+    
+    
+     private void buscar(String textoBuscar){
+        if(rbId.isSelected()==true){
+            mostrar("SELECT Id_departamento_emp,Nombre_departamento,Descripcion,Estado, Fecha_commit, Hora_commit, Id_usuario FROM TBL_DEPARTAMENTO_EMP WHERE (Id_departamento_emp like '%"+textoBuscar+"%') AND Estado = 1");
+        }else{
+            //Si no es por ID entonces será por NOMBRE
+           mostrar("SELECT Id_departamento_emp,Nombre_departamento,Descripcion,Estado, Fecha_commit, Hora_commit, Id_usuario FROM TBL_DEPARTAMENTO_EMP WHERE (Nombre_departamento like '%"+textoBuscar+"%') AND Estado = 1");
+        }   
+    }
+     
+     
+      //ESTE METODO SIRVE PARA OCULTAR COLUMNAS QUE NO QUERAMOS QUE SE VEAN, PERO SUS DATOS SI SON UTILIZABLES
+     private void ocultarColumnas(JTable tabla, int columna){
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
     }
     
 
@@ -269,7 +317,9 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-        //buscar();
+        
+           buscar(txtBuscar.getText());
+
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
@@ -279,11 +329,27 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
         Dimension FrameSize = frmMostrarDep.getSize();
         frmMostrarDep.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrarDep.setVisible(true);
+        
+        //pasar datos
+        
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarDep.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
+        frmMostrarDep.txtNombre.setText(tblDatos.getValueAt(posicion,1).toString());
+        frmMostrarDep.txtDescripcion.setText(tblDatos.getValueAt(posicion,2).toString());
+        frmMostrarDep.txtEstado.setText(tblDatos.getValueAt(posicion,3).toString());
+        frmMostrarDep.txtFecha.setText(tblDatos.getValueAt(posicion,4).toString());
+        frmMostrarDep.txtHora.setText(tblDatos.getValueAt(posicion,5).toString());
+                   //la posicion 6 es el usuario en este caso, no lo enviaré
+        
     }//GEN-LAST:event_tblDatosMouseClicked
 
+    
+    private void actualizar(){
+        mostrar(query);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevoDep;
     private javax.swing.JButton btnReporte;

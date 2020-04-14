@@ -12,6 +12,34 @@ package modelo;
 public class DepartamentoEmpresa {
 
     /**
+     * @return the fecha_commit
+     */
+    public String getFecha_commit() {
+        return fecha_commit;
+    }
+
+    /**
+     * @param fecha_commit the fecha_commit to set
+     */
+    public void setFecha_commit(String fecha_commit) {
+        this.fecha_commit = fecha_commit;
+    }
+
+    /**
+     * @return the hora_commit
+     */
+    public String getHora_commit() {
+        return hora_commit;
+    }
+
+    /**
+     * @param hora_commit the hora_commit to set
+     */
+    public void setHora_commit(String hora_commit) {
+        this.hora_commit = hora_commit;
+    }
+
+    /**
      * @return the id_departamento_emp
      */
     public int getId_departamento_emp() {
@@ -71,6 +99,9 @@ public class DepartamentoEmpresa {
     private String nombre_departamento;
     private String descripcion;
     private int id_usuario;
+    
+    private String fecha_commit;
+    private String hora_commit;
 
     public void agregarDepartamentoEm(DepartamentoEmpresa departamentoempresa) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
