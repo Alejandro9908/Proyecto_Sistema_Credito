@@ -5,18 +5,69 @@
  */
 package vistas.departametoEmpresa;
 
+import controladores.Conexion;
+import controladores.FDepartamentos_emp;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import modelo.DepartamentoEmpresa;
+import modeloBO.Departamento_empBO;
+
 /**
  *
  * @author Alejandro
  */
-public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame {
+public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame implements ActionListener{
 
-    /**
-     * Creates new form frmNuevoDepartamentoEmpresa
-     */
+    Conexion cn = new Conexion();
+    Connection conn = Conexion.getConnection();
+    FDepartamentos_emp funcion = new FDepartamentos_emp();
+    int id_usuario = 1;
+    
+     Conexion link = new Conexion();
+    
+    
     public frmNuevoDepartamentoEmpresa() {
         initComponents();
+        btnGuardar.addActionListener(this);
+        
+        
     }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()== btnGuardar){
+            guardarDepartamento_emp();
+        }
+        
+    }
+    
+    private void guardarDepartamento_emp(){
+        
+        try{
+         Departamento_empBO cbo = new Departamento_empBO();
+         DepartamentoEmpresa departamentoempresa = new DepartamentoEmpresa();
+         
+        departamentoempresa.setNombre_departamento(txtNombre.getText());
+        departamentoempresa.setDescripcion(txtDescripcion.getText());
+        departamentoempresa.setId_usuario(id_usuario);
+        
+        cbo.agregarDepartamentoEm(departamentoempresa);
+        
+        JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+        
+        
+        
+        }catch(Exception e){
+        
+         JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifique");
+        
+        }
+      
+    
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

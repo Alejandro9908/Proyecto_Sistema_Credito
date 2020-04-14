@@ -71,5 +71,9 @@ public class DepartamentoEmpresa {
     private String nombre_departamento;
     private String descripcion;
     private int id_usuario;
+
+    public void agregarDepartamentoEm(DepartamentoEmpresa departamentoempresa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
