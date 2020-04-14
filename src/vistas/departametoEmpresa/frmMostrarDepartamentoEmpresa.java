@@ -5,9 +5,13 @@
  */
 package vistas.departametoEmpresa;
 
+import controladores.Conexion;
+import controladores.FDepartamentos_emp;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import modelo.DepartamentoEmpresa;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -15,6 +19,10 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  * @author Alejandro
  */
 public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame implements ActionListener{
+    
+    
+    FDepartamentos_emp funcion = new FDepartamentos_emp();
+    Conexion cn = new Conexion();
 
     /**
      * Creates new form frmMostrarDepartamentoEmpresa
@@ -26,11 +34,13 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         
         btnEditar.addActionListener(this);
         btnEliminar.addActionListener(this);
+        btnCancelar.addActionListener(this);
+        btnGuardar.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==btnEditar){
+       /* if(e.getSource()==btnEditar){
             frmEditarDepartamentoEmpresa frmEditarDep = new frmEditarDepartamentoEmpresa();
             dpnlEscritorio.add(frmEditarDep);
             Dimension desktopSize = dpnlEscritorio.getSize();
@@ -39,13 +49,28 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
             frmEditarDep.setVisible(true);
             //cerramos el form mostrar departamento
             this.dispose();
-        }
+        }*/
+       
         if(e.getSource()== btnEliminar){
-            //AQUI MANDAR A LLAMAR UN JOPTIONPANE
-            //CON DOS BOTONES
-            //UNA PARA CANCELAR
-            //Y OTRO PARA CONFIRMAR ELIMINACION
+         
+            eliminarDepartamento2();
+           
         }
+        
+        if(e.getSource()== btnEditar){
+            desbloquearDatos();
+        }
+        
+         if(e.getSource()== btnCancelar){
+            cancelar();
+        }
+         
+         if(e.getSource()== btnGuardar){
+            editarDepartamento();
+            
+        }
+        
+        
     }
     
     
@@ -75,9 +100,11 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         lblNombre5 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -183,8 +210,8 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Detalles del Departamento");
+        lblTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        lblTitulo.setText("Detalles del Departamento");
 
         btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -193,6 +220,17 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.setEnabled(false);
+
+        btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
+
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
@@ -204,26 +242,32 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
                 .addContainerGap())
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlBaseLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addGap(18, 18, 18)
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(35, 35, 35)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar))
                 .addGap(26, 26, 26))
         );
 
@@ -236,11 +280,141 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
+    private void pasarDatos(){
+        //txtIdCarrera.setText((String) tablaDatosCarrera.getValueAt(tablaDatosCarrera.getSelectedRow(),0));
+        //txtNombreCarrera.setText((String) tablaDatosCarrera.getValueAt(tablaDatosCarrera.getSelectedRow(),1));
+        //txtDuracionCarrera.setText((String) tablaDatosCarrera.getValueAt(tablaDatosCarrera.getSelectedRow(),2));
+        //idCarrera = tablaDatosCarrera.getValueAt(tablaDatosCarrera.getSelectedRow(),0).toString();
+        
+    }
+    
+    private void desbloquearDatos(){
+        
+        txtNombre.setEditable(true);
+        txtDescripcion.setEditable(true);
+        btnGuardar.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        lblTitulo.setText("Editar Departamento del Empleado");
+        
+    }
+    
+    
+    private void bloquearDatos(){
+        
+        txtNombre.setEditable(false);
+        txtDescripcion.setEditable(false);
+        btnGuardar.setEnabled(false);
+        btnEditar.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        lblTitulo.setText("Detalles del Departamento");
+    }
+    
+    private void cancelar(){
+        this.dispose();
+    }
+    
+    private void editarDepartamento(){
+        
+        if(txtNombre.getText().length()==0 || txtDescripcion.getText().length()==0){
+              JOptionPane.showMessageDialog(null, "Hace falta rellenar campos obligatorios");
+        }
+        else{
+            DepartamentoEmpresa departamentoEmpresa = new DepartamentoEmpresa();
+        departamentoEmpresa.setId_departamento_emp(Integer.parseInt(txtId.getText()));
+        departamentoEmpresa.setNombre_departamento(txtNombre.getText());
+        departamentoEmpresa.setDescripcion(txtDescripcion.getText()); 
+  
+        funcion.editarDepartamentoEm(departamentoEmpresa, txtId.getText());
+        JOptionPane.showMessageDialog(null,"Registro editado correctamente");
+         frmIndexDepatamentosEmpresa.btnActualizar.doClick(); //para actualizar el index
+         bloquearDatos(); //botones y cajas de texto
+        //limpiar_formulario();
+            
+        }
+       
+        
+    }
+   
+    
+    
+    
+    private void eliminarDepartamento(){
+        
+         int res = JOptionPane.showConfirmDialog(
+        null, 
+        "¿Quieres continuar?", 
+        "Confirm",
+        JOptionPane.YES_NO_OPTION , 
+        JOptionPane.QUESTION_MESSAGE
+       );
+       if ( res == JOptionPane.YES_OPTION ) {
+       System.out.println( "Seleccionaste SI" );
+       
+       
+        funcion.eliminarDepartamentoEm(txtId.getText());
+        JOptionPane.showMessageDialog(null,"Registro eliminado correctamente");
+        limpiarFormulario();
+        
+         frmIndexDepatamentosEmpresa.btnActualizar.doClick(); //para actualizar el INDEX
+       
+       
+
+       } else if (res == JOptionPane.NO_OPTION) {
+     
+
+       } else if (res == JOptionPane.CLOSED_OPTION) {
+      
+       }
+        
+    }
+    
+    private void eliminarDepartamento2(){
+        int confirmado = JOptionPane.showConfirmDialog(
+         null,
+         "¿Lo confirmas?");
+
+             if (JOptionPane.OK_OPTION == confirmado){
+             
+                 funcion.eliminarDepartamentoEm(txtId.getText());
+                 JOptionPane.showMessageDialog(null,"Registro eliminado correctamente");
+                  limpiarFormulario();
+                  
+                   frmIndexDepatamentosEmpresa.btnActualizar.doClick(); //para actualizar el INDEX
+                 
+                 
+             }else{
+                            //Ok no borraré nada
+             }
+    }
+    
+    private void limpiarFormulario(){
+        
+        txtId.setText("");
+        txtNombre.setText("");
+        txtDescripcion.setText("");
+        txtEstado.setText("");
+        txtFecha.setText("");
+        txtHora.setText("");
+        btnEliminar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        
+    }
+    
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
@@ -248,14 +422,15 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
     private javax.swing.JLabel lblNombre3;
     private javax.swing.JLabel lblNombre4;
     private javax.swing.JLabel lblNombre5;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
-    private javax.swing.JTextArea txtDescripcion;
-    private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtHora;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextArea txtDescripcion;
+    public static javax.swing.JTextField txtEstado;
+    public static javax.swing.JTextField txtFecha;
+    public static javax.swing.JTextField txtHora;
+    public static javax.swing.JTextField txtId;
+    public static javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
 }

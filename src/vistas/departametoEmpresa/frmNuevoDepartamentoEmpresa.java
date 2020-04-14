@@ -34,6 +34,7 @@ public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame impl
     public frmNuevoDepartamentoEmpresa() {
         initComponents();
         btnGuardar.addActionListener(this);
+        btnCancelar.addActionListener(this);
         
         
     }
@@ -54,6 +55,10 @@ public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame impl
          }
         }
         
+        if(e.getSource()==btnCancelar){
+            this.dispose();
+        }
+        
         
     }
     
@@ -70,6 +75,7 @@ public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame impl
         
         JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
         limpiar();
+        frmIndexDepatamentosEmpresa.btnActualizar.doClick(); //para actualizar el index
     
     }catch(Exception e){
      JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
