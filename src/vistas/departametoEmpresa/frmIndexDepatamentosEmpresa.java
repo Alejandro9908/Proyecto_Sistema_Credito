@@ -5,11 +5,14 @@
  */
 package vistas.departametoEmpresa;
 
+import controladores.FDepartamentos_emp;
 import vistas.departametoEmpresa.frmMostrarDepartamentoEmpresa;
 import vistas.departametoEmpresa.frmNuevoDepartamentoEmpresa;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -18,11 +21,14 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  */
 public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame implements ActionListener{
 
-    /**
-     * Creates new form frmIndexDepatamentosEmpresa
-     */
+    DefaultTableModel modelo;
+    FDepartamentos_emp funcion = new FDepartamentos_emp();
+    
+    String query = "SELECT Id_departamento_emp,Nombre_departamento,Descripcion,Estado FROM  TBL_DEPARTAMENTO_EMP";
+    
     public frmIndexDepatamentosEmpresa() {
         initComponents();
+        mostrar(query);
         
         //Añadir los botones al ActionListener
         btnNuevoDep.addActionListener(this);
@@ -44,6 +50,18 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
             frmNuevoDep.setVisible(true);
         }
     }
+    
+    private void mostrar(String buscar){    
+        try {
+            modelo = funcion.mostrarDepartamento(buscar);
+            
+            tblDatos.setModel(modelo);
+            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));       
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

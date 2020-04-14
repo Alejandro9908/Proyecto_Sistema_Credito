@@ -60,4 +60,45 @@ public class FDepartamentos_emp {
     
     }
     
+     public DefaultTableModel mostrarDepartamento(String buscar){
+            DefaultTableModel modelo;
+            
+    String [] encabezado = {"ID","DEPARTAMENTO","DESCRIPCION","ESTADO"};   
+    String [] registros = new String [4];
+    
+    modelo = new DefaultTableModel(null,encabezado);
+    String sql = buscar;
+     
+     try{
+         
+         Statement st = cn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
+         
+         while(rs.next()){
+         
+             registros[0] = Integer.toString(rs.getInt("Id_departamento_emp"));
+             registros[1] = rs.getString("Nombre_departamento");
+             registros[2] = rs.getString("Descripcion");
+             registros[3] = Integer.toString(rs.getInt("Estado"));
+             
+             totalRegistros += 1;
+             modelo.addRow(registros);
+         
+         
+         }
+         
+         return modelo;
+     
+     
+     
+     }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     }
+     
+     
+     }
+    
 }
