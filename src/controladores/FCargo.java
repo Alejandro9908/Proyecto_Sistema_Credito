@@ -27,10 +27,10 @@ public class FCargo {
     String sql = "";
     public Integer totalRegistros = 0;
     
-    
+  //CONSULTAR EL DEPARTAMENTO DE LA EMPRESA EN EL COMBOBOX  
    public void consultarDepartamento(JComboBox cbDepartamentos){
        
-       sql = "SELECT Nombre_departamento FROM TBL_DEPARTAMENTO_EMP ORDER BY Nombre_departamento ASC";
+       sql = "SELECT Nombre_departamento FROM TBL_DEPARTAMENTO_EMP where Estado = 1 ORDER BY Nombre_departamento ASC";
        
        try{
      
@@ -59,7 +59,7 @@ public class FCargo {
     
    }
    
-   
+   //CONSULTAR ID DEL DEPARTAMENTO DE LA EMPRESA Y SE LO MANDAMOS A UN TXT
    public void consultarIdepartamento(JTextField idepartamento, String buscar){
    
        sql = "SELECT Id_departamento_emp FROM TBL_DEPARTAMENTO_EMP WHERE Nombre_departamento =" + "'" +buscar + "'";
@@ -87,7 +87,8 @@ public class FCargo {
      }
    
    }
-    
+   
+   //METODO PARA AGREGAR UN CARGO 
     public void agregarCargo(Cargo cargo){
         
      try{
@@ -116,9 +117,11 @@ public class FCargo {
     
     }
     
-    
+    //TABLA PARA MOSTRAR LOS REGISTROS DEL CARGO
     public DefaultTableModel mostrarCargo(String buscar){
            DefaultTableModel modelo;
+           
+            totalRegistros=0;
            
     String [] encabezado = {"ID","CARGO","DEPARTAMENTO","DESCRIPCION","FECHA","HORA","ESTADO","USUARIO"};   
     String [] registros = new String [8];
@@ -150,18 +153,49 @@ public class FCargo {
          
          return modelo;
      
-     
-     
      }catch(Exception e){
          
      JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
      
      return null;
      }
-          
-    
-    
     
     }
+    
+    //METODO PARA EDITAR EL CARGO
+    public void editarCargo(Cargo cargo, String buscar){
+    
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_CARGO set Id_cargo='"+cargo.getId_cargo()+"',Nombre_cargo='"+cargo.getNombre_cargo()+"',Descripcion='"+cargo.getDescripcion()+"' where Id_cargo="+buscar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible editar la informacion");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al editar, motivo:"+ex.getMessage());
+        } 
+        
+    
+    }
+    
+    //METODO PARA ELIMINAR UN REGISTRO
+    public void eliminarCargo(String idEliminar){
+        
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_CARGO set Estado=0 where Id_cargo="+idEliminar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible eliminar el registro");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al eliminar, motivo:"+ex.getMessage());
+        } 
+    
+    }
+    
     
 }

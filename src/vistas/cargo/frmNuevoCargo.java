@@ -9,6 +9,7 @@ import controladores.FCargo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import controladores.Conexion;
 import modelo.Cargo;
 
 /**
@@ -51,6 +52,9 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
             }
          }
         }
+        if(e.getSource()==btnCancelar){
+            this.dispose();
+        }
         
     }
     
@@ -69,6 +73,7 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
         funcion.agregarCargo(cargo);
         
         limpiar();
+        frmIndexCargo.btnActualizar.doClick();
         JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
         
         

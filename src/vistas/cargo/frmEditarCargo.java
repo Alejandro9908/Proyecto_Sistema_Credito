@@ -23,13 +23,13 @@ public class frmEditarCargo extends javax.swing.JInternalFrame implements  Actio
     public frmEditarCargo() {
         initComponents();
         //AGREGAR LOS BOTONES AL ACTION LISTENER
-        btnGuardar.addActionListener(this);
-        btnCancelar.addActionListener(this);
+        //btnGuardar.addActionListener(this);
+        //btnCancelar.addActionListener(this);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(btnCancelar == e.getSource()){
+        /*if(btnCancelar == e.getSource()){
             frmMostrarCargo frmMostrar = new frmMostrarCargo();
             dpnlEscritorio.add(frmMostrar);
             Dimension desktopSize = dpnlEscritorio.getSize();
@@ -43,7 +43,7 @@ public class frmEditarCargo extends javax.swing.JInternalFrame implements  Actio
             //SE PUEDE MANDAR A LLAMAR UN JOPTIONPANE PARA CONFIRMAR
             //LUEGO REDIRIGIR A LA VENTANA DE MOSTRAR DEPARTEMTO
             //PARA ESTO SE PUEDE USAR EL MISMO CODIGO DEL EVENTO CANCELAR
-        }
+        }*/
     }
 
     /**
@@ -262,8 +262,8 @@ public class frmEditarCargo extends javax.swing.JInternalFrame implements  Actio
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtId;
+    public static javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
     

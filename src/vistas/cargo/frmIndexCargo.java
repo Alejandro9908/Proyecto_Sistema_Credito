@@ -7,10 +7,14 @@ package vistas.cargo;
 
 import controladores.FCargo;
 import controladores.FDepartamentos_emp;
+import vistas.cargo.frmMostrarCargo;
+import vistas.cargo.frmNuevoCargo;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -24,12 +28,19 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
     FCargo funcion = new FCargo();
     
     String query = "SELECT a.Id_cargo,a.Nombre_cargo,b.Nombre_departamento,a.Descripcion,a.Fecha_commit,a.Hora_commit,a.Estado,a.Id_usuario\n" +
-                    "FROM TBL_CARGO AS a inner join TBL_DEPARTAMENTO_EMP AS b on a.Id_departamento_emp = b.Id_departamento_emp";
+                    "FROM TBL_CARGO AS a inner join TBL_DEPARTAMENTO_EMP AS b on a.Id_departamento_emp = b.Id_departamento_emp where a.Estado =1";
     
     
     public frmIndexCargo() {
         initComponents();
          mostrar(query);
+         
+         tblDatos.getTableHeader().setReorderingAllowed(false) ;
+         
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbNombre);
+        rbNombre.setSelected(true);
         
         //AGREGAR BOTONES AL ACTION LISTENER
         btnNuevo.addActionListener(this);
@@ -52,7 +63,8 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
        }
        
        if(e.getSource()== btnActualizar){
-          mostrar(query);
+          //mostrar(query);
+           actualizar();
         }
     }
     
@@ -61,10 +73,37 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
             modelo = funcion.mostrarCargo(buscar);
             
             tblDatos.setModel(modelo);
-            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));       
+            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));   
+             ocultarColumnas(tblDatos,4); //para ocultar la columna del estado
+             ocultarColumnas(tblDatos,5); //para ocultar la columna de Fecha de creacion
+             ocultarColumnas(tblDatos,6); //para ocultar la columna de Hora de creacion
+             ocultarColumnas(tblDatos,7); //para ocultar la columna del ID de Usuario que hizo eso
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
         }
+    }
+    
+    private void buscar(String textoBuscar){
+        
+        if(rbId.isSelected()==true){
+         mostrar("SELECT a.Id_cargo,a.Nombre_cargo,b.Nombre_departamento,a.Descripcion,a.Fecha_commit,a.Hora_commit,a.Estado,a.Id_usuario\n" +
+                    "FROM TBL_CARGO AS a inner join TBL_DEPARTAMENTO_EMP AS b on a.Id_departamento_emp = b.Id_departamento_emp WHERE (Id_cargo like '%"+textoBuscar+"%') AND a.Estado = 1");
+        }else{
+        
+          mostrar("SELECT a.Id_cargo,a.Nombre_cargo,b.Nombre_departamento,a.Descripcion,a.Fecha_commit,a.Hora_commit,a.Estado,a.Id_usuario\n" +
+                    "FROM TBL_CARGO AS a inner join TBL_DEPARTAMENTO_EMP AS b on a.Id_departamento_emp = b.Id_departamento_emp WHERE (Nombre_cargo like '%"+textoBuscar+"%') AND a.Estado = 1");  
+        
+        }
+    
+    
+    
+    }
+    
+     private void ocultarColumnas(JTable tabla, int columna){
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
     }
     
     
@@ -72,6 +111,7 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         pnlBase = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -89,6 +129,8 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
         btnNuevo = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setClosable(true);
         setIconifiable(true);
@@ -270,6 +312,7 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         //buscar();
+        buscar(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
@@ -279,14 +322,29 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
         Dimension FrameSize = frmMostrar.getSize();
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
+        
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarCargo.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
+        frmMostrarCargo.txtNombre.setText(tblDatos.getValueAt(posicion,1).toString());
+        frmMostrarCargo.txtDepartamento.setText(tblDatos.getValueAt(posicion,2).toString());
+        frmMostrarCargo.txtDescripcion.setText(tblDatos.getValueAt(posicion,3).toString());
+        frmMostrarCargo.txtFecha.setText(tblDatos.getValueAt(posicion,4).toString());
+        frmMostrarCargo.txtHora.setText(tblDatos.getValueAt(posicion,5).toString());
+        frmMostrarCargo.txtEstado.setText(tblDatos.getValueAt(posicion,6).toString());
+        
+        
     }//GEN-LAST:event_tblDatosMouseClicked
 
+    private void actualizar(){
+        mostrar(query);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
