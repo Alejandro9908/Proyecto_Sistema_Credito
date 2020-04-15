@@ -62,7 +62,7 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         }
         
          if(e.getSource()== btnCancelar){
-            cancelar();
+            cancelar1();
         }
          
          if(e.getSource()== btnGuardar){
@@ -312,7 +312,7 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         lblTitulo.setText("Detalles del Departamento");
     }
     
-    private void cancelar(){
+    private void cancelar1(){
         this.dispose();
     }
     
