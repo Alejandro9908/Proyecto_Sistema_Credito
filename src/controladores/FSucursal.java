@@ -13,6 +13,7 @@ import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import modelo.Departamento;
 import modelo.Municipio;
 import modelo.Sucursal;
@@ -100,7 +101,7 @@ public class FSucursal {
    
    public void consultarMunicipio(JComboBox<Municipio> cbMunicipio, String buscar){
        
-       sql = "SELECT Id_municipio, Nombre_municipio FROM TBL_MUNICIPIO WHERE ID_DEPARTAMENTO =" + "'" + buscar + "'";
+       sql = "SELECT Id_municipio, Nombre_municipio FROM TBL_MUNICIPIO WHERE ID_DEPARTAMENTO =" + "'" + buscar + "'"+ "ORDER BY Nombre_municipio ASC";
        
        try{
      
@@ -167,7 +168,7 @@ public class FSucursal {
    
    
    
-    public void agregarCargo(Sucursal sucursal){
+    public void agregarSucursal(Sucursal sucursal){
         
      try{
          
@@ -180,7 +181,7 @@ public class FSucursal {
                pst.setString(2, sucursal.getDireccion());
                pst.setInt(3, sucursal.getId_municipio());
                pst.setString(4, sucursal.getTelefono());
-               pst.setString(6, sucursal.getCorreo());
+               pst.setString(5, sucursal.getCorreo());
                
                 pst.execute(); 
               
@@ -195,6 +196,54 @@ public class FSucursal {
     
     
     }
+    
+     public DefaultTableModel mostrarSucursal(String buscar) throws SQLException{
+             DefaultTableModel modelo;
+             
+            totalRegistros=0;
+            
+             String [] encabezado = {"ID","SUCURSAL","MUNICIPIO","DEPARTAMENTO","DIRECCION","TELEFONO","CORREO","ESTADO","ID_MUNICIPIO"};   
+             String [] registros = new String [9];
+             
+              modelo = new DefaultTableModel(null,encabezado);
+              String sql = buscar;
+              
+              try{
+         
+         Statement st = cn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
+          while(rs.next()){
+         
+             registros[0] = Integer.toString(rs.getInt("Id_sucursal"));
+             registros[1] = rs.getString("Nombre_sucursal");
+             registros[2] = rs.getString("Nombre_municipio");
+             registros[3] = rs.getString("Nombre_departamento");
+             registros[4] = rs.getString("direccion");
+             registros[5] = rs.getString("Telefono_sucursal");
+             registros[6] = rs.getString("Correo_sucursal");
+             registros[7] = Integer.toString(rs.getInt("Estado"));
+             registros[8] = Integer.toString(rs.getInt("id_municipio"));
+             
+             totalRegistros += 1;
+             modelo.addRow(registros);
+         
+         
+         }
+         
+         
+         
+         return modelo;
+     
+     
+     }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     
+     }
+     
+     }
     
     
 }

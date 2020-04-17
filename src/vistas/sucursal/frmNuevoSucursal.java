@@ -13,6 +13,8 @@ import java.awt.event.ItemListener;
 import javax.swing.JOptionPane;
 import modelo.Departamento;
 import modelo.Municipio;
+import modelo.Sucursal;
+import vistas.cargo.frmIndexCargo;
 
 /**
  *
@@ -22,14 +24,16 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
 
      FSucursal funcion = new FSucursal();
      FSucursal funcion1 = new FSucursal();
-    
+   
       int departamentoSelected;
-    int municipioSelected;
-     String accion = "guardar";
+      int municipioSelected;
+      String accion = "guardar";
     
     public frmNuevoSucursal() {
         initComponents();
         
+        btnGuardar.addActionListener(this);
+        btnCancelar.addActionListener(this);
         
          cbDepartamentos.removeAllItems();
         
@@ -38,16 +42,9 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         funcion.consultarMunicipio(cbMunicipio, String.valueOf(departamentoSelected));
         municipioSelected = cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio(); 
        
-       
             
-            btnGuardar.addActionListener(this);
-           
-         
-        
-       
-         
-         
-         
+        btnGuardar.addActionListener(this);
+          
          
          cbDepartamentos.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent arg0){
@@ -57,15 +54,11 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
       //Aqui veremos que hacer cuando se cambie de departamento
       departamentoSelected = cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento(); 
      //
-
       
       cbMunicipio.removeAllItems();
       
-      
       funcion.consultarMunicipio(cbMunicipio, String.valueOf(departamentoSelected));
       municipioSelected = cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio(); 
-      
-      
                            
                }});
          
@@ -84,15 +77,56 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
     public void actionPerformed(ActionEvent e) {
         
         if (e.getSource()== btnGuardar){
-            
+            accion = "guardar";/*
             System.out.println("================================");
             System.out.println("Departamento ID: "+ cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento());
             System.out.println("Departamento NOMBRE: "+ cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getNombre_departamento());
             
             System.out.println("Municipio ID: "+ cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio());
             System.out.println("Municipio NOMBRE: "+ cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getNombre_muncipio());
-            System.out.println("================================");
+            System.out.println("================================");*/
+        } 
+        
+        if(e.getSource()== btnGuardar){
+        
+          /*if((txtNombre.getText().length()==0)||(txtDirección.getText().length()==0)||(txtTelefono.getText().length()==0)||(txtCorreo.getText().length()==0)){
+          JOptionPane.showMessageDialog(null, "Por Favor llena todos los campos necearios");
+          }else{*/
+            if(accion == "guardar"){
+            guardaSucursal();
+            //}
+          }
         }
+         if(e.getSource()==btnCancelar){
+            this.dispose();
+        }
+    
+    }
+    
+    public void guardaSucursal(){
+    
+     try{
+     
+        Sucursal sucursal = new Sucursal();
+        
+        sucursal.setNombre_sucursal(txtNombre.getText());
+        sucursal.setDireccion(txtDirección.getText());
+        sucursal.setId_municipio(cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio());
+        sucursal.setTelefono(txtTelefono.getText());
+        sucursal.setCorreo(txtCorreo.getText());
+        
+        funcion.agregarSucursal(sucursal);
+        
+        //JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+        frmIndexSucursal.btnActualizar.doClick();
+        limpiar();
+     
+     }catch(Exception e){
+       
+       JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
+       
+       }
+    
     
     }
 
@@ -106,6 +140,15 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         
         funcion.consultarMunicipio(cbMunicipio, id);
       
+    }
+    
+    public void limpiar(){
+    
+        txtNombre.setText("");
+        txtDirección.setText("");
+        txtCorreo.setText("");
+        txtTelefono.setText("");
+    
     }
     
     
@@ -339,6 +382,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         //llenarComboBoxMunicipios(txtIdepartamento.getText());
     }//GEN-LAST:event_cbDepartamentosItemStateChanged
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
