@@ -5,9 +5,15 @@
  */
 package vistas.sucursal;
 
+import controladores.FSucursal;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import static vistas.cargo.frmIndexCargo.btnActualizar;
 import vistas.cargo.frmNuevoCargo;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -17,11 +23,24 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  */
 public class frmIndexSucursal extends javax.swing.JInternalFrame implements ActionListener{
 
-    /**
-     * Creates new form frmIndexSucursal
-     */
+    DefaultTableModel modelo;
+    FSucursal funcion = new FSucursal();
+    
+    String query = "SELECT a.Id_sucursal,a.Nombre_sucursal,b.Nombre_municipio,c.Nombre_departamento,a.direccion,a.Telefono_sucursal,a.Correo_sucursal,a.Estado,\n" +
+     "a.id_municipio FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
+     "a.id_municipio = b.Id_municipio inner join [TBL_DEPARTAMENTO] AS c on c.Id_departamento = b.ID_DEPARTAMENTO where a.Estado =1";
+    
     public frmIndexSucursal() {
         initComponents();
+        
+         mostrar(query);
+        tblDatos.getTableHeader().setReorderingAllowed(false);
+        
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbNombre);
+        rbNombre.setSelected(true);
+        
         
         btnNuevo.addActionListener(this);
         btnActualizar.addActionListener(this);
@@ -39,6 +58,55 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
             frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             frmNuevo.setVisible(true);
        }
+       
+       if(e.getSource()== btnActualizar){
+          //mostrar(query);
+           actualizar();
+        }
+    }
+    
+    private void mostrar(String buscar){    
+        try {
+            modelo = funcion. mostrarSucursal(buscar);
+            
+            tblDatos.setModel(modelo);
+            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));   
+             ocultarColumnas(tblDatos,8); //para ocultar la columna del estado
+             ocultarColumnas(tblDatos,7); //para ocultar la columna de Fecha de creacion
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    }
+    
+    private void ocultarColumnas(JTable tabla, int columna){
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
+    }
+    
+     private void buscar(String textoBuscar){
+     
+         
+        if(rbId.isSelected()==true){
+        mostrar("SELECT a.Id_sucursal,a.Nombre_sucursal,b.Nombre_municipio,c.Nombre_departamento,a.direccion,a.Telefono_sucursal,a.Correo_sucursal,a.Estado,\n" +
+         "a.id_municipio FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
+         "a.id_municipio = b.Id_municipio inner join [TBL_DEPARTAMENTO] AS c on c.Id_departamento = b.ID_DEPARTAMENTO WHERE (Id_sucursal like '%"+textoBuscar+"%') AND a.Estado = 1");
+        }else{
+        
+          mostrar("SELECT a.Id_sucursal,a.Nombre_sucursal,b.Nombre_municipio,c.Nombre_departamento,a.direccion,a.Telefono_sucursal,a.Correo_sucursal,a.Estado,\n" +
+         "a.id_municipio FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
+         "a.id_municipio = b.Id_municipio inner join [TBL_DEPARTAMENTO] AS c on c.Id_departamento = b.ID_DEPARTAMENTO WHERE (Nombre_sucursal like '%"+textoBuscar+"%') AND a.Estado = 1");  
+        
+        }
+     
+     
+     }
+    
+    
+    private void actualizar(){
+        mostrar(query);
     }
 
     /**
@@ -248,6 +316,7 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         //buscar();
+        buscar(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
@@ -261,7 +330,7 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
