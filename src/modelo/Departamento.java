@@ -11,8 +11,16 @@ package modelo;
  */
 public class Departamento {
 
-    public Departamento(int aInt, String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public Departamento(int idDepartamento, String nombre) {
+        this.id_departamento = idDepartamento;
+        this.nombre_departamento = nombre;
+      
+    }
+     
+      @Override
+    public String toString(){
+        return nombre_departamento;
     }
 
     /**
@@ -60,5 +68,10 @@ public class Departamento {
     private int id_departamento;
     private String nombre_departamento;
     private int id_usuario;
+    
+    
+     public Departamento(){
+          
+      }
     
 }

@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.JOptionPane;
 import modelo.Departamento;
+import modelo.Municipio;
 
 /**
  *
@@ -21,26 +23,76 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
      FSucursal funcion = new FSucursal();
      FSucursal funcion1 = new FSucursal();
     
-     int departamentoSelected;
-     int municipioSelected;
+      int departamentoSelected;
+    int municipioSelected;
      String accion = "guardar";
     
     public frmNuevoSucursal() {
         initComponents();
         
-         llenarComboBoxDepartamentos();
-         llenarComboBoxMunicipios(txtIdepartamento.getText());
-         txtIdmunicipio.setVisible(true);
-         txtIdepartamento.setVisible(true);
+        
+         cbDepartamentos.removeAllItems();
+        
+        funcion.consultarDepartamento(cbDepartamentos);
+        departamentoSelected = cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento();    
+        funcion.consultarMunicipio(cbMunicipio, String.valueOf(departamentoSelected));
+        municipioSelected = cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio(); 
+       
+       
+            
+            btnGuardar.addActionListener(this);
+           
          
-         /*cbDepartamentos.addActionListener(new ActionListener() {
+        
+       
+         
+         
+         
+         
+         cbDepartamentos.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent arg0){
-               }});*/
+              
+              
+              System.out.println("Diferente departamento");
+      //Aqui veremos que hacer cuando se cambie de departamento
+      departamentoSelected = cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento(); 
+     //
+
+      
+      cbMunicipio.removeAllItems();
+      
+      
+      funcion.consultarMunicipio(cbMunicipio, String.valueOf(departamentoSelected));
+      municipioSelected = cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio(); 
+      
+      
+                           
+               }});
+         
+         //DE MUNICIPIOS
+          cbMunicipio.addItemListener(new ItemListener() {
+        public void itemStateChanged(ItemEvent itemEvent) {
+            
+        
+         
+        }
+        });
    
         }
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if (e.getSource()== btnGuardar){
+            
+            System.out.println("================================");
+            System.out.println("Departamento ID: "+ cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento());
+            System.out.println("Departamento NOMBRE: "+ cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getNombre_departamento());
+            
+            System.out.println("Municipio ID: "+ cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio());
+            System.out.println("Municipio NOMBRE: "+ cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getNombre_muncipio());
+            System.out.println("================================");
+        }
     
     }
 
@@ -51,12 +103,9 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
 
     
     public void llenarComboBoxMunicipios(String id){
-        int itemCount = cbMunicipio.getItemCount();
-
-      for(int i=0;i<itemCount;i++){
-        cbMunicipio.removeItemAt(0);
-          }
-        funcion.consultarMunicipio(cbMunicipio,id);
+        
+        funcion.consultarMunicipio(cbMunicipio, id);
+      
     }
     
     
@@ -82,8 +131,6 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         lblNombre9 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        txtIdepartamento = new javax.swing.JTextField();
-        txtIdmunicipio = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -171,17 +218,13 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
                             .addComponent(txtTelefono)
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
                                 .addComponent(lblNombre8)
-                                .addGap(0, 117, Short.MAX_VALUE)))
+                                .addGap(0, 109, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre9)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(txtIdmunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -191,11 +234,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
                 .addContainerGap()
                 .addComponent(lblNombre2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIdepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtIdmunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,28 +317,34 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
 
     private void cbDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDepartamentosActionPerformed
         // TODO add your handling code here:
-        String seleccionado = cbDepartamentos.getSelectedItem().toString();
-       funcion.consultarIdepartamento(txtIdepartamento, seleccionado);
+        //String seleccionado = cbDepartamentos.getSelectedItem().toString();
+       //funcion.consultarIdepartamento(txtIdepartamento, seleccionado);
+       
+        //System.out.println(txtIdepartamento.getText());
+        
+        
+        //llenarComboBoxMunicipios(txtIdepartamento.getText());
+       
+       
     }//GEN-LAST:event_cbDepartamentosActionPerformed
 
     private void cbMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMunicipioActionPerformed
         // TODO add your handling code here:
-        String seleccionado2 = cbMunicipio.getSelectedItem().toString();
-       funcion1.consultarIdmunicipio(txtIdmunicipio, seleccionado2);
+       
     }//GEN-LAST:event_cbMunicipioActionPerformed
 
     private void cbDepartamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDepartamentosItemStateChanged
         // TODO add your handling code here:
        
-        llenarComboBoxMunicipios(txtIdepartamento.getText());
+        //llenarComboBoxMunicipios(txtIdepartamento.getText());
     }//GEN-LAST:event_cbDepartamentosItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JComboBox<String> cbDepartamentos;
-    private javax.swing.JComboBox<String> cbMunicipio;
+    public static javax.swing.JComboBox<Departamento> cbDepartamentos;
+    public static javax.swing.JComboBox<Municipio> cbMunicipio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
@@ -314,8 +359,6 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextArea txtDirección;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtIdepartamento;
-    private javax.swing.JTextField txtIdmunicipio;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
