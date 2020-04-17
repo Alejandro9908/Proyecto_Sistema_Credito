@@ -13,6 +13,8 @@ import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import modelo.Departamento;
+import modelo.Municipio;
 import modelo.Sucursal;
 
 /**
@@ -28,9 +30,9 @@ public class FSucursal {
     
     
     //Metod consultar departamento
-     public void consultarDepartamento(JComboBox cbDepartamentos){
+     public void consultarDepartamento(JComboBox<Departamento> cbDepartamentos){
        
-       sql = "SELECT Nombre_Departamento FROM TBL_DEPARTAMENTO ORDER BY Nombre_departamento ASC";
+       sql = "SELECT Id_departamento, Nombre_Departamento FROM TBL_DEPARTAMENTO ORDER BY Nombre_departamento ASC";
        
        try{
      
@@ -41,7 +43,13 @@ public class FSucursal {
           
           while(rs.next()){
           
-               cbDepartamentos.addItem(rs.getString("Nombre_departamento"));
+                 cbDepartamentos.addItem(
+                        new Departamento(
+                            rs.getInt("Id_departamento"),
+                            rs.getString("Nombre_departamento")
+                          
+                        )
+                    );
           
           }
          
@@ -90,9 +98,9 @@ public class FSucursal {
      
    //Metod consultar departamento
    
-   public void consultarMunicipio(JComboBox cbMunicipio, String buscar){
+   public void consultarMunicipio(JComboBox<Municipio> cbMunicipio, String buscar){
        
-       sql = "SELECT Nombre_municipio FROM TBL_MUNICIPIO WHERE ID_DEPARTAMENTO =" + "'" + buscar + "'";
+       sql = "SELECT Id_municipio, Nombre_municipio FROM TBL_MUNICIPIO WHERE ID_DEPARTAMENTO =" + "'" + buscar + "'";
        
        try{
      
@@ -101,11 +109,17 @@ public class FSucursal {
           Statement st = cn.createStatement();
           ResultSet rs = st.executeQuery(sql);  
           
-          while(rs.next()){
-          
-               cbMunicipio.addItem(rs.getString("Nombre_municipio"));
-          
-          }
+         while(rs.next()){
+              
+                cbMunicipio.addItem(
+                        new Municipio(
+                            rs.getInt("Id_municipio"),
+                            rs.getString("Nombre_municipio")
+                          
+                        )
+                    );   
+                
+             }
          
          }else{
           

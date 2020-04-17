@@ -11,6 +11,16 @@ package modelo;
  */
 public class Municipio {
 
+     public Municipio(int idMunicipio, String nombre) {
+        this.id_municipio = idMunicipio;
+        this.nombre_muncipio = nombre;
+     
+    }
+
+      @Override
+    public String toString(){
+        return nombre_muncipio;
+    }
     /**
      * @return the id_municipio
      */
@@ -71,5 +81,9 @@ public class Municipio {
     private String nombre_muncipio;
     private int id_departamento;
     private int id_usuario;
+    
+     public Municipio(){
+          
+      }
     
 }
