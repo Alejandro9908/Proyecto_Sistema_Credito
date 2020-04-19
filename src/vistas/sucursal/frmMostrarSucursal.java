@@ -8,6 +8,8 @@ package vistas.sucursal;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.Departamento;
+import modelo.Municipio;
 import vistas.cargo.frmEditarCargo;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -17,19 +19,20 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  */
 public class frmMostrarSucursal extends javax.swing.JInternalFrame implements ActionListener{
 
-    /**
-     * Creates new form frmMostrarSucursal
-     */
+    
     public frmMostrarSucursal() {
         initComponents();
         //AGREGAR LOS BOTONES AL ACTION LISTENER
         btnEditar.addActionListener(this);
         btnEliminar.addActionListener(this);
+        btnCancelar.addActionListener(this);
+        btnGuardar.addActionListener(this);
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(btnEditar == e.getSource()){
+        /*if(btnCancelar == e.getSource()){
             frmEditarSucursal frmEditar = new frmEditarSucursal();
             dpnlEscritorio.add(frmEditar);
             Dimension desktopSize = dpnlEscritorio.getSize();
@@ -38,7 +41,7 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
             frmEditar.setVisible(true);
             //cerramos el form mostrar departamento
             this.dispose();
-        }
+        }*/
         
         if(e.getSource()== btnEliminar){
             //AQUI MANDAR A LLAMAR UN JOPTIONPANE
@@ -46,7 +49,20 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
             //UNA PARA CANCELAR
             //Y OTRO PARA CONFIRMAR ELIMINACION
         }
+        
+        if(e.getSource()== btnEditar){
+            desbloquearDatos();
+        }
+        
+        if(e.getSource()== btnCancelar){
+            cancelar1();
+        }
+         
+         if(e.getSource()== btnGuardar){
+            editarSucursal();   
+        }
     }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,13 +88,15 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
         lblNombre9 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        txtDepartamento = new javax.swing.JTextField();
-        txtMunicipio = new javax.swing.JTextField();
         txtEstado = new javax.swing.JTextField();
         lblNombre3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
+        cbDepartamentos = new javax.swing.JComboBox<>();
+        cbMunicipio = new javax.swing.JComboBox<>();
+        lblTitulo = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -90,14 +108,11 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre.setText("Nombre de la Sucursal");
 
-        txtNombre.setEnabled(false);
-
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre1.setText("Detalles de la Dirección");
 
         txtDireccion.setColumns(20);
         txtDireccion.setRows(5);
-        txtDireccion.setEnabled(false);
         jScrollPane1.setViewportView(txtDireccion);
 
         txtId.setEditable(false);
@@ -122,14 +137,6 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Correo");
 
-        txtTelefono.setEnabled(false);
-
-        txtCorreo.setEnabled(false);
-
-        txtDepartamento.setEnabled(false);
-
-        txtMunicipio.setEnabled(false);
-
         txtEstado.setEditable(false);
         txtEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +147,23 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
         lblNombre3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre3.setText("Estado");
 
+        cbDepartamentos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbDepartamentosItemStateChanged(evt);
+            }
+        });
+        cbDepartamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDepartamentosActionPerformed(evt);
+            }
+        });
+
+        cbMunicipio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMunicipioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
         pnlFormularioLayout.setHorizontalGroup(
@@ -149,23 +173,6 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
-                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDepartamento)
-                            .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNombre)
-                                    .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                        .addComponent(lblNombre2)
-                                        .addGap(184, 184, 184)
-                                        .addComponent(lblNombre3))
-                                    .addComponent(lblNombre1)
-                                    .addComponent(lblNombre6))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre7)
-                            .addComponent(txtMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre8)
@@ -180,7 +187,23 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombre)
+                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                .addComponent(lblNombre2)
+                                .addGap(184, 184, 184)
+                                .addComponent(lblNombre3))
+                            .addComponent(lblNombre1)
+                            .addComponent(lblNombre6)
+                            .addComponent(cbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbMunicipio, 0, 282, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
+                                .addComponent(lblNombre7)
+                                .addGap(210, 210, 210)))))
                 .addContainerGap())
         );
         pnlFormularioLayout.setVerticalGroup(
@@ -204,8 +227,8 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
                     .addComponent(lblNombre7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -221,16 +244,25 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Detalles de la Sucursal");
+        lblTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        lblTitulo.setText("Detalles de la Sucursal");
 
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
-        btnEditar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnEditar.setText("Editar");
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
 
         btnEliminar.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.setEnabled(false);
+
+        btnEditar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnEditar.setText("Editar");
+
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
@@ -242,11 +274,15 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
                 .addContainerGap())
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
-                .addContainerGap(290, Short.MAX_VALUE)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
@@ -255,13 +291,15 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addGap(18, 18, 18)
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnEliminar)
                     .addComponent(btnEditar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
 
@@ -270,6 +308,44 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void desbloquearDatos(){
+        
+        txtNombre.setEditable(true);
+        txtDireccion.setEditable(true);
+        txtTelefono.setEditable(true);
+        txtCorreo.setEditable(true);
+        btnGuardar.setEnabled(true);
+        btnEditar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        lblTitulo.setText("Editar Sucursal");
+        
+    }
+    
+    private void bloquearDatos(){
+        
+        txtNombre.setEditable(false);
+        txtDireccion.setEditable(false);
+        txtTelefono.setEditable(false);
+        txtCorreo.setEditable(false);
+        btnGuardar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        lblTitulo.setText("Detalles de la Sucursal");
+    }
+    
+     private void cancelar1(){
+        this.dispose();
+    }
+     
+     private void editarSucursal(){
+     frmIndexSucursal.btnActualizar.doClick();
+     bloquearDatos();
+     }
+    
+    
+    
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
@@ -278,11 +354,36 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEstadoActionPerformed
 
+    private void cbDepartamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDepartamentosItemStateChanged
+        // TODO add your handling code here:
+
+        //llenarComboBoxMunicipios(txtIdepartamento.getText());
+    }//GEN-LAST:event_cbDepartamentosItemStateChanged
+
+    private void cbDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDepartamentosActionPerformed
+        // TODO add your handling code here:
+        //String seleccionado = cbDepartamentos.getSelectedItem().toString();
+        //funcion.consultarIdepartamento(txtIdepartamento, seleccionado);
+
+        //System.out.println(txtIdepartamento.getText());
+
+        //llenarComboBoxMunicipios(txtIdepartamento.getText());
+
+    }//GEN-LAST:event_cbDepartamentosActionPerformed
+
+    private void cbMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMunicipioActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cbMunicipioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnGuardar;
+    public static javax.swing.JComboBox<Departamento> cbDepartamentos;
+    public static javax.swing.JComboBox<Municipio> cbMunicipio;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
@@ -292,15 +393,14 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
     private javax.swing.JLabel lblNombre7;
     private javax.swing.JLabel lblNombre8;
     private javax.swing.JLabel lblNombre9;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
-    private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtDepartamento;
-    private javax.swing.JTextArea txtDireccion;
-    private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtMunicipio;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    public static javax.swing.JTextField txtCorreo;
+    public static javax.swing.JTextArea txtDireccion;
+    public static javax.swing.JTextField txtEstado;
+    public static javax.swing.JTextField txtId;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
