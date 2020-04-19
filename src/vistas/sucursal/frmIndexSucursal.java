@@ -27,7 +27,7 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
     FSucursal funcion = new FSucursal();
     
     String query = "SELECT a.Id_sucursal,a.Nombre_sucursal,b.Nombre_municipio,c.Nombre_departamento,a.direccion,a.Telefono_sucursal,a.Correo_sucursal,a.Estado,\n" +
-     "a.id_municipio FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
+     "a.id_municipio,c.Id_departamento FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
      "a.id_municipio = b.Id_municipio inner join [TBL_DEPARTAMENTO] AS c on c.Id_departamento = b.ID_DEPARTAMENTO where a.Estado =1";
     
     public frmIndexSucursal() {
@@ -73,7 +73,7 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
             txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));   
              ocultarColumnas(tblDatos,8); //para ocultar la columna del estado
              ocultarColumnas(tblDatos,7); //para ocultar la columna de Fecha de creacion
-            
+             ocultarColumnas(tblDatos,9);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
         }
@@ -91,12 +91,12 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
          
         if(rbId.isSelected()==true){
         mostrar("SELECT a.Id_sucursal,a.Nombre_sucursal,b.Nombre_municipio,c.Nombre_departamento,a.direccion,a.Telefono_sucursal,a.Correo_sucursal,a.Estado,\n" +
-         "a.id_municipio FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
+         "a.id_municipio,c.Id_departamento FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
          "a.id_municipio = b.Id_municipio inner join [TBL_DEPARTAMENTO] AS c on c.Id_departamento = b.ID_DEPARTAMENTO WHERE (Id_sucursal like '%"+textoBuscar+"%') AND a.Estado = 1");
         }else{
         
           mostrar("SELECT a.Id_sucursal,a.Nombre_sucursal,b.Nombre_municipio,c.Nombre_departamento,a.direccion,a.Telefono_sucursal,a.Correo_sucursal,a.Estado,\n" +
-         "a.id_municipio FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
+         "a.id_municipio,c.Id_departamento FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on\n" +
          "a.id_municipio = b.Id_municipio inner join [TBL_DEPARTAMENTO] AS c on c.Id_departamento = b.ID_DEPARTAMENTO WHERE (Nombre_sucursal like '%"+textoBuscar+"%') AND a.Estado = 1");  
         
         }
@@ -326,6 +326,18 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
         Dimension FrameSize = frmMostrar.getSize();
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
+        
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarSucursal.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
+        frmMostrarSucursal.txtNombre.setText(tblDatos.getValueAt(posicion,1).toString());
+        frmMostrarSucursal.txtDireccion.setText(tblDatos.getValueAt(posicion,4).toString());
+        frmMostrarSucursal.txtTelefono.setText(tblDatos.getValueAt(posicion,5).toString());
+        frmMostrarSucursal.txtCorreo.setText(tblDatos.getValueAt(posicion,6).toString());
+        frmMostrarSucursal.txtEstado.setText(tblDatos.getValueAt(posicion,7).toString());
+        
+        //frmMostrarSucursal.cbMunicipio.setText((tblDatos.getValueAt(posicion,2).toString()));
+        
+        
     }//GEN-LAST:event_tblDatosMouseClicked
 
 

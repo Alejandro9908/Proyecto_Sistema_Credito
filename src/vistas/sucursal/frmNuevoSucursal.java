@@ -24,6 +24,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
 
      FSucursal funcion = new FSucursal();
      FSucursal funcion1 = new FSucursal();
+     int n;
    
       int departamentoSelected;
       int municipioSelected;
@@ -32,7 +33,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
     public frmNuevoSucursal() {
         initComponents();
         
-        btnGuardar.addActionListener(this);
+        //btnGuardar.addActionListener(this);
         btnCancelar.addActionListener(this);
         
          cbDepartamentos.removeAllItems();
@@ -76,7 +77,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        if (e.getSource()== btnGuardar){
+       /* if (e.getSource()== btnGuardar){
             accion = "guardar";/*
             System.out.println("================================");
             System.out.println("Departamento ID: "+ cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento());
@@ -85,7 +86,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
             System.out.println("Municipio ID: "+ cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio());
             System.out.println("Municipio NOMBRE: "+ cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getNombre_muncipio());
             System.out.println("================================");*/
-        } 
+        //} 
         
         if(e.getSource()== btnGuardar){
         

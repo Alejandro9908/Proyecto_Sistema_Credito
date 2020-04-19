@@ -202,8 +202,8 @@ public class FSucursal {
              
             totalRegistros=0;
             
-             String [] encabezado = {"ID","SUCURSAL","MUNICIPIO","DEPARTAMENTO","DIRECCION","TELEFONO","CORREO","ESTADO","ID_MUNICIPIO"};   
-             String [] registros = new String [9];
+             String [] encabezado = {"ID","SUCURSAL","MUNICIPIO","DEPARTAMENTO","DIRECCION","TELEFONO","CORREO","ESTADO","ID_MUNICIPIO","ID_DEPARTAMENTO"};   
+             String [] registros = new String [10];
              
               modelo = new DefaultTableModel(null,encabezado);
               String sql = buscar;
@@ -223,6 +223,7 @@ public class FSucursal {
              registros[6] = rs.getString("Correo_sucursal");
              registros[7] = Integer.toString(rs.getInt("Estado"));
              registros[8] = Integer.toString(rs.getInt("id_municipio"));
+             registros[9] = Integer.toString(rs.getInt("id_municipio"));
              
              totalRegistros += 1;
              modelo.addRow(registros);
