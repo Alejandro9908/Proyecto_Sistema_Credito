@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  */
 public class Conexion {
     
+    //Hola como estan
     private static Connection conexion;
     private static String bdName = "DB_Creditos";
     private static String user = "Proyecto_Creditos";//Nombre del usuario
