@@ -30,7 +30,7 @@ on a.Id_departamento_emp = e.Id_departamento_emp WHERE a.Estado = 1]]>
 				<frame>
 					<reportElement mode="Opaque" x="0" y="0" width="610" height="19" forecolor="#B89F7D" backcolor="#70A9C6" uuid="72383463-3317-4d11-b685-2697b750cbf0"/>
 					<staticText>
-						<reportElement x="18" y="0" width="30" height="19" uuid="75b46a1f-d291-45fc-9083-b0b56a71d272"/>
+						<reportElement x="31" y="0" width="30" height="19" uuid="75b46a1f-d291-45fc-9083-b0b56a71d272"/>
 						<textElement textAlignment="Center">
 							<font isBold="true"/>
 						</textElement>
@@ -101,7 +101,7 @@ on a.Id_departamento_emp = e.Id_departamento_emp WHERE a.Estado = 1]]>
 			<frame>
 				<reportElement x="0" y="0" width="610" height="58" uuid="3653e316-5b61-4f34-8e64-512ebc95157f"/>
 				<textField>
-					<reportElement x="0" y="0" width="65" height="20" uuid="d0cab36c-021c-4d7f-ac56-0db80e106c7b"/>
+					<reportElement x="13" y="0" width="65" height="20" uuid="d0cab36c-021c-4d7f-ac56-0db80e106c7b"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{Id_cargo}]]></textFieldExpression>
 				</textField>

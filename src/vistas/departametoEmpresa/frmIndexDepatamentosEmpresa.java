@@ -78,7 +78,9 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
         }
         
         if(e.getSource()==btnReporte){
+            
             Reporte();
+            
         }
         
     }
@@ -137,10 +139,12 @@ public class frmIndexDepatamentosEmpresa extends javax.swing.JInternalFrame impl
         JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
         JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
         
+        
         JasperViewer viewer = new JasperViewer(jasperPrint,false);
         //viewer.setTitle("Reporte UMG");
         viewer.setVisible(true);
-            
+         
+        
         }catch(Exception ex){
          
          System.out.println("Error de reporte"+ex.getMessage());

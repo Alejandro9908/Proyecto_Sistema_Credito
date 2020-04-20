@@ -27,7 +27,7 @@
 				<frame>
 					<reportElement mode="Opaque" x="0" y="7" width="610" height="24" forecolor="#B89F7D" backcolor="#70A9C6" uuid="848db4fa-b980-4931-b13b-a18247fe5060"/>
 					<staticText>
-						<reportElement x="2" y="0" width="22" height="24" uuid="4a12a1ce-0311-4ca2-97fc-a00d71d54cb1"/>
+						<reportElement x="2" y="0" width="42" height="24" uuid="4a12a1ce-0311-4ca2-97fc-a00d71d54cb1"/>
 						<textElement textAlignment="Center">
 							<font isBold="true"/>
 						</textElement>
@@ -91,7 +91,7 @@
 			<frame>
 				<reportElement x="0" y="0" width="610" height="87" uuid="6334c2cd-b939-4e9c-b929-b5f76da23462"/>
 				<textField>
-					<reportElement x="2" y="0" width="22" height="20" uuid="cc547365-800f-4a16-b5d4-cd66031751b8"/>
+					<reportElement x="2" y="0" width="42" height="20" uuid="cc547365-800f-4a16-b5d4-cd66031751b8"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{Id_departamento_emp}]]></textFieldExpression>
 				</textField>
