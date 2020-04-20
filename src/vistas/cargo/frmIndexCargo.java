@@ -5,6 +5,7 @@
  */
 package vistas.cargo;
 
+import controladores.Conexion;
 import controladores.FCargo;
 import controladores.FDepartamentos_emp;
 import vistas.cargo.frmMostrarCargo;
@@ -12,10 +13,17 @@ import vistas.cargo.frmNuevoCargo;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import vistas.departametoEmpresa.frmIndexDepatamentosEmpresa;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -66,6 +74,10 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
           //mostrar(query);
            actualizar();
         }
+       
+       if(e.getSource()==btnReporte){
+            Reporte();
+        }
     }
     
     private void mostrar(String buscar){    
@@ -105,6 +117,35 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
         tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
         tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
     }
+     
+     public void Reporte(){
+         
+         Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+            String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/ReporteCargos.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexCargo.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+            
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+        
+     }
     
     
     @SuppressWarnings("unchecked")
