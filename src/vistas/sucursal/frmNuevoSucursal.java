@@ -36,30 +36,31 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         //btnGuardar.addActionListener(this);
         btnCancelar.addActionListener(this);
         
-        cbDepartamentos.removeAllItems();
+         cbDepartamentos.removeAllItems();
         
         funcion.consultarDepartamento(cbDepartamentos);
+        cbDepartamentos.setSelectedItem(0);
         departamentoSelected = cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento();    
-        //funcion.consultarMunicipio(cbMunicipio, String.valueOf(departamentoSelected));
-        //municipioSelected = cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio(); 
-        
+        funcion.consultarMunicipio(cbMunicipio, String.valueOf(departamentoSelected));
+        municipioSelected = cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio(); 
+
         
         btnGuardar.addActionListener(this);
-        
-        
+          
+         
          cbDepartamentos.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent arg0){
               
               
               System.out.println("Diferente departamento");
-        //Aqui veremos que hacer cuando se cambie de departamento
-        departamentoSelected = cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento(); 
-     // 
-        
-        cbMunicipio.removeAllItems();
-        
-        funcion.consultarMunicipio(cbMunicipio, String.valueOf(departamentoSelected));
-        municipioSelected = cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio(); 
+      //Aqui veremos que hacer cuando se cambie de departamento
+      departamentoSelected = cbDepartamentos.getItemAt(cbDepartamentos.getSelectedIndex()).getId_departamento(); 
+     //
+      
+      cbMunicipio.removeAllItems();
+      
+      funcion.consultarMunicipio(cbMunicipio, String.valueOf(departamentoSelected));
+      municipioSelected = cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio(); 
                            
                }});
          
