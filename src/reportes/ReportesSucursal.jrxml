@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportesSucursal" language="groovy" pageWidth="650" pageHeight="650" orientation="Landscape" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f2bfbb48-2129-468e-890e-5182d7d79e94">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="99ae2fcb-aac0-487c-abbb-498cf2e859a0"/>
+	<queryString>
+		<![CDATA[SELECT a.Id_sucursal,a.Nombre_sucursal,b.Nombre_municipio,c.Nombre_departamento,a.direccion,a.Telefono_sucursal,
+a.Correo_sucursal,a.Estado FROM TBL_SUCURSAL AS a inner join TBL_MUNICIPIO AS b on a.id_municipio = b.Id_municipio
+inner join [TBL_DEPARTAMENTO] AS c on c.Id_departamento = b.ID_DEPARTAMENTO WHERE a.Estado = 1]]>
+	</queryString>
+	<field name="Id_sucursal" class="java.lang.Integer"/>
+	<field name="Nombre_sucursal" class="java.lang.String"/>
+	<field name="Nombre_municipio" class="java.lang.String"/>
+	<field name="Nombre_departamento" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="Telefono_sucursal" class="java.lang.String"/>
+	<field name="Correo_sucursal" class="java.lang.String"/>
+	<field name="Estado" class="java.lang.Integer"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="0" width="610" height="31" forecolor="#B89F7D" backcolor="#70A9C6" uuid="f4b6ee33-167e-418b-8990-ea0df54cd2b9"/>
+					<staticText>
+						<reportElement x="0" y="4" width="51" height="20" uuid="df620927-4acd-4356-8c9d-47935ab6b557"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ID]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="67" y="4" width="100" height="20" uuid="2752945b-25ab-4329-9996-ecf35fe30273"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[NOMBRE]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="180" y="4" width="100" height="20" uuid="e5844ab9-2ffb-4d40-bcc8-fd279d1f7510"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[MUNICIPIO]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="293" y="4" width="100" height="20" uuid="d7262126-1568-43c9-b6c4-a48ff11a2baa"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[DEPARTAMENTO]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="409" y="4" width="110" height="20" uuid="75269070-8828-4665-aee4-9d305c50f10e"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[DIRECCIÓN]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="530" y="4" width="80" height="20" uuid="b17cd9b9-c36f-4215-9b73-a1a8fe1e7dd9"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[TELEFONO]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="11"/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+		<groupHeader>
+			<band height="7"/>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="555" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="610" height="65" forecolor="#006699" backcolor="#006699" uuid="36418dc9-b433-4199-b51b-baac23c013a1"/>
+				<staticText>
+					<reportElement style="Title" x="91" y="0" width="428" height="65" uuid="66a8934a-e24f-4197-b618-7110ddfc8409"/>
+					<textElement textAlignment="Center">
+						<font size="54" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Sucursal]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="80" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="79" width="610" height="1" uuid="54efd4d2-12c1-4673-81ca-42641021522d"/>
+			</line>
+			<frame>
+				<reportElement x="0" y="1" width="610" height="79" uuid="5126e437-198d-493f-bd6f-1319e3a4ec0c"/>
+				<textField>
+					<reportElement x="0" y="0" width="51" height="20" uuid="994863f2-63fc-4b64-bf25-8e18f144b84f"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{Id_sucursal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="67" y="0" width="100" height="20" uuid="e8803f60-ba57-4ee0-8e03-7ffb37d6c2ee"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{Nombre_sucursal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="0" width="100" height="20" uuid="c5fc3343-2bfd-4cdd-b81c-c9b6b367671f"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{Nombre_municipio}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="293" y="0" width="100" height="20" uuid="acbdc97b-afa1-4e4f-961c-f2e80732fb07"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{Nombre_departamento}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="409" y="0" width="110" height="79" uuid="b92c446f-3269-4903-b96c-c307e62b71cf"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="530" y="0" width="80" height="20" uuid="e19fd3da-ed5f-46bb-939b-bb25333f980c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Telefono_sucursal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="b826ba0b-ddf6-4dd5-9449-dba8ea8193d5"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="608" height="16" forecolor="#D0B48E" backcolor="#006699" uuid="9d9a9849-6219-4760-8ec7-63c5476d94f4"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="568" y="0" width="40" height="16" forecolor="#FFFFFF" uuid="dc917f9a-e0a9-408c-8725-4e838bd18b36"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="488" y="0" width="80" height="16" forecolor="#FFFFFF" uuid="a1b4dad0-8c3c-44c6-ae36-d691da9240d8"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" uuid="4d257e06-ac57-441f-a238-6854040de55e"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

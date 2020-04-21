@@ -71,7 +71,7 @@ public class Conexion {
         this.conexion= DriverManager.getConnection(BaseDeDatos);
         
         Statement st =  conexion.createStatement();
-         ResultSet rs = st.executeQuery("SELECT Id_usuario,Id_empleado,NIckname,Permisos,Contrasena,Estado FROM TBL_USUARIO");
+       /* ResultSet rs = st.executeQuery("SELECT Id_usuario,NIckname,Permisos,Contrasena,Estado FROM TBL_USUARIO");
          
          while(rs.next()){
              
@@ -83,7 +83,7 @@ public class Conexion {
              int ESTADO=rs.getInt(6);
              System.out.println(ID + " " + ID1 + " " + NOMBRE + " " + PERMISO + " " + CONTRASENA + " " + ESTADO);
          
-     }
+     }*/
         
         if(this.conexion!=null)
         {

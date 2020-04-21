@@ -5,14 +5,21 @@
  */
 package vistas.sucursal;
 
+import controladores.Conexion;
 import controladores.FSucursal;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import static vistas.cargo.frmIndexCargo.btnActualizar;
 import vistas.cargo.frmNuevoCargo;
 import static vistas.frmEscritorio.dpnlEscritorio;
@@ -63,6 +70,12 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
           //mostrar(query);
            actualizar();
         }
+       
+       if(e.getSource()==btnReporte){
+            
+            Reporte();
+            
+        }
     }
     
     private void mostrar(String buscar){    
@@ -85,6 +98,37 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
         tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
         tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
     }
+    
+     public void Reporte(){
+         
+         Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+            String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/ReportesSucursal.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexSucursal.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+         
+        
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+        
+     }
     
      private void buscar(String textoBuscar){
      
