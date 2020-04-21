@@ -22,6 +22,7 @@ public class frmMostrarCargo extends javax.swing.JInternalFrame implements Actio
 
     FCargo funcion = new FCargo();
     Conexion cn = new Conexion();
+    //Ya funciona
 
     public frmMostrarCargo() {
         initComponents();
