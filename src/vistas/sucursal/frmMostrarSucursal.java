@@ -37,7 +37,10 @@ public class frmMostrarSucursal extends javax.swing.JInternalFrame implements Ac
         
         txtIdMunicipio.setVisible(false);
         txtIdDepartamento.setVisible(false);
-        
+        txtNombre.setEditable(false);
+        txtDireccion.setEditable(false);
+        txtTelefono.setEditable(false);
+        txtCorreo.setEditable(false);
         
         
         

@@ -202,11 +202,14 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre.setText("Nombre de la Sucursal");
 
+        txtNombre.setEnabled(false);
+
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre1.setText("Detalles de la Dirección");
 
         txtDireccion.setColumns(20);
         txtDireccion.setRows(5);
+        txtDireccion.setEnabled(false);
         jScrollPane1.setViewportView(txtDireccion);
 
         txtId.setEditable(false);
@@ -247,6 +250,10 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
 
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Correo");
+
+        txtTelefono.setEnabled(false);
+
+        txtCorreo.setEnabled(false);
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
