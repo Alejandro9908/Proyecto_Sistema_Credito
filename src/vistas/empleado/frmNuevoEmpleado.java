@@ -114,7 +114,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
 
         setClosable(true);
         setResizable(true);
-        setMaximumSize(new java.awt.Dimension(670, 700));
+        setMaximumSize(null);
         setMinimumSize(new java.awt.Dimension(200, 40));
         setPreferredSize(new java.awt.Dimension(670, 700));
 
