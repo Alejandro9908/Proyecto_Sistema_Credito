@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.Departamento;
@@ -197,13 +198,197 @@ public class FSucursal {
     
     }
     
+    
+    //este metodo es el de Seleccionar FRM (deberia ir en FDepartamento pero lo coloqué acá) Att. Kevin
+     public void mostrarDepartamento( JTable tabla){
+         
+        DefaultTableModel model;
+        String [] columnas = {"ID_DEPARTAMENTO", "NOMBRE_DEPARTAMENTO"};
+        model = new DefaultTableModel(null, columnas);
+        
+        sql = "SELECT Id_departamento, Nombre_departamento FROM TBL_DEPARTAMENTO";
+        
+        String[] filas = new String [2]; //registros
+        
+        Statement st = null;
+        ResultSet rs = null;
+        
+         try {
+             
+             st = cn.createStatement();
+             rs = st.executeQuery(sql);
+             
+             while(rs.next()){
+                 // es como for (int i=0; i <4; i++)
+               for(int i=0; i <2; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 filas[i] = rs.getString(i+1); 
+               }
+                totalRegistros += 1;
+               model.addRow(filas);
+                
+             }
+             tabla.setModel(model);
+             
+         } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "No se pueden mostrar los datos");
+         }
+            
+         
+     }
+     
+     public void buscarDepartamento(JTable tabla, String buscar){
+         
+        DefaultTableModel model;
+        String [] columnas = {"ID_DEPARTAMENTO", "NOMBRE_DEPARTAMENTO"};
+        model = new DefaultTableModel(null, columnas);
+        
+         sql = "SELECT Id_departamento, Nombre_departamento FROM TBL_DEPARTAMENTO where UPPER(Nombre_departamento) LIKE '%"+buscar+"%'";
+        
+        String[] filas = new String [2]; //registros
+        
+        Statement st = null;
+        ResultSet rs = null;
+        
+         try {
+             
+             st = cn.createStatement();
+             rs = st.executeQuery(sql);
+             
+             while(rs.next()){
+                 // es como for (int i=0; i <4; i++)
+               for(int i=0; i <2; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 filas[i] = rs.getString(i+1); 
+               }
+                totalRegistros += 1;
+               model.addRow(filas);
+                
+             }
+             tabla.setModel(model);
+             
+         } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "No se pueden mostrar los datos");
+         }
+            
+         
+     }
+     
+     
+     
+    //este metodo es el de Seleccionar FRM (deberia ir en FDepartamento pero lo coloqué acá) Att. Kevin
+     public void mostrarMunicipio( JTable tabla, String buscar){
+         
+        DefaultTableModel model;
+        String [] columnas = {"ID_MUNICIPIO", "NOMBRE_MUNICIPIO"};
+        model = new DefaultTableModel(null, columnas);
+        
+         sql = "SELECT Id_municipio, Nombre_municipio FROM TBL_MUNICIPIO WHERE ID_DEPARTAMENTO = "+buscar+" ORDER BY Nombre_municipio ASC";
+        
+        String[] filas = new String [2]; //registros
+        
+        Statement st = null;
+        ResultSet rs = null;
+        
+         try {
+             
+             st = cn.createStatement();
+             rs = st.executeQuery(sql);
+             
+             while(rs.next()){
+                 // es como for (int i=0; i <4; i++)
+               for(int i=0; i <2; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 filas[i] = rs.getString(i+1); 
+               }
+                totalRegistros += 1;
+               model.addRow(filas);
+                
+             }
+             tabla.setModel(model);
+             
+         } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "No se pueden mostrar los datos");
+         }
+            
+         
+     }
+     
+        public void buscarMunicipio( JTable tabla, String buscar, String search){
+         
+        DefaultTableModel model;
+        String [] columnas = {"ID_MUNICIPIO", "NOMBRE_MUNICIPIO"};
+        model = new DefaultTableModel(null, columnas);
+        
+        sql = "SELECT Id_municipio, Nombre_municipio FROM TBL_MUNICIPIO WHERE ID_DEPARTAMENTO = "+buscar+" AND  UPPER(NOMBRE_MUNICIPIO) LIKE '%"+search+"%'";
+        
+        String[] filas = new String [2]; //registros
+        
+        Statement st = null;
+        ResultSet rs = null;
+        
+         try {
+             
+             st = cn.createStatement();
+             rs = st.executeQuery(sql);
+             
+             while(rs.next()){
+                 // es como for (int i=0; i <4; i++)
+               for(int i=0; i <2; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 filas[i] = rs.getString(i+1); 
+               }
+                totalRegistros += 1;
+               model.addRow(filas);
+                
+             }
+             tabla.setModel(model);
+             
+         } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "No se pueden mostrar los datos");
+         }
+            
+         
+     }
+        
+         public void editarSucursal(Sucursal sucursal, String buscar){
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_SUCURSAL set Id_sucursal='"+sucursal.getId_sucursal()+"',Nombre_sucursal='"+sucursal.getNombre_sucursal()+"',Id_municipio='"+sucursal.getId_municipio() +"', Telefono_sucursal='"+ sucursal.getTelefono()+  "',Correo_sucursal='"+sucursal.getCorreo() +   "',direccion='"+sucursal.getDireccion() +        "' where Id_sucursal="+buscar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible editar la informacion");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al editar, motivo:"+ex.getMessage());
+        } 
+    }
+         
+         public void eliminarSucursal(String idEliminar){
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_SUCURSAL set Estado=0 where Id_sucursal="+idEliminar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible eliminar el registro");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al eliminar, motivo:"+ex.getMessage());
+        } 
+    }
+     
+    
+    
+    
      public DefaultTableModel mostrarSucursal(String buscar) throws SQLException{
              DefaultTableModel modelo;
              
             totalRegistros=0;
             
-             String [] encabezado = {"ID","SUCURSAL","MUNICIPIO","DEPARTAMENTO","DIRECCION","TELEFONO","CORREO","ESTADO","ID_MUNICIPIO","ID_DEPARTAMENTO"};   
-             String [] registros = new String [10];
+             String [] encabezado = {"ID","SUCURSAL","MUNICIPIO","DEPARTAMENTO","DIRECCION","TELEFONO","CORREO","ESTADO","ID_MUNICIPIO","ID_DEPARTAMENTO", "FECHA_COMMIT", "HORA_COMMIT"};   
+             String [] registros = new String [12];
              
               modelo = new DefaultTableModel(null,encabezado);
               String sql = buscar;
@@ -223,7 +408,9 @@ public class FSucursal {
              registros[6] = rs.getString("Correo_sucursal");
              registros[7] = Integer.toString(rs.getInt("Estado"));
              registros[8] = Integer.toString(rs.getInt("id_municipio"));
-             registros[9] = Integer.toString(rs.getInt("id_municipio"));
+             registros[9] = Integer.toString(rs.getInt("id_departamento"));
+             registros[10] = rs.getString("Fecha_commit");
+             registros[11] = rs.getString("Hora_commit");
              
              totalRegistros += 1;
              modelo.addRow(registros);
