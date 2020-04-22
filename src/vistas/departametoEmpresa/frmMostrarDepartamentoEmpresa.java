@@ -340,37 +340,6 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
    
     
     
-    
-    private void eliminarDepartamento(){
-        
-         int res = JOptionPane.showConfirmDialog(
-        null, 
-        "¿Quieres continuar?", 
-        "Confirm",
-        JOptionPane.YES_NO_OPTION , 
-        JOptionPane.QUESTION_MESSAGE
-       );
-       if ( res == JOptionPane.YES_OPTION ) {
-       System.out.println( "Seleccionaste SI" );
-       
-       
-        funcion.eliminarDepartamentoEm(txtId.getText());
-        JOptionPane.showMessageDialog(null,"Registro eliminado correctamente");
-        limpiarFormulario();
-        
-         frmIndexDepatamentosEmpresa.btnActualizar.doClick(); //para actualizar el INDEX
-       
-       
-
-       } else if (res == JOptionPane.NO_OPTION) {
-     
-
-       } else if (res == JOptionPane.CLOSED_OPTION) {
-      
-       }
-        
-    }
-    
     private void eliminarDepartamento2(){
         int confirmado = JOptionPane.showConfirmDialog(
          null,
@@ -402,6 +371,7 @@ public class frmMostrarDepartamentoEmpresa extends javax.swing.JInternalFrame im
         btnEditar.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
+       
         
     }
     

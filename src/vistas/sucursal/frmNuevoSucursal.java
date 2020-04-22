@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
 import modelo.Departamento;
 import modelo.Municipio;
 import modelo.Sucursal;
-import vistas.cargo.frmIndexCargo;
+import vistas.sucursal.frmIndexSucursal;
+
 
 /**
  *
@@ -106,13 +107,19 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
     }
     
     public void guardaSucursal(){
-    
-     try{
+        
+        
+        if(txtNombre.getText().length()==0 || txtDireccion.getText().length()==0 || txtTelefono.getText().length()==0 || txtCorreo.getText().length()==0){
+              JOptionPane.showMessageDialog(null, "Hace falta rellenar campos obligatorios");
+        }
+        else{
+            
+           try{
      
         Sucursal sucursal = new Sucursal();
         
         sucursal.setNombre_sucursal(txtNombre.getText());
-        sucursal.setDireccion(txtDirección.getText());
+        sucursal.setDireccion(txtDireccion.getText());
         sucursal.setId_municipio(cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio());
         sucursal.setTelefono(txtTelefono.getText());
         sucursal.setCorreo(txtCorreo.getText());
@@ -127,7 +134,12 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
        
        JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
        
-       }
+       }   
+            
+            
+        }
+    
+   
     
     
     }
@@ -147,7 +159,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
     public void limpiar(){
     
         txtNombre.setText("");
-        txtDirección.setText("");
+        txtDireccion.setText("");
         txtCorreo.setText("");
         txtTelefono.setText("");
     
@@ -165,7 +177,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         txtNombre = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtDirección = new javax.swing.JTextArea();
+        txtDireccion = new javax.swing.JTextArea();
         txtId = new javax.swing.JTextField();
         lblNombre2 = new javax.swing.JLabel();
         lblNombre6 = new javax.swing.JLabel();
@@ -193,9 +205,9 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre1.setText("Detalles de la Dirección");
 
-        txtDirección.setColumns(20);
-        txtDirección.setRows(5);
-        jScrollPane1.setViewportView(txtDirección);
+        txtDireccion.setColumns(20);
+        txtDireccion.setRows(5);
+        jScrollPane1.setViewportView(txtDireccion);
 
         txtId.setEditable(false);
         txtId.addActionListener(new java.awt.event.ActionListener() {
@@ -403,7 +415,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
     private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextArea txtDirección;
+    private javax.swing.JTextArea txtDireccion;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
