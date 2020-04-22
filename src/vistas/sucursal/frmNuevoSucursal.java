@@ -126,13 +126,23 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         
         funcion.agregarSucursal(sucursal);
         
-        //JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+        JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
         frmIndexSucursal.btnActualizar.doClick();
         limpiar();
      
      }catch(Exception e){
+       if(txtNombre.getText().length()==0 || txtDireccion.getText().length()==0 || txtTelefono.getText().length()==0 || txtCorreo.getText().length()==0){
+              JOptionPane.showMessageDialog(null, "Hace falta rellenar campos obligatorios");
+              
+              
+        }else{
        
-       JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
+       limpiar();
+       //JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
+       JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+       
+       }
+       
        
        }   
             
@@ -202,14 +212,11 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre.setText("Nombre de la Sucursal");
 
-        txtNombre.setEnabled(false);
-
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre1.setText("Detalles de la Dirección");
 
         txtDireccion.setColumns(20);
         txtDireccion.setRows(5);
-        txtDireccion.setEnabled(false);
         jScrollPane1.setViewportView(txtDireccion);
 
         txtId.setEditable(false);
@@ -250,10 +257,6 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
 
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Correo");
-
-        txtTelefono.setEnabled(false);
-
-        txtCorreo.setEnabled(false);
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
