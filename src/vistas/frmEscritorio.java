@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import vistas.cargo.frmIndexCargo;
 import vistas.cargo.frmNuevoCargo;
+import vistas.cliente.frmIndexCliente;
+import vistas.cliente.frmNuevoCliente;
 import vistas.empleado.frmIndexEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
 import vistas.sucursal.frmIndexSucursal;
@@ -65,6 +67,8 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmiSucursal = new javax.swing.JMenuItem();
         jmiNuevaSucursal = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jmiClientes = new javax.swing.JMenuItem();
+        jmiNuevoCliente = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,8 +164,25 @@ public class frmEscritorio extends javax.swing.JFrame {
 
         jMenuBar1.add(jmEmpresa);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Clientes");
         jMenu2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        jmiClientes.setText("Clientes");
+        jmiClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiClientesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiClientes);
+
+        jmiNuevoCliente.setText("Nuevo Cliente");
+        jmiNuevoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoClienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiNuevoCliente);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -244,6 +265,24 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiNuevaSucursalActionPerformed
 
+    private void jmiClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClientesActionPerformed
+        frmIndexCliente frmIndex =new frmIndexCliente();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiClientesActionPerformed
+
+    private void jmiNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoClienteActionPerformed
+        frmNuevoCliente frmNuevo = new frmNuevoCliente();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,10 +324,12 @@ public class frmEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jmEmpresa;
     private javax.swing.JMenuItem jmiCargos;
+    private javax.swing.JMenuItem jmiClientes;
     private javax.swing.JMenuItem jmiDepartamentos;
     private javax.swing.JMenuItem jmiEmpleados;
     private javax.swing.JMenuItem jmiNuevaSucursal;
     private javax.swing.JMenuItem jmiNuevoCargo;
+    private javax.swing.JMenuItem jmiNuevoCliente;
     private javax.swing.JMenuItem jmiNuevoDepartamento;
     private javax.swing.JMenuItem jmiNuevoEmpleado;
     private javax.swing.JMenuItem jmiNuevoUsuario;
