@@ -139,7 +139,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
        
        limpiar();
        //JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
-       JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+       //JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
        
        }
        
