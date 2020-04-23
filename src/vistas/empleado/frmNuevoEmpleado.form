@@ -77,7 +77,7 @@
                   <Component id="pnlFormularioContacto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" pref="22" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" pref="55" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -114,9 +114,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblNombre13" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtFechaNacimiento" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Component id="txtFechaNacimiento" min="-2" pref="165" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -475,9 +475,6 @@
               </Layout>
             </Container>
             <Component class="com.toedter.calendar.JDateChooser" name="txtFechaNacimiento">
-              <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -175,7 +175,7 @@ public class FSucursal {
          
           if(cn != null ){
            
-              sql = "INSERT INTO TBL_SUCURSAL(Id_sucursal,Nombre_sucursal,direccion,id_municipio,Telefono_sucursal,Correo_sucursal) VALUES(NEXT VALUE FOR SUCURSAL,?,?,?,?,?) ";
+              sql = "INSERT INTO TBL_SUCURSAL(Id_sucursal,Nombre_sucursal,direccion,id_municipio,Telefono_sucursal,Correo_sucursal,Id_usuario) VALUES(NEXT VALUE FOR SUCURSAL,?,?,?,?,?,?) ";
               PreparedStatement pst = cn.prepareStatement(sql);
               
                pst.setString(1, sucursal.getNombre_sucursal());
@@ -183,6 +183,7 @@ public class FSucursal {
                pst.setInt(3, sucursal.getId_municipio());
                pst.setString(4, sucursal.getTelefono());
                pst.setString(5, sucursal.getCorreo());
+               pst.setInt(6, sucursal.getId_usuario());
                
                 pst.execute(); 
               

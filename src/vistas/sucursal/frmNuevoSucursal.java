@@ -26,6 +26,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
      FSucursal funcion = new FSucursal();
      FSucursal funcion1 = new FSucursal();
      int n;
+     int id=1;
    
       int departamentoSelected;
       int municipioSelected;
@@ -123,6 +124,8 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
         sucursal.setId_municipio(cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()).getId_municipio());
         sucursal.setTelefono(txtTelefono.getText());
         sucursal.setCorreo(txtCorreo.getText());
+        sucursal.setId_usuario(id);
+        
         
         funcion.agregarSucursal(sucursal);
         

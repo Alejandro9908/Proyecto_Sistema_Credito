@@ -197,7 +197,68 @@ public class FEmpleado {
          
      }
     
+    public DefaultTableModel mostrarEmpleado(String buscar){
+            DefaultTableModel modelo;
     
+      totalRegistros=0;
+
+      String [] encabezado = {"ID","DPI","PRIMER NOMBRE","SEGUNDO NOMBRE","TERCER NOMBRE","PRIMER APELLID","SEGUNDO APELLIDO","APELLIDO CASADO","ESTADO CIVIL","FOTO","DIRECCION","TELEFONO","CORREO","GENERO","PROFESION","SUELDO","FECHA NACIMIENTO","FECHA","HORA","SUCURSAL","CARGO","MUNICIPIO","ESTADO","ID SUCURSAL","ID CARGO","ID MUNICIPIO","ID USUARIO"};   
+      String [] registros = new String [27];      
+     
+       modelo = new DefaultTableModel(null,encabezado);
+       String sql = buscar;
+       
+        try{
+         
+         Statement st = cn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
+         
+         while(rs.next()){
+         
+             registros[0] = Integer.toString(rs.getInt("Id_empleado"));
+             registros[1] = rs.getString("Dpi");
+             registros[2] = rs.getString("Primer_nombre");
+             registros[3] = rs.getString("Segundo_nombre");
+             registros[4] = rs.getString("Tercer_nombre");
+             registros[5] = rs.getString("Primer_apellido");
+             registros[6] = rs.getString("Segundo_apellido");
+             registros[7] = rs.getString("Apellido_casado");
+             registros[8] = rs.getString("Estado_civil");
+             registros[9] = rs.getString("Foto");
+             registros[10] = rs.getString("Direccion");
+             registros[11] = rs.getString("Telefono");
+             registros[12] = rs.getString("Correo");
+             registros[13] = rs.getString("Genero");
+             registros[14] = rs.getString("Profesion");
+             registros[15] = Integer.toString((int) rs.getFloat("Suledo"));
+             registros[16] = rs.getString("Fecha_nacimiento");
+             registros[17] = rs.getString("Fecha_commit");
+             registros[18] = rs.getString("Hora_commit");
+             registros[19] = rs.getString("Nombre_sucursal");
+             registros[20] = rs.getString("Nombre_cargo");
+             registros[21] = rs.getString("Nombre_municipio");
+             registros[22] = Integer.toString(rs.getInt("Estado"));
+             registros[23] = Integer.toString(rs.getInt("Id_sucursal"));
+             registros[24] = Integer.toString(rs.getInt("Id_cargo"));
+             registros[25] = Integer.toString(rs.getInt("Id_municipio"));
+             registros[26] = Integer.toString(rs.getInt("Id_usuario"));
+             
+             totalRegistros += 1;
+             modelo.addRow(registros);
+         
+         
+         }
+         
+         return modelo;
+     
+     }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     }
+
+    }
     
     
     
