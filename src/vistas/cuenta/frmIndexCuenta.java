@@ -5,6 +5,9 @@
  */
 package vistas.cuenta;
 
+import java.awt.Dimension;
+import static vistas.frmEscritorio.dpnlEscritorio;
+
 /**
  *
  * @author Alejandro
@@ -229,14 +232,14 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        /*frmMostrarSucursal frmMostrar = new frmMostrarSucursal();
+        frmMostrarCuenta frmMostrar = new frmMostrarCuenta();
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
 
-        int posicion = tblDatos.getSelectedRow();
+        /*int posicion = tblDatos.getSelectedRow();
         frmMostrarSucursal.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
         frmMostrarSucursal.txtNombre.setText(tblDatos.getValueAt(posicion,1).toString());
 
