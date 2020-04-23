@@ -14,6 +14,84 @@ import java.util.Date;
 public class Empleado {
 
     /**
+     * @return the direccion
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * @param direccion the direccion to set
+     */
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    /**
+     * @return the id_municipio
+     */
+    public int getId_municipio() {
+        return id_municipio;
+    }
+
+    /**
+     * @param id_municipio the id_municipio to set
+     */
+    public void setId_municipio(int id_municipio) {
+        this.id_municipio = id_municipio;
+    }
+
+    /**
+     * @return the foto
+     */
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    /**
+     * @param foto the foto to set
+     */
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    /**
+     * @param foto the foto to set
+     */
+   
+
+    /**
+     * @return the fecha_nacimiento
+     */
+    public Date getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    /**
+     * @param fecha_nacimiento the fecha_nacimiento to set
+     */
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    /**
+    
+
+    /**
+     * @return the id_sucursal
+     */
+    public int getId_sucursal() {
+        return id_sucursal;
+    }
+
+    /**
+     * @param id_sucursal the id_sucursal to set
+     */
+    public void setId_sucursal(int id_sucursal) {
+        this.id_sucursal = id_sucursal;
+    }
+
+    /**
      * @return the id_empleado
      */
     public int getId_empleado() {
@@ -167,19 +245,7 @@ public class Empleado {
         this.estado_civil = estado_civil;
     }
 
-    /**
-     * @return the foto
-     */
-    public byte getFoto() {
-        return foto;
-    }
-
-    /**
-     * @param foto the foto to set
-     */
-    public void setFoto(byte foto) {
-        this.foto = foto;
-    }
+   
 
     /**
      * @return the id_direccion
@@ -290,14 +356,18 @@ public class Empleado {
     private int id_cargo;
     private int id_departamento;
     private String estado_civil;
-    private byte foto;
+    private byte[] foto;
     private int id_direccion;
     private String telefono;
     private String correo;
-    //private Date fecha_nacimiento;
+    private Date fecha_nacimiento;
     private String genero;
     private String profesion;
     private float sueldo;
     private int id_usuario;
+    private int id_sucursal;
+    private int id_municipio;
+    
+    private String direccion;
     
 }
