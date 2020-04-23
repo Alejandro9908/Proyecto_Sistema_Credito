@@ -156,6 +156,8 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
     txtMunicipio.setText("");
     txtDireccion.setText("");
     txtFechaNacimiento.setCalendar(null); 
+    txtSucursal.setText("");
+    txtCargo.setText("");
     
     }
     
@@ -171,6 +173,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         pnlBase = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         pnlFormularioPersonal = new javax.swing.JPanel();
@@ -333,8 +336,8 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                         .addGap(18, 18, 18)
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre13)
-                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
+                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23))
                     .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
@@ -664,7 +667,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                     .addComponent(jLabel1)
                     .addComponent(pnlFormularioContacto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -715,6 +718,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JButton btnSucursal;
     private javax.swing.JComboBox<String> cbEstadoCivil;
     private javax.swing.JComboBox<String> cbGenero;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
