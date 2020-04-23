@@ -5,9 +5,13 @@
  */
 package vistas.empleado;
 
+import controladores.FEmpleado;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -16,9 +20,18 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  */
 public class frmIndexEmpleado extends javax.swing.JInternalFrame implements ActionListener{
 
+    DefaultTableModel modelo;
+    FEmpleado funcion = new FEmpleado();
+    
+    String query = "SELECT a.Id_empleado,a.Dpi,a.Primer_nombre,a.Segundo_nombre,a.Tercer_nombre,a.Primer_apellido,a.Segundo_apellido, \n" +
+                   "a.Apellido_casado,a.Estado_civil,a.Foto,a.Direccion,a.Telefono,a.Correo,a.Genero,a.Profesion,a.Suledo,a.Fecha_nacimiento,\n" +
+                    "a.Fecha_commit,a.Hora_commit,b.Nombre_sucursal,c.Nombre_cargo,d.Nombre_municipio,a.Estado,a.Id_sucursal,a.Id_cargo,a.Id_municipio,a.Id_usuario\n" +
+                     "FROM TBL_EMPLEADO AS a inner join TBL_SUCURSAL AS b on a.Id_sucursal = b.Id_sucursal inner join [TBL_CARGO] AS c on a.Id_cargo = c.Id_cargo inner join \n" +
+                      "[TBL_MUNICIPIO] AS d on a.Id_municipio = d.Id_municipio WHERE a.Estado = 1";
   
     public frmIndexEmpleado() {
         initComponents();
+        mostrar(query);
         //AGREGAR BOTONES AL ACTION LISTENER
         btnNuevo.addActionListener(this);
         btnActualizar.addActionListener(this);
@@ -36,6 +49,46 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
             frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             frmNuevo.setVisible(true);
        }
+        
+        if(e.getSource()== btnActualizar){
+          //mostrar(query);
+           actualizar();
+        }
+    }
+    
+    private void mostrar(String buscar){ 
+    
+    try {
+            modelo = funcion.mostrarEmpleado(buscar);
+            
+            tblDatos.setModel(modelo);
+            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));  
+            
+             ocultarColumnas(tblDatos,4); //para ocultar la columna del estado
+             ocultarColumnas(tblDatos,7); //para ocultar la columna de Fecha de creacion
+             ocultarColumnas(tblDatos,9); //para ocultar la columna de Hora de creacion
+             ocultarColumnas(tblDatos,15); //para ocultar la columna del ID de Usuario que hizo eso*/
+             ocultarColumnas(tblDatos,17); //para ocultar la columna del ID de Usuario que hizo eso*/
+             ocultarColumnas(tblDatos,18); //para ocultar la columna del ID de Usuario que hizo eso*/
+             ocultarColumnas(tblDatos,22); //para ocultar la columna del ID de Usuario que hizo eso*/
+             ocultarColumnas(tblDatos,23); //para ocultar la columna del ID de Usuario que hizo eso*/
+             ocultarColumnas(tblDatos,24); //para ocultar la columna del ID de Usuario que hizo eso*/
+             ocultarColumnas(tblDatos,25); //para ocultar la columna del ID de Usuario que hizo eso*/
+             ocultarColumnas(tblDatos,26); //para ocultar la columna del ID de Usuario que hizo eso*/
+             
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    
+    
+    }
+    
+    private void ocultarColumnas(JTable tabla, int columna){
+        
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
     }
 
     /**
@@ -256,9 +309,12 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
         frmMostrar.setVisible(true);
     }//GEN-LAST:event_tblDatosMouseClicked
 
+    private void actualizar(){
+        mostrar(query);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;

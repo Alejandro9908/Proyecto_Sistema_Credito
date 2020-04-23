@@ -33,6 +33,10 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         jsp.setViewportView(pnlBase);
         add(jsp);
         
+        txtIdMunicipio.setVisible(false);
+        txtIdSucursal.setVisible(false);
+        txtIdCargo.setVisible(false);
+        
         btnGuardar.addActionListener(this);
         btnCancelar.addActionListener(this);
         btnSucursal.addActionListener(this);
@@ -122,15 +126,38 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                     
             
             funcion.guardarEmpleado(empleado);
+            frmIndexEmpleado.btnActualizar.doClick();
+            limpiarDatos();
             
            // limpiartxt();
             JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
-            JOptionPane.showMessageDialog(null,"Es necesario asignar a cursos");
+           // JOptionPane.showMessageDialog(null,"Es necesario asignar a cursos");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifique");
         }
     }
     
+    
+    public void limpiarDatos(){
+    
+    txtDpi.setText("");
+    txtNombre1.setText("");
+    txtNombre2.setText("");
+    txtNombre3.setText("");
+    txtApellido1.setText("");
+    txtApellido2.setText("");
+    txtApellidoCasado.setText("");
+    txtTelefono.setText("");
+    txtCorreo.setText("");
+    txtProfesion.setText("");
+    txtSueldo.setText("");
+    txtDireccion.setText("");
+    panelFoto.setImagenNull();
+    txtMunicipio.setText("");
+    txtDireccion.setText("");
+    txtFechaNacimiento.setCalendar(null); 
+    
+    }
     
     
     
@@ -294,8 +321,6 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
             .addGap(0, 153, Short.MAX_VALUE)
         );
 
-        txtFechaNacimiento.setDateFormatString("yyyy-MM-dd");
-
         javax.swing.GroupLayout pnlFormularioPersonalLayout = new javax.swing.GroupLayout(pnlFormularioPersonal);
         pnlFormularioPersonal.setLayout(pnlFormularioPersonalLayout);
         pnlFormularioPersonalLayout.setHorizontalGroup(
@@ -308,8 +333,8 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                         .addGap(18, 18, 18)
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre13)
-                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30))
+                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25))
                     .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
@@ -652,7 +677,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                 .addComponent(pnlFormularioContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 55, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))

@@ -12,6 +12,20 @@ package modelo;
 public class Sucursal {
 
     /**
+     * @return the id_usuario
+     */
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    /**
+     * @param id_usuario the id_usuario to set
+     */
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    /**
      * @return the hora
      */
     public String getHora() {
@@ -146,6 +160,7 @@ public class Sucursal {
     private int id_sucursal;
     private String nombre_sucursal;
     private int id_empleado;
+    private int id_usuario;
     
     
 }
