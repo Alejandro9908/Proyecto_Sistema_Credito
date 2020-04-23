@@ -5,9 +5,11 @@
  */
 package vistas;
 
+import controladores.FEmpleado;
 import controladores.FSucursal;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vistas.empleado.frmNuevoEmpleado;
 import vistas.sucursal.frmMostrarSucursal;
 
 
@@ -26,6 +28,20 @@ public class frmSeleccionar extends javax.swing.JFrame {
     //Variables para el municipio
     
     public static String id_municipio, nombre_municipio;
+    
+    //variables para seleccionar la sucursal en FrmNuevoEmpleado
+    FEmpleado funcionEmpleado = new FEmpleado();
+    public static String id_sucursal, nombre_sucursal;
+    
+    
+    //variables para seleccionar el cargo en FrmNuevoEmpleado
+    public static String id_cargo, nombre_cargo;
+    
+    
+    //Variables para selecionar el municipio en FrmNuevoEMpleado
+    
+    public static String id_municipioEmpleado, nombre_municipioEmpleado;
+    
     
     
     
@@ -52,10 +68,21 @@ public class frmSeleccionar extends javax.swing.JFrame {
             txtAccion.setText("Seleccione un municipio");
             mostrarMunicipios();
         }
-        /*if(opcion==3){
-            txtAccion.setText("Seleccione una servicio");
-            mostrarServicios();
-        }*/
+        if(opcion==3){
+            txtAccion.setText("Seleccione una sucursal");
+            mostrarSucursales();
+        }
+        
+        if(opcion==4){
+            txtAccion.setText("Seleccione un cargo");
+            mostrarCargos();
+            
+        }
+        
+        if(opcion==5){
+            txtAccion.setText("Seleccione un municipio");
+            mostrarMunicipiosEmpleado();
+        }
         
         
         
@@ -74,9 +101,23 @@ public class frmSeleccionar extends javax.swing.JFrame {
     public void mostrarMunicipios(){
         
         funcion.mostrarMunicipio(Tabla, departamento);
-        
-        
+          
     }
+    
+      public void mostrarSucursales(){
+        
+        funcionEmpleado.mostrarSucursalSeleccionar(Tabla);
+          
+    }
+      
+      public void mostrarCargos(){
+          funcionEmpleado.mostrarCargoSeleccionar(Tabla);
+      }
+      
+      public void mostrarMunicipiosEmpleado(){
+          funcionEmpleado.mostrarMunicipioEmpleado(Tabla);     
+
+      }
     
   
     
@@ -138,8 +179,31 @@ public class frmSeleccionar extends javax.swing.JFrame {
             
             
         }else if(opcion == 3){
-            //frmCalificaciones.idProfesor=Integer.parseInt(id_profe);
-            //frmCalificaciones.txtProfesor.setText(nombre);
+            id_sucursal = (Tabla.getValueAt(posicion,0).toString());
+            nombre_sucursal = (Tabla.getValueAt(posicion,1).toString());
+            
+            
+            frmNuevoEmpleado.txtIdSucursal.setText(id_sucursal);
+            frmNuevoEmpleado.txtSucursal.setText(nombre_sucursal);
+            
+            
+        }else if (opcion==4){
+            
+            id_cargo= (Tabla.getValueAt(posicion, 0).toString());
+            nombre_cargo = (Tabla.getValueAt(posicion,1).toString());
+            
+            frmNuevoEmpleado.txtIdCargo.setText(id_cargo);
+            frmNuevoEmpleado.txtCargo.setText(nombre_cargo);
+            
+        }else if (opcion==5){
+            
+            id_municipioEmpleado= (Tabla.getValueAt(posicion, 0).toString());
+            nombre_municipioEmpleado = (Tabla.getValueAt(posicion,1).toString());
+            
+            frmNuevoEmpleado.txtIdMunicipio.setText(id_municipioEmpleado);
+            frmNuevoEmpleado.txtMunicipio.setText(nombre_municipioEmpleado);
+           
+            
         }
         
         //para cerrar el frmBuscar
