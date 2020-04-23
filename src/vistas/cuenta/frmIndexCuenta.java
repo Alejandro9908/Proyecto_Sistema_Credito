@@ -3,45 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas.cliente;
-
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import static vistas.frmEscritorio.dpnlEscritorio;
+package vistas.cuenta;
 
 /**
  *
  * @author Alejandro
  */
-public class frmIndexCliente extends javax.swing.JInternalFrame implements ActionListener{
+public class frmIndexCuenta extends javax.swing.JInternalFrame {
 
-    
-    public frmIndexCliente() {
+    /**
+     * Creates new form frmIndexCuenta
+     */
+    public frmIndexCuenta() {
         initComponents();
-        
-        btnNuevo.addActionListener(this);
     }
 
-    
-    
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==btnNuevo){
-            frmNuevoCliente frmNuevo = new frmNuevoCliente();
-            dpnlEscritorio.add(frmNuevo);
-            Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmNuevo.getSize();
-            frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmNuevo.setVisible(true);
-        }
-    }
-    
-    
-    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,7 +52,7 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Clientes");
+        jLabel1.setText("Cuentas");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,11 +79,11 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
 
         rbNombre.setBackground(new java.awt.Color(255, 255, 255));
         rbNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbNombre.setText("Nombre");
+        rbNombre.setText("Id del cliente");
 
         rbId.setBackground(new java.awt.Color(255, 255, 255));
         rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbId.setText("Id");
+        rbId.setText("Número de Cuenta");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -176,13 +152,13 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
         );
         pnlIndexLayout.setVerticalGroup(
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -192,7 +168,7 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
 
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevo.setText("Nuevo Cliente");
+        btnNuevo.setText("Nueva Cuenta");
 
         btnReporte.setBackground(new java.awt.Color(255, 255, 255));
         btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -249,20 +225,40 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         //buscar();
+        //buscar(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        frmMostrarCliente frmMostrar = new frmMostrarCliente();
+        /*frmMostrarSucursal frmMostrar = new frmMostrarSucursal();
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
+
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarSucursal.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
+        frmMostrarSucursal.txtNombre.setText(tblDatos.getValueAt(posicion,1).toString());
+
+        frmMostrarSucursal.txtMunicipio.setText(tblDatos.getValueAt(posicion,2).toString());
+        frmMostrarSucursal.txtDepartamento.setText(tblDatos.getValueAt(posicion,3).toString());
+
+        frmMostrarSucursal.txtDireccion.setText(tblDatos.getValueAt(posicion,4).toString());
+        frmMostrarSucursal.txtTelefono.setText(tblDatos.getValueAt(posicion,5).toString());
+        frmMostrarSucursal.txtCorreo.setText(tblDatos.getValueAt(posicion,6).toString());
+        frmMostrarSucursal.txtEstado.setText(tblDatos.getValueAt(posicion,7).toString());
+        frmMostrarSucursal.txtIdMunicipio.setText(tblDatos.getValueAt(posicion,8).toString());
+        frmMostrarSucursal.txtIdDepartamento.setText(tblDatos.getValueAt(posicion,9).toString());
+        frmMostrarSucursal.txtFecha.setText(tblDatos.getValueAt(posicion,10).toString());
+        frmMostrarSucursal.txtHora.setText(tblDatos.getValueAt(posicion,11).toString());
+
+        //frmMostrarSucursal.cbMunicipio.setText((tblDatos.getValueAt(posicion,2).toString()));*/
+
     }//GEN-LAST:event_tblDatosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
@@ -280,6 +276,4 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
-
-    
 }

@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import sisserviciofinanciero.*;
 import vistas.departametoEmpresa.frmIndexDepatamentosEmpresa;
 import vistas.departametoEmpresa.frmNuevoDepartamentoEmpresa;
 import java.awt.Dimension;
@@ -69,6 +70,9 @@ public class frmEscritorio extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jmiClientes = new javax.swing.JMenuItem();
         jmiNuevoCliente = new javax.swing.JMenuItem();
+        jmCuentas = new javax.swing.JMenu();
+        jmiCuentas = new javax.swing.JMenuItem();
+        jmiNuevoCuenta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -185,6 +189,27 @@ public class frmEscritorio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jmCuentas.setText("Cuentas");
+        jmCuentas.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        jmiCuentas.setText("Cuentas");
+        jmiCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCuentasActionPerformed(evt);
+            }
+        });
+        jmCuentas.add(jmiCuentas);
+
+        jmiNuevoCuenta.setText("Nueva Cuenta");
+        jmiNuevoCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoCuentaActionPerformed(evt);
+            }
+        });
+        jmCuentas.add(jmiNuevoCuenta);
+
+        jMenuBar1.add(jmCuentas);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -283,6 +308,14 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiNuevoClienteActionPerformed
 
+    private void jmiCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCuentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiCuentasActionPerformed
+
+    private void jmiNuevoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiNuevoCuentaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -309,6 +342,9 @@ public class frmEscritorio extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -322,14 +358,17 @@ public class frmEscritorio extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane dpnlEscritorio;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jmCuentas;
     private javax.swing.JMenu jmEmpresa;
     private javax.swing.JMenuItem jmiCargos;
     private javax.swing.JMenuItem jmiClientes;
+    private javax.swing.JMenuItem jmiCuentas;
     private javax.swing.JMenuItem jmiDepartamentos;
     private javax.swing.JMenuItem jmiEmpleados;
     private javax.swing.JMenuItem jmiNuevaSucursal;
     private javax.swing.JMenuItem jmiNuevoCargo;
     private javax.swing.JMenuItem jmiNuevoCliente;
+    private javax.swing.JMenuItem jmiNuevoCuenta;
     private javax.swing.JMenuItem jmiNuevoDepartamento;
     private javax.swing.JMenuItem jmiNuevoEmpleado;
     private javax.swing.JMenuItem jmiNuevoUsuario;

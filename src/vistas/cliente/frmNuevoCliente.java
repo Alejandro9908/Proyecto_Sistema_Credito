@@ -137,6 +137,17 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
         btnQuitar = new javax.swing.JButton();
         txtCorreo = new javax.swing.JTextField();
         lblNombre12 = new javax.swing.JLabel();
+        lblNombre23 = new javax.swing.JLabel();
+        lblNombre24 = new javax.swing.JLabel();
+        txtDpiReferencia = new javax.swing.JTextField();
+        lblNombre25 = new javax.swing.JLabel();
+        txtNombresReferencia = new javax.swing.JTextField();
+        txtApellidosReferencia = new javax.swing.JTextField();
+        lblNombre26 = new javax.swing.JLabel();
+        lblNombre27 = new javax.swing.JLabel();
+        txtTelefonoReferencia = new javax.swing.JTextField();
+        lblNombre28 = new javax.swing.JLabel();
+        cbTipo = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -480,8 +491,40 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
         btnQuitar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnQuitar.setText("Quitar");
 
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoActionPerformed(evt);
+            }
+        });
+
         lblNombre12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre12.setText("Correo");
+
+        lblNombre23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNombre23.setText("Persona de Referencia");
+
+        lblNombre24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre24.setText("DPI");
+
+        txtDpiReferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDpiReferenciaActionPerformed(evt);
+            }
+        });
+
+        lblNombre25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre25.setText("Nombres");
+
+        lblNombre26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre26.setText("Apellidos");
+
+        lblNombre27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre27.setText("Teléfono");
+
+        lblNombre28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre28.setText("Tipo");
+
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion", "Cónyugue", "Referencia" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -489,13 +532,6 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnQuitar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -507,12 +543,41 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(lblNombre12)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnQuitar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNombre23)
+                                    .addComponent(lblNombre24)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(lblNombre25)
+                                        .addGap(219, 219, 219)
+                                        .addComponent(lblNombre26)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtTelefonoReferencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                                        .addComponent(txtNombresReferencia, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtDpiReferencia, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(lblNombre27))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(lblNombre28)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtApellidosReferencia))))))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,7 +597,31 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
                 .addComponent(lblNombre12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblNombre23)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNombre24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDpiReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNombre25)
+                            .addComponent(lblNombre26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombresReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellidosReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombre27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelefonoReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblNombre28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
@@ -585,6 +674,14 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void txtDpiReferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDpiReferenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDpiReferenciaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -596,6 +693,7 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
     private javax.swing.JComboBox<String> cbEstadoCivil;
     private javax.swing.JComboBox<String> cbGenero;
     private javax.swing.JComboBox<String> cbMunicipio;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JComboBox<String> cbTipoCasa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -619,6 +717,12 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
     private javax.swing.JLabel lblNombre20;
     private javax.swing.JLabel lblNombre21;
     private javax.swing.JLabel lblNombre22;
+    private javax.swing.JLabel lblNombre23;
+    private javax.swing.JLabel lblNombre24;
+    private javax.swing.JLabel lblNombre25;
+    private javax.swing.JLabel lblNombre26;
+    private javax.swing.JLabel lblNombre27;
+    private javax.swing.JLabel lblNombre28;
     private javax.swing.JLabel lblNombre3;
     private javax.swing.JLabel lblNombre4;
     private javax.swing.JLabel lblNombre5;
@@ -629,21 +733,25 @@ public class frmNuevoCliente extends javax.swing.JInternalFrame implements Actio
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormularioContacto;
     private javax.swing.JPanel pnlFormularioPersonal;
-    private javax.swing.JTable tblTelefonos;
+    public static javax.swing.JTable tblTelefonos;
     private javax.swing.JTextField txtApellido1;
     private javax.swing.JTextField txtApellido2;
     private javax.swing.JTextField txtApellidoCasado;
+    private javax.swing.JTextField txtApellidosReferencia;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDpi;
+    private javax.swing.JTextField txtDpiReferencia;
     private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNombre2;
     private javax.swing.JTextField txtNombre3;
+    private javax.swing.JTextField txtNombresReferencia;
     private javax.swing.JTextField txtProfesion;
     private javax.swing.JTextArea txtReferencia;
+    private javax.swing.JTextField txtTelefonoReferencia;
     // End of variables declaration//GEN-END:variables
 
     
