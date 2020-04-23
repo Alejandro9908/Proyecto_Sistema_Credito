@@ -16,6 +16,8 @@ import vistas.cargo.frmIndexCargo;
 import vistas.cargo.frmNuevoCargo;
 import vistas.cliente.frmIndexCliente;
 import vistas.cliente.frmNuevoCliente;
+import vistas.cuenta.frmIndexCuenta;
+import vistas.cuenta.frmNuevoCuenta;
 import vistas.empleado.frmIndexEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
 import vistas.sucursal.frmIndexSucursal;
@@ -309,11 +311,21 @@ public class frmEscritorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNuevoClienteActionPerformed
 
     private void jmiCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCuentasActionPerformed
-        // TODO add your handling code here:
+        frmIndexCuenta frmIndex =new frmIndexCuenta();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
     }//GEN-LAST:event_jmiCuentasActionPerformed
 
     private void jmiNuevoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoCuentaActionPerformed
-        // TODO add your handling code here:
+        frmNuevoCuenta frmNuevo = new frmNuevoCuenta();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiNuevoCuentaActionPerformed
 
     /**
