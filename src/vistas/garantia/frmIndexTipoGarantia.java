@@ -3,32 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas.cuenta;
+package vistas.garantia;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vistas.credito.frmNuevoCredito;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
  *
  * @author Alejandro
  */
-public class frmIndexCuenta extends javax.swing.JInternalFrame implements ActionListener{
+public class frmIndexTipoGarantia extends javax.swing.JInternalFrame implements ActionListener{
 
     /**
-     * Creates new form frmIndexCuenta
+     * Creates new form frmIndexTipoGarantia
      */
-    public frmIndexCuenta() {
+    public frmIndexTipoGarantia() {
         initComponents();
+        
         btnNuevo.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnNuevo){
-            frmNuevoCuenta frmNuevo = new frmNuevoCuenta();
+            frmNuevoTipoGarantia frmNuevo = new frmNuevoTipoGarantia();
             dpnlEscritorio.add(frmNuevo);
             Dimension desktopSize = dpnlEscritorio.getSize();
             Dimension FrameSize = frmNuevo.getSize();
@@ -36,7 +36,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
             frmNuevo.setVisible(true);
         }
     }
-    
     
     
     
@@ -66,7 +65,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         jLabel2 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         btnNuevo = new javax.swing.JButton();
-        btnReporte = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
 
         setClosable(true);
@@ -76,7 +74,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Cuentas");
+        jLabel1.setText("Tipos de Garantías");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,11 +101,11 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
 
         rbNombre.setBackground(new java.awt.Color(255, 255, 255));
         rbNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbNombre.setText("Id del cliente");
+        rbNombre.setText("Número de Credito");
 
         rbId.setBackground(new java.awt.Color(255, 255, 255));
         rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbId.setText("Número de Cuenta");
+        rbId.setText("Id");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -192,11 +190,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
 
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevo.setText("Nueva Cuenta");
-
-        btnReporte.setBackground(new java.awt.Color(255, 255, 255));
-        btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnReporte.setText("Reporte");
+        btnNuevo.setText("Nuevo Tipo");
 
         btnActualizar.setBackground(new java.awt.Color(255, 255, 255));
         btnActualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -213,8 +207,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                         .addComponent(btnNuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
                         .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -235,7 +227,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                 .addGap(30, 30, 30)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo)
-                    .addComponent(btnReporte)
                     .addComponent(btnActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,7 +244,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        frmMostrarCuenta frmMostrar = new frmMostrarCuenta();
+        frmMostrarTipoGarantia frmMostrar = new frmMostrarTipoGarantia();
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
@@ -277,7 +268,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         frmMostrarSucursal.txtHora.setText(tblDatos.getValueAt(posicion,11).toString());
 
         //frmMostrarSucursal.cbMunicipio.setText((tblDatos.getValueAt(posicion,2).toString()));*/
-
     }//GEN-LAST:event_tblDatosMouseClicked
 
 
@@ -285,7 +275,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnReporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -300,4 +289,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+    
 }

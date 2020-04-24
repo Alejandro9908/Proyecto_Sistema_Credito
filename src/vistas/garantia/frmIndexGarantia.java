@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas.cuenta;
+package vistas.garantia;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vistas.credito.frmNuevoCredito;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
  *
  * @author Alejandro
  */
-public class frmIndexCuenta extends javax.swing.JInternalFrame implements ActionListener{
+public class frmIndexGarantia extends javax.swing.JInternalFrame implements ActionListener{
 
     /**
-     * Creates new form frmIndexCuenta
+     * Creates new form frmIndexGarantia
      */
-    public frmIndexCuenta() {
+    public frmIndexGarantia() {
         initComponents();
         btnNuevo.addActionListener(this);
     }
@@ -28,7 +27,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnNuevo){
-            frmNuevoCuenta frmNuevo = new frmNuevoCuenta();
+            frmNuevoGarantia frmNuevo = new frmNuevoGarantia();
             dpnlEscritorio.add(frmNuevo);
             Dimension desktopSize = dpnlEscritorio.getSize();
             Dimension FrameSize = frmNuevo.getSize();
@@ -36,6 +35,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
             frmNuevo.setVisible(true);
         }
     }
+    
     
     
     
@@ -76,7 +76,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Cuentas");
+        jLabel1.setText("Garantias");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,11 +103,11 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
 
         rbNombre.setBackground(new java.awt.Color(255, 255, 255));
         rbNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbNombre.setText("Id del cliente");
+        rbNombre.setText("Número de Credito");
 
         rbId.setBackground(new java.awt.Color(255, 255, 255));
         rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbId.setText("Número de Cuenta");
+        rbId.setText("Id");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -182,7 +182,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -192,7 +192,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
 
         btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevo.setText("Nueva Cuenta");
+        btnNuevo.setText("Nueva Garantia");
 
         btnReporte.setBackground(new java.awt.Color(255, 255, 255));
         btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -253,7 +253,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        frmMostrarCuenta frmMostrar = new frmMostrarCuenta();
+        frmMostrarGarantia frmMostrar = new frmMostrarGarantia();
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
@@ -277,7 +277,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         frmMostrarSucursal.txtHora.setText(tblDatos.getValueAt(posicion,11).toString());
 
         //frmMostrarSucursal.cbMunicipio.setText((tblDatos.getValueAt(posicion,2).toString()));*/
-
     }//GEN-LAST:event_tblDatosMouseClicked
 
 
