@@ -16,10 +16,16 @@ import vistas.cargo.frmIndexCargo;
 import vistas.cargo.frmNuevoCargo;
 import vistas.cliente.frmIndexCliente;
 import vistas.cliente.frmNuevoCliente;
+import vistas.credito.frmIndexCredito;
+import vistas.credito.frmNuevoCredito;
 import vistas.cuenta.frmIndexCuenta;
 import vistas.cuenta.frmNuevoCuenta;
 import vistas.empleado.frmIndexEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
+import vistas.garantia.frmIndexGarantia;
+import vistas.garantia.frmIndexTipoGarantia;
+import vistas.garantia.frmNuevoGarantia;
+import vistas.garantia.frmNuevoTipoGarantia;
 import vistas.sucursal.frmIndexSucursal;
 import vistas.sucursal.frmNuevoSucursal;
 
@@ -75,6 +81,16 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmCuentas = new javax.swing.JMenu();
         jmiCuentas = new javax.swing.JMenuItem();
         jmiNuevoCuenta = new javax.swing.JMenuItem();
+        jmCreditos = new javax.swing.JMenu();
+        jmiCreditos = new javax.swing.JMenuItem();
+        jmiNuevoCredito = new javax.swing.JMenuItem();
+        jmiGarantias = new javax.swing.JMenuItem();
+        jmiNuevoGarantia = new javax.swing.JMenuItem();
+        jmiTipoGarantia = new javax.swing.JMenuItem();
+        jmiNuevoTipoGarantia = new javax.swing.JMenuItem();
+        jmAhorros = new javax.swing.JMenu();
+        jmiCuentas2 = new javax.swing.JMenuItem();
+        jmiNuevoCuenta2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -212,6 +228,80 @@ public class frmEscritorio extends javax.swing.JFrame {
 
         jMenuBar1.add(jmCuentas);
 
+        jmCreditos.setText("Creditos");
+        jmCreditos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        jmiCreditos.setText("Creditos");
+        jmiCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCreditosActionPerformed(evt);
+            }
+        });
+        jmCreditos.add(jmiCreditos);
+
+        jmiNuevoCredito.setText("Nuevo Credito");
+        jmiNuevoCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoCreditoActionPerformed(evt);
+            }
+        });
+        jmCreditos.add(jmiNuevoCredito);
+
+        jmiGarantias.setText("Garantías");
+        jmiGarantias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiGarantiasActionPerformed(evt);
+            }
+        });
+        jmCreditos.add(jmiGarantias);
+
+        jmiNuevoGarantia.setText("Nueva Garantía");
+        jmiNuevoGarantia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoGarantiaActionPerformed(evt);
+            }
+        });
+        jmCreditos.add(jmiNuevoGarantia);
+
+        jmiTipoGarantia.setText("Tipos de Garantía");
+        jmiTipoGarantia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiTipoGarantiaActionPerformed(evt);
+            }
+        });
+        jmCreditos.add(jmiTipoGarantia);
+
+        jmiNuevoTipoGarantia.setText("Nuevo tipo de Garantia");
+        jmiNuevoTipoGarantia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoTipoGarantiaActionPerformed(evt);
+            }
+        });
+        jmCreditos.add(jmiNuevoTipoGarantia);
+
+        jMenuBar1.add(jmCreditos);
+
+        jmAhorros.setText("Ahorros");
+        jmAhorros.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        jmiCuentas2.setText("Ahorros");
+        jmiCuentas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCuentas2ActionPerformed(evt);
+            }
+        });
+        jmAhorros.add(jmiCuentas2);
+
+        jmiNuevoCuenta2.setText("Nuevo Ahorro");
+        jmiNuevoCuenta2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoCuenta2ActionPerformed(evt);
+            }
+        });
+        jmAhorros.add(jmiNuevoCuenta2);
+
+        jMenuBar1.add(jmAhorros);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -328,6 +418,68 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiNuevoCuentaActionPerformed
 
+    private void jmiCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCreditosActionPerformed
+        frmIndexCredito frmIndex =new frmIndexCredito();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiCreditosActionPerformed
+
+    private void jmiNuevoCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoCreditoActionPerformed
+        frmNuevoCredito frmNuevo = new frmNuevoCredito();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoCreditoActionPerformed
+
+    private void jmiCuentas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCuentas2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiCuentas2ActionPerformed
+
+    private void jmiNuevoCuenta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoCuenta2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiNuevoCuenta2ActionPerformed
+
+    private void jmiGarantiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGarantiasActionPerformed
+        frmIndexGarantia frmIndex =new frmIndexGarantia();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiGarantiasActionPerformed
+
+    private void jmiNuevoGarantiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoGarantiaActionPerformed
+        frmNuevoGarantia frmNuevo = new frmNuevoGarantia();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoGarantiaActionPerformed
+
+    private void jmiTipoGarantiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTipoGarantiaActionPerformed
+        frmIndexTipoGarantia frmIndex =new frmIndexTipoGarantia();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiTipoGarantiaActionPerformed
+
+    private void jmiNuevoTipoGarantiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoTipoGarantiaActionPerformed
+        frmNuevoTipoGarantia frmNuevo = new frmNuevoTipoGarantia();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoTipoGarantiaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -370,21 +522,31 @@ public class frmEscritorio extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane dpnlEscritorio;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jmAhorros;
+    private javax.swing.JMenu jmCreditos;
     private javax.swing.JMenu jmCuentas;
     private javax.swing.JMenu jmEmpresa;
     private javax.swing.JMenuItem jmiCargos;
     private javax.swing.JMenuItem jmiClientes;
+    private javax.swing.JMenuItem jmiCreditos;
     private javax.swing.JMenuItem jmiCuentas;
+    private javax.swing.JMenuItem jmiCuentas2;
     private javax.swing.JMenuItem jmiDepartamentos;
     private javax.swing.JMenuItem jmiEmpleados;
+    private javax.swing.JMenuItem jmiGarantias;
     private javax.swing.JMenuItem jmiNuevaSucursal;
     private javax.swing.JMenuItem jmiNuevoCargo;
     private javax.swing.JMenuItem jmiNuevoCliente;
+    private javax.swing.JMenuItem jmiNuevoCredito;
     private javax.swing.JMenuItem jmiNuevoCuenta;
+    private javax.swing.JMenuItem jmiNuevoCuenta2;
     private javax.swing.JMenuItem jmiNuevoDepartamento;
     private javax.swing.JMenuItem jmiNuevoEmpleado;
+    private javax.swing.JMenuItem jmiNuevoGarantia;
+    private javax.swing.JMenuItem jmiNuevoTipoGarantia;
     private javax.swing.JMenuItem jmiNuevoUsuario;
     private javax.swing.JMenuItem jmiSucursal;
+    private javax.swing.JMenuItem jmiTipoGarantia;
     private javax.swing.JMenuItem jmiUsuarios;
     // End of variables declaration//GEN-END:variables
 }
