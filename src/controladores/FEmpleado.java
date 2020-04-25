@@ -82,6 +82,54 @@ public class FEmpleado {
     
     
     
+    public void editarEmpleado(Empleado empleado, String buscar){ //el editar foto no funciona por el momento en EDITAR
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_EMPLEADO set Id_empleado='"+empleado.getId_empleado()+ "',Id_sucursal='"+empleado.getId_sucursal()+"',Dpi='"+empleado.getDpi()+"',Primer_nombre='"+empleado.getPrimer_nombre() +"', Segundo_nombre='"+ empleado.getSegundo_nombre()+  "',Tercer_nombre='"+ empleado.getTercer_nombre()+   "', Primer_apellido='"+ empleado.getPrimer_apellido() + "', Segundo_apellido='"+empleado.getSegundo_apellido()+ "', Apellido_casado='"+ empleado.getApellido_casado()+ "', Id_cargo='"+ empleado.getId_cargo()+ "', Estado_civil='"+ empleado.getEstado_civil()+"', Id_municipio='"+ empleado.getId_municipio()+ "', Telefono='"+ empleado.getTelefono() + "', Correo='"+ empleado.getCorreo() + "', Fecha_nacimiento='"+ empleado.getFecha_nacimiento()+ "', Genero='"+ empleado.getGenero() + "', Profesion='"+ empleado.getProfesion() + "', Suledo='"+ empleado.getSueldo() + "', Id_usuario='"+ empleado.getId_usuario() + "', Direccion='"+ empleado.getDireccion() + "' where Id_empleado="+buscar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible editar la informacion");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al editar, motivo:"+ex.getMessage());
+        } 
+    }
+         
+         public void eliminarSucursal(String idEliminar){
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_SUCURSAL set Estado=0 where Id_sucursal="+idEliminar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible eliminar el registro");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al eliminar, motivo:"+ex.getMessage());
+        } 
+    }
+         
+           public void eliminarEmpleado(String idEliminar){
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_EMPLEADO set Estado=0 where Id_empleado="+idEliminar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible eliminar el registro");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al eliminar, motivo:"+ex.getMessage());
+        } 
+    }
+     
+         
+     
+    
+    
+    
+    
      //este metodo es el de Seleccionar FRM (deberia ir en FDepartamento pero lo coloqué acá) Att. Kevin
      public void mostrarSucursalSeleccionar( JTable tabla){
          
@@ -259,6 +307,125 @@ public class FEmpleado {
      }
 
     }
+    
+    
+    
+     public void buscarMunicipioGeneral(JTable tabla, String buscar){
+         
+        DefaultTableModel model;
+        String [] columnas = {"ID_MUNICIPIO", "NOMBRE_MUNICIPIO", "DEPARTAMENTO"};
+        model = new DefaultTableModel(null, columnas);
+        
+ 
+         
+        sql= " SELECT a.Id_municipio, a.Nombre_municipio,b.Nombre_departamento FROM TBL_MUNICIPIO AS a\n" + "inner join TBL_DEPARTAMENTO AS b on a.ID_DEPARTAMENTO = b.Id_departamento where UPPER(Nombre_municipio) LIKE '%"+buscar+"%'";
+        
+        String[] filas = new String [3]; //registros
+        
+        Statement st = null;
+        ResultSet rs = null;
+        
+         try {
+             
+             st = cn.createStatement();
+             rs = st.executeQuery(sql);
+             
+             while(rs.next()){
+                 // es como for (int i=0; i <4; i++)
+               for(int i=0; i <3; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 filas[i] = rs.getString(i+1); 
+               }
+                totalRegistros += 1;
+               model.addRow(filas);
+                
+             }
+             tabla.setModel(model);
+             
+         } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "No se pueden mostrar los datos");
+         }
+            
+         
+     }
+     
+     
+      public void buscarSucursalEmpleado(JTable tabla, String buscar){
+         
+        DefaultTableModel model;
+        String [] columnas = {"ID_SUCURSAL", "NOMBRE_SUCURSAL"};
+        model = new DefaultTableModel(null, columnas);
+        
+         sql = "SELECT Id_sucursal, Nombre_sucursal FROM TBL_SUCURSAL where UPPER(Nombre_sucursal) LIKE '%"+buscar+"%'";
+        
+        String[] filas = new String [2]; //registros
+        
+        Statement st = null;
+        ResultSet rs = null;
+        
+         try {
+             
+             st = cn.createStatement();
+             rs = st.executeQuery(sql);
+             
+             while(rs.next()){
+                 // es como for (int i=0; i <4; i++)
+               for(int i=0; i <2; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 filas[i] = rs.getString(i+1); 
+               }
+                totalRegistros += 1;
+               model.addRow(filas);
+                
+             }
+             tabla.setModel(model);
+             
+         } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "No se pueden mostrar los datos");
+         }
+            
+         
+     }
+      
+      
+      public void buscarCargoEmpleado(JTable tabla, String buscar){
+         
+        DefaultTableModel model;
+        String [] columnas = {"ID_CARGO", "NOMBRE_CARGO"};
+        model = new DefaultTableModel(null, columnas);
+        
+         sql = "SELECT Id_cargo, Nombre_cargo FROM TBL_CARGO where UPPER(Nombre_cargo) LIKE '%"+buscar+"%'";
+        
+        String[] filas = new String [2]; //registros
+        
+        Statement st = null;
+        ResultSet rs = null;
+        
+         try {
+             
+             st = cn.createStatement();
+             rs = st.executeQuery(sql);
+             
+             while(rs.next()){
+                 // es como for (int i=0; i <4; i++)
+               for(int i=0; i <2; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 filas[i] = rs.getString(i+1); 
+               }
+                totalRegistros += 1;
+               model.addRow(filas);
+                
+             }
+             tabla.setModel(model);
+             
+         } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "No se pueden mostrar los datos");
+         }
+            
+         
+     }
+     
+     
     
     
     

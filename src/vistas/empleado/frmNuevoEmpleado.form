@@ -634,6 +634,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtMunicipio">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
@@ -784,6 +787,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSucursal">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
@@ -797,6 +803,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCargo">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
