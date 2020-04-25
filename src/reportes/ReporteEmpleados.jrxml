@@ -16,7 +16,7 @@
 	<subDataset name="PieChartDataset" uuid="50a51674-0a29-48a3-bbdc-75125232b398"/>
 	<queryString>
 		<![CDATA[SELECT a.Id_empleado,a.Primer_nombre,a.Primer_apellido,a.Estado_civil,a.Fecha_nacimiento,a.Foto,b.Nombre_sucursal
-FROM TBL_EMPLEADO AS a inner join TBL_SUCURSAL AS b on a.Id_sucursal = b.Id_sucursal]]>
+FROM TBL_EMPLEADO AS a inner join TBL_SUCURSAL AS b on a.Id_sucursal = b.Id_sucursal WHERE a.Estado = 1]]>
 	</queryString>
 	<field name="Id_empleado" class="java.lang.Integer"/>
 	<field name="Primer_nombre" class="java.lang.String"/>
@@ -32,48 +32,48 @@ FROM TBL_EMPLEADO AS a inner join TBL_SUCURSAL AS b on a.Id_sucursal = b.Id_sucu
 				<frame>
 					<reportElement mode="Opaque" x="0" y="11" width="710" height="20" forecolor="#B89F7D" backcolor="#70A9C6" uuid="be3e5e92-42b7-4bfe-9b0e-16d0475468e9"/>
 					<staticText>
-						<reportElement x="72" y="0" width="100" height="20" uuid="72a89a9f-fcaf-4b62-93f6-5a47228bbfee"/>
+						<reportElement x="0" y="0" width="47" height="20" uuid="5159e2b5-b671-44e9-8d81-d227eace02e8"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ID]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="568" y="0" width="142" height="20" uuid="5a30424c-62bf-4381-97c5-aec5223fccf0"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[FOTO]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="62" y="0" width="100" height="20" uuid="99fbbf80-b39c-43ae-83e0-49e89aea5d21"/>
 						<textElement textAlignment="Center">
 							<font isBold="true"/>
 						</textElement>
 						<text><![CDATA[NOMBRE]]></text>
 					</staticText>
 					<staticText>
-						<reportElement x="188" y="0" width="100" height="20" uuid="85a5fe1a-3f1e-4c0e-a299-61c50cd841e1"/>
+						<reportElement x="180" y="0" width="100" height="20" uuid="a5982ddc-b5a3-4eee-bbf0-38877f518933"/>
 						<textElement textAlignment="Center">
 							<font isBold="true"/>
 						</textElement>
 						<text><![CDATA[APELLIDO]]></text>
 					</staticText>
 					<staticText>
-						<reportElement x="311" y="0" width="121" height="20" uuid="ff3a3638-54ad-4048-b59c-768e501ec36c"/>
+						<reportElement x="301" y="0" width="128" height="20" uuid="a5763cea-9073-4d03-97bb-38948e5cdd8f"/>
 						<textElement textAlignment="Center">
 							<font isBold="true"/>
 						</textElement>
 						<text><![CDATA[FECHA DE NACIMIENTO]]></text>
 					</staticText>
 					<staticText>
-						<reportElement x="596" y="0" width="114" height="20" uuid="18498cb5-d930-4245-adcf-12cf6c15ba4c"/>
-						<textElement textAlignment="Center">
-							<font isBold="true"/>
-						</textElement>
-						<text><![CDATA[Foto]]></text>
-					</staticText>
-					<staticText>
-						<reportElement x="455" y="0" width="100" height="20" uuid="67480b3e-5c22-4fa2-82fd-0fa6dc2308fb"/>
+						<reportElement x="444" y="0" width="100" height="20" uuid="62a894b5-e69c-4e2d-8d68-f9dfd4a4c9ee"/>
 						<textElement textAlignment="Center">
 							<font isBold="true"/>
 						</textElement>
 						<text><![CDATA[SUCURSAL]]></text>
 					</staticText>
 				</frame>
-				<staticText>
-					<reportElement x="0" y="11" width="50" height="20" uuid="8163226a-02d4-4c11-a94f-79de04449f0f"/>
-					<textElement textAlignment="Center">
-						<font isBold="true"/>
-					</textElement>
-					<text><![CDATA[ID]]></text>
-				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -117,34 +117,34 @@ FROM TBL_EMPLEADO AS a inner join TBL_SUCURSAL AS b on a.Id_sucursal = b.Id_sucu
 			<frame>
 				<reportElement x="0" y="0" width="710" height="93" uuid="b0a7bfdd-a7d3-4655-9023-22e267bad041"/>
 				<textField>
-					<reportElement x="0" y="0" width="50" height="20" uuid="d2bda812-6973-4cdd-9757-a85466b2c6b5"/>
+					<reportElement x="0" y="0" width="47" height="20" uuid="82002fd5-4e2c-428b-b788-c3b18a4d9754"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{Id_empleado}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="72" y="0" width="100" height="20" uuid="f9e7d87b-20f4-4df1-b632-24495de2d103"/>
+					<reportElement x="62" y="0" width="100" height="20" uuid="d13efce0-6866-48a3-8f44-37c40fa5845b"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{Primer_nombre}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="188" y="0" width="100" height="20" uuid="265ec3b2-b7d9-4a1e-ae67-7da9dd8c98bd"/>
+					<reportElement x="180" y="0" width="100" height="20" uuid="68bba2ef-ca13-4aae-a40b-176a5dc54a3c"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{Primer_apellido}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="349" y="0" width="48" height="20" uuid="d624810d-bbf0-4686-b471-f5a7c27baff0"/>
+					<reportElement x="342" y="0" width="43" height="20" uuid="4de3ea48-5722-4211-9816-a5a4ddea9f9b"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{Fecha_nacimiento}]]></textFieldExpression>
 				</textField>
-				<image>
-					<reportElement x="596" y="0" width="114" height="92" uuid="2cfd99b3-350b-42e3-b40b-77d0e08ccf8e"/>
-					<imageExpression><![CDATA[$F{Foto}]]></imageExpression>
-				</image>
 				<textField>
-					<reportElement x="455" y="0" width="100" height="20" uuid="adca89a4-d33c-4461-a3b4-6b6dd2b911d2"/>
+					<reportElement x="444" y="0" width="100" height="20" uuid="4a281119-0de2-48f0-a498-f463dd9fbf1a"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{Nombre_sucursal}]]></textFieldExpression>
 				</textField>
+				<image>
+					<reportElement x="568" y="0" width="142" height="92" uuid="13dc77c9-a0df-4792-951c-959505b6fb55"/>
+					<imageExpression><![CDATA[$F{Foto}]]></imageExpression>
+				</image>
 			</frame>
 		</band>
 	</detail>
