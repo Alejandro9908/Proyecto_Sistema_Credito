@@ -9,6 +9,7 @@ import controladores.FEmpleado;
 import controladores.FSucursal;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vistas.empleado.frmMostrarEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
 import vistas.sucursal.frmMostrarSucursal;
 
@@ -84,6 +85,23 @@ public class frmSeleccionar extends javax.swing.JFrame {
             mostrarMunicipiosEmpleado();
         }
         
+        if(opcion==6){ //edita
+            txtAccion.setText("Seleccione un municipio");
+            mostrarMunicipiosEmpleado();
+        }
+        
+        if(opcion==7){ //cargo de editar empleado
+            txtAccion.setText("Seleccione un cargo");
+            mostrarCargos();
+            
+        }
+        
+        if(opcion==8){ //sucursal de editar empleado
+            txtAccion.setText("Seleccione una sucursal");
+            mostrarSucursales();
+        }
+        
+        
         
         
         this.setLocationRelativeTo(null); //para centrar la ventana
@@ -140,6 +158,41 @@ public class frmSeleccionar extends javax.swing.JFrame {
             String search = txtBuscar.getText(); //Es solo para prueba,, borrar luego
             
             funcion.buscarMunicipio(Tabla, departamento, search.toUpperCase()); //para buscar en mayusculas
+          
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    }
+     
+     
+      private void buscarMunicipioGeneral(){
+        try {
+            String search = txtBuscar.getText(); //Es solo para prueba,, borrar luego
+            
+            funcionEmpleado.buscarMunicipioGeneral(Tabla, search.toUpperCase()); //para buscar en mayusculas
+          
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    }
+      
+      
+       private void buscarCargoEmpleado(){
+        try {
+            String search = txtBuscar.getText(); //Es solo para prueba,, borrar luego
+            
+            funcionEmpleado.buscarCargoEmpleado(Tabla, search.toUpperCase()); //para buscar en mayusculas
+          
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    }
+       
+        private void buscarSucursalEmpleado(){
+        try {
+            String search = txtBuscar.getText(); //Es solo para prueba,, borrar luego
+            
+            funcionEmpleado.buscarSucursalEmpleado(Tabla, search.toUpperCase()); //para buscar en mayusculas
           
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
@@ -202,8 +255,37 @@ public class frmSeleccionar extends javax.swing.JFrame {
             
             frmNuevoEmpleado.txtIdMunicipio.setText(id_municipioEmpleado);
             frmNuevoEmpleado.txtMunicipio.setText(nombre_municipioEmpleado);
-           
+         
+        }
+        
+        
+        else if (opcion==6){ //si la opcion 6 será municipio pero para el editar de empleado
             
+            id_municipioEmpleado= (Tabla.getValueAt(posicion, 0).toString());
+            nombre_municipioEmpleado = (Tabla.getValueAt(posicion,1).toString());
+            
+            frmMostrarEmpleado.txtIdMunicipio.setText(id_municipioEmpleado);
+            frmMostrarEmpleado.txtMunicipio.setText(nombre_municipioEmpleado);
+         
+        }     
+        else if (opcion==7){ //si la opcion 7 será cargo de editar empleado
+            
+            id_cargo= (Tabla.getValueAt(posicion, 0).toString());
+            nombre_cargo = (Tabla.getValueAt(posicion,1).toString());
+            
+            frmMostrarEmpleado.txtIdCargo.setText(id_cargo);
+            frmMostrarEmpleado.txtCargo.setText(nombre_cargo);
+         
+        }
+        
+        else if (opcion==8){ //si la opcion 8 será sucursal de editar empleado
+            
+            id_sucursal= (Tabla.getValueAt(posicion, 0).toString());
+            nombre_sucursal = (Tabla.getValueAt(posicion,1).toString());
+            
+            frmMostrarEmpleado.txtIdSucursal.setText(id_sucursal);
+            frmMostrarEmpleado.txtSucursal.setText(nombre_sucursal);
+         
         }
         
         //para cerrar el frmBuscar
@@ -340,6 +422,39 @@ public class frmSeleccionar extends javax.swing.JFrame {
         //Solamente buscara los del departamento seleccionado Att.Kevin
         if(opcion==2){
         buscarMunicipio();
+        }
+        
+        if(opcion==3){ //para sucursal
+            buscarSucursalEmpleado();
+            
+            
+        }
+        
+        if(opcion==4){ //para buscar cargo
+            buscarCargoEmpleado();
+            
+        }
+        
+        if(opcion==5){ //para buscar municipio con el empleado
+            buscarMunicipioGeneral();
+           
+        }
+        
+        if(opcion==6){ //busca municipios en el buscar Editar
+            buscarMunicipioGeneral();
+            
+        }
+        
+        if(opcion==7){ //buscar en cargo editar empleado
+            buscarCargoEmpleado();
+            
+            
+        }
+        
+        if(opcion==8){ //buscar en sucursal editar empleado
+            buscarSucursalEmpleado();
+            
+            
         }
        
        

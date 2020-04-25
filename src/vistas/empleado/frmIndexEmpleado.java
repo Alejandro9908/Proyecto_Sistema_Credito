@@ -11,6 +11,13 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +38,10 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
     DefaultTableModel modelo;
     FEmpleado funcion = new FEmpleado();
     
+      
+    
+    
+    
     String query = "SELECT a.Id_empleado,a.Dpi,a.Primer_nombre,a.Segundo_nombre,a.Tercer_nombre,a.Primer_apellido,a.Segundo_apellido, \n" +
                    "a.Apellido_casado,a.Estado_civil,a.Foto,a.Direccion,a.Telefono,a.Correo,a.Genero,a.Profesion,a.Suledo,a.Fecha_nacimiento,\n" +
                     "a.Fecha_commit,a.Hora_commit,b.Nombre_sucursal,c.Nombre_cargo,d.Nombre_municipio,a.Estado,a.Id_sucursal,a.Id_cargo,a.Id_municipio,a.Id_usuario\n" +
@@ -39,6 +50,14 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
   
     public frmIndexEmpleado() {
         initComponents();
+        
+        
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbNombre);
+        rbNombre.setSelected(true);
+        
+        
         mostrar(query);
         //AGREGAR BOTONES AL ACTION LISTENER
         btnNuevo.addActionListener(this);
@@ -76,7 +95,15 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
             modelo = funcion.mostrarEmpleado(buscar);
             
             tblDatos.setModel(modelo);
-            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));  
+            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros)); 
+            
+            
+            
+            ocultarColumnas(tblDatos,0); //para ocultar el ID de empleado
+             ocultarColumnas(tblDatos,1); //para ocultar el ID de sucursal
+              ocultarColumnas(tblDatos,11); //para ocultar el la FOTO wtf
+               ocultarColumnas(tblDatos,12); //para ocultar el ID de 
+               
             
              ocultarColumnas(tblDatos,4); //para ocultar la columna del estado
              ocultarColumnas(tblDatos,7); //para ocultar la columna de Fecha de creacion
@@ -96,6 +123,34 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
     
     
     }
+    
+    
+    
+       private void buscarEmpleado(String textoBuscar){
+     
+         
+        if(rbId.isSelected()==true){
+        mostrar("SELECT a.Id_empleado,a.Dpi,a.Primer_nombre,a.Segundo_nombre,a.Tercer_nombre,a.Primer_apellido,a.Segundo_apellido, \n" +
+                   "a.Apellido_casado,a.Estado_civil,a.Foto,a.Direccion,a.Telefono,a.Correo,a.Genero,a.Profesion,a.Suledo,a.Fecha_nacimiento,\n" +
+                    "a.Fecha_commit,a.Hora_commit,b.Nombre_sucursal,c.Nombre_cargo,d.Nombre_municipio,a.Estado,a.Id_sucursal,a.Id_cargo,a.Id_municipio,a.Id_usuario\n" +
+                     "FROM TBL_EMPLEADO AS a inner join TBL_SUCURSAL AS b on a.Id_sucursal = b.Id_sucursal inner join [TBL_CARGO] AS c on a.Id_cargo = c.Id_cargo inner join \n" +
+                      "[TBL_MUNICIPIO] AS d on a.Id_municipio = d.Id_municipio WHERE (Id_empleado like '%"+textoBuscar+"%') AND a.Estado = 1");
+        }else{
+        
+          mostrar("SELECT a.Id_empleado,a.Dpi,a.Primer_nombre,a.Segundo_nombre,a.Tercer_nombre,a.Primer_apellido,a.Segundo_apellido, \n" +
+                   "a.Apellido_casado,a.Estado_civil,a.Foto,a.Direccion,a.Telefono,a.Correo,a.Genero,a.Profesion,a.Suledo,a.Fecha_nacimiento,\n" +
+                    "a.Fecha_commit,a.Hora_commit,b.Nombre_sucursal,c.Nombre_cargo,d.Nombre_municipio,a.Estado,a.Id_sucursal,a.Id_cargo,a.Id_municipio,a.Id_usuario\n" +
+                     "FROM TBL_EMPLEADO AS a inner join TBL_SUCURSAL AS b on a.Id_sucursal = b.Id_sucursal inner join [TBL_CARGO] AS c on a.Id_cargo = c.Id_cargo inner join \n" +
+                      "[TBL_MUNICIPIO] AS d on a.Id_municipio = d.Id_municipio WHERE (Primer_nombre like '%"+textoBuscar+"%') AND a.Estado = 1");  
+        
+        }
+     
+     
+     }
+    
+    
+    
+    
     
     private void ocultarColumnas(JTable tabla, int columna){
         
@@ -342,7 +397,7 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-        //buscar();
+        buscarEmpleado(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
@@ -352,8 +407,120 @@ public class frmIndexEmpleado extends javax.swing.JInternalFrame implements Acti
         Dimension FrameSize = frmMostrar.getSize();
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
+        
+        
+       int posicion = tblDatos.getSelectedRow();
+        frmMostrarEmpleado.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
+        frmMostrarEmpleado.txtDpi.setText(tblDatos.getValueAt(posicion,1).toString());
+        frmMostrarEmpleado.txtNombre1.setText(tblDatos.getValueAt(posicion,2).toString());
+        frmMostrarEmpleado.txtNombre2.setText(tblDatos.getValueAt(posicion,3).toString());
+        frmMostrarEmpleado.txtNombre3.setText(tblDatos.getValueAt(posicion,4).toString());
+        frmMostrarEmpleado.txtApellido1.setText(tblDatos.getValueAt(posicion,5).toString());
+        frmMostrarEmpleado.txtApellido2.setText(tblDatos.getValueAt(posicion,6).toString());
+        frmMostrarEmpleado.txtApellidoCasado.setText(tblDatos.getValueAt(posicion,7).toString());
+        
+        //OBTENEMOS EL VALOR DEL ESTADO CIVIL
+        //frmMostrarEmpleado.cbEstadoCivil.setText(tblDatos.getValueAt(posicion,8).toString());
+        for(int i = 0; i < frmMostrarEmpleado.cbEstadoCivil.getItemCount(); i++){ // <=============================
+            if(tblDatos.getValueAt(posicion, 8).toString().equals(frmMostrarEmpleado.cbEstadoCivil.getItemAt(i))){             //============== REVISAR CON EL EDITAR PARA VER SI FUNCIONA
+                frmMostrarEmpleado.cbEstadoCivil.setSelectedIndex(i);
+            }
+        }
+        
+        
+        
+        //frmMostrarEmpleado.panelFoto.(tblDatos.getValueAt(posicion,9).toString());
+                        //Lo que le mando es el ID desde la tabla, lo pude hacer en una consulta allá pero bueno
+        consultarFoto(tblDatos.getValueAt(posicion,0).toString());
+        
+        
+        frmMostrarEmpleado.txtDireccion.setText(tblDatos.getValueAt(posicion,10).toString());
+        frmMostrarEmpleado.txtTelefono.setText(tblDatos.getValueAt(posicion,11).toString());  
+        frmMostrarEmpleado.txtCorreo.setText(tblDatos.getValueAt(posicion,12).toString());
+     
+     
+     
+     //obtener genero
+     //   frmMostrarEmpleado.cbGenero.setText(tblDatos.getValueAt(posicion,13).toString());
+      for(int i = 0; i < frmMostrarEmpleado.cbGenero.getItemCount(); i++){ // <=============================
+            if(tblDatos.getValueAt(posicion, 13).toString().equals(frmMostrarEmpleado.cbGenero.getItemAt(i))){             //============== REVISAR CON EL EDITAR PARA VER SI FUNCIONA
+                frmMostrarEmpleado.cbGenero.setSelectedIndex(i);
+            }
+        }
+     
+     
+     
+     
+     
+        frmMostrarEmpleado.txtProfesion.setText(tblDatos.getValueAt(posicion,14).toString());
+        frmMostrarEmpleado.txtSueldo.setText(tblDatos.getValueAt(posicion,15).toString());
+        
+        
+        //Metodo para pasar la fecha de nacimiento
+        
+        String fechaNacimiento = tblDatos.getValueAt(posicion,16).toString();
+         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fechaNacimiento);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+          frmMostrarEmpleado.txtFechaNacimiento.setDate(fechaDate);
+          
+          //TEMINA PASAR FECHA DE NACIMIENTO
+        
+      
+        frmMostrarEmpleado.txtFecha.setText(tblDatos.getValueAt(posicion,17).toString());
+        frmMostrarEmpleado.txtHora.setText(tblDatos.getValueAt(posicion,18).toString());
+        frmMostrarEmpleado.txtSucursal.setText(tblDatos.getValueAt(posicion,19).toString());
+        frmMostrarEmpleado.txtCargo.setText(tblDatos.getValueAt(posicion,20).toString());
+        frmMostrarEmpleado.txtMunicipio.setText(tblDatos.getValueAt(posicion,21).toString());
+        frmMostrarEmpleado.txtEstado.setText(tblDatos.getValueAt(posicion,22).toString());
+        frmMostrarEmpleado.txtIdSucursal.setText(tblDatos.getValueAt(posicion,23).toString());
+        frmMostrarEmpleado.txtIdCargo.setText(tblDatos.getValueAt(posicion,24).toString());
+        frmMostrarEmpleado.txtIdMunicipio.setText(tblDatos.getValueAt(posicion,25).toString());
+        
+        
+        
+        //consultarFoto((String)tablaDatosAlumnos.getValueAt(tablaDatosAlumnos.getSelectedRow(),1));
+      
+     
     }//GEN-LAST:event_tblDatosMouseClicked
 
+     public void consultarFoto(String buscar){
+       
+ 
+        Conexion sqlSERVER = new Conexion();
+        Connection cn2 = sqlSERVER.Conectar();
+        
+        
+        String sql = "select Foto from TBL_EMPLEADO where ID_EMPLEADO =" + "'" +buscar + "'";
+         try{
+            if(cn2!=null){
+                Statement st = cn2.createStatement();
+                ResultSet rs = st.executeQuery(sql);  
+    
+                while(rs.next()){
+                    //el nombre del campo que queremos obtener en la db
+                    byte [] imagen = rs.getBytes("Foto");
+                    frmMostrarEmpleado.panelFoto.setImagen(imagen);
+                }
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se ha establecido conexion con la db");
+            }
+           
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }  
+        
+    }
+    
+    
+    
+    
     private void actualizar(){
         mostrar(query);
     }

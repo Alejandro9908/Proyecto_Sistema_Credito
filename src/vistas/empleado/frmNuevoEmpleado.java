@@ -43,6 +43,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         btnCargo.addActionListener(this);
         btnFoto.addActionListener(this);
         btnMunicipio.addActionListener(this);
+        btnCancelar.addActionListener(this);
     }
     
     @Override
@@ -73,6 +74,12 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
             frmSeleccionar f = new frmSeleccionar(5,"QUEMADO"); //el numero es para que se haga universal, pero creo que solo usaremos esa ventana
             //el dato quemado es solamente para que no busque ningun departamento, solo se ocupa en la opcion dos
             f.setVisible(true);
+ 
+        }
+        
+        
+        if(e.getSource()==btnCancelar){
+            cancelar();
             
         }
         
@@ -159,6 +166,11 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
     txtSucursal.setText("");
     txtCargo.setText("");
     
+    }
+    
+    public void cancelar(){
+        
+        this.dispose();
     }
     
     
@@ -477,6 +489,8 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         lblNombre20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre20.setText("Municipio");
 
+        txtMunicipio.setEditable(false);
+
         btnMunicipio.setBackground(new java.awt.Color(255, 255, 255));
         btnMunicipio.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnMunicipio.setText("Seleccionar");
@@ -560,8 +574,12 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         lblNombre23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre23.setText("Sucursal");
 
+        txtSucursal.setEditable(false);
+
         lblNombre25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre25.setText("Cargo");
+
+        txtCargo.setEditable(false);
 
         btnCargo.setBackground(new java.awt.Color(255, 255, 255));
         btnCargo.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
