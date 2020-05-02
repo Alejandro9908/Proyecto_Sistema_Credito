@@ -34,6 +34,7 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame implements Ac
         btnCancelar.addActionListener(this);
         btnGuardar.addActionListener(this);
         btnT.addActionListener(this);
+        txtIdtipo.setVisible(false);
     }
     
     @Override
