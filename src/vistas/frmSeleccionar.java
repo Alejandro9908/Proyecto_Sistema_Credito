@@ -6,11 +6,14 @@
 package vistas;
 
 import controladores.FEmpleado;
+import controladores.FGarantia;
 import controladores.FSucursal;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vistas.empleado.frmMostrarEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
+import vistas.garantia.frmMostrarGarantia;
+import vistas.garantia.frmNuevoGarantia;
 import vistas.sucursal.frmMostrarSucursal;
 
 
@@ -25,6 +28,7 @@ public class frmSeleccionar extends javax.swing.JFrame {
     public static String id_departamento;
     public static String nombre_departamento;
     FSucursal funcion = new FSucursal();
+    FGarantia funcion2 = new FGarantia();
     
     //Variables para el municipio
     
@@ -44,6 +48,8 @@ public class frmSeleccionar extends javax.swing.JFrame {
     public static String id_municipioEmpleado, nombre_municipioEmpleado;
     
     
+    //Variables para selecionar el municipio en FrmNuevaGarantia
+    public static String id_tipogarantia, nombre_garantia;
     
     
     DefaultTableModel modelo;
@@ -101,6 +107,16 @@ public class frmSeleccionar extends javax.swing.JFrame {
             mostrarSucursales();
         }
         
+        if(opcion==9){
+         txtAccion.setText("Seleccione un tipo de garantia");
+         mostarTipogarantia();
+        }
+        
+        if(opcion==10){
+         txtAccion.setText("Seleccione un tipo de garantia");
+         mostarTipogarantia();
+        }
+        
         
         
         
@@ -135,6 +151,12 @@ public class frmSeleccionar extends javax.swing.JFrame {
       public void mostrarMunicipiosEmpleado(){
           funcionEmpleado.mostrarMunicipioEmpleado(Tabla);     
 
+      }
+      
+      
+      public void mostarTipogarantia(){
+      
+         funcion2.mostratipogarantia(Tabla);
       }
     
   
@@ -198,6 +220,21 @@ public class frmSeleccionar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
         }
     }
+        
+        
+     private void buscartipoGarantia(){
+     
+      try{
+      
+      String search = txtBuscar.getText(); //Es solo para prueba,, borrar luego
+      funcion2.buscartipogarantia(Tabla, search.toUpperCase());
+      
+      }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+     
+     
+     }   
     
   
 
@@ -286,6 +323,27 @@ public class frmSeleccionar extends javax.swing.JFrame {
             frmMostrarEmpleado.txtIdSucursal.setText(id_sucursal);
             frmMostrarEmpleado.txtSucursal.setText(nombre_sucursal);
          
+        }
+        
+        else if(opcion==9){
+        
+         id_tipogarantia =(Tabla.getValueAt(posicion, 0).toString());
+         nombre_garantia=(Tabla.getValueAt(posicion, 1).toString());
+         
+         frmNuevoGarantia.txtIdtipo.setText(id_tipogarantia);
+         frmNuevoGarantia.txtCorreo1.setText(nombre_garantia);
+         
+        
+        }
+        
+        else if(opcion==10){
+        
+         id_tipogarantia =(Tabla.getValueAt(posicion, 0).toString());
+         nombre_garantia=(Tabla.getValueAt(posicion, 1).toString());
+         
+         frmMostrarGarantia.txtIdtipo.setText(id_tipogarantia);
+         frmMostrarGarantia.txtCorreo1.setText(nombre_garantia);
+        
         }
         
         //para cerrar el frmBuscar
@@ -453,11 +511,14 @@ public class frmSeleccionar extends javax.swing.JFrame {
         
         if(opcion==8){ //buscar en sucursal editar empleado
             buscarSucursalEmpleado();
-            
-            
+           
         }
        
+       if(opcion==9){
        
+       buscartipoGarantia();
+       
+       }
        
         
         

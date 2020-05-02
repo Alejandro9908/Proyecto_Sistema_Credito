@@ -12,6 +12,34 @@ package modelo;
 public class Garantia {
 
     /**
+     * @return the fotografia
+     */
+    public byte[] getFotografia() {
+        return fotografia;
+    }
+
+    /**
+     * @param fotografia the fotografia to set
+     */
+    public void setFotografia(byte[] fotografia) {
+        this.fotografia = fotografia;
+    }
+
+    /**
+     * @return the n_documento
+     */
+    public String getN_documento() {
+        return n_documento;
+    }
+
+    /**
+     * @param n_documento the n_documento to set
+     */
+    public void setN_documento(String n_documento) {
+        this.n_documento = n_documento;
+    }
+
+    /**
      * @return the id_garantia
      */
     public int getId_garantia() {
@@ -81,19 +109,7 @@ public class Garantia {
         this.descripcion = descripcion;
     }
 
-    /**
-     * @return the fotografia
-     */
-    public byte getFotografia() {
-        return fotografia;
-    }
-
-    /**
-     * @param fotografia the fotografia to set
-     */
-    public void setFotografia(byte fotografia) {
-        this.fotografia = fotografia;
-    }
+  
 
     /**
      * @return the valuacion
@@ -128,9 +144,10 @@ public class Garantia {
     private int id_credito;
     private int id_tipo_garantia;
     private String descripcion;
-    private byte fotografia;
+    private byte[] fotografia;
     private float valuacion;
     private int id_usuario;
+    private String n_documento;
             
     
 }

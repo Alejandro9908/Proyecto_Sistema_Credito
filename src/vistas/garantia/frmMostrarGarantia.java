@@ -5,19 +5,173 @@
  */
 package vistas.garantia;
 
+import controladores.FGarantia;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import modelo.Garantia;
+import static vistas.empleado.frmMostrarEmpleado.txtId;
+import vistas.frmSeleccionar;
+import static vistas.garantia.frmNuevoGarantia.txtIdtipo;
+import static vistas.garantia.frmNuevoGarantia.txtNombre;
+
 /**
  *
  * @author Alejandro
  */
-public class frmMostrarGarantia extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form frmMostrarGarantia
-     */
+public class frmMostrarGarantia extends javax.swing.JInternalFrame implements ActionListener {
+  
+    
+    FGarantia funcion = new FGarantia();
+    String idAlumno;
+    
     public frmMostrarGarantia() {
         initComponents();
+       // panelFoto.setImagenNull();
+        btnEditar.addActionListener(this);
+        btnEliminar.addActionListener(this);
+        btnTipo.addActionListener(this);
+        btnCancelar.addActionListener(this);
+        btnGuardar.addActionListener(this);
+        btnT.addActionListener(this);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    if(btnEditar == e.getSource()){
+            desbloquearDatos();
+            
+            
+            
+        }
+     if(btnGuardar == e.getSource()){ 
+           editar(); 
+           //panelFoto.setImagenNull();
+        }
+     
+     if(e.getSource()== btnEliminar){
+            
+            //eliminarEmpleado();
+            
+        }
+     
+      if (e.getSource()==btnTipo){
+            
+             frmSeleccionar f = new frmSeleccionar(10,"QUEMADO"); //el numero es para que se haga universal, pero creo que solo usaremos esa ventana
+            //el dato quemado es solamente para que no busque ningun departamento, solo se ocupa en la opcion dos
+            f.setVisible(true);
+        }
+    
+     if(e.getSource()==btnCancelar){
+                  cancelar();
+                  
+              }
+     
+     if(e.getSource()==btnT){
+     
+       desbloquearDatos1();
+     
+     }
+    
     }
 
+     private void editar(){
+     
+         if(txtNombre.getText().length()==0 ||txtDireccion.getText().length()==0 || txtCorreo.getText().length()==0 || txtId1.getText().length()==1){
+         JOptionPane.showMessageDialog(null,"Hace falta rellenar campos obligatorios");
+         
+         }/*else if(txtId1.getText().length()==null){
+           JOptionPane.showMessageDialog(null,"Hace falta rellenar campos obligatorios");                   
+         }*/else{
+          Garantia garantia = new Garantia();
+          
+          //empleado.setId_empleado(Integer.parseInt(txtId.getText()));
+          garantia.setId_garantia(Integer.parseInt(txtId.getText()));
+          garantia.setNombre(txtNombre.getText());
+          garantia.setN_documento(txtId1.getText());
+          garantia.setId_tipo_garantia(Integer.parseInt(txtIdtipo.getText()));
+          garantia.setDescripcion(txtDireccion.getText());
+          //garantia.setFotografia(panelFoto.getBytes());
+          garantia.setValuacion(Float.parseFloat(txtCorreo.getText()));
+          
+          funcion.editarGarantia(garantia, txtId.getText());
+          //panelFoto.setImagenNull();
+          limpiarDatos();
+          JOptionPane.showMessageDialog(null,"Datos editados Correctamente");
+         
+          frmIndexGarantia.btnActualizar.doClick();
+         bloquear();
+        bloquearDatos();
+         }
+        
+     }
+     
+     public void limpiarDatos(){
+    
+     txtId.setText("");
+     txtNombre.setText("");
+     txtId1.setText("");
+     txtIdtipo.setText("");
+     txtDireccion.setText("");
+     txtCorreo.setText("");
+     txtCorreo1.setText("");
+     panelFoto.setImagenNull();
+    
+    }
+     
+      private void desbloquearDatos(){
+      
+      txtNombre.setEnabled(true);
+     //txtId1.setEnabled(true);
+     txtIdtipo.setEnabled(true);
+     txtDireccion.setEnabled(true);
+     txtCorreo.setEnabled(true);
+     txtCorreo1.setEnabled(false);    
+     panelFoto.setEnabled(false);  
+     
+     
+        btnGuardar.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        btnTipo.setEnabled(true);
+        jLabel1.setText("Editar Garantia");
+      }
+      
+      private void bloquearDatos(){
+      
+       txtNombre.setEnabled(false);
+     //txtId1.setEnabled(false);
+     txtIdtipo.setEnabled(false);
+     txtDireccion.setEnabled(false);
+     txtCorreo.setEnabled(false);
+     txtCorreo1.setEnabled(false);    
+     //panelFoto.setEnabled(false);  
+     
+     
+        btnGuardar.setEnabled(false);
+        btnEditar.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnTipo.setEnabled(false);
+        jLabel1.setText("Detalles Garantia");
+      
+      }
+    
+      private void cancelar(){
+        this.dispose();
+    }
+    private void desbloquearDatos1(){
+    
+        txtId1.setEnabled(true);
+    
+    }
+    
+    private void bloquear(){
+     
+        txtId1.setEnabled(false);
+        btnT.setEnabled(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,11 +195,13 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
         txtCorreo = new javax.swing.JTextField();
         lblNombre3 = new javax.swing.JLabel();
         txtId1 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         btnGuardar1 = new javax.swing.JButton();
         lblNombre10 = new javax.swing.JLabel();
         txtCorreo1 = new javax.swing.JTextField();
         btnTipo = new javax.swing.JButton();
+        panelFoto = new JPanelWebCam.JPanelWebCam();
+        txtIdtipo = new javax.swing.JTextField();
+        btnT = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -100,17 +256,6 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 167, Short.MAX_VALUE)
-        );
-
         btnGuardar1.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnGuardar1.setText("Seleccionar Foto");
@@ -122,7 +267,22 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
         txtCorreo1.setEnabled(false);
 
         btnTipo.setText("...");
-        btnTipo.setEnabled(false);
+
+        panelFoto.setBackground(new java.awt.Color(255, 255, 255));
+        panelFoto.setToolTipText("");
+
+        javax.swing.GroupLayout panelFotoLayout = new javax.swing.GroupLayout(panelFoto);
+        panelFoto.setLayout(panelFotoLayout);
+        panelFotoLayout.setHorizontalGroup(
+            panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelFotoLayout.setVerticalGroup(
+            panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        btnT.setText("...");
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
@@ -133,23 +293,11 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(txtId1))
-                    .addGroup(pnlFormularioLayout.createSequentialGroup()
-                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre)
-                            .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                .addComponent(lblNombre2)
-                                .addGap(188, 188, 188)
-                                .addComponent(lblNombre3)))
-                        .addGap(0, 185, Short.MAX_VALUE))
-                    .addGroup(pnlFormularioLayout.createSequentialGroup()
-                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnGuardar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                            .addComponent(lblNombre8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnGuardar1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(lblNombre8)
+                            .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addComponent(txtCorreo)
@@ -161,9 +309,28 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
                                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                                         .addComponent(txtCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addComponent(btnTipo)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombre)
+                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                .addComponent(lblNombre2)
+                                .addGap(188, 188, 188)
+                                .addComponent(lblNombre3)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnT)
+                        .addGap(2, 2, 2)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtIdtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145))
         );
         pnlFormularioLayout.setVerticalGroup(
             pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +342,8 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnT, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,24 +352,28 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre8)
                     .addComponent(lblNombre10))
-                .addGap(9, 9, 9)
-                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNombre6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNombre9))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(txtIdtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
@@ -238,7 +410,7 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -260,7 +432,7 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminar)
                     .addComponent(btnEditar)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlBase, java.awt.BorderLayout.CENTER);
@@ -268,13 +440,13 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
-
     private void txtId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtId1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtId1ActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -283,9 +455,9 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardar1;
+    private javax.swing.JButton btnT;
     private javax.swing.JButton btnTipo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre10;
@@ -294,13 +466,15 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre6;
     private javax.swing.JLabel lblNombre8;
     private javax.swing.JLabel lblNombre9;
+    public static JPanelWebCam.JPanelWebCam panelFoto;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
-    private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtCorreo1;
-    private javax.swing.JTextArea txtDireccion;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtId1;
-    private javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtCorreo;
+    public static javax.swing.JTextField txtCorreo1;
+    public static javax.swing.JTextArea txtDireccion;
+    public static javax.swing.JTextField txtId;
+    public static javax.swing.JTextField txtId1;
+    public static javax.swing.JTextField txtIdtipo;
+    public static javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
