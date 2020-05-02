@@ -10,6 +10,7 @@ import controladores.FGarantia;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -18,6 +19,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Garantia;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import vistas.empleado.frmIndexEmpleado;
 import static vistas.empleado.frmIndexEmpleado.btnActualizar;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -68,7 +75,7 @@ public class frmIndexGarantia extends javax.swing.JInternalFrame implements Acti
         
         if(e.getSource()==btnReporte){
             
-            //Reporte();
+            Reporte();
             
         }   
     }
@@ -330,6 +337,37 @@ public class frmIndexGarantia extends javax.swing.JInternalFrame implements Acti
         buscarGarantia(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
+     public void Reporte(){
+         
+         Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+            String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/ReporteGarantia.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexGarantia.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+         
+        
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+        
+     }
+    
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
         frmMostrarGarantia frmMostrar = new frmMostrarGarantia();
         dpnlEscritorio.add(frmMostrar);
