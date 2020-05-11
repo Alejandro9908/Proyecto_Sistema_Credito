@@ -37,7 +37,7 @@ public class frmIndexGarantia extends javax.swing.JInternalFrame implements Acti
      DefaultTableModel modelo;
     FGarantia funcion = new FGarantia();
     
-    String query = "SELECT a.Id_garantia,a.Nombre,a.N_identificacion,b.Nombre_garantia,b.Descripcion,a.Id_tipo_garantia,a.Fotografia,\n" +
+    String query = "SELECT a.Id_garantia,a.Nombre,a.N_identificacion,b.Nombre_garantia,a.Descripcion,a.Id_tipo_garantia,a.Fotografia,\n" +
        "a.Valuacion,a.Estado,a.Fecha_commit,a.Hora_commit,a.Id_usuario FROM TBL_GARANTIA AS a inner join\n" +
        "TBL_TIPO_GARANTIA AS b on a.Id_tipo_garantia = b.Id_tipo_garantia where a.Estado = 1 and b.Estado =1";
     
