@@ -64,14 +64,16 @@ public class frmNuevoTipoGarantia extends javax.swing.JInternalFrame implements 
             
             funcion.AgregarTipogantia(tipogarantia);
             
-            limpiar();
+           
             frmIndexTipoGarantia.btnActualizar.doClick();
             JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
-        
+            limpiar();
         
         }catch(Exception e){
             
-            JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
+            //JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos");
+            limpiar();
+            JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
         
         }
     

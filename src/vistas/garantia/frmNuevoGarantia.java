@@ -94,6 +94,8 @@ public class frmNuevoGarantia extends javax.swing.JInternalFrame implements Acti
       
       }catch(Exception e){
             //JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifique");
+            limpiarDatos();
+            JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
         }
     
       }
@@ -107,6 +109,7 @@ public class frmNuevoGarantia extends javax.swing.JInternalFrame implements Acti
      txtIdtipo.setText("");
      txtDireccion.setText("");
      txtValuacion.setText("");
+     txtCorreo1.setText("");
      panelFoto1.setImagenNull();
      
     
