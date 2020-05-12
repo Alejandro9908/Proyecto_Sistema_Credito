@@ -5,9 +5,17 @@
  */
 package vistas.cliente;
 
+import controladores.Conexion;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import vistas.cargo.frmIndexCargo;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -35,6 +43,10 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
             Dimension FrameSize = frmNuevo.getSize();
             frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             frmNuevo.setVisible(true);
+        }
+        
+        if(e.getSource()==btnReporte){
+            Reporte();
         }
     }
     
@@ -251,6 +263,35 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
         //buscar();
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
+    public void Reporte(){
+         
+         Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+            String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/ReporteClientes.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexCliente.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+            
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+        
+     }
+    
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
         frmMostrarCliente frmMostrar = new frmMostrarCliente();
         dpnlEscritorio.add(frmMostrar);
