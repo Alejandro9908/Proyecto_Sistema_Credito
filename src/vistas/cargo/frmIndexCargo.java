@@ -98,8 +98,9 @@ public class frmIndexCargo extends javax.swing.JInternalFrame implements ActionL
     private void buscar(String textoBuscar){
         
         if(rbId.isSelected()==true){
-         mostrar("SELECT a.Id_cargo,a.Nombre_cargo,b.Nombre_departamento,a.Descripcion,a.Fecha_commit,a.Hora_commit,a.Estado,a.Id_usuario\n" +
-                    "FROM TBL_CARGO AS a inner join TBL_DEPARTAMENTO_EMP AS b on a.Id_departamento_emp = b.Id_departamento_emp WHERE (Id_cargo like '%"+textoBuscar+"%') AND a.Estado = 1");
+            mostrar("SELECT a.Id_cargo,a.Nombre_cargo,b.Nombre_departamento,a.Descripcion,a.Fecha_commit,a.Hora_commit,a.Estado,a.Id_usuario\n" +
+                    "FROM TBL_CARGO AS a inner join TBL_DEPARTAMENTO_EMP AS b on a.Id_departamento_emp = b.Id_departamento_emp WHERE (Id_cargo like '%"+textoBuscar+"%') AND a.Estado = 1");  
+        
         }else{
         
           mostrar("SELECT a.Id_cargo,a.Nombre_cargo,b.Nombre_departamento,a.Descripcion,a.Fecha_commit,a.Hora_commit,a.Estado,a.Id_usuario\n" +

@@ -5,9 +5,14 @@
  */
 package vistas.cuenta;
 
+import controladores.FCuenta;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import vistas.credito.frmNuevoCredito;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -17,28 +22,73 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  */
 public class frmIndexCuenta extends javax.swing.JInternalFrame implements ActionListener{
 
-    /**
-     * Creates new form frmIndexCuenta
-     */
+   
+    
+    DefaultTableModel modelo;
+    FCuenta funcion = new FCuenta();
+    
+    String query = "SELECT CUENTA.Id_cuenta, \n" +
+                    "CUENTA.Numero_cuenta, \n" +
+                    "CLI.Primer_nombre+' '+CLI.Primer_apellido AS CLIENTE,\n" +
+                    "TIPO.Clase, CUENTA.Fecha_apertura\n" +
+                    "FROM TBL_CUENTA AS CUENTA \n" +
+                    "JOIN TBL_CLIENTE AS CLI ON CUENTA.Id_cliente = CLI.Id_cliente\n" +
+                    "JOIN TBL_TIPO_SOCIO AS TIPO ON TIPO.Id_tipo_socio = CUENTA.Id_tipo_socio";
+                 
+    
     public frmIndexCuenta() {
         initComponents();
-        btnNuevo.addActionListener(this);
+        mostrar(query);
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbNombre);
+        rbId.setSelected(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==btnNuevo){
-            frmNuevoCuenta frmNuevo = new frmNuevoCuenta();
-            dpnlEscritorio.add(frmNuevo);
-            Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmNuevo.getSize();
-            frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmNuevo.setVisible(true);
+        
+    }
+    
+    private void mostrar(String buscar){    
+        try {
+            modelo = funcion.mostrarCuentas(buscar);
+            tblDatos.setModel(modelo);
+            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
         }
     }
     
+    private void buscar(String textoBuscar){
+        
+        if(rbId.isSelected()==true){
+            mostrar("SELECT CUENTA.Id_cuenta, \n" +
+                "CUENTA.Numero_cuenta, \n" +
+                "CLI.Primer_nombre+' '+CLI.Primer_apellido AS CLIENTE,\n" +
+                "TIPO.Clase, CUENTA.Fecha_apertura\n" +
+                "FROM TBL_CUENTA AS CUENTA \n" +
+                "JOIN TBL_CLIENTE AS CLI ON CUENTA.Id_cliente = CLI.Id_cliente\n" +
+                "JOIN TBL_TIPO_SOCIO AS TIPO ON TIPO.Id_tipo_socio = CUENTA.Id_tipo_socio\n" +
+                "WHERE (Numero_cuenta LIKE '%"+textoBuscar+"%') AND CUENTA.Estado = 1");
+        }else{
+            mostrar("SELECT CUENTA.Id_cuenta, \n" +
+                "CUENTA.Numero_cuenta, \n" +
+                "CLI.Primer_nombre+' '+CLI.Primer_apellido AS CLIENTE,\n" +
+                "TIPO.Clase, CUENTA.Fecha_apertura\n" +
+                "FROM TBL_CUENTA AS CUENTA \n" +
+                "JOIN TBL_CLIENTE AS CLI ON CUENTA.Id_cliente = CLI.Id_cliente\n" +
+                "JOIN TBL_TIPO_SOCIO AS TIPO ON TIPO.Id_tipo_socio = CUENTA.Id_tipo_socio\n" +
+                "WHERE (CLI.Primer_nombre LIKE '%"+textoBuscar+"%' OR CLI.Primer_apellido LIKE '%"+textoBuscar+"%') AND CUENTA.Estado = 1");
+        }
+    }
     
-    
+    private void ocultarColumnas(JTable tabla, int columna){
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
+    }
     
     
     
@@ -65,7 +115,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         tblDatos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
-        btnNuevo = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
 
@@ -103,7 +152,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
 
         rbNombre.setBackground(new java.awt.Color(255, 255, 255));
         rbNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbNombre.setText("Id del cliente");
+        rbNombre.setText("Cliente");
 
         rbId.setBackground(new java.awt.Color(255, 255, 255));
         rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -190,10 +239,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                 .addContainerGap())
         );
 
-        btnNuevo.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevo.setText("Nueva Cuenta");
-
         btnReporte.setBackground(new java.awt.Color(255, 255, 255));
         btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnReporte.setText("Reporte");
@@ -210,13 +255,11 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                 .addGap(30, 30, 30)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addComponent(btnNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
+                    .addGroup(pnlBaseLayout.createSequentialGroup()
                         .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBaseLayout.createSequentialGroup()
@@ -234,7 +277,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo)
                     .addComponent(btnReporte)
                     .addComponent(btnActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -248,35 +290,17 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-        //buscar();
-        //buscar(txtBuscar.getText());
+        buscar(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        frmMostrarCuenta frmMostrar = new frmMostrarCuenta();
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarCuenta frmMostrar = new frmMostrarCuenta(tblDatos.getValueAt(posicion,0).toString());
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
-
-        /*int posicion = tblDatos.getSelectedRow();
-        frmMostrarSucursal.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
-        frmMostrarSucursal.txtNombre.setText(tblDatos.getValueAt(posicion,1).toString());
-
-        frmMostrarSucursal.txtMunicipio.setText(tblDatos.getValueAt(posicion,2).toString());
-        frmMostrarSucursal.txtDepartamento.setText(tblDatos.getValueAt(posicion,3).toString());
-
-        frmMostrarSucursal.txtDireccion.setText(tblDatos.getValueAt(posicion,4).toString());
-        frmMostrarSucursal.txtTelefono.setText(tblDatos.getValueAt(posicion,5).toString());
-        frmMostrarSucursal.txtCorreo.setText(tblDatos.getValueAt(posicion,6).toString());
-        frmMostrarSucursal.txtEstado.setText(tblDatos.getValueAt(posicion,7).toString());
-        frmMostrarSucursal.txtIdMunicipio.setText(tblDatos.getValueAt(posicion,8).toString());
-        frmMostrarSucursal.txtIdDepartamento.setText(tblDatos.getValueAt(posicion,9).toString());
-        frmMostrarSucursal.txtFecha.setText(tblDatos.getValueAt(posicion,10).toString());
-        frmMostrarSucursal.txtHora.setText(tblDatos.getValueAt(posicion,11).toString());
-
-        //frmMostrarSucursal.cbMunicipio.setText((tblDatos.getValueAt(posicion,2).toString()));*/
 
     }//GEN-LAST:event_tblDatosMouseClicked
 
@@ -284,7 +308,6 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
