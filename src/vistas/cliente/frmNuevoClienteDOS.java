@@ -50,6 +50,8 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
      */
     public frmNuevoClienteDOS() {
         initComponents();
+        txtIdClienteNuevo.setVisible(false);
+        btnIdCliente.setVisible(false);
         JScrollPane jsp = new JScrollPane();
         jsp.setViewportView(pnlBase);
         add(jsp);
@@ -190,9 +192,17 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
     
     
     private void guardarCliente(){
+        
+        if(txtDpi.getText().length()==0 || txtNombre1.getText().length()==0 || txtApellido1.getText().length()==0 || panelFoto.getBytes().length==1 ||
+           txtProfesion.getText().length()==0  || txtDescripcion.getText().length()==0 || txtReferencia.getText().length()==0 || txtCorreo.getText().length()==0 ||
+           txtDpiReferencia.getText().length()==0 || txtNombresReferencia.getText().length()==0 || txtApellidosReferencia.getText().length()==0 || txtTelefonoReferencia.getText().length()==0 
+           || txtFechaNacimiento.getCalendar()==null){
+        
+           JOptionPane.showMessageDialog(null,"Hace falta rellenar campos obligatorios"); 
+        
+        }else{
         try{
 
-            
             Cliente cliente = new  Cliente();
             //empleado.setId_sucursal(Integer.parseInt(txtIdSucursal.getText()));
             cliente.setDpi(txtDpi.getText());
@@ -270,11 +280,22 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
         }catch(Exception e){
             //JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifique");
         }
+        }
     }
     
     
     public void limpiarDatos(){
     
+     /*modeloTel=(DefaultTableModel) tblTelefonos.getModel();  
+     int filas=tblTelefonos.getRowCount();
+     
+     for(int i = 0;i<=filas; i++){
+     
+     modeloTel.removeRow(0);
+     
+     }*/
+        
+        
     txtDpi.setText("");
     txtNombre1.setText("");
     txtNombre2.setText("");
@@ -282,17 +303,18 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
     txtApellido1.setText("");
     txtApellido2.setText("");
     txtApellidoCasado.setText("");
-    //txtTelefono.setText("");
+    txtReferencia.setText("");
     txtCorreo.setText("");
     txtProfesion.setText("");
-   // txtSueldo.setText("");
+    txtNombresReferencia.setText("");
     txtDireccion.setText("");
     panelFoto.setImagenNull();
-   // txtMunicipio.setText("");
-    txtDireccion.setText("");
+    txtDpiReferencia.setText("");
+    txtDescripcion.setText("");
     txtFechaNacimiento.setCalendar(null); 
-   // txtSucursal.setText("");
-   // txtCargo.setText("");
+    txtApellidosReferencia.setText("");
+    txtTelefonoReferencia.setText("");
+   
     
     }
     

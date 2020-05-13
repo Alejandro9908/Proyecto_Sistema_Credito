@@ -14,6 +14,7 @@ import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.Departamento;
 import modelo.Operador;
@@ -174,13 +175,58 @@ public class FCliente {
             }    
     
     }
-    
-    
-    
-    
-    
-    
-    
+       
+       
+     public DefaultTableModel mostrarCliente(String buscar) throws SQLException{
+             DefaultTableModel modelo;   
+     
+     totalRegistros=0;
+     
+      String [] encabezado = {"ID","DPI","NOMBRE","APELLIDO","FECHA DE NACIMIENTO","ESTADO CIVIL","DIRECCION","MUNICIPIO","DEPARTAMENTO"};   
+      String [] registros = new String [9];
+     
+       modelo = new DefaultTableModel(null,encabezado);
+       String sql = buscar;
+     
+       
+        try{
+         Statement st = cn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
+         
+          while(rs.next()){
+          
+           registros[0] = Integer.toString(rs.getInt("Id_cliente"));
+           registros[1] = rs.getString("Dpi");
+           registros[2] = rs.getString("Primer_nombre");
+           registros[3] = rs.getString("Primer_apellido");
+           registros[4] = rs.getString("Fecha_Nacimiento");
+           registros[5] = rs.getString("Estado_civil");
+           registros[6] = rs.getString("Direccion");
+           registros[7] = rs.getString("Nombre_municipio");
+           registros[8] = rs.getString("Nombre_departamento");
+      
+              
+           totalRegistros += 1;
+           modelo.addRow(registros);
+            
+          
+          }
+        
+        
+     return modelo;
+        
+        
+     }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     
+     }
+     
+     
+     
+     }
     
     
     
