@@ -365,6 +365,7 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
         
         int posicion = tblDatos.getSelectedRow();
         frmMostrarCliente.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
+        frmMostrarCliente.btnCargarDatos.doClick();
     }//GEN-LAST:event_tblDatosMouseClicked
 
 
