@@ -16,6 +16,7 @@ import vistas.cargo.frmIndexCargo;
 import vistas.cargo.frmNuevoCargo;
 import vistas.cliente.frmIndexCliente;
 import vistas.cliente.frmNuevoCliente;
+import vistas.cliente.frmNuevoClienteDOS;
 import vistas.credito.frmIndexCredito;
 import vistas.credito.frmNuevoCredito;
 import vistas.cuenta.frmIndexCuenta;
@@ -392,7 +393,8 @@ public class frmEscritorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiClientesActionPerformed
 
     private void jmiNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoClienteActionPerformed
-        frmNuevoCliente frmNuevo = new frmNuevoCliente();
+        
+        frmNuevoClienteDOS frmNuevo = new frmNuevoClienteDOS();
         dpnlEscritorio.add(frmNuevo);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmNuevo.getSize();
