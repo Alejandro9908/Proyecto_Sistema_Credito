@@ -10,6 +10,19 @@ package modelo;
  * @author Alejandro
  */
 public class Operador {
+    
+    
+    
+     public Operador(int idOperador, String nombre) {
+        this.id_operador= idOperador;
+        this.nombre_operador = nombre;
+      
+    }
+     
+      @Override
+    public String toString(){
+        return nombre_operador;
+    }
 
     /**
      * @return the id_operador

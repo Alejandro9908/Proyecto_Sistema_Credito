@@ -29,7 +29,7 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnNuevo){
-            frmNuevoCliente frmNuevo = new frmNuevoCliente();
+            frmNuevoClienteDOS frmNuevo = new frmNuevoClienteDOS();
             dpnlEscritorio.add(frmNuevo);
             Dimension desktopSize = dpnlEscritorio.getSize();
             Dimension FrameSize = frmNuevo.getSize();
@@ -262,7 +262,7 @@ public class frmIndexCliente extends javax.swing.JInternalFrame implements Actio
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
