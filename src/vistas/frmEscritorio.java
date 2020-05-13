@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import vistas.ahorro.frmIndexAhorro;
+import vistas.ahorro.frmNuevoAhorro;
 import vistas.cargo.frmIndexCargo;
 import vistas.cargo.frmNuevoCargo;
 import vistas.cliente.frmIndexCliente;
@@ -29,6 +31,8 @@ import vistas.garantia.frmNuevoGarantia;
 import vistas.garantia.frmNuevoTipoGarantia;
 import vistas.sucursal.frmIndexSucursal;
 import vistas.sucursal.frmNuevoSucursal;
+import vistas.usuario.frmIndexUsuario;
+import vistas.usuario.frmNuevoUsuario;
 
 /**
  *
@@ -72,8 +76,6 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmiNuevoCargo = new javax.swing.JMenuItem();
         jmiEmpleados = new javax.swing.JMenuItem();
         jmiNuevoEmpleado = new javax.swing.JMenuItem();
-        jmiUsuarios = new javax.swing.JMenuItem();
-        jmiNuevoUsuario = new javax.swing.JMenuItem();
         jmiSucursal = new javax.swing.JMenuItem();
         jmiNuevaSucursal = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -90,8 +92,13 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmiTipoGarantia = new javax.swing.JMenuItem();
         jmiNuevoTipoGarantia = new javax.swing.JMenuItem();
         jmAhorros = new javax.swing.JMenu();
-        jmiCuentas2 = new javax.swing.JMenuItem();
-        jmiNuevoCuenta2 = new javax.swing.JMenuItem();
+        jmiAhorros = new javax.swing.JMenuItem();
+        jmiNuevoAhorro = new javax.swing.JMenuItem();
+        jmSistema = new javax.swing.JMenu();
+        jmiPerfil = new javax.swing.JMenuItem();
+        jmiUsuarios = new javax.swing.JMenuItem();
+        jmiNuevoUsuairo = new javax.swing.JMenuItem();
+        jmiSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,12 +169,6 @@ public class frmEscritorio extends javax.swing.JFrame {
             }
         });
         jmEmpresa.add(jmiNuevoEmpleado);
-
-        jmiUsuarios.setText("Usuarios");
-        jmEmpresa.add(jmiUsuarios);
-
-        jmiNuevoUsuario.setText("Nuevo Usuario");
-        jmEmpresa.add(jmiNuevoUsuario);
 
         jmiSucursal.setText("Sucursal");
         jmiSucursal.addActionListener(new java.awt.event.ActionListener() {
@@ -285,23 +286,55 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmAhorros.setText("Ahorros");
         jmAhorros.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
-        jmiCuentas2.setText("Ahorros");
-        jmiCuentas2.addActionListener(new java.awt.event.ActionListener() {
+        jmiAhorros.setText("Ahorros");
+        jmiAhorros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiCuentas2ActionPerformed(evt);
+                jmiAhorrosActionPerformed(evt);
             }
         });
-        jmAhorros.add(jmiCuentas2);
+        jmAhorros.add(jmiAhorros);
 
-        jmiNuevoCuenta2.setText("Nuevo Ahorro");
-        jmiNuevoCuenta2.addActionListener(new java.awt.event.ActionListener() {
+        jmiNuevoAhorro.setText("Nuevo Ahorro");
+        jmiNuevoAhorro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiNuevoCuenta2ActionPerformed(evt);
+                jmiNuevoAhorroActionPerformed(evt);
             }
         });
-        jmAhorros.add(jmiNuevoCuenta2);
+        jmAhorros.add(jmiNuevoAhorro);
 
         jMenuBar1.add(jmAhorros);
+
+        jmSistema.setText("Sistema");
+        jmSistema.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        jmiPerfil.setText("Mi perfil");
+        jmiPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPerfilActionPerformed(evt);
+            }
+        });
+        jmSistema.add(jmiPerfil);
+
+        jmiUsuarios.setText("Usuarios");
+        jmiUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiUsuariosActionPerformed(evt);
+            }
+        });
+        jmSistema.add(jmiUsuarios);
+
+        jmiNuevoUsuairo.setText("Nuevo Usuario");
+        jmiNuevoUsuairo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoUsuairoActionPerformed(evt);
+            }
+        });
+        jmSistema.add(jmiNuevoUsuairo);
+
+        jmiSalir.setText("Salir");
+        jmSistema.add(jmiSalir);
+
+        jMenuBar1.add(jmSistema);
 
         setJMenuBar(jMenuBar1);
 
@@ -438,13 +471,23 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiNuevoCreditoActionPerformed
 
-    private void jmiCuentas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCuentas2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmiCuentas2ActionPerformed
+    private void jmiAhorrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAhorrosActionPerformed
+        frmIndexAhorro frmIndex =new frmIndexAhorro();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiAhorrosActionPerformed
 
-    private void jmiNuevoCuenta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoCuenta2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmiNuevoCuenta2ActionPerformed
+    private void jmiNuevoAhorroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoAhorroActionPerformed
+        frmNuevoAhorro frmNuevo = new frmNuevoAhorro();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoAhorroActionPerformed
 
     private void jmiGarantiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGarantiasActionPerformed
         frmIndexGarantia frmIndex =new frmIndexGarantia();
@@ -481,6 +524,28 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiNuevoTipoGarantiaActionPerformed
+
+    private void jmiPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPerfilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiPerfilActionPerformed
+
+    private void jmiUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUsuariosActionPerformed
+        frmIndexUsuario frmIndex =new frmIndexUsuario();
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+    }//GEN-LAST:event_jmiUsuariosActionPerformed
+
+    private void jmiNuevoUsuairoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoUsuairoActionPerformed
+        frmNuevoUsuario frmNuevo = new frmNuevoUsuario();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoUsuairoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -528,25 +593,28 @@ public class frmEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenu jmCreditos;
     private javax.swing.JMenu jmCuentas;
     private javax.swing.JMenu jmEmpresa;
+    private javax.swing.JMenu jmSistema;
+    private javax.swing.JMenuItem jmiAhorros;
     private javax.swing.JMenuItem jmiCargos;
     private javax.swing.JMenuItem jmiClientes;
     private javax.swing.JMenuItem jmiCreditos;
     private javax.swing.JMenuItem jmiCuentas;
-    private javax.swing.JMenuItem jmiCuentas2;
     private javax.swing.JMenuItem jmiDepartamentos;
     private javax.swing.JMenuItem jmiEmpleados;
     private javax.swing.JMenuItem jmiGarantias;
     private javax.swing.JMenuItem jmiNuevaSucursal;
+    private javax.swing.JMenuItem jmiNuevoAhorro;
     private javax.swing.JMenuItem jmiNuevoCargo;
     private javax.swing.JMenuItem jmiNuevoCliente;
     private javax.swing.JMenuItem jmiNuevoCredito;
     private javax.swing.JMenuItem jmiNuevoCuenta;
-    private javax.swing.JMenuItem jmiNuevoCuenta2;
     private javax.swing.JMenuItem jmiNuevoDepartamento;
     private javax.swing.JMenuItem jmiNuevoEmpleado;
     private javax.swing.JMenuItem jmiNuevoGarantia;
     private javax.swing.JMenuItem jmiNuevoTipoGarantia;
-    private javax.swing.JMenuItem jmiNuevoUsuario;
+    private javax.swing.JMenuItem jmiNuevoUsuairo;
+    private javax.swing.JMenuItem jmiPerfil;
+    private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiSucursal;
     private javax.swing.JMenuItem jmiTipoGarantia;
     private javax.swing.JMenuItem jmiUsuarios;
