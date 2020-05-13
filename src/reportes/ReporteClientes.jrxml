@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteClientes" language="groovy" pageWidth="750" pageHeight="750" orientation="Landscape" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ecb64aa1-1935-43ad-9dc5-3f4af34d31dd">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="37"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -80,7 +80,9 @@ TBL_MUNICIPIO AS b on a.Id_municipio = b.Id_municipio inner join TBL_DEPARTAMENT
 					</staticText>
 					<staticText>
 						<reportElement x="328" y="1" width="100" height="20" uuid="6fbfc6f0-79dd-43e1-909a-62a78dc07dcf"/>
-						<textElement textAlignment="Center"/>
+						<textElement textAlignment="Center">
+							<font isBold="false"/>
+						</textElement>
 						<text><![CDATA[MUNICIPIO]]></text>
 					</staticText>
 					<staticText>
@@ -92,6 +94,9 @@ TBL_MUNICIPIO AS b on a.Id_municipio = b.Id_municipio inner join TBL_DEPARTAMENT
 					</staticText>
 					<staticText>
 						<reportElement x="590" y="1" width="120" height="20" uuid="2380714c-892f-4878-b3e7-961b60422450"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
 						<text><![CDATA[FOTO]]></text>
 					</staticText>
 				</frame>

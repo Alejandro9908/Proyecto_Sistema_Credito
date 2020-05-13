@@ -40,7 +40,7 @@ public class frmIndexSucursal extends javax.swing.JInternalFrame implements Acti
     public frmIndexSucursal() {
         initComponents();
         
-         mostrar(query);
+        mostrar(query);
         tblDatos.getTableHeader().setReorderingAllowed(false);
         
         ButtonGroup grupoBuscar = new ButtonGroup();
