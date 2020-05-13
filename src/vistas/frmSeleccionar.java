@@ -10,6 +10,7 @@ import controladores.FGarantia;
 import controladores.FSucursal;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vistas.cliente.frmMostrarCliente;
 import vistas.empleado.frmMostrarEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
 import vistas.garantia.frmMostrarGarantia;
@@ -115,6 +116,11 @@ public class frmSeleccionar extends javax.swing.JFrame {
         if(opcion==10){
          txtAccion.setText("Seleccione un tipo de garantia");
          mostarTipogarantia();
+        }
+        
+         if(opcion==11){
+         txtAccion.setText("Seleccione un municipio");
+         mostrarMunicipiosEmpleado();
         }
         
         
@@ -343,8 +349,21 @@ public class frmSeleccionar extends javax.swing.JFrame {
          
          frmMostrarGarantia.txtIdtipo.setText(id_tipogarantia);
          frmMostrarGarantia.txtCorreo1.setText(nombre_garantia);
-        
+         
+  
         }
+        
+        else if (opcion==11){ //si la opcion 7 será cargo de editar empleado
+            
+            id_municipio= (Tabla.getValueAt(posicion, 0).toString());
+            nombre_municipio = (Tabla.getValueAt(posicion,1).toString());
+            
+            frmMostrarCliente.txtIdMunicipio.setText(id_municipio);
+            frmMostrarCliente.txtMunicipio.setText(nombre_municipio);
+         
+        }
+        
+        
         
         //para cerrar el frmBuscar
         this.dispose(); 
@@ -518,6 +537,10 @@ public class frmSeleccionar extends javax.swing.JFrame {
        
        buscartipoGarantia();
        
+       }
+       
+       if(opcion==11){
+           buscarMunicipioGeneral();
        }
        
         

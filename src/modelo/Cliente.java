@@ -15,6 +15,48 @@ import java.util.Date;
 public class Cliente {
 
     /**
+     * @return the fecha_commit
+     */
+    public String getFecha_commit() {
+        return fecha_commit;
+    }
+
+    /**
+     * @param fecha_commit the fecha_commit to set
+     */
+    public void setFecha_commit(String fecha_commit) {
+        this.fecha_commit = fecha_commit;
+    }
+
+    /**
+     * @return the hora_commit
+     */
+    public String getHora_commit() {
+        return hora_commit;
+    }
+
+    /**
+     * @param hora_commit the hora_commit to set
+     */
+    public void setHora_commit(String hora_commit) {
+        this.hora_commit = hora_commit;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
      * @return the descripcion_direccion
      */
     public String getDescripcion_direccion() {
@@ -424,6 +466,11 @@ public class Cliente {
     private String apellidos_referencia;
     private String tipo_referencia;
     private String telefono_referencia;
+    
+    
+    private String fecha_commit;
+    private String hora_commit;
+    private String estado;
     
     
     

@@ -5,18 +5,35 @@
  */
 package vistas.cliente;
 
+import controladores.Conexion;
+import controladores.FCliente;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import modelo.Cliente;
 import modelo.Departamento;
 import modelo.Municipio;
 import modelo.Operador;
+import modelo.Telefono;
 import static vistas.cliente.frmNuevoCliente.modeloTel;
 import static vistas.cliente.frmNuevoCliente.tblTelefonos;
+import static vistas.cliente.frmNuevoClienteDOS.cbMunicipioC;
+import static vistas.cliente.frmNuevoClienteDOS.cbOperador;
+import static vistas.cliente.frmNuevoClienteDOS.tblTelefonos;
+import vistas.empleado.frmMostrarEmpleado;
 import static vistas.frmEscritorio.dpnlEscritorio;
+import vistas.frmSeleccionar;
 
 /**
  *
@@ -24,7 +41,8 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  */
 public class frmMostrarCliente extends javax.swing.JInternalFrame implements ActionListener{
 
-   
+   FCliente funcion = new FCliente();
+   int idUsuario = 1;
     
     public static DefaultTableModel modeloTel;
     
@@ -38,7 +56,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         add(jsp);
         
         txtIdClienteNuevo.setVisible(false);
-        btnIdCliente.setVisible(false);
+        btnCargarDatos.setVisible(true);
         
         btnAddTelefono.addActionListener(this);
         btnQuitarTelefono.addActionListener(this);
@@ -46,6 +64,20 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         btnEliminar.addActionListener(this);
         btnCancelar.addActionListener(this);
         btnGuardar.addActionListener(this);
+        btnCargarDatos.addActionListener(this);
+        btnActualizarTelefono.addActionListener(this);
+        btnMunicipio.addActionListener(this);
+        
+        
+        btnCargarDatos.setVisible(false);
+        txtIdMunicipio.setVisible(false);
+        
+        
+        
+        consultarCliente(txtId.getText());
+        llenarCbOperador();
+        
+        bloquearDatos();
         
         
         
@@ -54,23 +86,51 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
     @Override
     public void actionPerformed(ActionEvent e) {
         if(btnAddTelefono == e.getSource()){
-            /*frmAgregarTelefono frmNuevo = new frmAgregarTelefono();
-            dpnlEscritorio.add(frmNuevo);
-            Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmNuevo.getSize();
-            frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmNuevo.setVisible(true);
-            */
+            
+            agregarTelefono();
             
         }
         if(btnQuitarTelefono == e.getSource()){
-            /*int posicion = tblTelefonos.getSelectedRow();
-            if(posicion >=0){
-                modeloTel.removeRow(posicion);
-            }else{
-                JOptionPane.showMessageDialog(null,"Debe selecionar el teléfono que quiere borrar"); 
-            }*/
+            quitarTelefono();
         }
+        
+        if(btnCargarDatos == e.getSource()){
+            consultarCliente(txtId.getText());
+        }
+        
+        if(btnActualizarTelefono == e.getSource()){
+            consultarTelefonos(tblTelefonos, txtId.getText());
+          
+        }
+        
+        if(btnEditar == e.getSource()){
+            desbloquearDatos();
+            
+        }
+        
+        if(btnGuardar == e.getSource()){
+            editarCliente();
+        }
+        
+        
+        if(btnCancelar == e.getSource()){
+            this.dispose();
+            
+        }
+        
+        
+        if( e.getSource()==btnMunicipio){
+             frmSeleccionar f = new frmSeleccionar(11,"QUEMADO"); //el numero es para que se haga universal, pero creo que solo usaremos esa ventana
+            //el dato quemado es solamente para que no busque ninguna direccion, solo se ocupa en la opcion dos
+            f.setVisible(true);      
+        }
+        
+        if(e.getSource()== btnEliminar){
+            eliminarCliente();
+        }
+        
+        
+        
     }
     
     
@@ -122,7 +182,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         panelFoto = new JPanelWebCam.JPanelWebCam();
         txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
         lblNombre29 = new javax.swing.JLabel();
-        btnIdCliente = new javax.swing.JButton();
+        btnCargarDatos = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         pnlFormularioContacto = new javax.swing.JPanel();
@@ -135,12 +195,12 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         lblNombre18 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtReferencia = new javax.swing.JTextArea();
-        lblNombre19 = new javax.swing.JLabel();
-        lblNombre20 = new javax.swing.JLabel();
-        cbDepartamentoC = new javax.swing.JComboBox<>();
-        cbMunicipioC = new javax.swing.JComboBox<>();
         lblNombre21 = new javax.swing.JLabel();
         cbTipoCasa = new javax.swing.JComboBox<>();
+        lblNombre20 = new javax.swing.JLabel();
+        txtMunicipio = new javax.swing.JTextField();
+        txtIdMunicipio = new javax.swing.JTextField();
+        btnMunicipio = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblNombre22 = new javax.swing.JLabel();
         lblNombre14 = new javax.swing.JLabel();
@@ -163,9 +223,16 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         cbTipo = new javax.swing.JComboBox<>();
         txtTelefono = new javax.swing.JTextField();
         cbOperador = new javax.swing.JComboBox<>();
+        btnActualizarTelefono = new javax.swing.JButton();
         txtIdClienteNuevo = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        txtEstado = new javax.swing.JTextField();
+        lblNombre30 = new javax.swing.JLabel();
+        txtFecha_commit = new javax.swing.JTextField();
+        lblNombre31 = new javax.swing.JLabel();
+        txtHora_commit = new javax.swing.JTextField();
+        lblNombre32 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -174,7 +241,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        lblTitulo.setText("Nuevo Cliente");
+        lblTitulo.setText("Detalles del cliente");
 
         pnlFormularioPersonal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -234,7 +301,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado", "Soltero", "Divorciado", "Viudo", "Unido" }));
 
         lblNombre11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblNombre11.setText("Datos del empleado");
+        lblNombre11.setText("Datos del Cliente");
 
         lblNombre13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre13.setText("Fecha de Nacimiento");
@@ -256,9 +323,9 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         lblNombre29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre29.setText("Foto");
 
-        btnIdCliente.setBackground(new java.awt.Color(255, 255, 255));
-        btnIdCliente.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnIdCliente.setText("Guardar");
+        btnCargarDatos.setBackground(new java.awt.Color(255, 255, 255));
+        btnCargarDatos.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnCargarDatos.setText("Cargar");
 
         javax.swing.GroupLayout pnlFormularioPersonalLayout = new javax.swing.GroupLayout(pnlFormularioPersonal);
         pnlFormularioPersonal.setLayout(pnlFormularioPersonalLayout);
@@ -331,18 +398,16 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                                 .addComponent(lblNombre11)
                                 .addGap(131, 131, 131)
-                                .addComponent(btnIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnCargarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlFormularioPersonalLayout.setVerticalGroup(
             pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(lblNombre11))
-                    .addComponent(btnIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCargarDatos)
+                .addGap(3, 3, 3)
+                .addComponent(lblNombre11)
+                .addGap(15, 15, 15)
                 .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre2)
                     .addComponent(lblNombre3))
@@ -432,16 +497,27 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         txtReferencia.setRows(5);
         jScrollPane2.setViewportView(txtReferencia);
 
-        lblNombre19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre19.setText("Departamento");
-
-        lblNombre20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre20.setText("Municipio");
-
         lblNombre21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre21.setText("Tipo de Casa");
 
         cbTipoCasa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Propia", "Rentada", "Vive con un familiar" }));
+
+        lblNombre20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre20.setText("Municipio");
+
+        txtMunicipio.setEnabled(false);
+
+        txtIdMunicipio.setEnabled(false);
+        txtIdMunicipio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdMunicipioActionPerformed(evt);
+            }
+        });
+
+        btnMunicipio.setBackground(new java.awt.Color(255, 255, 255));
+        btnMunicipio.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnMunicipio.setText("Seleccionar");
+        btnMunicipio.setEnabled(false);
 
         javax.swing.GroupLayout pnlFormularioContactoLayout = new javax.swing.GroupLayout(pnlFormularioContacto);
         pnlFormularioContacto.setLayout(pnlFormularioContactoLayout);
@@ -464,20 +540,21 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlFormularioContactoLayout.createSequentialGroup()
                         .addGroup(pnlFormularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre19)
-                            .addComponent(cbDepartamentoC, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(66, 66, 66)
-                        .addGroup(pnlFormularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre20)
-                            .addComponent(cbMunicipioC, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlFormularioContactoLayout.createSequentialGroup()
-                        .addGroup(pnlFormularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombre16))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlFormularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre21)
-                            .addComponent(cbTipoCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbTipoCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlFormularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlFormularioContactoLayout.createSequentialGroup()
+                            .addGap(283, 283, 283)
+                            .addComponent(btnMunicipio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(pnlFormularioContactoLayout.createSequentialGroup()
+                            .addComponent(txtMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtIdMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblNombre20)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         pnlFormularioContactoLayout.setVerticalGroup(
@@ -485,14 +562,13 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
             .addGroup(pnlFormularioContactoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblNombre15)
+                .addGap(6, 6, 6)
+                .addComponent(lblNombre20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre19)
-                    .addComponent(lblNombre20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFormularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbDepartamentoC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbMunicipioC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre16)
@@ -527,7 +603,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
 
             },
             new String [] {
-                "Número", "Id_operador", "Operador"
+
             }
         ));
         jScrollPane3.setViewportView(tblTelefonos);
@@ -575,6 +651,10 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Conyugue", "Referencia" }));
 
+        btnActualizarTelefono.setBackground(new java.awt.Color(255, 255, 255));
+        btnActualizarTelefono.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnActualizarTelefono.setText("Actualizar");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -592,10 +672,15 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnAddTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnQuitarTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(39, 39, 39))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(btnAddTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnQuitarTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(39, 39, 39))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnActualizarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -640,7 +725,10 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQuitarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnQuitarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnActualizarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -688,6 +776,33 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         btnEliminar.setText("Eliminar");
         btnEliminar.setEnabled(false);
 
+        txtEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEstadoActionPerformed(evt);
+            }
+        });
+
+        lblNombre30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre30.setText("Estado");
+
+        txtFecha_commit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFecha_commitActionPerformed(evt);
+            }
+        });
+
+        lblNombre31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre31.setText("Fecha creación");
+
+        txtHora_commit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHora_commitActionPerformed(evt);
+            }
+        });
+
+        lblNombre32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre32.setText("Hora creación");
+
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
         pnlBaseLayout.setHorizontalGroup(
@@ -712,8 +827,22 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                         .addGap(30, 30, 30)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombre30))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFecha_commit, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombre31))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombre32)
+                            .addComponent(txtHora_commit, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(193, 193, 193)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -728,7 +857,21 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                 .addComponent(pnlFormularioContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlBaseLayout.createSequentialGroup()
+                        .addComponent(lblNombre30)
+                        .addGap(3, 3, 3)
+                        .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBaseLayout.createSequentialGroup()
+                        .addComponent(lblNombre31)
+                        .addGap(3, 3, 3)
+                        .addComponent(txtFecha_commit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBaseLayout.createSequentialGroup()
+                        .addComponent(lblNombre32)
+                        .addGap(3, 3, 3)
+                        .addComponent(txtHora_commit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar)
@@ -758,19 +901,588 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdClienteNuevoActionPerformed
 
+    private void txtEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEstadoActionPerformed
+
+    private void txtFecha_commitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFecha_commitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFecha_commitActionPerformed
+
+    private void txtHora_commitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHora_commitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHora_commitActionPerformed
+
+    private void txtIdMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdMunicipioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdMunicipioActionPerformed
+
+    
+    
+    
+    
+    
+     public void llenarCbOperador(){
+        funcion.consultarOperador(cbOperador);
+    }
+     
+     public void desbloquearDatos(){
+         
+         txtDpi.setEditable(true);
+         txtNombre1.setEditable(true);
+         txtNombre2.setEditable(true);
+         txtNombre3.setEditable(true);
+         txtApellido1.setEditable(true);
+         txtApellido2.setEditable(true);
+         txtApellidoCasado.setEditable(true);
+         
+         
+         txtCorreo.setEditable(true);
+         txtFechaNacimiento.setEnabled(true);
+         txtProfesion.setEditable(true);
+         txtDireccion.setEditable(true);
+         
+         cbTipoCasa.setEnabled(true);
+         txtDpiReferencia.setEditable(true);
+         txtNombresReferencia.setEditable(true);
+         txtApellidosReferencia.setEditable(true);
+         cbTipo.setEnabled(true);
+         cbOperador.setEnabled(true);
+         
+         btnMunicipio.setEnabled(true);
+         
+         cbEstadoCivil.setEnabled(true);
+         cbGenero.setEnabled(true);
+         
+         btnAddTelefono.setEnabled(true);
+         btnQuitarTelefono.setEnabled(true);
+         
+         
+          txtTelefono.setEnabled(true);
+         txtTelefonoReferencia.setEnabled(true);
+         txtDescripcion.setEnabled(true);
+         txtReferencia.setEnabled(true);
+         
+         
+         txtEstado.setEnabled(false);
+         txtFecha_commit.setEnabled(false);
+         txtHora_commit.setEnabled(false);
+         
+         
+         btnGuardar.setEnabled(true);
+         btnCancelar.setEnabled(true);
+         btnEliminar.setEnabled(true);
+         btnEditar.setEnabled(false);
+         btnActualizarTelefono.setEnabled(true);
+         
+         lblTitulo.setText("Editar cliente");
+         
+     }
+     
+      public void bloquearDatos(){
+         
+         txtDpi.setEditable(false);
+         txtNombre1.setEditable(false);
+         txtNombre2.setEditable(false);
+         txtNombre3.setEditable(false);
+         txtApellido1.setEditable(false);
+         txtApellido2.setEditable(false);
+         txtApellidoCasado.setEditable(false);
+         
+         
+         
+         txtCorreo.setEditable(false);
+         txtFechaNacimiento.setEnabled(false);
+         txtProfesion.setEditable(false);
+         txtDireccion.setEditable(false);
+         
+         cbTipoCasa.setEnabled(false);
+         txtDpiReferencia.setEditable(false);
+         txtNombresReferencia.setEditable(false);
+         txtApellidosReferencia.setEditable(false);
+         cbTipo.setEnabled(false);
+         cbOperador.setEnabled(false);
+         
+         btnMunicipio.setEnabled(false);
+         
+         cbEstadoCivil.setEnabled(false);
+         cbGenero.setEnabled(false);
+         
+         btnAddTelefono.setEnabled(false);
+         btnQuitarTelefono.setEnabled(false);
+         
+         
+         btnGuardar.setEnabled(false);
+         btnCancelar.setEnabled(false);
+         btnEliminar.setEnabled(false);
+         btnEditar.setEnabled(true);
+         
+         txtTelefono.setEnabled(false);
+         txtTelefonoReferencia.setEnabled(false);
+         txtDescripcion.setEnabled(false);
+         txtReferencia.setEnabled(false);
+         
+         txtEstado.setEnabled(false);
+         txtFecha_commit.setEnabled(false);
+         txtHora_commit.setEnabled(false);
+         
+         
+         
+         btnActualizarTelefono.setEnabled(false);
+         
+         lblTitulo.setText("Detalles del cliente");
+         
+     }
+      
+      
+      private void eliminarCliente(){
+        int confirmado = JOptionPane.showConfirmDialog(
+         null,
+         "¿Estas seguro que deseas eliminar el registro?");
+
+             if (JOptionPane.OK_OPTION == confirmado){
+             
+                 funcion.eliminarCliente(txtId.getText());
+                 JOptionPane.showMessageDialog(null,"Registro eliminado correctamente");
+               
+                   frmIndexCliente.btnActualizar.doClick(); //para actualizar el INDEX
+                   this.dispose();
+                 
+             }else{
+                            //Ok no borraré nada
+             }
+    }
+      
+      
+      
+       private void editarCliente(){
+        
+        if(txtDpi.getText().length()==0 || txtNombre1.getText().length()==0 || txtApellido1.getText().length()==0 || panelFoto.getBytes().length==1 ||
+           txtProfesion.getText().length()==0  || txtDescripcion.getText().length()==0 || txtReferencia.getText().length()==0 || txtCorreo.getText().length()==0 ||
+           txtDpiReferencia.getText().length()==0 || txtNombresReferencia.getText().length()==0 || txtApellidosReferencia.getText().length()==0 || txtTelefonoReferencia.getText().length()==0 
+           || txtFechaNacimiento.getCalendar()==null){
+              JOptionPane.showMessageDialog(null, "Hace falta rellenar campos obligatorios");
+        }
+        else{
+            
+            Cliente cliente = new  Cliente();
+            //empleado.setId_sucursal(Integer.parseInt(txtIdSucursal.getText()));
+            cliente.setId_cliente(Integer.parseInt(txtId.getText()));
+            cliente.setDpi(txtDpi.getText());
+            cliente.setPrimer_nombre(txtNombre1.getText());
+            cliente.setSegundo_nombre(txtNombre2.getText());
+            cliente.setTercer_nombre(txtNombre3.getText());
+            cliente.setPrimer_apellido(txtApellido1.getText());
+            cliente.setSegundo_apellido(txtApellido2.getText());
+            cliente.setApellido_casado(txtApellidoCasado.getText());
+        
+           
+            cliente.setEstado_civil(cbEstadoCivil.getSelectedItem().toString());
+           // cliente.setFoto(panelFoto.getBytes());
+            
+            int idMunicipio = Integer.valueOf(txtIdMunicipio.getText());
+            
+           cliente.setId_municipio(idMunicipio);
+          
+           
+           cliente.setDescripcion_direccion(txtDescripcion.getText());
+           cliente.setReferencia_direccion(txtReferencia.getText());
+           cliente.setTipo_casa(cbTipoCasa.getSelectedItem().toString());
+           
+           
+           
+           // empleado.setTelefono(txtTelefono.getText()); NO PUEDO GUARDAR TELEFONOS DEBIDO A QUE SE GUARDARAN EN OTRA TABLA (Y)
+           
+
+            cliente.setCorreo(txtCorreo.getText());
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            
+            
+            java.util.Date utilStartDate = txtFechaNacimiento.getDate();
+            java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+            
+            cliente.setFecha_nacimiento(sqlStartDate);
+      
+           cliente.setGenero(cbGenero.getSelectedItem().toString());
+           cliente.setProfesion(txtProfesion.getText());
+           cliente.setId_usuario(1);
+           cliente.setDireccion(txtDireccion.getText());
+           
+           
+           
+           //AHORA VAN LOS DATOS DE REFERENCIA
+           
+           cliente.setDpi_referencia(txtDpiReferencia.getText());
+           cliente.setNombres_referencia(txtNombresReferencia.getText());
+           cliente.setApellidos_referencia(txtApellidosReferencia.getText());
+           cliente.setTelefono_referencia(txtTelefonoReferencia.getText());
+           cliente.setTipo_referencia(cbTipo.getSelectedItem().toString());
+           
+           
+           
+        
+            
+           
+           
+           
+           
+           
+  
+        funcion.editarCliente(cliente, txtId.getText());
+        JOptionPane.showMessageDialog(null,"Registro editado correctamente");
+       // panelFoto.setImagenNull();
+         frmIndexCliente.btnActualizar.doClick();
+         
+        bloquearDatos();
+  
+        }
+       
+        
+    }
+      
+    
+    
+    
+    
+    
+    public void consultarMunicipio(String buscar){
+       
+ 
+        Conexion sqlSERVER = new Conexion();
+        Connection cn2 = sqlSERVER.Conectar();
+        
+        
+        String sql = "select Nombre_municipio from TBL_MUNICIPIO where ID_MUNICIPIO =" + "'" +buscar + "'";
+         try{
+            if(cn2!=null){
+                Statement st = cn2.createStatement();
+                ResultSet rs = st.executeQuery(sql);  
+    
+                while(rs.next()){
+                    //el nombre del campo que queremos obtener en la db
+                    String nombre_municipio = rs.getString("Nombre_municipio");
+                    txtMunicipio.setText(nombre_municipio);
+                }
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se ha establecido conexion con la db");
+            }
+           
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }  
+        
+    }
+    
+    
+      public void consultarTelefonos(JTable tabla, String id){
+          Conexion sqlSERVER = new Conexion();
+          Connection cn3 = sqlSERVER.Conectar();
+    
+    DefaultTableModel model;
+    String [] columnas = {"Id_telefono", "Numero", "Operador"};
+    model = new DefaultTableModel(null, columnas);
+    
+   String sql = "SELECT Id_telefono,Telefono FROM TBL_TELEFONO where Estado=1 and  Id_cliente =" + "'" +id + "'";
+   
+   
+   sql = "SELECT a.Id_telefono,a.Telefono,b.Nombre_operador FROM TBL_TELEFONO AS a inner join TBL_OPERADOR AS b\n" +
+            "on a.Id_operador = b.Id_operador where a.Estado = 1 and a.Id_cliente ="+ "'" +id + "'" ;
+    
+    String[] filas = new String [3]; //registros
+    
+    Statement st = null;
+        ResultSet rs = null;
+        
+         try {
+             
+             st = cn3.createStatement();
+             rs = st.executeQuery(sql);
+             
+             while(rs.next()){
+                 // es como for (int i=0; i <4; i++)
+               for(int i=0; i <3; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 filas[i] = rs.getString(i+1); 
+               }
+               // totalRegistros += 1;
+               model.addRow(filas);
+                
+             }
+             tabla.setModel(model);
+             
+         } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "No se pueden mostrar los datos");
+         }
+            
+    }
+      
+      
+       public void agregarTelefono(){
+           
+           try{
+               
+               if(txtTelefono.getText().length()==0){
+                   JOptionPane.showMessageDialog(null, "El campo esta vacio");
+               }else{
+                   
+                  Telefono telefono2 = new Telefono();
+        //Guardamos los telefonos del cliente
+            
+     
+                    telefono2.setTelefono(txtTelefono.getText());
+                    telefono2.setId_cliente(Integer.parseInt(txtId.getText()));
+                    telefono2.setId_operador(cbOperador.getItemAt(cbOperador.getSelectedIndex()).getId_operador());
+                    telefono2.setId_usuario(idUsuario);   
+                    funcion.agregarTelefonos(telefono2);
+                    
+                    btnActualizarTelefono.doClick();
+                    txtTelefono.setText("");
+                      
+               }
+             
+           }catch(Exception e){ 
+               JOptionPane.showMessageDialog(null, "Eror:" + e);
+     
+           }
+
+       }
+       
+       
+     
+       private void quitarTelefono(){
+           
+           if (tblTelefonos.getSelectedRow()>=0){
+         
+                int confirmado = JOptionPane.showConfirmDialog(
+         null,
+         "¿Estas seguro que deseas eliminar el registro?");
+
+             if (JOptionPane.OK_OPTION == confirmado){
+                 
+                 
+                 
+             int posicion = tblTelefonos.getSelectedRow();
+                FClienteQuitarTelefono(  tblTelefonos.getValueAt(posicion,0).toString()  );
+                 JOptionPane.showMessageDialog(null,"Registro eliminado correctamente");
+                   btnActualizarTelefono.doClick();
+                 
+             }else{
+                            //Ok no borraré nada
+             }
+               
+               
+               
+            }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un telefono para poder eliminarlo");
+
+             }
+           
+        
+    }
+       
+       
+          public void FClienteQuitarTelefono(String idEliminar){
+               Conexion sqlSERVER = new Conexion();
+          Connection cn = sqlSERVER.Conectar();
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_TELEFONO set Estado=0 where Id_telefono="+idEliminar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible eliminar el registro");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al eliminar, motivo:"+ex.getMessage());
+        } 
+    }
+     
+       
+       
+    
+    
+    
+    public void consultarCliente(String buscar){
+       
+ 
+        Conexion sqlSERVER = new Conexion();
+        Connection cn2 = sqlSERVER.Conectar();
+        Cliente cliente = new Cliente();
+        
+        
+        String sql = "select Id_cliente, Dpi, Primer_nombre, Segundo_nombre, Tercer_nombre,"
+                + "Primer_apellido, Segundo_apellido, Apellido_casado, Estado_civil,"
+                + "Foto, Id_municipio, Correo, Fecha_nacimiento, Genero, Profesion,"
+                + "Estado, Fecha_commit, Hora_commit, Id_usuario, Direccion,"
+                + "Tipo_casa, Descripcion_direccion, Referencia_direccion,"
+                + "Dpi_referencia, Nombres_referencia, Apellidos_referencia, "
+                + "Tipo_referencia, Telefono_referencia from TBL_CLIENTE where Id_cliente =" + "'" +buscar + "'";
+         try{
+            if(cn2!=null){
+                Statement st = cn2.createStatement();
+                ResultSet rs = st.executeQuery(sql);  
+    
+                while(rs.next()){
+                    
+                    cliente.setId_cliente(rs.getInt("Id_cliente"));
+                    cliente.setDpi(rs.getString("Dpi"));
+                    cliente.setPrimer_nombre(rs.getString("Primer_nombre"));
+                    cliente.setSegundo_nombre(rs.getString("Segundo_apellido"));
+                    cliente.setTercer_nombre(rs.getString("Tercer_nombre"));
+                    
+                    
+                    cliente.setPrimer_apellido(rs.getString("Primer_apellido"));
+                    cliente.setSegundo_apellido(rs.getString("Segundo_apellido"));
+                    cliente.setApellido_casado(rs.getString("Apellido_casado"));
+                    cliente.setEstado_civil(rs.getString("Estado_civil"));
+                   
+                    cliente.setFoto(rs.getBytes("Foto"));
+                    cliente.setId_municipio(rs.getInt("Id_municipio"));
+                    cliente.setCorreo(rs.getString("Correo"));
+                    cliente.setFecha_nacimiento(rs.getDate("Fecha_nacimiento"));
+                    cliente.setGenero(rs.getString("Genero"));
+                    cliente.setProfesion(rs.getString("Profesion"));
+                    
+                    
+                    cliente.setEstado(rs.getString("Estado"));
+                    cliente.setFecha_commit(rs.getString("Fecha_commit"));
+                    cliente.setHora_commit(rs.getString("Hora_commit"));
+                    cliente.setId_usuario(rs.getInt("Id_usuario"));
+                    cliente.setDireccion(rs.getString("Direccion"));
+                    
+                    cliente.setTipo_casa(rs.getString("Tipo_casa"));
+                    cliente.setDescripcion_direccion(rs.getString("Descripcion_direccion"));
+                    cliente.setReferencia_direccion(rs.getString("Referencia_direccion"));
+                    
+                    
+                    cliente.setDpi_referencia(rs.getString("Dpi_referencia"));
+                    cliente.setNombres_referencia(rs.getString("Nombres_referencia"));
+                    cliente.setApellidos_referencia(rs.getString("Apellidos_referencia"));
+                    
+                    cliente.setTipo_referencia(rs.getString("Tipo_referencia"));
+                    cliente.setTelefono_referencia(rs.getString("Telefono_referencia"));
+                    
+                    txtId.setText(Integer.toString(cliente.getId_cliente()));
+                    txtDpi.setText(cliente.getDpi());
+                    txtNombre1.setText(cliente.getPrimer_nombre());
+                    txtNombre2.setText(cliente.getSegundo_nombre());
+                    txtNombre3.setText(cliente.getTercer_nombre());
+                    
+                    txtApellido1.setText(cliente.getPrimer_apellido());
+                    txtApellido2.setText(cliente.getSegundo_apellido());
+                    txtApellidoCasado.setText(cliente.getApellido_casado());
+                    //cargar el combobox seleccionado de Estado_civil
+                    
+                   //  panelFoto.setImagen(cliente.getFoto());
+                     txtIdMunicipio.setText(Integer.toString(cliente.getId_municipio()));
+                     txtCorreo.setText(cliente.getCorreo());
+                     txtFechaNacimiento.setDate(cliente.getFecha_nacimiento());
+                     //cargar el genero
+                     txtProfesion.setText(cliente.getProfesion());
+                     
+                     txtEstado.setText(cliente.getEstado());
+                     txtFecha_commit.setText(cliente.getFecha_commit());
+                     txtHora_commit.setText(cliente.getHora_commit());
+                     //txtIdUsuario.setText();
+                     txtDireccion.setText(cliente.getDireccion());
+                     
+                     //cbTipocasa.set
+                     txtDescripcion.setText(cliente.getDescripcion_direccion());
+                     txtReferencia.setText(cliente.getReferencia_direccion());
+                     
+                     
+                     txtDpiReferencia.setText(cliente.getDpi_referencia());
+                     txtNombresReferencia.setText(cliente.getNombres_referencia());
+                     txtApellidosReferencia.setText(cliente.getApellidos_referencia());
+                     
+                     //cbTipoReferencia
+                     txtTelefonoReferencia.setText(cliente.getTelefono_referencia());
+                     
+                     
+                     
+                     
+                     
+                     //llenar los datos que hacen falta
+                     consultarMunicipio(txtIdMunicipio.getText());
+                     
+                     //obtener datos del genero
+                      
+                     //obtener el estado_civil
+                     
+                     for(int i = 0; i < cbEstadoCivil.getItemCount(); i++){
+                        if(cliente.getEstado_civil().equals(cbEstadoCivil.getItemAt(i))){          
+                           cbEstadoCivil.setSelectedIndex(i);
+                
+                        }
+                    }
+                     
+            //obtener genero
+     
+            for(int i = 0; i < cbGenero.getItemCount(); i++){
+                if(cliente.getGenero().equals(cbGenero.getItemAt(i))){          
+               cbGenero.setSelectedIndex(i);
+                
+                }    
+            }
+            
+            //obtener el tipo de casa
+              for(int i = 0; i < cbTipoCasa.getItemCount(); i++){
+                if(cliente.getTipo_casa().equals(cbTipoCasa.getItemAt(i))){          
+               cbTipoCasa.setSelectedIndex(i);
+             
+                }    
+            }
+              
+              //obtener el tipo de referencia
+              
+               for(int i = 0; i < cbTipo.getItemCount(); i++){
+                if(cliente.getTipo_referencia().equals(cbTipo.getItemAt(i))){          
+               cbTipo.setSelectedIndex(i);
+             
+                }    
+            }
+               
+               
+               consultarTelefonos(tblTelefonos, txtId.getText());
+                     
+                     
+                panelFoto.setImagen(cliente.getFoto()); //lo coloque aca por cuestiones de algunos errores ggg
+               
+
+               
+                }
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se ha establecido conexion con la db");
+            }
+           
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }  
+        
+    }
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarTelefono;
     private javax.swing.JButton btnAddTelefono;
     private javax.swing.JButton btnCancelar;
+    public static javax.swing.JButton btnCargarDatos;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnIdCliente;
+    private javax.swing.JButton btnMunicipio;
     private javax.swing.JButton btnQuitarTelefono;
-    public static javax.swing.JComboBox<Departamento> cbDepartamentoC;
     private javax.swing.JComboBox<String> cbEstadoCivil;
     private javax.swing.JComboBox<String> cbGenero;
-    public static javax.swing.JComboBox<Municipio> cbMunicipioC;
     public static javax.swing.JComboBox<Operador> cbOperador;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JComboBox<String> cbTipoCasa;
@@ -790,7 +1502,6 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
     private javax.swing.JLabel lblNombre16;
     private javax.swing.JLabel lblNombre17;
     private javax.swing.JLabel lblNombre18;
-    private javax.swing.JLabel lblNombre19;
     private javax.swing.JLabel lblNombre2;
     private javax.swing.JLabel lblNombre20;
     private javax.swing.JLabel lblNombre21;
@@ -803,6 +1514,9 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
     private javax.swing.JLabel lblNombre28;
     private javax.swing.JLabel lblNombre29;
     private javax.swing.JLabel lblNombre3;
+    private javax.swing.JLabel lblNombre30;
+    private javax.swing.JLabel lblNombre31;
+    private javax.swing.JLabel lblNombre32;
     private javax.swing.JLabel lblNombre4;
     private javax.swing.JLabel lblNombre5;
     private javax.swing.JLabel lblNombre6;
@@ -824,9 +1538,14 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
     public static javax.swing.JTextField txtDireccion;
     public static javax.swing.JTextField txtDpi;
     public static javax.swing.JTextField txtDpiReferencia;
+    public static javax.swing.JTextField txtEstado;
     public static com.toedter.calendar.JDateChooser txtFechaNacimiento;
+    public static javax.swing.JTextField txtFecha_commit;
+    public static javax.swing.JTextField txtHora_commit;
     public static javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdClienteNuevo;
+    public static javax.swing.JTextField txtIdMunicipio;
+    public static javax.swing.JTextField txtMunicipio;
     public static javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNombre2;
     public static javax.swing.JTextField txtNombre3;

@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.Departamento;
+import modelo.Empleado;
 import modelo.Operador;
 import modelo.Telefono;
 
@@ -227,6 +228,39 @@ public class FCliente {
      
      
      }
+     
+     
+     
+      public void editarCliente(Cliente cliente, String buscar){ //el editar foto no funciona por el momento en EDITAR
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_CLIENTE set Id_cliente='"+cliente.getId_cliente()+"',Dpi='"+cliente.getDpi()+"',Primer_nombre='"+cliente.getPrimer_nombre() +"', Segundo_nombre='"+ cliente.getSegundo_nombre()+  "',Tercer_nombre='"+ cliente.getTercer_nombre()+   "', Primer_apellido='"+ cliente.getPrimer_apellido() + "', Segundo_apellido='"+cliente.getSegundo_apellido()+ "', Apellido_casado='"+ cliente.getApellido_casado()+ "', Estado_civil='"+ cliente.getEstado_civil()+"', Id_municipio='"+ cliente.getId_municipio()+ "', Correo='"+ cliente.getCorreo() + "', Fecha_nacimiento='"+ cliente.getFecha_nacimiento()+ "', Genero='"+ cliente.getGenero() + "', Profesion='"+ cliente.getProfesion() + "', Direccion='"+ cliente.getDireccion()+ "', Tipo_casa='"+ cliente.getTipo_casa() + "', Descripcion_direccion='"+ cliente.getDireccion() + "', Referencia_direccion='"+ cliente.getReferencia_direccion() + "', Dpi_referencia='"+ cliente.getDpi_referencia() + "', Nombres_referencia='"+ cliente.getNombres_referencia() + "', Apellidos_referencia='"+ cliente.getApellidos_referencia() + "', Tipo_referencia='"+ cliente.getTipo_referencia() + "', Telefono_referencia='"+ cliente.getTelefono_referencia() + "' where Id_cliente="+buscar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible editar la informacion");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al editar, motivo:"+ex.getMessage());
+        } 
+    }
+      
+      
+       public void eliminarCliente(String idEliminar){
+        try{
+            if(cn!=null){
+                PreparedStatement st = cn.prepareStatement("update TBL_CLIENTE set Estado=0 where Id_cliente="+idEliminar+"");
+                st.execute();
+            }else{
+                System.out.println("No es posible eliminar el registro");
+            }
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(null,"Error al eliminar, motivo:"+ex.getMessage());
+        } 
+    }
+     
+     
     
     
     
