@@ -14,9 +14,6 @@
 		</conditionalStyle>
 	</style>
 	<subDataset name="PieChartDataset" uuid="f75e8b7c-a8b7-4556-8ae8-6212784215da"/>
-	<parameter name="socio" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
 	<queryString>
 		<![CDATA[SELECT
 C.Primer_nombre,C.Segundo_nombre, C.Primer_apellido,C.Segundo_apellido, C.Dpi,
@@ -30,8 +27,8 @@ JOIN TBL_MUNICIPIO AS M ON M.Id_municipio = C.Id_municipio
 JOIN TBL_DEPARTAMENTO AS D ON D.Id_departamento = M.ID_DEPARTAMENTO
 JOIN TBL_CUENTA AS CU ON CU.Id_cliente = C.Id_cliente
 JOIN TBL_TIPO_SOCIO AS TI ON TI.Id_tipo_socio = CU.Id_tipo_socio
-WHERE TI.Clase = $P{socio} AND
-C.Estado = 1]]>
+WHERE C.Estado=1  AND
+TI.Clase = TI.Clase]]>
 	</queryString>
 	<field name="Primer_nombre" class="java.lang.String"/>
 	<field name="Segundo_nombre" class="java.lang.String"/>
