@@ -5,16 +5,27 @@
  */
 package vistas.cuenta;
 
+import controladores.Conexion;
 import controladores.FCuenta;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import vistas.credito.frmNuevoCredito;
 import static vistas.frmEscritorio.dpnlEscritorio;
+import vistas.sucursal.frmIndexSucursal;
 
 /**
  *
@@ -23,7 +34,7 @@ import static vistas.frmEscritorio.dpnlEscritorio;
 public class frmIndexCuenta extends javax.swing.JInternalFrame implements ActionListener{
 
    
-    
+    String categoria;
     DefaultTableModel modelo;
     FCuenta funcion = new FCuenta();
     
@@ -43,10 +54,33 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         grupoBuscar.add(rbId);
         grupoBuscar.add(rbNombre);
         rbId.setSelected(true);
+        
+        btnReporte.addActionListener(this);
+       
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource()==btnReporte){
+        
+          if(categoria.equals("Tipo de Reporte")==true){
+             JOptionPane.showMessageDialog(null,"Seleccione un tipo de reporte"); 
+             
+        }else if(categoria.equals("Conyuge")==true){
+        ReporteConyugue();
+        
+        }else if(categoria.equals("Tipo de Socio")==true){
+        
+        ReporteSocio();
+        }else if(categoria.equals("Fecha de Nacimiento")==true){
+        
+        ReporteFecha();
+        }
+        
+        }
+        
+        
         
     }
     
@@ -91,6 +125,101 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     }
     
     
+     public void ReporteConyugue(){
+     
+      Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+        String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/ReporteConyuge.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexCuenta.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+         
+        
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+     
+     }
+     
+     public void ReporteFecha(){
+     
+     Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+        String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/ReporteFecha.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexCuenta.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+         
+        
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+     
+     }
+     
+     public void ReporteSocio(){
+     
+    Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+        String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/ReporteTipodeSocio.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexCuenta.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+         
+        
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+    
+     }
+     
+     
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,6 +246,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         txtTotal = new javax.swing.JTextField();
         btnReporte = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
+        cbReporte = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -231,7 +361,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -247,6 +377,15 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         btnActualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnActualizar.setText("Actualizar");
 
+        cbReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo de Reporte", "Conyuge", "Tipo de Socio", "Fecha de Nacimiento" }));
+        cbReporte.setMinimumSize(new java.awt.Dimension(97, 23));
+        cbReporte.setPreferredSize(new java.awt.Dimension(97, 23));
+        cbReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
         pnlBaseLayout.setHorizontalGroup(
@@ -258,6 +397,8 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                         .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlBaseLayout.createSequentialGroup()
                         .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -277,8 +418,11 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReporte)
-                    .addComponent(btnActualizar))
+                    .addComponent(btnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlBaseLayout.createSequentialGroup()
+                        .addComponent(cbReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -301,14 +445,22 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         Dimension FrameSize = frmMostrar.getSize();
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
+        
+        
 
     }//GEN-LAST:event_tblDatosMouseClicked
+
+    private void cbReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReporteActionPerformed
+        // TODO add your handling code here:
+        categoria = (String) cbReporte.getSelectedItem();
+    }//GEN-LAST:event_cbReporteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnReporte;
+    private javax.swing.JComboBox<String> cbReporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -319,7 +471,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
     private javax.swing.JPanel pnlIndex;
     private javax.swing.JRadioButton rbId;
     private javax.swing.JRadioButton rbNombre;
-    private javax.swing.JTable tblDatos;
+    public static javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
