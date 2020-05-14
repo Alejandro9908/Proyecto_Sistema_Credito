@@ -14,6 +14,9 @@
 		</conditionalStyle>
 	</style>
 	<subDataset name="PieChartDataset" uuid="f75e8b7c-a8b7-4556-8ae8-6212784215da"/>
+	<parameter name="Socio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
 C.Primer_nombre,C.Segundo_nombre, C.Primer_apellido,C.Segundo_apellido, C.Dpi,
@@ -28,18 +31,18 @@ JOIN TBL_DEPARTAMENTO AS D ON D.Id_departamento = M.ID_DEPARTAMENTO
 JOIN TBL_CUENTA AS CU ON CU.Id_cliente = C.Id_cliente
 JOIN TBL_TIPO_SOCIO AS TI ON TI.Id_tipo_socio = CU.Id_tipo_socio
 WHERE C.Estado=1  AND
-TI.Clase = TI.Clase]]>
+TI.Clase = $P{Socio}]]>
 	</queryString>
-	<field name="Primer_nombre" class="java.lang.String"/>
-	<field name="Segundo_nombre" class="java.lang.String"/>
-	<field name="Primer_apellido" class="java.lang.String"/>
-	<field name="Segundo_apellido" class="java.lang.String"/>
-	<field name="Dpi" class="java.lang.String"/>
-	<field name="TELEFONO" class="java.lang.String"/>
-	<field name="Clase" class="java.lang.String"/>
-	<field name="Direccion" class="java.lang.String"/>
-	<field name="Nombre_municipio" class="java.lang.String"/>
-	<field name="Nombre_departamento" class="java.lang.String"/>
+	<field name="Primer_nombre" class="java.lang.Object"/>
+	<field name="Segundo_nombre" class="java.lang.Object"/>
+	<field name="Primer_apellido" class="java.lang.Object"/>
+	<field name="Segundo_apellido" class="java.lang.Object"/>
+	<field name="Dpi" class="java.lang.Object"/>
+	<field name="TELEFONO" class="java.lang.Object"/>
+	<field name="Clase" class="java.lang.Object"/>
+	<field name="Direccion" class="java.lang.Object"/>
+	<field name="Nombre_municipio" class="java.lang.Object"/>
+	<field name="Nombre_departamento" class="java.lang.Object"/>
 	<group name="Group1">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
 		<groupHeader>
