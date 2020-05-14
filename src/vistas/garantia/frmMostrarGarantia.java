@@ -97,7 +97,7 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame implements Ac
           
           funcion.editarGarantia(garantia, txtId.getText());
           //panelFoto.setImagenNull();
-          limpiarDatos();
+          //limpiarDatos();
           JOptionPane.showMessageDialog(null,"Datos editados Correctamente");
          
           frmIndexGarantia.btnActualizar.doClick();
