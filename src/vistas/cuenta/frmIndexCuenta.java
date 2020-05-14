@@ -188,33 +188,33 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
      }
      
      public void ReporteSocio(){
-     
-    Conexion g = new Conexion();
-        g.Conectar();
-      
-        try{
-          
-        String url= System.getProperty("user.dir");
-        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
-        String ruta = "/reportes/ReporteTipodeSocio.jasper";
-        
-        g.Conectar();
-        
-        InputStream rutaJasper =  frmIndexCuenta.class.getResourceAsStream(ruta);
-        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
-        
-        
-        JasperViewer viewer = new JasperViewer(jasperPrint,false);
-        //viewer.setTitle("Reporte UMG");
-        viewer.setVisible(true);
-         
-        
-        }catch(Exception ex){
-         
-         System.out.println("Error de reporte"+ex.getMessage());
-         
-     }
+   
+         if(tblDatos.getSelectedRow()<0){
+            JOptionPane.showMessageDialog(null, "Seleccione un tipo de socio");   
+        }else{ 
+           String carre = (String) tblDatos.getValueAt(tblDatos.getSelectedRow(),3);
+           Conexion g = new Conexion();
+            g.Conectar();
+           try{
+               String url = System.getProperty("user.dir");
+               // String ruta = url+"/src/reportes/ReporteEspecificoAlum.jasper";
+               String ruta = "/reportes/ReporteTipodeSocio.jasper";
+               
+               Map parametro = new HashMap();
+               parametro.put("Socio",carre);
+               
+               InputStream rutaJasper =  frmIndexCuenta.class.getResourceAsStream(ruta);
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaJasper);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametro,g.getConexion());
+               
+               
+                JasperViewer viewer = new JasperViewer(jasperPrint,false);
+                //viewer.setTitle("Reporte UMG");
+                viewer.setVisible(true);
+            }catch(JRException ex){
+                System.out.println(ex.getMessage());
+            }
+       }
     
      }
      
@@ -417,8 +417,8 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlBaseLayout.createSequentialGroup()
                         .addComponent(cbReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
