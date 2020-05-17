@@ -189,7 +189,7 @@ public class FUsuario {
       try{
           
           if(cn!=null){
-          PreparedStatement st = cn.prepareStatement("update TBL_USUARIO set Id_usuario='"+usuario.getId_usuario()+"',NIckname='"+usuario.getNickname()+"',Permisos='"+usuario.getPermisasos()+"',Contrasena='"+usuario.getContrasena()+"' where Id_usuario="+buscar+"");
+          PreparedStatement st = cn.prepareStatement("update TBL_USUARIO set NIckname='"+usuario.getNickname()+"',Permisos='"+usuario.getPermisasos()+"',Contrasena='"+usuario.getContrasena()+"' where Id_usuario="+buscar+"");
           st.execute();
           
           }else{
