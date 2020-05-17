@@ -5,9 +5,14 @@
  */
 package vistas.usuario;
 
+import controladores.FUsuario;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -16,12 +21,24 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  */
 public class frmIndexUsuario extends javax.swing.JInternalFrame implements ActionListener{
 
-    /**
-     * Creates new form frmIndexUsuario
-     */
+    DefaultTableModel modelo;
+    FUsuario funcion = new FUsuario();
+    
+    String query ="SELECT a.Id_usuario,b.Dpi,CONCAT(b.Primer_nombre,' ',b.Segundo_nombre,' ',b.Tercer_nombre,' ',b.Primer_apellido,' ',b.Segundo_apellido,' ',\n" +
+                  "b.Apellido_casado),a.Id_empleado,a.NIckname,a.Permisos,a.Contrasena FROM TBL_USUARIO AS a inner join TBL_EMPLEADO AS b on a.Id_empleado = b.Id_empleado WHERE a.Estado = 1";
+    
     public frmIndexUsuario() {
         initComponents();
+        mostrar(query);
+        
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbNombre);
+        rbNombre.setSelected(true);
+        
         btnNuevo.addActionListener(this);
+        btnBuscar.addActionListener(this);
+        btnActualizar.addActionListener(this);
     }
 
     @Override
@@ -34,9 +51,64 @@ public class frmIndexUsuario extends javax.swing.JInternalFrame implements Actio
             frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             frmNuevo.setVisible(true);
         }
+        
+        if(e.getSource()== btnActualizar){
+          //mostrar(query);
+           actualizar();
+        }
     }
     
+    private void mostrar(String buscar){ 
     
+    try{
+    
+    modelo = funcion.mostrarUsuarioInx(buscar);
+    tblDatos.setModel(modelo);
+    txtTotal.setText("    " + Integer.toString(funcion.totalRegistros)); 
+    
+    ocultarColumnas(tblDatos,3);
+   /* ocultarColumnas(tblDatos,5);
+    ocultarColumnas(tblDatos,6);
+    ocultarColumnas(tblDatos,8);
+    ocultarColumnas(tblDatos,9);
+    ocultarColumnas(tblDatos,10);
+    ocultarColumnas(tblDatos,11);*/
+    
+    }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    
+    
+    }
+    
+    private void ocultarColumnas(JTable tabla, int columna){
+        
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
+    }
+    
+    private void buscarUsuario(String textoBuscar){
+    
+    if(rbId.isSelected()==true){
+    
+    mostrar("SELECT a.Id_usuario,b.Dpi,CONCAT(b.Primer_nombre,' ',b.Segundo_nombre,' ',b.Tercer_nombre,' ',b.Primer_apellido,' ',b.Segundo_apellido,' ',\n" +
+    "b.Apellido_casado),a.Id_empleado,a.NIckname,a.Permisos,a.Contrasena FROM TBL_USUARIO AS a inner join TBL_EMPLEADO AS b on a.Id_empleado = b.Id_empleado where (a.Id_usuario like '%"+textoBuscar+"%') and a.Estado = 1");
+    
+    }else{
+    
+    mostrar("SELECT a.Id_usuario,b.Dpi,CONCAT(b.Primer_nombre,' ',b.Segundo_nombre,' ',b.Tercer_nombre,' ',b.Primer_apellido,' ',b.Segundo_apellido,' ',\n" +
+     "b.Apellido_casado),a.Id_empleado,a.NIckname,a.Permisos,a.Contrasena FROM TBL_USUARIO AS a inner join TBL_EMPLEADO AS b on a.Id_empleado = b.Id_empleado WHERE (CONCAT(b.Primer_nombre,' ',b.Segundo_nombre,' ',b.Tercer_nombre,' ',b.Primer_apellido,' ',b.Segundo_apellido,' ',\n" +
+     "b.Apellido_casado) like '%"+textoBuscar+"%') and a.Estado = 1");
+    
+    }
+    
+    }
+    
+     private void actualizar(){
+        mostrar(query);
+    }
     
     
     /**
@@ -265,7 +337,8 @@ public class frmIndexUsuario extends javax.swing.JInternalFrame implements Actio
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         //buscar();
-        //buscar(txtBuscar.getText());
+        buscarUsuario(txtBuscar.getText());
+        
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
@@ -276,15 +349,17 @@ public class frmIndexUsuario extends javax.swing.JInternalFrame implements Actio
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
 
-        /*int posicion = tblDatos.getSelectedRow();
-        frmMostrarSucursal.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
-        frmMostrarSucursal.txtNombre.setText(tblDatos.getValueAt(posicion,1).toString());
-        frmMostrarSucursal.txtDireccion.setText(tblDatos.getValueAt(posicion,4).toString());
-        frmMostrarSucursal.txtTelefono.setText(tblDatos.getValueAt(posicion,5).toString());
-        frmMostrarSucursal.txtCorreo.setText(tblDatos.getValueAt(posicion,6).toString());
-        frmMostrarSucursal.txtEstado.setText(tblDatos.getValueAt(posicion,7).toString());
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarUsuario.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
+        frmMostrarUsuario.txtId1.setText(tblDatos.getValueAt(posicion,3).toString());
+        frmMostrarUsuario.txtId2.setText(tblDatos.getValueAt(posicion,1).toString());
+        frmMostrarUsuario.txtEmpleado.setText(tblDatos.getValueAt(posicion,2).toString());
+        frmMostrarUsuario.txtNick.setText(tblDatos.getValueAt(posicion,4).toString());
+        frmMostrarUsuario.txtipo.setText(tblDatos.getValueAt(posicion,5).toString());
+        frmMostrarUsuario.txtContrasenia.setText(tblDatos.getValueAt(posicion,6).toString());
+       
 
-        //frmMostrarSucursal.cbMunicipio.setText((tblDatos.getValueAt(posicion,2).toString()));*/
+        
 
     }//GEN-LAST:event_tblDatosMouseClicked
 

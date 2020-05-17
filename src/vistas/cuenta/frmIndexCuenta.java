@@ -190,7 +190,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
      public void ReporteSocio(){
      
      if(tblDatos.getSelectedRow()<0){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila para generar el reporte");   
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de socio");   
         }else{ 
            String carre = (String) tblDatos.getValueAt(tblDatos.getSelectedRow(),3);
            Conexion g = new Conexion();
@@ -209,7 +209,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
                
                
                 JasperViewer viewer = new JasperViewer(jasperPrint,false);
-                viewer.setTitle("Reporte UMG");
+               // viewer.setTitle("Reporte UMG");
                 viewer.setVisible(true);
             }catch(JRException ex){
                 System.out.println(ex.getMessage());
