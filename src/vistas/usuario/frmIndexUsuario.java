@@ -46,6 +46,7 @@ public class frmIndexUsuario extends javax.swing.JInternalFrame implements Actio
         btnNuevo.addActionListener(this);
         btnBuscar.addActionListener(this);
         btnActualizar.addActionListener(this);
+        btnReporte.addActionListener(this);
     }
 
     @Override
