@@ -5,15 +5,23 @@
  */
 package vistas.ahorro;
 
+import controladores.Conexion;
 import controladores.FAhorro;
 import vistas.credito.*;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import vistas.cliente.frmIndexCliente;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -62,7 +70,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         }
         
         if(e.getSource()==btnReporte){
-            //Reporte();
+            Reporte();
         }
     }
     
@@ -89,6 +97,35 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
     
     
     }
+    
+    public void Reporte(){
+         
+         Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+            String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/Ahorro.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexAhorro.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+            
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+        
+     }
     
     private void ocultarColumnas(JTable tabla, int columna){
         
