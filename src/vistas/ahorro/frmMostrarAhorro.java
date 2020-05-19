@@ -55,8 +55,6 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame {
         txtInteres = new javax.swing.JTextField();
         lblNombre7 = new javax.swing.JLabel();
         txtPlazo = new javax.swing.JTextField();
-        lblNombre4 = new javax.swing.JLabel();
-        txtCorte = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
         txtPago = new javax.swing.JTextField();
         lblNombre10 = new javax.swing.JLabel();
@@ -208,21 +206,16 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame {
 
         txtPlazo.setEnabled(false);
 
-        lblNombre4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre4.setText("Fecha de inicio");
-
-        txtCorte.setEnabled(false);
-
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre1.setText("Fecha final");
+        lblNombre1.setText("Fecha Retiro");
 
         txtPago.setEnabled(false);
 
         lblNombre10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre10.setText("Capital");
+        lblNombre10.setText("Monto Total");
 
         lblNombre11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre11.setText("Monto Total");
+        lblNombre11.setText("Pago Programado");
 
         txtMontoTotal.setEnabled(false);
 
@@ -260,13 +253,8 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlIndexLayout.createSequentialGroup()
-                        .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre6)
-                            .addComponent(txtGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(158, 158, 158)
-                        .addComponent(lblNombre10)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblNombre6)
+                    .addComponent(txtGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlIndexLayout.createSequentialGroup()
                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,43 +274,34 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame {
                                 .addComponent(txtNombre)))
                         .addGap(18, 18, 18)
                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlIndexLayout.createSequentialGroup()
-                                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(pnlIndexLayout.createSequentialGroup()
+                                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblNombre8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblNombre7)
+                                        .addComponent(txtPlazo, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
+                                .addGroup(pnlIndexLayout.createSequentialGroup()
+                                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblNombre1)
                                         .addGroup(pnlIndexLayout.createSequentialGroup()
-                                            .addComponent(lblNombre4)
-                                            .addGap(94, 94, 94)
-                                            .addComponent(lblNombre1)
-                                            .addGap(274, 274, 274))
+                                            .addComponent(lblNombre10)
+                                            .addGap(112, 112, 112)
+                                            .addComponent(lblNombre11))
                                         .addGroup(pnlIndexLayout.createSequentialGroup()
-                                            .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(lblNombre8))
+                                            .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lblNombre7)
-                                                .addComponent(txtPlazo))))
-                                    .addGroup(pnlIndexLayout.createSequentialGroup()
-                                        .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtMontoPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pnlIndexLayout.createSequentialGroup()
-                                .addComponent(txtCorte, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlIndexLayout.createSequentialGroup()
-                                        .addComponent(lblNombre11)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(pnlIndexLayout.createSequentialGroup()
-                                        .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnlIndexLayout.createSequentialGroup()
-                                                .addComponent(lblNombre13)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(txtMontoRestante))))))))
-                .addContainerGap())
+                                            .addComponent(txtMontoPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(10, 10, 10)
+                                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnlIndexLayout.createSequentialGroup()
+                                            .addComponent(lblNombre13)
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(txtMontoRestante))))
+                            .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlIndexLayout.setVerticalGroup(
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,28 +333,27 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame {
                                 .addGap(38, 38, 38)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNombre1)
                             .addComponent(lblNombre13)
-                            .addComponent(lblNombre4))))
+                            .addComponent(lblNombre10)
+                            .addComponent(lblNombre11))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCorte, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtMontoRestante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMontoRestante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMontoPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createSequentialGroup()
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre10)
+                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre6)
-                    .addComponent(lblNombre11))
+                    .addComponent(lblNombre1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMontoPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -384,7 +362,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame {
                     .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 34, Short.MAX_VALUE)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -481,7 +459,6 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre13;
     private javax.swing.JLabel lblNombre2;
     private javax.swing.JLabel lblNombre3;
-    private javax.swing.JLabel lblNombre4;
     private javax.swing.JLabel lblNombre6;
     private javax.swing.JLabel lblNombre7;
     private javax.swing.JLabel lblNombre8;
@@ -490,17 +467,16 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbId;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtCorte;
-    private javax.swing.JTextField txtDpi;
-    private javax.swing.JTextField txtGarantia;
-    private javax.swing.JTextField txtIdCuenta;
-    private javax.swing.JTextField txtInteres;
-    private javax.swing.JTextField txtMontoPagado;
-    private javax.swing.JTextField txtMontoRestante;
-    private javax.swing.JTextField txtMontoTotal;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPago;
-    private javax.swing.JTextField txtPlazo;
+    public static javax.swing.JTextField txtDpi;
+    public static javax.swing.JTextField txtGarantia;
+    public static javax.swing.JTextField txtIdCuenta;
+    public static javax.swing.JTextField txtInteres;
+    public static javax.swing.JTextField txtMontoPagado;
+    public static javax.swing.JTextField txtMontoRestante;
+    public static javax.swing.JTextField txtMontoTotal;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtPago;
+    public static javax.swing.JTextField txtPlazo;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,7 +18,7 @@ import modelo.DepartamentoEmpresa;
 
 /**
  *
- * @author DELL
+ * @author Carlos
  */
 public class FDepartamentos_emp {
      

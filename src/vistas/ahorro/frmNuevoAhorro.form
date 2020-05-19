@@ -38,20 +38,36 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="pnlFormulario" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="pnlFormulario" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="btnGuardar" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnCancelar" min="-2" pref="125" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  <Component id="txtIdcliente" min="-2" pref="49" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtIdahorro" min="-2" pref="36" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="txtfechaa" min="-2" pref="101" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="btnGuardar" min="-2" pref="125" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" pref="125" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -65,7 +81,13 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="pnlFormulario" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtIdcliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtIdahorro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtfechaa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="41" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -106,43 +128,29 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtDestino" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtCorte" alignment="0" pref="178" max="32767" attributes="0"/>
-                                  <Component id="lblNombre4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="txtPago" max="32767" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtMora" min="-2" pref="190" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="lblNombre1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtDestino1" min="-2" pref="373" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="txtPago" min="-2" pref="264" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtFinal" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jComboBox1" min="-2" pref="363" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cbAhorro" min="-2" pref="363" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblNombre1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
+                                      <Component id="lblNombre5" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtPlazo" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblNombre5" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblNombre7" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblNombre7" min="-2" pref="112" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtPlazo" min="-2" pref="143" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnInteres" pref="48" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -177,8 +185,8 @@
                                   <Component id="lblNombre8" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblNombre10" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                                      <Component id="lblNombre17" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="lblNombre18" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="lblNombre14" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -192,6 +200,18 @@
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="jComboBox2" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="lblNombre17" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="txtDestino" min="-2" pref="178" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtprogramado" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtisr" min="-2" pref="198" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -225,30 +245,33 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnInteres" max="32767" attributes="0"/>
                           <Component id="txtPlazo" pref="31" max="32767" attributes="0"/>
-                          <Component id="jComboBox1" max="32767" attributes="0"/>
+                          <Component id="cbAhorro" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNombre4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNombre5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNombre1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCorte" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtPago" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtMora" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtPago" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtFinal" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNombre10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNombre17" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNombre17" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblNombre10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNombre18" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtDestino" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtDestino1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtisr" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtprogramado" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lblNombre14" min="-2" max="-2" attributes="0"/>
@@ -269,10 +292,12 @@
                           <Component id="lblNombre15" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtValoracion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtValoracion1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jComboBox2" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtValoracion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="txtValoracion1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
@@ -292,6 +317,9 @@
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre1">
               <Properties>
@@ -308,6 +336,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdCuentaActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre2">
               <Properties>
@@ -341,8 +372,6 @@
                 <Property name="text" type="java.lang.String" value="Tipo de cuenta de ahorro"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCorte">
-            </Component>
             <Component class="javax.swing.JTextField" name="txtDpi">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
@@ -350,6 +379,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDpiActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre3">
               <Properties>
@@ -372,14 +404,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtPlazo">
             </Component>
-            <Component class="javax.swing.JLabel" name="lblNombre4">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Fecha de inicio"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="txtPago">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre5">
@@ -387,17 +411,15 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Fecha Final"/>
+                <Property name="text" type="java.lang.String" value="Fecha Retiro"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtMora">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre10">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Monto programado"/>
+                <Property name="text" type="java.lang.String" value="Monto Ahorrar"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre11">
@@ -432,17 +454,10 @@
                 <Property name="text" type="java.lang.String" value="Telefono"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
-                </Property>
-              </Properties>
+            <Component class="javax.swing.JComboBox" name="cbAhorro">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAhorroActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -476,11 +491,13 @@
             <Component class="javax.swing.JComboBox" name="jComboBox2">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="6">
+                    <StringItem index="0" value="Padre"/>
+                    <StringItem index="1" value="Madre"/>
+                    <StringItem index="2" value="Hermano"/>
+                    <StringItem index="3" value="Tio"/>
+                    <StringItem index="4" value="Abuelo"/>
+                    <StringItem index="5" value="Primo"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -496,7 +513,24 @@
                 <Property name="text" type="java.lang.String" value="ISR"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDestino1">
+            <Component class="com.toedter.calendar.JDateChooser" name="txtFinal">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnInteres">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="..."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtisr">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtprogramado">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblNombre18">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Monto Programado"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -529,6 +563,15 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtIdcliente">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtIdahorro">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtfechaa">
         </Component>
       </SubComponents>
     </Container>
