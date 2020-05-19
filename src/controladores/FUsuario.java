@@ -14,7 +14,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author DELL
+ * @author Carlos
  */
 public class FUsuario {
     
@@ -57,7 +57,7 @@ public class FUsuario {
     model = new DefaultTableModel(null, columnas);
     
     sql = "SELECT Id_empleado,Dpi,CONCAT(Primer_nombre,' ',Segundo_nombre,' ',Tercer_nombre,' ',Primer_apellido,' ',Segundo_apellido,' ',\n" +
-           "Apellido_casado) FROM TBL_EMPLEADO";
+           "Apellido_casado) FROM TBL_EMPLEADO WHERE Estado=1";
     
     String[] filas = new String [3]; //registros
     

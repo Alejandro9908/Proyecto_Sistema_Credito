@@ -398,10 +398,7 @@ public class frmIndexUsuario extends javax.swing.JInternalFrame implements Actio
         frmMostrarUsuario.txtNick.setText(tblDatos.getValueAt(posicion,4).toString());
         frmMostrarUsuario.txtipo.setText(tblDatos.getValueAt(posicion,5).toString());
         frmMostrarUsuario.txtContrasenia.setText(tblDatos.getValueAt(posicion,6).toString());
-       
-
-        
-
+      
     }//GEN-LAST:event_tblDatosMouseClicked
 
 

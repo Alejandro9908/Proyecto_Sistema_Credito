@@ -5,12 +5,14 @@
  */
 package vistas;
 
+import controladores.FAhorro;
 import controladores.FEmpleado;
 import controladores.FGarantia;
 import controladores.FSucursal;
 import controladores.FUsuario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vistas.ahorro.frmNuevoAhorro;
 import vistas.cliente.frmMostrarCliente;
 import vistas.empleado.frmMostrarEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
@@ -33,6 +35,7 @@ public class frmSeleccionar extends javax.swing.JFrame {
     FSucursal funcion = new FSucursal();
     FGarantia funcion2 = new FGarantia();
     FUsuario funcion3 = new FUsuario();
+    FAhorro funcion4 = new FAhorro();
     
     //Variables para el municipio
     
@@ -57,6 +60,8 @@ public class frmSeleccionar extends javax.swing.JFrame {
     
     //Variables para selecionar el municipio en FrmNuevaGarantia
     public static String id_empleado, Dpi, Nombre;
+    
+    public static String id_cuenta, no_cuenta,nombre,dpi;
     
     DefaultTableModel modelo;
     private int opcion;
@@ -133,6 +138,11 @@ public class frmSeleccionar extends javax.swing.JFrame {
          mostrarEmpleado();
         } 
         
+        if(opcion==13){
+         txtAccion.setText("Seleccione un cliente");
+         mostrarCliente();
+        } 
+        
         
         
         
@@ -178,6 +188,11 @@ public class frmSeleccionar extends javax.swing.JFrame {
       public void mostrarEmpleado(){
       
          funcion3.mostraempleado(Tabla);
+      }
+      
+      public void mostrarCliente(){
+      
+         funcion4.mostracliente(Tabla);
       }
     
   
@@ -272,6 +287,20 @@ public class frmSeleccionar extends javax.swing.JFrame {
      
      }  
     
+     
+      private void buscarCliente(){
+     
+      try{
+      
+      String search = txtBuscar.getText(); //Es solo para prueba,, borrar luego
+      funcion4.buscarempleado(Tabla, search.toUpperCase());
+      
+      }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+     
+     
+     } 
   
 
     
@@ -403,6 +432,22 @@ public class frmSeleccionar extends javax.swing.JFrame {
             frmNuevoUsuario.txtId1.setText(id_empleado);
             frmNuevoUsuario.txtId2.setText(Dpi);
             frmNuevoUsuario.txtEmpleado.setText(Nombre);
+        
+        
+        }
+        
+        else if(opcion==13){
+        
+        id_cuenta=(Tabla.getValueAt(posicion, 0).toString());
+        no_cuenta=(Tabla.getValueAt(posicion, 1).toString());
+        nombre=(Tabla.getValueAt(posicion, 2).toString());
+        dpi=(Tabla.getValueAt(posicion,3).toString());
+        
+        frmNuevoAhorro.txtIdcliente.setText(id_cuenta);
+        frmNuevoAhorro.txtIdCuenta.setText(no_cuenta);
+        frmNuevoAhorro.txtNombre.setText(nombre);
+        frmNuevoAhorro.txtDpi.setText(dpi);
+        
         
         
         }
@@ -589,6 +634,10 @@ public class frmSeleccionar extends javax.swing.JFrame {
        
        if(opcion==12){
            buscarEmpleado();
+       }
+       
+       if(opcion==13){
+         buscarCliente(); 
        }
         
         
