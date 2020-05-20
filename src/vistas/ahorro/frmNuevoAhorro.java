@@ -24,6 +24,8 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
     FAhorro funcion = new FAhorro();
     String accion = "guardar";
     int id_usuario =1;
+    String n;
+    String m;
    
     public frmNuevoAhorro() {
         initComponents();
@@ -31,6 +33,9 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         txtIdcliente.setVisible(false);
         txtIdahorro.setVisible(false);
         txtfechaa.setVisible(false);
+        txtPlazo.setVisible(false);
+        txtisr.setVisible(false);
+        
         llenarComboBoxAhorro();
         btnGuardar.addActionListener(this);
         btnCancelar.addActionListener(this);
@@ -178,7 +183,6 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         txtDpi = new javax.swing.JTextField();
         lblNombre3 = new javax.swing.JLabel();
         btnSeleccionarCuenta = new javax.swing.JButton();
-        txtPlazo = new javax.swing.JTextField();
         txtPago = new javax.swing.JTextField();
         lblNombre5 = new javax.swing.JLabel();
         lblNombre10 = new javax.swing.JLabel();
@@ -198,15 +202,18 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         lblNombre17 = new javax.swing.JLabel();
         txtFinal = new com.toedter.calendar.JDateChooser();
         btnInteres = new javax.swing.JButton();
-        txtisr = new javax.swing.JTextField();
         txtprogramado = new javax.swing.JTextField();
         lblNombre18 = new javax.swing.JLabel();
+        cbInteres = new javax.swing.JComboBox<>();
+        cbIsr = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         txtIdcliente = new javax.swing.JTextField();
         txtIdahorro = new javax.swing.JTextField();
         txtfechaa = new javax.swing.JTextField();
+        txtPlazo = new javax.swing.JTextField();
+        txtisr = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -286,7 +293,7 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         lblNombre16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre16.setText("Parentesco");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Padre", "Madre", "Hermano", "Tio", "Abuelo", "Primo" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Padre", "Madre", "Hermano", "Tio", "Abuelo", "Primo", "Otro" }));
 
         lblNombre17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre17.setText("ISR");
@@ -295,6 +302,20 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
 
         lblNombre18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre18.setText("Monto Programado");
+
+        cbInteres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2%", "1.5%", "1%" }));
+        cbInteres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbInteresActionPerformed(evt);
+            }
+        });
+
+        cbIsr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pago de ISR", "1.45%" }));
+        cbIsr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbIsrActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
@@ -332,9 +353,10 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                                 .addComponent(lblNombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                .addComponent(txtPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(cbInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnInteres, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))))
+                                .addComponent(btnInteres, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))))
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre11)
@@ -379,7 +401,7 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtprogramado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtisr, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbIsr, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlFormularioLayout.setVerticalGroup(
@@ -406,9 +428,10 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                     .addComponent(lblNombre7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnInteres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPlazo, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(cbAhorro))
+                    .addComponent(cbInteres, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnInteres, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(cbAhorro)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre5)
@@ -426,8 +449,8 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtisr, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtprogramado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtprogramado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbIsr, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblNombre14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -489,7 +512,11 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtIdahorro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtfechaa, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtfechaa, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(txtPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtisr, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -504,7 +531,9 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIdahorro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtfechaa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfechaa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtisr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
@@ -532,6 +561,42 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         
     }//GEN-LAST:event_cbAhorroActionPerformed
 
+    private void cbInteresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbInteresActionPerformed
+        // TODO add your handling code here:
+        n =(String) cbInteres.getSelectedItem();
+        if(n=="1%"){
+         
+         
+            String cadena = "0.00010";
+            //JOptionPane.showMessageDialog(null,u);
+            txtPlazo.setText(cadena);
+        }else if(n=="1.5%"){
+        
+          String cadena1 = "0.00015"; 
+          txtPlazo.setText(cadena1);
+        }else if(n=="2%"){
+        
+        String cadena2 = "0.0002"; 
+          txtPlazo.setText(cadena2);
+        }
+    }//GEN-LAST:event_cbInteresActionPerformed
+
+    private void cbIsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIsrActionPerformed
+        // TODO add your handling code here:
+        m = (String) cbIsr.getSelectedItem();
+        
+        if(m=="Pago de ISR"){
+        
+        JOptionPane.showMessageDialog(null,"Seleccion el interes de ISR");  
+        
+        }
+        else if(m=="1.45%"){
+        
+        String cad = "0.000145";
+        txtisr.setText(cad);
+        }
+    }//GEN-LAST:event_cbIsrActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -539,6 +604,8 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
     private javax.swing.JButton btnInteres;
     private javax.swing.JButton btnSeleccionarCuenta;
     private javax.swing.JComboBox<String> cbAhorro;
+    private javax.swing.JComboBox<String> cbInteres;
+    private javax.swing.JComboBox<String> cbIsr;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblNombre;

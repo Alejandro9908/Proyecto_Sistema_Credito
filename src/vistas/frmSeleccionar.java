@@ -139,7 +139,7 @@ public class frmSeleccionar extends javax.swing.JFrame {
         } 
         
         if(opcion==13){
-         txtAccion.setText("Seleccione un cliente");
+         txtAccion.setText("Seleccione una cuenta");
          mostrarCliente();
         } 
         
