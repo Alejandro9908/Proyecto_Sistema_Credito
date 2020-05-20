@@ -65,6 +65,10 @@
                                   <Component id="txtIdahorro" min="-2" pref="36" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="txtfechaa" min="-2" pref="101" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="txtPlazo" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="txtisr" min="-2" pref="78" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -86,6 +90,8 @@
                       <Component id="txtIdcliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtIdahorro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtfechaa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPlazo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtisr" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="41" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -148,9 +154,10 @@
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtPlazo" min="-2" pref="143" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                      <Component id="cbInteres" min="-2" pref="141" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnInteres" pref="48" max="32767" attributes="0"/>
+                                      <Component id="btnInteres" pref="50" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -211,7 +218,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtprogramado" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtisr" min="-2" pref="198" max="-2" attributes="0"/>
+                              <Component id="cbIsr" min="-2" pref="198" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -245,9 +252,11 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnInteres" max="32767" attributes="0"/>
-                          <Component id="txtPlazo" pref="31" max="32767" attributes="0"/>
-                          <Component id="cbAhorro" max="32767" attributes="0"/>
+                          <Component id="cbInteres" pref="31" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnInteres" pref="31" max="32767" attributes="0"/>
+                              <Component id="cbAhorro" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -270,8 +279,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtDestino" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="txtisr" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="txtprogramado" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="cbIsr" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lblNombre14" min="-2" max="-2" attributes="0"/>
@@ -402,8 +411,6 @@
                 <Property name="text" type="java.lang.String" value="Seleccionar"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPlazo">
-            </Component>
             <Component class="javax.swing.JTextField" name="txtPago">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre5">
@@ -491,13 +498,14 @@
             <Component class="javax.swing.JComboBox" name="jComboBox2">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="6">
+                  <StringArray count="7">
                     <StringItem index="0" value="Padre"/>
                     <StringItem index="1" value="Madre"/>
                     <StringItem index="2" value="Hermano"/>
                     <StringItem index="3" value="Tio"/>
                     <StringItem index="4" value="Abuelo"/>
                     <StringItem index="5" value="Primo"/>
+                    <StringItem index="6" value="Otro"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -520,8 +528,6 @@
                 <Property name="text" type="java.lang.String" value="..."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtisr">
-            </Component>
             <Component class="javax.swing.JTextField" name="txtprogramado">
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre18">
@@ -531,6 +537,39 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Monto Programado"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbInteres">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="3">
+                    <StringItem index="0" value="2%"/>
+                    <StringItem index="1" value="1.5%"/>
+                    <StringItem index="2" value="1%"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbInteresActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbIsr">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="2">
+                    <StringItem index="0" value="Pago de ISR"/>
+                    <StringItem index="1" value="1.45%"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbIsrActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -572,6 +611,10 @@
         <Component class="javax.swing.JTextField" name="txtIdahorro">
         </Component>
         <Component class="javax.swing.JTextField" name="txtfechaa">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPlazo">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtisr">
         </Component>
       </SubComponents>
     </Container>

@@ -77,8 +77,7 @@ public class FAhorro {
    model = new DefaultTableModel(null, columnas);
    
    sql = "SELECT a.Id_cuenta,a.Numero_cuenta,CONCAT(b.Primer_nombre,' ',b.Segundo_nombre,' ',b.Primer_apellido,' ',\n" +
-          "b.Segundo_apellido),b.Dpi FROM TBL_CUENTA AS a inner join TBL_CLIENTE AS b on a.Id_cliente = b.Id_cliente WHERE UPPER(CONCAT(b.Primer_nombre,' ',b.Segundo_nombre,' ',b.Primer_apellido,' ',\n" +
-          "b.Segundo_apellido) LIKE '%"+buscar+"%')";
+          "b.Segundo_apellido),b.Dpi FROM TBL_CUENTA AS a inner join TBL_CLIENTE AS b on a.Id_cliente = b.Id_cliente WHERE UPPER(a.Numero_cuenta) LIKE '%"+buscar+"%'";
    
     String[] filas = new String [4]; //registros
         
@@ -86,6 +85,9 @@ public class FAhorro {
         ResultSet rs = null;
         
      try{
+     
+     st = cn.createStatement();
+     rs = st.executeQuery(sql);
      
       while(rs.next()){
       
