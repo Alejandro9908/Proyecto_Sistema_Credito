@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import modelo.TipoGarantia;
+import vistas.frmLogin;
 
 /**
  *
@@ -19,7 +20,7 @@ public class frmNuevoTipoGarantia extends javax.swing.JInternalFrame implements 
     
     FTipo_garantia funcion = new FTipo_garantia();
     String accion = "guardar";
-    int id_usuario =1;
+    int id_usuario = frmLogin.idUsuarioSystem;
     
     public frmNuevoTipoGarantia() {
         initComponents();

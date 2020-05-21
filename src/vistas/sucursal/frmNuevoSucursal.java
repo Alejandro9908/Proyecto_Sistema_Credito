@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import modelo.Departamento;
 import modelo.Municipio;
 import modelo.Sucursal;
+import vistas.frmLogin;
 import vistas.sucursal.frmIndexSucursal;
 
 
@@ -26,7 +27,7 @@ public class frmNuevoSucursal extends javax.swing.JInternalFrame implements Acti
      FSucursal funcion = new FSucursal();
      FSucursal funcion1 = new FSucursal();
      int n;
-     int id=1;
+     int id= frmLogin.idUsuarioSystem;
    
       int departamentoSelected;
       int municipioSelected;

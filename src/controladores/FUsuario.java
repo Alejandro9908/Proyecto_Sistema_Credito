@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.Garantia;
 import modelo.Usuario;
+import vistas.frmLogin;
 
 /**
  *
@@ -204,7 +206,41 @@ public class FUsuario {
   
   
   
-  }  
+  }
+
+
+//FUNCIONES EN EL LOGIN
+  
+    public void consultarUsuario(String nickname, String contrasena){
+                    
+        sql = "select Id_usuario, NIckname, Contrasena, Permisos from TBL_USUARIO where NIckname =" + "'" +nickname + "' and contrasena = " + "'" +contrasena + "'";
+         
+        try{
+            if(cn!=null){
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);  
+    
+                while(rs.next()){
+                    //el nombre del campo que queremos obtener en la db
+                  
+                    frmLogin.idUsuarioSystem = Integer.parseInt(rs.getString("Id_usuario"));
+                    frmLogin.nicknameSystem = rs.getString("NIckname");
+                    frmLogin.contrasenaSystem = rs.getString("Contrasena");
+                    frmLogin.permisosSystem = rs.getString("Permisos");
+                    
+                            
+                }
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se ha establecido conexion con la db");
+            }
+             
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }  
+    }
+
+     
+  
     
     
     
