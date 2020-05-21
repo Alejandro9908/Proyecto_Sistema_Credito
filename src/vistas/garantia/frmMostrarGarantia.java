@@ -270,6 +270,7 @@ public class frmMostrarGarantia extends javax.swing.JInternalFrame implements Ac
         btnTipo.setText("...");
 
         panelFoto.setBackground(new java.awt.Color(255, 255, 255));
+        panelFoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelFoto.setToolTipText("");
 
         javax.swing.GroupLayout panelFotoLayout = new javax.swing.GroupLayout(panelFoto);
