@@ -25,6 +25,7 @@ import modelo.Empleado;
 import modelo.Municipio;
 import modelo.Operador;
 import modelo.Telefono;
+import vistas.frmLogin;
 import vistas.frmSeleccionar;
 import static vistas.sucursal.frmNuevoSucursal.cbDepartamentos;
 import static vistas.sucursal.frmNuevoSucursal.cbMunicipio;
@@ -39,7 +40,7 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
     FCliente funcion = new FCliente();
     FSucursal llenarDepartamentoMunicipio = new FSucursal();
     int n;
-    int id=1;
+    int id= frmLogin.idUsuarioSystem;
     int departamentoSelected;
      int municipioSelected;
      DefaultTableModel modeloTel;
@@ -242,7 +243,7 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
       
            cliente.setGenero(cbGenero.getSelectedItem().toString());
            cliente.setProfesion(txtProfesion.getText());
-           cliente.setId_usuario(1);
+           cliente.setId_usuario(id);
            cliente.setDireccion(txtDireccion.getText());
            
            

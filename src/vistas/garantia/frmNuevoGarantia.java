@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import modelo.Garantia;
+import vistas.frmLogin;
 import vistas.frmSeleccionar;
 
 
@@ -21,7 +22,7 @@ import vistas.frmSeleccionar;
 public class frmNuevoGarantia extends javax.swing.JInternalFrame implements ActionListener{
 
     FGarantia funcion = new FGarantia();
-    int id_usuario=1;
+    int id_usuario= frmLogin.idUsuarioSystem;
     
     
     public frmNuevoGarantia() {

@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import modelo.Empleado;
+import vistas.frmLogin;
 import vistas.frmSeleccionar;
 
 /**
@@ -24,6 +25,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
 
     
     FEmpleado funcion = new FEmpleado();
+    int idUsuario = frmLogin.idUsuarioSystem;
     /**
      * Creates new form frmNuevoEmpleado
      */
@@ -123,7 +125,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
            empleado.setGenero(cbGenero.getSelectedItem().toString());
            empleado.setProfesion(txtProfesion.getText());
            empleado.setSueldo(Float.parseFloat(txtSueldo.getText()));
-           empleado.setId_usuario(1);
+           empleado.setId_usuario(idUsuario);
            empleado.setDireccion(txtDireccion.getText());
            
            

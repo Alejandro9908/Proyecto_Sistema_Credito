@@ -13,6 +13,7 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import modelo.DepartamentoEmpresa;
 import modeloBO.Departamento_empBO;
+import vistas.frmLogin;
 
 /**
  *
@@ -26,7 +27,7 @@ public class frmNuevoDepartamentoEmpresa extends javax.swing.JInternalFrame impl
     
     FDepartamentos_emp funcion = new FDepartamentos_emp();
     
-    int id_usuario = 1;
+    int id_usuario = frmLogin.idUsuarioSystem;
     
      Conexion link = new Conexion();
      String accion = "guardar";

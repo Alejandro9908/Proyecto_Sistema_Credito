@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import controladores.Conexion;
 import modelo.Cargo;
+import vistas.frmLogin;
 
 /**
  *
@@ -20,7 +21,7 @@ public class frmNuevoCargo extends javax.swing.JInternalFrame implements ActionL
 
     FCargo funcion = new FCargo();
     String accion = "guardar";
-    int id_usuario =1;
+    int id_usuario = frmLogin.idUsuarioSystem;
     
     
     public frmNuevoCargo() {
