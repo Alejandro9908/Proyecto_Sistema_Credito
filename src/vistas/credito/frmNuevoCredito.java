@@ -35,11 +35,11 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnSeleccionarGarantia){
-            frmSeleccionar seleccionar = new frmSeleccionar(12, "quemado");
+            frmSeleccionar seleccionar = new frmSeleccionar(14, "quemado");
             seleccionar.setVisible(true);
         }
         if(e.getSource()==btnSeleccionarCuenta){
-            frmSeleccionar seleccionar = new frmSeleccionar(13, "quemado");
+            frmSeleccionar seleccionar = new frmSeleccionar(15, "quemado");
             seleccionar.setVisible(true);
         }
         if(e.getSource()==btnGuardar){
