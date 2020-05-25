@@ -103,12 +103,16 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtId2" min="-2" pref="178" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnInformación" max="32767" attributes="0"/>
+                              <Component id="btnInformación" pref="172" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="cbTipoUsuario" min="-2" pref="253" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="txtipo" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblNombre2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbTipoUsuario" min="-2" pref="253" max="-2" attributes="0"/>
                                   <Component id="lblNombre1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtId" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -143,9 +147,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtId" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNombre3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblNombre4" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNombre3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -170,7 +174,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblNombre1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbTipoUsuario" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtipo" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="cbTipoUsuario" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace pref="89" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -189,6 +196,9 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre1">
               <Properties>
@@ -205,6 +215,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre2">
               <Properties>
@@ -230,16 +243,6 @@
                 <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNick">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtContrasenia">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="btnInformaci&#xf3;n">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -251,22 +254,6 @@
                 <Property name="text" type="java.lang.String" value="Informaci&#xf3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbTipoUsuario">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JTextField" name="txtId1">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
@@ -274,6 +261,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtId1ActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre3">
               <Properties>
@@ -290,6 +280,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtId2ActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNombre4">
               <Properties>
@@ -298,6 +291,44 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="DPI"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtipo">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtipoActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtNick">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtContrasenia">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbTipoUsuario">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="3">
+                    <StringItem index="0" value="Administrador"/>
+                    <StringItem index="1" value="Gerente"/>
+                    <StringItem index="2" value="Supervisor"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTipoUsuarioActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

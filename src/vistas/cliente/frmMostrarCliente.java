@@ -171,7 +171,6 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         txtNombre3 = new javax.swing.JTextField();
         lblNombre8 = new javax.swing.JLabel();
         txtApellido1 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         lblNombre9 = new javax.swing.JLabel();
         txtApellidoCasado = new javax.swing.JTextField();
         lblNombre10 = new javax.swing.JLabel();
@@ -281,17 +280,6 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         lblNombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre8.setText("Segundo Apellido");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Apellido de Casado");
 
@@ -307,6 +295,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         lblNombre13.setText("Fecha de Nacimiento");
 
         panelFoto.setBackground(new java.awt.Color(255, 255, 255));
+        panelFoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelFoto.setToolTipText("");
 
         javax.swing.GroupLayout panelFotoLayout = new javax.swing.GroupLayout(panelFoto);
@@ -317,7 +306,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
         );
         panelFotoLayout.setVerticalGroup(
             panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 153, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         lblNombre29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -380,9 +369,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(12, 12, 12))
                             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                                 .addComponent(lblNombre29)
@@ -421,7 +408,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                     .addComponent(lblNombre4)
                     .addComponent(lblNombre29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -447,9 +434,8 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                             .addComponent(lblNombre10)
                             .addComponent(lblNombre1)))
                     .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(7, 7, 7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -871,7 +857,7 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
                         .addComponent(lblNombre32)
                         .addGap(3, 3, 3)
                         .addComponent(txtHora_commit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar)
@@ -1486,7 +1472,6 @@ public class frmMostrarCliente extends javax.swing.JInternalFrame implements Act
     public static javax.swing.JComboBox<Operador> cbOperador;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JComboBox<String> cbTipoCasa;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

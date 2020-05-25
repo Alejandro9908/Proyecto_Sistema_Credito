@@ -45,6 +45,9 @@ public class frmEscritorio extends javax.swing.JFrame {
      */
     public frmEscritorio() {
         initComponents();
+        permisos();
+        
+        lblUsuario.setText("" + frmLogin.nicknameSystem + " - " + frmLogin.permisosSystem);
         
         try{
             JFrame.setDefaultLookAndFeelDecorated(true);
@@ -56,7 +59,21 @@ public class frmEscritorio extends javax.swing.JFrame {
         }catch (Exception e){
             e.printStackTrace();
         }
+        
+        
+        //Defino los permisos o bloqueo menus
+        
+        
+        
+        
+        
+        
+        
     }
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,7 +84,11 @@ public class frmEscritorio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         dpnlEscritorio = new javax.swing.JDesktopPane();
+        lblUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmEmpresa = new javax.swing.JMenu();
         jmiDepartamentos = new javax.swing.JMenuItem();
@@ -97,22 +118,39 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmSistema = new javax.swing.JMenu();
         jmiPerfil = new javax.swing.JMenuItem();
         jmiUsuarios = new javax.swing.JMenuItem();
-        jmiNuevoUsuairo = new javax.swing.JMenuItem();
+        jmiNuevoUsuario = new javax.swing.JMenuItem();
         jmiSalir = new javax.swing.JMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar2.add(jMenu1);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         dpnlEscritorio.setBackground(new java.awt.Color(255, 255, 255));
 
+        lblUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblUsuario.setText("Informacion");
+
+        dpnlEscritorio.setLayer(lblUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout dpnlEscritorioLayout = new javax.swing.GroupLayout(dpnlEscritorio);
         dpnlEscritorio.setLayout(dpnlEscritorioLayout);
         dpnlEscritorioLayout.setHorizontalGroup(
             dpnlEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1329, Short.MAX_VALUE)
+            .addGroup(dpnlEscritorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUsuario)
+                .addContainerGap(1232, Short.MAX_VALUE))
         );
         dpnlEscritorioLayout.setVerticalGroup(
             dpnlEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 676, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpnlEscritorioLayout.createSequentialGroup()
+                .addContainerGap(646, Short.MAX_VALUE)
+                .addComponent(lblUsuario)
+                .addContainerGap())
         );
 
         getContentPane().add(dpnlEscritorio, java.awt.BorderLayout.CENTER);
@@ -323,13 +361,13 @@ public class frmEscritorio extends javax.swing.JFrame {
         });
         jmSistema.add(jmiUsuarios);
 
-        jmiNuevoUsuairo.setText("Nuevo Usuario");
-        jmiNuevoUsuairo.addActionListener(new java.awt.event.ActionListener() {
+        jmiNuevoUsuario.setText("Nuevo Usuario");
+        jmiNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiNuevoUsuairoActionPerformed(evt);
+                jmiNuevoUsuarioActionPerformed(evt);
             }
         });
-        jmSistema.add(jmiNuevoUsuairo);
+        jmSistema.add(jmiNuevoUsuario);
 
         jmiSalir.setText("Salir");
         jmSistema.add(jmiSalir);
@@ -341,6 +379,24 @@ public class frmEscritorio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void permisos(){
+        
+        if(frmLogin.permisosSystem.equals("Supervisor")){
+            
+        jmiUsuarios.setEnabled(false);
+        jmiNuevoUsuario.setEnabled(false);
+        
+        }else if(frmLogin.permisosSystem.equals("Gerente")){
+            
+        jmiUsuarios.setEnabled(false);
+        jmiNuevoUsuario.setEnabled(false);
+        
+        }
+           
+    }
+    
+    
     private void jmiNuevoDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoDepartamentoActionPerformed
         // TODO add your handling code here:
         
@@ -538,14 +594,14 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmIndex.setVisible(true);
     }//GEN-LAST:event_jmiUsuariosActionPerformed
 
-    private void jmiNuevoUsuairoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoUsuairoActionPerformed
+    private void jmiNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoUsuarioActionPerformed
         frmNuevoUsuario frmNuevo = new frmNuevoUsuario();
         dpnlEscritorio.add(frmNuevo);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmNuevo.getSize();
         frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmNuevo.setVisible(true);
-    }//GEN-LAST:event_jmiNuevoUsuairoActionPerformed
+    }//GEN-LAST:event_jmiNuevoUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -587,8 +643,11 @@ public class frmEscritorio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane dpnlEscritorio;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jmAhorros;
     private javax.swing.JMenu jmCreditos;
     private javax.swing.JMenu jmCuentas;
@@ -612,11 +671,12 @@ public class frmEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiNuevoEmpleado;
     private javax.swing.JMenuItem jmiNuevoGarantia;
     private javax.swing.JMenuItem jmiNuevoTipoGarantia;
-    private javax.swing.JMenuItem jmiNuevoUsuairo;
+    private javax.swing.JMenuItem jmiNuevoUsuario;
     private javax.swing.JMenuItem jmiPerfil;
     private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiSucursal;
     private javax.swing.JMenuItem jmiTipoGarantia;
     private javax.swing.JMenuItem jmiUsuarios;
+    private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }

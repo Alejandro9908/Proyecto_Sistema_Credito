@@ -10,6 +10,7 @@ import java.awt.Frame;
 import static java.sql.DriverManager.println;
 import javax.swing.JFrame;
 import vistas.frmEscritorio;
+import vistas.frmLogin;
 
 /**
  *
@@ -28,11 +29,20 @@ public class SisServicioFinanciero {
         
         Conexion conexion = new Conexion();
         conexion.Conectar();
-        
+        /*
         frmEscritorio frm_Escritorio1 = new frmEscritorio();
         frm_Escritorio1.setTitle("Sistema de Creditos");
         frm_Escritorio1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frm_Escritorio1.setExtendedState(Frame.MAXIMIZED_BOTH);
+        frm_Escritorio1.setVisible(true);*/
+        
+        
+        
+          frmLogin frm_Escritorio1 = new frmLogin();
+        frm_Escritorio1.setTitle("Sistema de Creditos: Iniciar Sesion");
+        frm_Escritorio1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frm_Escritorio1.setLocationRelativeTo(null);
+        
         frm_Escritorio1.setVisible(true);
         
         System.out.println("Hola soy kevin");

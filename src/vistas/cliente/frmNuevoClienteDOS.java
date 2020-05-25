@@ -25,6 +25,7 @@ import modelo.Empleado;
 import modelo.Municipio;
 import modelo.Operador;
 import modelo.Telefono;
+import vistas.frmLogin;
 import vistas.frmSeleccionar;
 import static vistas.sucursal.frmNuevoSucursal.cbDepartamentos;
 import static vistas.sucursal.frmNuevoSucursal.cbMunicipio;
@@ -39,7 +40,7 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
     FCliente funcion = new FCliente();
     FSucursal llenarDepartamentoMunicipio = new FSucursal();
     int n;
-    int id=1;
+    int id= frmLogin.idUsuarioSystem;
     int departamentoSelected;
      int municipioSelected;
      DefaultTableModel modeloTel;
@@ -242,7 +243,7 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
       
            cliente.setGenero(cbGenero.getSelectedItem().toString());
            cliente.setProfesion(txtProfesion.getText());
-           cliente.setId_usuario(1);
+           cliente.setId_usuario(id);
            cliente.setDireccion(txtDireccion.getText());
            
            
@@ -356,7 +357,6 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
         txtNombre3 = new javax.swing.JTextField();
         lblNombre8 = new javax.swing.JLabel();
         txtApellido1 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         lblNombre9 = new javax.swing.JLabel();
         txtApellidoCasado = new javax.swing.JTextField();
         lblNombre10 = new javax.swing.JLabel();
@@ -459,17 +459,6 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
         lblNombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre8.setText("Segundo Apellido");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Apellido de Casado");
 
@@ -485,6 +474,7 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
         lblNombre13.setText("Fecha de Nacimiento");
 
         panelFoto.setBackground(new java.awt.Color(255, 255, 255));
+        panelFoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelFoto.setToolTipText("");
 
         javax.swing.GroupLayout panelFotoLayout = new javax.swing.GroupLayout(panelFoto);
@@ -495,11 +485,11 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
         );
         panelFotoLayout.setVerticalGroup(
             panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 153, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        lblNombre29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre29.setText("Foto");
+        lblNombre29.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNombre29.setText("Fotografía");
 
         btnIdCliente.setBackground(new java.awt.Color(255, 255, 255));
         btnIdCliente.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -512,6 +502,19 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
+                        .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
+                                .addComponent(txtProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNombre13)
+                                    .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
+                                .addComponent(lblNombre11)
+                                .addGap(131, 131, 131)
+                                .addComponent(btnIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
@@ -555,29 +558,15 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
                                     .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblNombre4)
                                         .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(12, 12, 12))
-                            .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioPersonalLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblNombre29)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                        .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                                .addComponent(txtProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNombre13)
-                                    .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                                .addComponent(lblNombre11)
-                                .addGap(131, 131, 131)
-                                .addComponent(btnIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(65, 65, 65))))))
         );
         pnlFormularioPersonalLayout.setVerticalGroup(
             pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,7 +590,7 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
                     .addComponent(lblNombre4)
                     .addComponent(lblNombre29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -627,9 +616,8 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
                             .addComponent(lblNombre10)
                             .addComponent(lblNombre1)))
                     .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(7, 7, 7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1000,7 +988,6 @@ public class frmNuevoClienteDOS extends javax.swing.JInternalFrame implements Ac
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JComboBox<String> cbTipoCasa;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import modelo.Garantia;
+import vistas.frmLogin;
 import vistas.frmSeleccionar;
 
 
@@ -21,7 +22,7 @@ import vistas.frmSeleccionar;
 public class frmNuevoGarantia extends javax.swing.JInternalFrame implements ActionListener{
 
     FGarantia funcion = new FGarantia();
-    int id_usuario=1;
+    int id_usuario= frmLogin.idUsuarioSystem;
     
     
     public frmNuevoGarantia() {
@@ -190,8 +191,8 @@ public class frmNuevoGarantia extends javax.swing.JInternalFrame implements Acti
         lblNombre6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre6.setText("Descripción");
 
-        lblNombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre8.setText("Foto");
+        lblNombre8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNombre8.setText("Fotografía");
 
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Valuación");
@@ -205,6 +206,8 @@ public class frmNuevoGarantia extends javax.swing.JInternalFrame implements Acti
                 txtId1ActionPerformed(evt);
             }
         });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -250,9 +253,14 @@ public class frmNuevoGarantia extends javax.swing.JInternalFrame implements Acti
                     .addComponent(txtNombre)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNombre8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelFoto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(panelFoto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
+                                        .addGap(49, 49, 49)
+                                        .addComponent(lblNombre8)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -260,7 +268,7 @@ public class frmNuevoGarantia extends javax.swing.JInternalFrame implements Acti
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
                                 .addComponent(txtCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                                .addComponent(btnTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
                                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNombre9)
@@ -300,13 +308,9 @@ public class frmNuevoGarantia extends javax.swing.JInternalFrame implements Acti
                 .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
-                        .addComponent(lblNombre8)
-                        .addGap(9, 9, 9)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addComponent(lblNombre10)
                         .addGap(9, 9, 9)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -317,7 +321,12 @@ public class frmNuevoGarantia extends javax.swing.JInternalFrame implements Acti
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNombre9)))
+                        .addComponent(lblNombre9))
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombre8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()

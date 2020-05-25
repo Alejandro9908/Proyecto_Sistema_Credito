@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import modelo.Empleado;
+import vistas.frmLogin;
 import vistas.frmSeleccionar;
 
 /**
@@ -24,6 +25,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
 
     
     FEmpleado funcion = new FEmpleado();
+    int idUsuario = frmLogin.idUsuarioSystem;
     /**
      * Creates new form frmNuevoEmpleado
      */
@@ -88,6 +90,15 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
 
     
     private void guardarEmpleado(){
+        
+        if(txtDpi.getText().length()==0 || txtNombre1.getText().length()==0 || txtNombre2.getText().length()==0 || txtApellido1.getText().length()==0 ||
+           txtApellido2.getText().length()==0 || cbEstadoCivil.getSelectedItem().toString()=="" || cbGenero.getSelectedItem().toString()=="" || panelFoto.getBytes().length==1 ||
+           txtProfesion.getText().length()==0 || txtFechaNacimiento.getCalendar()==null || txtTelefono.getText().length()==0 || txtCorreo.getText().length()==0 || 
+           txtMunicipio.getText().length()==0 || txtDireccion.getText().length()==0 || txtSucursal.getText().length()==0 || txtCargo.getText().length()==0 || txtSueldo.getText().length()==0){
+        
+        JOptionPane.showMessageDialog(null,"Hace falta rellenar campos obligatorios"); 
+        
+        }else{
         try{
             
             Empleado empleado = new  Empleado();
@@ -123,7 +134,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
            empleado.setGenero(cbGenero.getSelectedItem().toString());
            empleado.setProfesion(txtProfesion.getText());
            empleado.setSueldo(Float.parseFloat(txtSueldo.getText()));
-           empleado.setId_usuario(1);
+           empleado.setId_usuario(idUsuario);
            empleado.setDireccion(txtDireccion.getText());
            
            
@@ -133,14 +144,18 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                     
             
             funcion.guardarEmpleado(empleado);
-            frmIndexEmpleado.btnActualizar.doClick();
             limpiarDatos();
+            JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+            frmIndexEmpleado.btnActualizar.doClick();
+            
             
            // limpiartxt();
-            JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+            
            // JOptionPane.showMessageDialog(null,"Es necesario asignar a cursos");
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifique");
+            //JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifique");
+        }
+        
         }
     }
     
@@ -206,7 +221,6 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         txtNombre3 = new javax.swing.JTextField();
         lblNombre8 = new javax.swing.JLabel();
         txtApellido1 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         lblNombre9 = new javax.swing.JLabel();
         txtApellidoCasado = new javax.swing.JTextField();
         btnFoto = new javax.swing.JButton();
@@ -217,6 +231,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         lblNombre13 = new javax.swing.JLabel();
         panelFoto = new JPanelWebCam.JPanelWebCam();
         txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         pnlFormularioContacto = new javax.swing.JPanel();
@@ -293,17 +308,6 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         lblNombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre8.setText("Segundo Apellido");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 162, Short.MAX_VALUE)
-        );
-
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Apellido de Casado");
 
@@ -323,6 +327,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         lblNombre13.setText("Fecha de Nacimiento");
 
         panelFoto.setBackground(new java.awt.Color(255, 255, 255));
+        panelFoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelFoto.setToolTipText("");
 
         javax.swing.GroupLayout panelFotoLayout = new javax.swing.GroupLayout(panelFoto);
@@ -333,8 +338,11 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
         );
         panelFotoLayout.setVerticalGroup(
             panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 153, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Fotografía");
 
         javax.swing.GroupLayout pnlFormularioPersonalLayout = new javax.swing.GroupLayout(pnlFormularioPersonal);
         pnlFormularioPersonal.setLayout(pnlFormularioPersonalLayout);
@@ -394,17 +402,22 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                                         .addComponent(lblNombre4)
                                         .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(lblNombre11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(12, 12, 12))))
+                            .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioPersonalLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addGap(71, 71, 71))))))
         );
         pnlFormularioPersonalLayout.setVerticalGroup(
             pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(lblNombre11)
@@ -419,8 +432,13 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombre)
-                            .addComponent(lblNombre4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblNombre4)))
+                    .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -444,10 +462,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
                         .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombre10)
                             .addComponent(lblNombre1)))
-                    .addGroup(pnlFormularioPersonalLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -738,7 +753,7 @@ public class frmNuevoEmpleado extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JComboBox<String> cbGenero;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;

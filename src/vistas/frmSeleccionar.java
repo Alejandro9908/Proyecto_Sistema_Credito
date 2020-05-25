@@ -5,12 +5,17 @@
  */
 package vistas;
 
+ dba0.1i
 import controladores.FCuenta;
+import controladores.FAhorro;
+ master
 import controladores.FEmpleado;
 import controladores.FGarantia;
 import controladores.FSucursal;
+import controladores.FUsuario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vistas.ahorro.frmNuevoAhorro;
 import vistas.cliente.frmMostrarCliente;
 import vistas.credito.frmNuevoCredito;
 import vistas.empleado.frmMostrarEmpleado;
@@ -18,6 +23,7 @@ import vistas.empleado.frmNuevoEmpleado;
 import vistas.garantia.frmMostrarGarantia;
 import vistas.garantia.frmNuevoGarantia;
 import vistas.sucursal.frmMostrarSucursal;
+import vistas.usuario.frmNuevoUsuario;
 
 
 
@@ -32,6 +38,8 @@ public class frmSeleccionar extends javax.swing.JFrame {
     public static String nombre_departamento;
     FSucursal funcion = new FSucursal();
     FGarantia funcion2 = new FGarantia();
+    FUsuario funcion3 = new FUsuario();
+    FAhorro funcion4 = new FAhorro();
     
     //Variables para el municipio
     
@@ -54,6 +62,10 @@ public class frmSeleccionar extends javax.swing.JFrame {
     //Variables para selecionar el municipio en FrmNuevaGarantia
     public static String id_tipogarantia, nombre_garantia;
     
+    //Variables para selecionar el municipio en FrmNuevaGarantia
+    public static String id_empleado, Dpi, Nombre;
+    
+    public static String id_cuenta, no_cuenta,nombre,dpi;
     
     DefaultTableModel modelo;
     private int opcion;
@@ -113,15 +125,29 @@ public class frmSeleccionar extends javax.swing.JFrame {
             txtAccion.setText("Seleccione un municipio");
             mostrarMunicipiosEmpleado();
         }
-        if(opcion == 12){
+ dba0.1
+        if(opcion == 14){
             String search = txtBuscar.getText();
             txtAccion.setText("Seleccione una Garantia");
             mostrarGarantia();
         }
-        if(opcion==13){
+        if(opcion==15){
             mostrarClientes();
         }
-       
+         
+        if(opcion==12){
+         txtAccion.setText("Seleccione un empleado");
+         mostrarEmpleado();
+        } 
+        
+        if(opcion==13){
+         txtAccion.setText("Seleccione una cuenta");
+         mostrarCliente();
+        } 
+        
+        
+        
+  master
         this.setLocationRelativeTo(null); //para centrar la ventana
     }
     
@@ -169,6 +195,16 @@ public class frmSeleccionar extends javax.swing.JFrame {
       public void mostarTipogarantia(){
       
          funcion2.mostratipogarantia(Tabla);
+      }
+      
+      public void mostrarEmpleado(){
+      
+         funcion3.mostraempleado(Tabla);
+      }
+      
+      public void mostrarCliente(){
+      
+         funcion4.mostracliente(Tabla);
       }
     
   
@@ -247,7 +283,36 @@ public class frmSeleccionar extends javax.swing.JFrame {
      
      
      }   
+     
+     
+     private void buscarEmpleado(){
+     
+      try{
+      
+      String search = txtBuscar.getText(); //Es solo para prueba,, borrar luego
+      funcion3.buscarempleado(Tabla, search.toUpperCase());
+      
+      }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+     
+     
+     }  
     
+     
+      private void buscarCliente(){
+     
+      try{
+      
+      String search = txtBuscar.getText(); //Es solo para prueba,, borrar luego
+      funcion4.buscarempleado(Tabla, search.toUpperCase());
+      
+      }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+     
+     
+     } 
   
 
     
@@ -369,7 +434,7 @@ public class frmSeleccionar extends javax.swing.JFrame {
          
         }
         
-        else if(opcion==12){
+        else if(opcion==14){
             String garantia, descripcion, valuacion, id;
             id = (Tabla.getValueAt(posicion, 0).toString());
             garantia = (Tabla.getValueAt(posicion, 2).toString())+" - "+ (Tabla.getValueAt(posicion, 1).toString());
@@ -384,7 +449,8 @@ public class frmSeleccionar extends javax.swing.JFrame {
             
         }
         
-        else if(opcion==13){
+ dba0.1
+        else if(opcion==15){
             String cuenta, dpi, cliente, idC;
             
             cuenta = (Tabla.getValueAt(posicion, 0).toString());
@@ -397,6 +463,38 @@ public class frmSeleccionar extends javax.swing.JFrame {
             frmNuevoCredito.txtNombre.setText(cliente);
             frmNuevoCredito.txtIdC.setText(idC);
         }
+
+        else if(opcion==12){
+        
+            id_empleado=(Tabla.getValueAt(posicion, 0).toString());
+            Dpi=(Tabla.getValueAt(posicion, 1).toString());
+            Nombre=(Tabla.getValueAt(posicion, 2).toString());
+            
+            frmNuevoUsuario.txtId1.setText(id_empleado);
+            frmNuevoUsuario.txtId2.setText(Dpi);
+            frmNuevoUsuario.txtEmpleado.setText(Nombre);
+        
+        
+        }
+        
+        else if(opcion==13){
+        
+        id_cuenta=(Tabla.getValueAt(posicion, 0).toString());
+        no_cuenta=(Tabla.getValueAt(posicion, 1).toString());
+        nombre=(Tabla.getValueAt(posicion, 2).toString());
+        dpi=(Tabla.getValueAt(posicion,3).toString());
+        
+        frmNuevoAhorro.txtIdcliente.setText(id_cuenta);
+        frmNuevoAhorro.txtIdCuenta.setText(no_cuenta);
+        frmNuevoAhorro.txtNombre.setText(nombre);
+        frmNuevoAhorro.txtDpi.setText(dpi);
+        
+        
+        
+        }
+        
+        
+ master
         
         //para cerrar el frmBuscar
         this.dispose(); 
@@ -576,13 +674,24 @@ public class frmSeleccionar extends javax.swing.JFrame {
            buscarMunicipioGeneral();
        }
        
-       if(opcion == 12){
+ dba0.1
+       if(opcion == 14){
            mostrarGarantia();
        }
        
-        if(opcion == 13){
+        if(opcion == 15){
            mostrarClientes();
        }
+
+       if(opcion==12){
+           buscarEmpleado();
+       }
+       
+       if(opcion==13){
+         buscarCliente(); 
+       }
+        
+ master
         
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
