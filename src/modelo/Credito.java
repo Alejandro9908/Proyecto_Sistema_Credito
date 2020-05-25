@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author Alejandro
@@ -193,6 +195,30 @@ public class Credito {
         this.id_usuario = id_usuario;
     }
     
+     public int getId_garantia() {
+        return id_garantia;
+    }
+
+    public void setId_garantia(int id_garantia) {
+        this.id_garantia = id_garantia;
+    }
+
+    public Date getFecha_corte() {
+        return fecha_corte;
+    }
+
+    public void setFecha_corte(Date fecha_corte) {
+        this.fecha_corte = fecha_corte;
+    }
+
+    public Date getFecha_pago() {
+        return fecha_pago;
+    }
+
+    public void setFecha_pago(Date fecha_pago) {
+        this.fecha_pago = fecha_pago;
+    }
+    
     private int id_credito;
     private String numero_credito;
     private int id_cuenta;
@@ -206,5 +232,7 @@ public class Credito {
     private String destino;
     private int id_empleado;
     private int id_usuario;
-    
+    private int id_garantia;
+    private Date fecha_corte;
+    private Date fecha_pago;
 }

@@ -5,12 +5,14 @@
  */
 package vistas;
 
+import controladores.FCuenta;
 import controladores.FEmpleado;
 import controladores.FGarantia;
 import controladores.FSucursal;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vistas.cliente.frmMostrarCliente;
+import vistas.credito.frmNuevoCredito;
 import vistas.empleado.frmMostrarEmpleado;
 import vistas.empleado.frmNuevoEmpleado;
 import vistas.garantia.frmMostrarGarantia;
@@ -68,9 +70,8 @@ public class frmSeleccionar extends javax.swing.JFrame {
         initComponents();
         
         if(opcion==1){
-           txtAccion.setText("Seleccione un departamento");
-           mostrarDepartamentos();
-             
+            txtAccion.setText("Seleccione un departamento");
+            mostrarDepartamentos();       
         }
         if(opcion==2){
             txtAccion.setText("Seleccione un municipio");
@@ -80,58 +81,63 @@ public class frmSeleccionar extends javax.swing.JFrame {
             txtAccion.setText("Seleccione una sucursal");
             mostrarSucursales();
         }
-        
         if(opcion==4){
             txtAccion.setText("Seleccione un cargo");
-            mostrarCargos();
-            
+            mostrarCargos();   
         }
-        
         if(opcion==5){
             txtAccion.setText("Seleccione un municipio");
             mostrarMunicipiosEmpleado();
-        }
-        
+        } 
         if(opcion==6){ //edita
             txtAccion.setText("Seleccione un municipio");
             mostrarMunicipiosEmpleado();
         }
-        
         if(opcion==7){ //cargo de editar empleado
             txtAccion.setText("Seleccione un cargo");
-            mostrarCargos();
-            
+            mostrarCargos();   
         }
-        
         if(opcion==8){ //sucursal de editar empleado
             txtAccion.setText("Seleccione una sucursal");
             mostrarSucursales();
         }
-        
         if(opcion==9){
-         txtAccion.setText("Seleccione un tipo de garantia");
-         mostarTipogarantia();
+            txtAccion.setText("Seleccione un tipo de garantia");
+            mostarTipogarantia();
         }
-        
         if(opcion==10){
-         txtAccion.setText("Seleccione un tipo de garantia");
-         mostarTipogarantia();
+            txtAccion.setText("Seleccione un tipo de garantia");
+            mostarTipogarantia();
         }
-        
-         if(opcion==11){
-         txtAccion.setText("Seleccione un municipio");
-         mostrarMunicipiosEmpleado();
+        if(opcion==11){
+            txtAccion.setText("Seleccione un municipio");
+            mostrarMunicipiosEmpleado();
         }
-        
-        
-        
-        
+        if(opcion == 12){
+            String search = txtBuscar.getText();
+            txtAccion.setText("Seleccione una Garantia");
+            mostrarGarantia();
+        }
+        if(opcion==13){
+            mostrarClientes();
+        }
+       
         this.setLocationRelativeTo(null); //para centrar la ventana
     }
     
     
-   
     
+   public void mostrarGarantia(){
+       String buscar = txtBuscar.getText();
+       funcion2.mostrarGarantias(Tabla,buscar.toUpperCase());
+   }
+    
+    public void mostrarClientes(){
+        FCuenta f = new FCuenta();
+        String buscar = txtBuscar.getText();
+        f.mostrarCuentasS(Tabla, buscar);
+        txtAccion.setText("Seleccione un Cliente");
+    }
     
     public void mostrarDepartamentos(){
         
@@ -363,7 +369,34 @@ public class frmSeleccionar extends javax.swing.JFrame {
          
         }
         
+        else if(opcion==12){
+            String garantia, descripcion, valuacion, id;
+            id = (Tabla.getValueAt(posicion, 0).toString());
+            garantia = (Tabla.getValueAt(posicion, 2).toString())+" - "+ (Tabla.getValueAt(posicion, 1).toString());
+            descripcion = (Tabla.getValueAt(posicion, 3).toString());
+            valuacion = (Tabla.getValueAt(posicion, 4).toString());
+            
+            
+            frmNuevoCredito.txtGarantia.setText(garantia);
+            frmNuevoCredito.txtDescripcion.setText(descripcion);
+            frmNuevoCredito.txtValoracion.setText(valuacion);
+            frmNuevoCredito.txtIdGarantia.setText(id);
+            
+        }
         
+        else if(opcion==13){
+            String cuenta, dpi, cliente, idC;
+            
+            cuenta = (Tabla.getValueAt(posicion, 0).toString());
+            dpi = (Tabla.getValueAt(posicion, 1).toString());
+            cliente = (Tabla.getValueAt(posicion, 2).toString());
+            idC =(Tabla.getValueAt(posicion, 3).toString());
+            
+            frmNuevoCredito.txtIdCuenta.setText(cuenta);
+            frmNuevoCredito.txtDpi.setText(dpi);
+            frmNuevoCredito.txtNombre.setText(cliente);
+            frmNuevoCredito.txtIdC.setText(idC);
+        }
         
         //para cerrar el frmBuscar
         this.dispose(); 
@@ -543,7 +576,13 @@ public class frmSeleccionar extends javax.swing.JFrame {
            buscarMunicipioGeneral();
        }
        
-        
+       if(opcion == 12){
+           mostrarGarantia();
+       }
+       
+        if(opcion == 13){
+           mostrarClientes();
+       }
         
     }//GEN-LAST:event_txtBuscarCaretUpdate
 

@@ -232,6 +232,35 @@ public class FGarantia {
   
   
   }
+  
+  public void mostrarGarantias(JTable tabla,String buscar){ /// ESTA ES PARA LA VENTANITA DE SELCCIONAR
+        DefaultTableModel modelo;
+        
+        String [] encabezado = {"ID","NOMBRE","NUMERO DE IDENTIFICACION","DESCRIPCCION","VALUACION"};         
+        String [] registros = new String [7];  
+        modelo = new DefaultTableModel(null,encabezado);
+        String sql = "SELECT a.Id_garantia,a.Nombre,a.N_identificacion,a.Descripcion,\n" +
+        "a.Valuacion,a.Estado FROM TBL_GARANTIA AS a inner join\n" +
+        "TBL_TIPO_GARANTIA AS b on a.Id_tipo_garantia = b.Id_tipo_garantia where UPPER(a.Nombre) LIKE '%"+buscar+"%' and a.Estado = 1 and b.Estado =1";
+
+        try{
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                registros[0] = Integer.toString(rs.getInt("Id_garantia"));    
+                registros[1] = rs.getString("Nombre");
+                registros[2] = rs.getString("N_identificacion"); 
+                registros[3] = rs.getString("Descripcion"); 
+                registros[4] = Integer.toString((int) rs.getFloat("Valuacion"));
+
+                modelo.addRow(registros);    
+            }
+            tabla.setModel(modelo);
+        }catch(Exception e){    
+            JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+        } 
+    }  
    
    
 
