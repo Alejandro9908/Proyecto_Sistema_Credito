@@ -5,10 +5,10 @@
  */
 package vistas;
 
- dba0.1i
+
 import controladores.FCuenta;
 import controladores.FAhorro;
- master
+
 import controladores.FEmpleado;
 import controladores.FGarantia;
 import controladores.FSucursal;
@@ -125,7 +125,6 @@ public class frmSeleccionar extends javax.swing.JFrame {
             txtAccion.setText("Seleccione un municipio");
             mostrarMunicipiosEmpleado();
         }
- dba0.1
         if(opcion == 14){
             String search = txtBuscar.getText();
             txtAccion.setText("Seleccione una Garantia");
@@ -147,7 +146,6 @@ public class frmSeleccionar extends javax.swing.JFrame {
         
         
         
-  master
         this.setLocationRelativeTo(null); //para centrar la ventana
     }
     
@@ -449,7 +447,7 @@ public class frmSeleccionar extends javax.swing.JFrame {
             
         }
         
- dba0.1
+
         else if(opcion==15){
             String cuenta, dpi, cliente, idC;
             
@@ -494,7 +492,7 @@ public class frmSeleccionar extends javax.swing.JFrame {
         }
         
         
- master
+
         
         //para cerrar el frmBuscar
         this.dispose(); 
@@ -674,7 +672,7 @@ public class frmSeleccionar extends javax.swing.JFrame {
            buscarMunicipioGeneral();
        }
        
- dba0.1
+
        if(opcion == 14){
            mostrarGarantia();
        }
@@ -691,8 +689,7 @@ public class frmSeleccionar extends javax.swing.JFrame {
          buscarCliente(); 
        }
         
- master
-        
+ 
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
