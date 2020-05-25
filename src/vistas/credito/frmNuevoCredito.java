@@ -5,19 +5,94 @@
  */
 package vistas.credito;
 
+import controladores.FCredito;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import modelo.Cargo;
+import modelo.Credito;
+import vistas.cargo.frmIndexCargo;
+import vistas.frmSeleccionar;
+
 /**
  *
  * @author Alejandro
  */
-public class frmNuevoCredito extends javax.swing.JInternalFrame {
-
+public class frmNuevoCredito extends javax.swing.JInternalFrame implements ActionListener{
+    FCredito funcion = new FCredito();
     /**
      * Creates new form frmNuevoCredito
      */
     public frmNuevoCredito() {
         initComponents();
+        btnSeleccionarGarantia.addActionListener(this);
+        btnSeleccionarCuenta.addActionListener(this);
+        btnGuardar.addActionListener(this);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnSeleccionarGarantia){
+            frmSeleccionar seleccionar = new frmSeleccionar(12, "quemado");
+            seleccionar.setVisible(true);
+        }
+        if(e.getSource()==btnSeleccionarCuenta){
+            frmSeleccionar seleccionar = new frmSeleccionar(13, "quemado");
+            seleccionar.setVisible(true);
+        }
+        if(e.getSource()==btnGuardar){
+            guardarCredito();
+        }
+    }
+   
+    
+    public void guardarCredito(){
+        
+        try{
+            Credito credito = new Credito();
+            credito.setId_cuenta(Integer.parseInt(txtIdC.getText()));
+            credito.setMonto(Integer.parseInt(txtMonto.getText()));
+            credito.setCapital(Integer.parseInt(txtMonto.getText()));
+            credito.setInteres(Integer.parseInt(txtInteres.getText()));
+            credito.setPlazo(txtPlazo.getText());
+            credito.setPagado(0);
+            credito.setPorcentaje(1);
+            credito.setMora(Integer.parseInt(txtMora.getText()));
+            credito.setDestino(txtDestino.getText());
+            credito.setId_empleado(1);
+            credito.setId_usuario(1);
+            credito.setId_garantia(Integer.parseInt(txtIdGarantia.getText()));
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");   
+            java.util.Date utilStartDate = txtFechaCorte.getDate();
+            java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+            credito.setFecha_corte(sqlStartDate);
+            java.util.Date utilStartDate2 = txtFechaPago.getDate();
+            java.sql.Date sqlStartDate2 = new java.sql.Date(utilStartDate2.getTime());
+            credito.setFecha_pago(sqlStartDate2);
+       
+            funcion.guardarCredito(credito);
+
+            //limpiar();
+            //frmIndexCargo.btnActualizar.doClick();
+            JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+
+
+       }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos"); 
+       }
+    
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,21 +107,18 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
-        txtIdCuenta = new javax.swing.JTextField();
         lblNombre2 = new javax.swing.JLabel();
         lblNombre6 = new javax.swing.JLabel();
         lblNombre7 = new javax.swing.JLabel();
         lblNombre8 = new javax.swing.JLabel();
         lblNombre9 = new javax.swing.JLabel();
-        txtCapital = new javax.swing.JTextField();
-        txtCorte = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         txtDpi = new javax.swing.JTextField();
         lblNombre3 = new javax.swing.JLabel();
         btnSeleccionarCuenta = new javax.swing.JButton();
         txtInteres = new javax.swing.JTextField();
         txtPlazo = new javax.swing.JTextField();
         lblNombre4 = new javax.swing.JLabel();
-        txtPago = new javax.swing.JTextField();
         lblNombre5 = new javax.swing.JLabel();
         txtMora = new javax.swing.JTextField();
         lblNombre10 = new javax.swing.JLabel();
@@ -58,6 +130,11 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
         txtValoracion = new javax.swing.JTextField();
         lblNombre12 = new javax.swing.JLabel();
         lblNombre13 = new javax.swing.JLabel();
+        txtIdGarantia = new javax.swing.JTextField();
+        txtIdC = new javax.swing.JTextField();
+        txtIdCuenta = new javax.swing.JTextField();
+        txtFechaCorte = new com.toedter.calendar.JDateChooser();
+        txtFechaPago = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -72,17 +149,10 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre.setText("Cliente");
 
-        txtNombre.setEnabled(false);
+        txtNombre.setEditable(false);
 
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre1.setText("Fecha de pagos");
-
-        txtIdCuenta.setEditable(false);
-        txtIdCuenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdCuentaActionPerformed(evt);
-            }
-        });
 
         lblNombre2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre2.setText("Id cuenta");
@@ -94,7 +164,7 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
         lblNombre7.setText("Plazo");
 
         lblNombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre8.setText("Capital");
+        lblNombre8.setText("Monto acreditado");
 
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Interes Mensual");
@@ -125,21 +195,37 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
         lblNombre11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre11.setText("Garantía");
 
-        txtGarantia.setEnabled(false);
+        txtGarantia.setEditable(false);
 
         btnSeleccionarGarantia.setBackground(new java.awt.Color(255, 255, 255));
         btnSeleccionarGarantia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnSeleccionarGarantia.setText("Seleccionar");
 
-        txtDescripcion.setEnabled(false);
+        txtDescripcion.setEditable(false);
 
-        txtValoracion.setEnabled(false);
+        txtValoracion.setEditable(false);
 
         lblNombre12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre12.setText("Descripción");
 
         lblNombre13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre13.setText("Valoración");
+
+        txtIdGarantia.setEditable(false);
+
+        txtIdC.setEditable(false);
+        txtIdC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCActionPerformed(evt);
+            }
+        });
+
+        txtIdCuenta.setEditable(false);
+        txtIdCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCuentaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
@@ -151,55 +237,58 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
                     .addComponent(txtNombre)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                .addComponent(txtIdC, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblNombre2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre3)
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
                                 .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnSeleccionarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(txtDestino, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+                    .addComponent(txtDestino, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(lblNombre4)
+                            .addComponent(txtFechaCorte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNombre1)))
+                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(txtFechaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                .addComponent(txtMora)
+                                .addGap(2, 2, 2))
+                            .addComponent(lblNombre5)
+                            .addComponent(lblNombre7)
+                            .addComponent(txtPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtCorte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                        .addComponent(txtCapital, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(lblNombre4))
-                                .addGap(7, 7, 7)
-                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                        .addComponent(txtPago)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMora)
-                                        .addGap(2, 2, 2))
-                                    .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblNombre1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblNombre5)
-                                            .addComponent(lblNombre7)
-                                            .addComponent(txtPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNombre)
-                                    .addComponent(lblNombre6)
-                                    .addComponent(lblNombre8))
-                                .addGap(71, 71, 71)
-                                .addComponent(lblNombre9))
-                            .addComponent(lblNombre10)
-                            .addComponent(lblNombre11))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lblNombre)
+                            .addComponent(lblNombre6)
+                            .addComponent(lblNombre8))
+                        .addGap(71, 71, 71)
+                        .addComponent(lblNombre9))
+                    .addComponent(lblNombre10)
+                    .addComponent(lblNombre11)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                            .addComponent(txtGarantia)
-                            .addComponent(lblNombre12, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombre12, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                .addComponent(txtIdGarantia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,9 +311,10 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
                     .addComponent(lblNombre3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSeleccionarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,7 +328,7 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
                     .addComponent(lblNombre7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCapital, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -247,10 +337,10 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
                     .addComponent(lblNombre5)
                     .addComponent(lblNombre1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorte, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMora, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMora, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaCorte, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaPago, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNombre10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,7 +350,8 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionarGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSeleccionarGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre12)
@@ -288,6 +379,12 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
         pnlBaseLayout.setHorizontalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+            .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -295,12 +392,6 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlBaseLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,6 +420,10 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDpiActionPerformed
 
+    private void txtIdCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdCActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -352,18 +447,24 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre9;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
-    private javax.swing.JTextField txtCapital;
-    private javax.swing.JTextField txtCorte;
-    private javax.swing.JTextField txtDescripcion;
+    public static javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtDestino;
-    private javax.swing.JTextField txtDpi;
-    private javax.swing.JTextField txtGarantia;
-    private javax.swing.JTextField txtIdCuenta;
+    public static javax.swing.JTextField txtDpi;
+    private com.toedter.calendar.JDateChooser txtFechaCorte;
+    private com.toedter.calendar.JDateChooser txtFechaPago;
+    public static javax.swing.JTextField txtGarantia;
+    public static javax.swing.JTextField txtIdC;
+    public static javax.swing.JTextField txtIdCuenta;
+    public static javax.swing.JTextField txtIdGarantia;
     private javax.swing.JTextField txtInteres;
+    private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtMora;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPago;
+    public static javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPlazo;
-    private javax.swing.JTextField txtValoracion;
+    public static javax.swing.JTextField txtValoracion;
     // End of variables declaration//GEN-END:variables
+
+   
+
+    
 }

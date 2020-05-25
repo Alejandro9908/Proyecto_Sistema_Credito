@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cuenta;
 
@@ -105,4 +106,55 @@ public class FCuenta {
             return null;
         }
     }
+    
+    public void mostrarCuentasS(JTable tabla,String buscar){ // ESTE ES PARA LA TABLITA DE SELECIONAR
+        DefaultTableModel modelo;
+        
+        String [] encabezado = {"NO. CUENTA","DPI","CLIENTE","ID"};         
+        String [] registros = new String [4];  
+        modelo = new DefaultTableModel(null,encabezado);
+        String sql = "SELECT CU.Numero_cuenta, \n" +
+                    "CL.Dpi,\n" +
+                    "CL.Primer_nombre,\n" +
+                    "CL.Segundo_nombre,\n" +
+                    "CL.Tercer_nombre,\n" +
+                    "CL.Primer_apellido,\n" +
+                    "CL.Segundo_apellido,\n" +
+                    "CL.Apellido_casado,\n" +
+                    "CU.Id_cuenta\n" +
+                    "FROM TBL_CUENTA AS CU JOIN TBL_CLIENTE AS CL ON CU.Id_cliente = CL.Id_cliente \n" +
+                    "WHERE UPPER(CL.Dpi) LIKE '%"+buscar+"%' and CU.Estado = 1";
+
+        try{
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                registros[0] = rs.getString("Numero_cuenta");    
+                registros[1] = rs.getString("Dpi");
+                registros[2] = rs.getString("Primer_nombre"); 
+                if(rs.getString("Segundo_nombre")!=null){
+                    registros[2] = registros[2]+" "+rs.getString("Segundo_nombre"); 
+                }
+                if(rs.getString("Tercer_nombre")!=null){
+                    registros[2] = registros[2]+" "+rs.getString("Tercer_nombre"); 
+                }
+                if(rs.getString("Primer_apellido")!=null){
+                    registros[2] = registros[2]+" "+rs.getString("Primer_apellido"); 
+                }
+                if(rs.getString("Segundo_apellido")!=null){
+                    registros[2] = registros[2]+" "+rs.getString("Segundo_apellido"); 
+                }
+                if(rs.getString("Apellido_casado")!=null){
+                    registros[2] = registros[2]+" de "+rs.getString("Apellido_casado"); 
+                }
+                
+                registros[3] = rs.getString("Id_cuenta");  
+                modelo.addRow(registros);    
+            }
+            tabla.setModel(modelo);
+        }catch(Exception e){    
+            JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+        } 
+    } 
 }
