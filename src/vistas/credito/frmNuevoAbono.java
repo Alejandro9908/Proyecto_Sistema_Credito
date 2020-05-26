@@ -5,17 +5,29 @@
  */
 package vistas.credito;
 
+import controladores.FAbonoCredito;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import vistas.frmSeleccionar;
+
 /**
  *
  * @author Alejandro
  */
-public class frmNuevoAbono extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form frmNuevoAbono
-     */
-    public frmNuevoAbono() {
+public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionListener{
+    DefaultTableModel modelo;
+    FAbonoCredito funcion = new FAbonoCredito();
+    String query ="";
+    public frmNuevoAbono(int idCredito) {
         initComponents();
+        query = "SELECT Id_abono, Capital, Interes, Mora, Total_monto, fecha_pago FROM TBL_ABONO_CREDITO WHERE Id_credito = '"+idCredito+"' AND fecha_corte <= CAST(GETDATE() AS DATE)";
+        btnGuardar.addActionListener(this);
+        btnCancelar.addActionListener(this);
+        txtIdCredito.setVisible(false);
         cbBanco.setVisible(false);
         txtCheque.setVisible(false);
         lbl1.setVisible(false);
@@ -24,8 +36,45 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
         txtCambio.setVisible(true);
         lbl3.setVisible(true);
         lbl4.setVisible(true);
+        
+        mostrarAbonos(query);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
+    
+    
+    public void mostrarAbonos(String buscar){
+        try{
+    
+            modelo = funcion.mostrarAbonos(buscar);
+            tblPagos.setModel(modelo);
+            txtTotal.setText("    " + Integer.toString(funcion.totalRegistros)); 
+
+            ocultarColumnas(tblPagos,4);
+            /*ocultarColumnas(tblDatos,6);
+            ocultarColumnas(tblDatos,8);
+            /*ocultarColumnas(tblDatos,6);
+            ocultarColumnas(tblDatos,8);
+            ocultarColumnas(tblDatos,9);
+            ocultarColumnas(tblDatos,10);
+            ocultarColumnas(tblDatos,11);*/
+    
+    }   catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    }
+    
+     private void ocultarColumnas(JTable tabla, int columna){
+        
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +96,6 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
         txtIdAbono = new javax.swing.JTextField();
         txtDpi = new javax.swing.JTextField();
         lblNombre3 = new javax.swing.JLabel();
-        btnSeleccionarCuenta = new javax.swing.JButton();
         txtFechaPago = new javax.swing.JTextField();
         txtCheque = new javax.swing.JTextField();
         txtNCredito = new javax.swing.JTextField();
@@ -77,6 +125,7 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        txtIdCredito = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -115,10 +164,6 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
         lblNombre3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre3.setText("DPI");
 
-        btnSeleccionarCuenta.setBackground(new java.awt.Color(255, 255, 255));
-        btnSeleccionarCuenta.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnSeleccionarCuenta.setText("Seleccionar");
-
         txtNCredito.setEditable(false);
         txtNCredito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +189,11 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
                 "Id", "otroCampo"
             }
         ));
+        tblPagos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPagosMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblPagos);
 
         lblNombre11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -215,13 +265,9 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
                             .addComponent(lblNombre3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                .addComponent(lblNombre4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSeleccionarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
+                            .addComponent(lblNombre4)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
@@ -266,12 +312,12 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
                                     .addComponent(txtCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblNombre15))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFechaPago)
                                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                                         .addComponent(lblNombre9)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtFechaPago)))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
                                 .addComponent(lbl4)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -291,7 +337,6 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -347,6 +392,13 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnCancelar.setText("Cancelar");
 
+        txtIdCredito.setEditable(false);
+        txtIdCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCreditoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
         pnlBaseLayout.setHorizontalGroup(
@@ -364,14 +416,22 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtIdCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(20, 20, 20)
+                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlBaseLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtIdCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -410,7 +470,7 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
             txtCheque.setVisible(true);
             lbl1.setVisible(true);
             lbl2.setVisible(true);
-            txtEfectivo.setVisible(false);
+            txtEfectivo.setVisible(true);
             txtCambio.setVisible(false);
             lbl3.setVisible(false);
             lbl4.setVisible(false);
@@ -430,11 +490,28 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDpiActionPerformed
 
+    private void txtIdCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCreditoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdCreditoActionPerformed
+
+    private void tblPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPagosMouseClicked
+        int posicion = tblPagos.getSelectedRow();
+        
+        txtIdAbono.setText(tblPagos.getValueAt(posicion,0).toString());
+        txtCapital.setText(tblPagos.getValueAt(posicion,1).toString());
+        txtIntereses.setText(tblPagos.getValueAt(posicion,2).toString());
+        txtMora.setText(tblPagos.getValueAt(posicion,3).toString());
+        int total = Integer.parseInt(tblPagos.getValueAt(posicion,1).toString())+Integer.parseInt(tblPagos.getValueAt(posicion,2).toString())+Integer.parseInt(tblPagos.getValueAt(posicion,3).toString());
+        txtTotal.setText(Integer.toString(total));
+        txtFechaPago.setText(tblPagos.getValueAt(posicion,5).toString());
+        
+        
+    }//GEN-LAST:event_tblPagosMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnSeleccionarCuenta;
     private javax.swing.JComboBox<String> cbBanco;
     private javax.swing.JComboBox<String> cbFormaPago;
     private javax.swing.JLabel jLabel1;
@@ -459,20 +536,23 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre9;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
-    private javax.swing.JTable tblPagos;
+    public static javax.swing.JTable tblPagos;
     private javax.swing.JTextField txtCambio;
     private javax.swing.JTextField txtCapital;
     private javax.swing.JTextField txtCheque;
-    private javax.swing.JTextField txtDpi;
+    public static javax.swing.JTextField txtDpi;
     private javax.swing.JTextField txtEfectivo;
-    private javax.swing.JTextField txtEstado;
+    public static javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFechaPago;
     private javax.swing.JTextField txtIdAbono;
+    public static javax.swing.JTextField txtIdCredito;
     private javax.swing.JTextField txtIntereses;
     private javax.swing.JTextField txtMora;
-    private javax.swing.JTextField txtNCredito;
-    private javax.swing.JTextField txtNCuenta;
-    private javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtNCredito;
+    public static javax.swing.JTextField txtNCuenta;
+    public static javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+    
 }
