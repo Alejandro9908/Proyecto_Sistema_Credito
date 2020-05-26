@@ -260,7 +260,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -320,26 +320,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 997, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnlBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 644, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnlBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        getContentPane().add(pnlBase, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -359,7 +340,10 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         frmMostrar.setVisible(true);
 
         int posicion = tblDatos.getSelectedRow();
+        frmMostrarCredito.txtIdCredito.setText(tblDatos.getValueAt(posicion,0).toString());
         frmMostrarCredito.txtIdCuenta.setText(tblDatos.getValueAt(posicion,3).toString());
+        frmMostrarCredito.txtNCredito.setText(tblDatos.getValueAt(posicion,1).toString());
+        frmMostrarCredito.txtNCuenta.setText(tblDatos.getValueAt(posicion,2).toString());
         frmMostrarCredito.txtDpi.setText(tblDatos.getValueAt(posicion,5).toString());
         frmMostrarCredito.txtNombre.setText(tblDatos.getValueAt(posicion,4).toString());
         frmMostrarCredito.txtGarantia.setText(tblDatos.getValueAt(posicion,6).toString());
