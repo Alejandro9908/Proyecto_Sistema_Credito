@@ -5,9 +5,14 @@
  */
 package vistas.credito;
 
+import controladores.FCredito;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -16,12 +21,27 @@ import static vistas.frmEscritorio.dpnlEscritorio;
  */
 public class frmIndexCredito extends javax.swing.JInternalFrame implements ActionListener{
 
-    /**
-     * Creates new form frmIndexCredito
-     */
+    DefaultTableModel modelo;
+    FCredito funcion = new FCredito();
+    String query ="SELECT a.Id_credito,a.Numero_credito,b.Numero_cuenta,a.Id_cuenta,CONCAT(c.Primer_nombre,' ',c.Segundo_nombre,' ',c.Primer_apellido,' ',c.Segundo_apellido),\n" +
+                  "c.Dpi,u.descripcion,j.Nombre_garantia,m.NIckname,CONCAT(e.Primer_nombre,' ',e.Primer_apellido),a.Monto,a.Interes,a.Capital,a.Pagado,a.Capital-a.Pagado,a.Plazo,a.Mora,a.Fecha_pago,a.Fecha_corte\n" +
+                   " FROM TBL_CREDITO AS a inner join TBL_CUENTA AS b on a.Id_cuenta = b.Id_cuenta inner join TBL_CLIENTE AS c on b.Id_cliente = c.Id_cliente inner join TBL_USUARIO AS m \n" +
+                   "on a.Id_usuario = m.Id_usuario inner join TBL_EMPLEADO AS e on m.Id_empleado=e.Id_empleado inner join TBL_GARANTIA AS u on a.Id_garantia = u.Id_garantia\n" +
+                    "inner join TBL_TIPO_GARANTIA AS j on u.Id_tipo_garantia = j.Id_tipo_garantia WHERE a.Estado =1";
+    
+    
     public frmIndexCredito() {
         initComponents();
+        mostrar(query);
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbCuente);
+        grupoBuscar.add(rbNombre);
+        rbCuente.setSelected(true);
+        
         btnNuevo.addActionListener(this);
+        btnBuscar.addActionListener(this);
+        btnActualizar.addActionListener(this);
+        btnReporte.addActionListener(this);
     }
 
     @Override
@@ -34,17 +54,77 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
             frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
             frmNuevo.setVisible(true);
         }
+        
+         if(e.getSource()== btnActualizar){
+          //mostrar(query);
+           actualizar();
+        }
+        
+        if(e.getSource()==btnReporte){
+            //Reporte();
+        }
     }
     
+    private void mostrar(String buscar){ 
+    
+    try{
+    
+    modelo = funcion.mostrarCredito(buscar);
+    tblDatos.setModel(modelo);
+    txtTotal.setText("    " + Integer.toString(funcion.totalRegistros)); 
+    
+    ocultarColumnas(tblDatos,3);
+    ocultarColumnas(tblDatos,6);
+    ocultarColumnas(tblDatos,8);
+    /*ocultarColumnas(tblDatos,6);
+    ocultarColumnas(tblDatos,8);
+    ocultarColumnas(tblDatos,9);
+    ocultarColumnas(tblDatos,10);
+    ocultarColumnas(tblDatos,11);*/
+    
+    }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
     
     
+    }
+    
+    private void buscarCredito(String textoBuscar){
+     
+     if(rbCuente.isSelected()==true){
+     
+     
+       mostrar("SELECT a.Id_credito,a.Numero_credito,b.Numero_cuenta,a.Id_cuenta,CONCAT(c.Primer_nombre,' ',c.Segundo_nombre,' ',c.Primer_apellido,' ',c.Segundo_apellido),\n" +
+                  "c.Dpi,u.descripcion,j.Nombre_garantia,m.NIckname,CONCAT(e.Primer_nombre,' ',e.Primer_apellido),a.Monto,a.Interes,a.Capital,a.Pagado,a.Capital-a.Pagado,a.Plazo,a.Mora,a.Fecha_pago,a.Fecha_corte\n" +
+                   " FROM TBL_CREDITO AS a inner join TBL_CUENTA AS b on a.Id_cuenta = b.Id_cuenta inner join TBL_CLIENTE AS c on b.Id_cliente = c.Id_cliente inner join TBL_USUARIO AS m \n" +
+                   "on a.Id_usuario = m.Id_usuario inner join TBL_EMPLEADO AS e on m.Id_empleado=e.Id_empleado inner join TBL_GARANTIA AS u on a.Id_garantia = u.Id_garantia\n" +
+                    "inner join TBL_TIPO_GARANTIA AS j on u.Id_tipo_garantia = j.Id_tipo_garantia  WHERE (a.Numero_credito like '%"+textoBuscar+"%') and a.Estado=1 ");
+     }else{
+         
+         
+      mostrar("SELECT a.Id_credito,a.Numero_credito,b.Numero_cuenta,a.Id_cuenta,CONCAT(c.Primer_nombre,' ',c.Segundo_nombre,' ',c.Primer_apellido,' ',c.Segundo_apellido),\n" +
+                  "c.Dpi,u.descripcion,j.Nombre_garantia,m.NIckname,CONCAT(e.Primer_nombre,' ',e.Primer_apellido),a.Monto,a.Interes,a.Capital,a.Pagado,a.Capital-a.Pagado,a.Plazo,a.Mora,a.Fecha_pago,a.Fecha_corte\n" +
+                   " FROM TBL_CREDITO AS a inner join TBL_CUENTA AS b on a.Id_cuenta = b.Id_cuenta inner join TBL_CLIENTE AS c on b.Id_cliente = c.Id_cliente inner join TBL_USUARIO AS m \n" +
+                   "on a.Id_usuario = m.Id_usuario inner join TBL_EMPLEADO AS e on m.Id_empleado=e.Id_empleado inner join TBL_GARANTIA AS u on a.Id_garantia = u.Id_garantia\n" +
+                    "inner join TBL_TIPO_GARANTIA AS j on u.Id_tipo_garantia = j.Id_tipo_garantia WHERE (CONCAT(c.Primer_nombre,' ',c.Segundo_nombre,' ',c.Primer_apellido,' ',c.Segundo_apellido) like '%"+textoBuscar+"%') and a.Estado=1 ");   
+     
+     
+     }
     
     
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    }
+    
+    private void ocultarColumnas(JTable tabla, int columna){
+        
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
+    }
+    
+     private void actualizar(){
+        mostrar(query);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -56,8 +136,8 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        rbCuente = new javax.swing.JRadioButton();
         rbNombre = new javax.swing.JRadioButton();
-        rbId = new javax.swing.JRadioButton();
         pnlIndex = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
@@ -99,13 +179,13 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Buscar");
 
+        rbCuente.setBackground(new java.awt.Color(255, 255, 255));
+        rbCuente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbCuente.setText("Numero de Credito");
+
         rbNombre.setBackground(new java.awt.Color(255, 255, 255));
         rbNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbNombre.setText("Id del cliente");
-
-        rbId.setBackground(new java.awt.Color(255, 255, 255));
-        rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbId.setText("Número de Cuenta");
+        rbNombre.setText("Nombre del Cliente");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -115,9 +195,9 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rbId)
+                        .addComponent(rbNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbNombre))
+                        .addComponent(rbCuente))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -137,8 +217,8 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbNombre)
-                    .addComponent(rbId)))
+                    .addComponent(rbCuente)
+                    .addComponent(rbNombre)))
         );
 
         pnlIndex.setBackground(new java.awt.Color(255, 255, 255));
@@ -267,6 +347,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         //buscar();
         //buscar(txtBuscar.getText());
+        buscarCredito(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
@@ -277,23 +358,23 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frmMostrar.setVisible(true);
 
-        /*int posicion = tblDatos.getSelectedRow();
-        frmMostrarSucursal.txtId.setText(tblDatos.getValueAt(posicion,0).toString());
-        frmMostrarSucursal.txtNombre.setText(tblDatos.getValueAt(posicion,1).toString());
-
-        frmMostrarSucursal.txtMunicipio.setText(tblDatos.getValueAt(posicion,2).toString());
-        frmMostrarSucursal.txtDepartamento.setText(tblDatos.getValueAt(posicion,3).toString());
-
-        frmMostrarSucursal.txtDireccion.setText(tblDatos.getValueAt(posicion,4).toString());
-        frmMostrarSucursal.txtTelefono.setText(tblDatos.getValueAt(posicion,5).toString());
-        frmMostrarSucursal.txtCorreo.setText(tblDatos.getValueAt(posicion,6).toString());
-        frmMostrarSucursal.txtEstado.setText(tblDatos.getValueAt(posicion,7).toString());
-        frmMostrarSucursal.txtIdMunicipio.setText(tblDatos.getValueAt(posicion,8).toString());
-        frmMostrarSucursal.txtIdDepartamento.setText(tblDatos.getValueAt(posicion,9).toString());
-        frmMostrarSucursal.txtFecha.setText(tblDatos.getValueAt(posicion,10).toString());
-        frmMostrarSucursal.txtHora.setText(tblDatos.getValueAt(posicion,11).toString());
-
-        //frmMostrarSucursal.cbMunicipio.setText((tblDatos.getValueAt(posicion,2).toString()));*/
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarCredito.txtIdCuenta.setText(tblDatos.getValueAt(posicion,3).toString());
+        frmMostrarCredito.txtDpi.setText(tblDatos.getValueAt(posicion,5).toString());
+        frmMostrarCredito.txtNombre.setText(tblDatos.getValueAt(posicion,4).toString());
+        frmMostrarCredito.txtGarantia.setText(tblDatos.getValueAt(posicion,6).toString());
+        frmMostrarCredito.txtInteres.setText(tblDatos.getValueAt(posicion,12).toString());
+        frmMostrarCredito.txtCapital.setText(tblDatos.getValueAt(posicion,11).toString());
+        frmMostrarCredito.txtPlazo.setText(tblDatos.getValueAt(posicion,15).toString());
+        frmMostrarCredito.txtMora.setText(tblDatos.getValueAt(posicion,16).toString());
+        frmMostrarCredito.txtCorte.setText(tblDatos.getValueAt(posicion,18).toString());
+        frmMostrarCredito.txtPago.setText(tblDatos.getValueAt(posicion,17).toString());
+        frmMostrarCredito.txtMontoTotal.setText(tblDatos.getValueAt(posicion,10).toString());
+        frmMostrarCredito.txtMontoPagado.setText(tblDatos.getValueAt(posicion,13).toString());
+        frmMostrarCredito.txtMontoRestante.setText(tblDatos.getValueAt(posicion,14).toString());
+        
+        
+        
     }//GEN-LAST:event_tblDatosMouseClicked
 
 
@@ -310,7 +391,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlIndex;
-    private javax.swing.JRadioButton rbId;
+    private javax.swing.JRadioButton rbCuente;
     private javax.swing.JRadioButton rbNombre;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtBuscar;
