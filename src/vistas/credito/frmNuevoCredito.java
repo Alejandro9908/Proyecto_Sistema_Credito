@@ -79,14 +79,14 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
             credito.setFecha_pago(sqlStartDate2);
        
             funcion.guardarCredito(credito);
-
             limpiar();
-            frmIndexCargo.btnActualizar.doClick();
             JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
+            frmIndexCargo.btnActualizar.doClick();
+            
 
 
        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos"); 
+            //JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos"); 
        }
         }
         
@@ -186,13 +186,13 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
         lblNombre6.setText("Datos del Credito");
 
         lblNombre7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre7.setText("Plazo");
+        lblNombre7.setText("Plazo Anual");
 
         lblNombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre8.setText("Monto acreditado");
+        lblNombre8.setText("Capital acreditado");
 
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre9.setText("Interes Mensual");
+        lblNombre9.setText("Interes Anual");
 
         txtDpi.setEditable(false);
         txtDpi.addActionListener(new java.awt.event.ActionListener() {
