@@ -5,14 +5,22 @@
  */
 package vistas.credito;
 
+import controladores.Conexion;
 import controladores.FCredito;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import vistas.cliente.frmIndexCliente;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -61,7 +69,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         }
         
         if(e.getSource()==btnReporte){
-            //Reporte();
+            Reporte();
         }
     }
     
@@ -254,7 +262,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         pnlIndexLayout.setVerticalGroup(
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,6 +339,35 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         buscarCredito(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
+    public void Reporte(){
+         
+         Conexion g = new Conexion();
+        g.Conectar();
+      
+        try{
+          
+            String url= System.getProperty("user.dir");
+        // String ruta = url+"/src/reportes/ReporteGeneral.jasper";
+        String ruta = "/reportes/ReporteCreditos.jasper";
+        
+        g.Conectar();
+        
+        InputStream rutaJasper =  frmIndexCredito.class.getResourceAsStream(ruta);
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaJasper);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, g.getConexion());
+        
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        //viewer.setTitle("Reporte UMG");
+        viewer.setVisible(true);
+            
+        }catch(Exception ex){
+         
+         System.out.println("Error de reporte"+ex.getMessage());
+         
+     }
+        
+     }
+    
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
         frmMostrarCredito frmMostrar = new frmMostrarCredito();
         dpnlEscritorio.add(frmMostrar);
