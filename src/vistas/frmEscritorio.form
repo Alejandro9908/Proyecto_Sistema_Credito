@@ -237,6 +237,45 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jmCaja">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Caja"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="0"/>
+            </Property>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiPerfil1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Abono de Creditos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPerfil1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiUsuarios1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Desembolso de Creditos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiUsuarios1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiNuevoUsuario1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Abono de Ahorros"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiNuevoUsuario1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiSalir1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Desembolso de Ahorros"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jmSistema">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sistema"/>

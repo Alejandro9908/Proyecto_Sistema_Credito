@@ -20,6 +20,7 @@ import vistas.cliente.frmIndexCliente;
 import vistas.cliente.frmNuevoCliente;
 import vistas.cliente.frmNuevoClienteDOS;
 import vistas.credito.frmIndexCredito;
+import vistas.credito.frmNuevoAbono;
 import vistas.credito.frmNuevoCredito;
 import vistas.cuenta.frmIndexCuenta;
 import vistas.cuenta.frmNuevoCuenta;
@@ -115,6 +116,11 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmAhorros = new javax.swing.JMenu();
         jmiAhorros = new javax.swing.JMenuItem();
         jmiNuevoAhorro = new javax.swing.JMenuItem();
+        jmCaja = new javax.swing.JMenu();
+        jmiPerfil1 = new javax.swing.JMenuItem();
+        jmiUsuarios1 = new javax.swing.JMenuItem();
+        jmiNuevoUsuario1 = new javax.swing.JMenuItem();
+        jmiSalir1 = new javax.swing.JMenuItem();
         jmSistema = new javax.swing.JMenu();
         jmiPerfil = new javax.swing.JMenuItem();
         jmiUsuarios = new javax.swing.JMenuItem();
@@ -341,6 +347,38 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmAhorros.add(jmiNuevoAhorro);
 
         jMenuBar1.add(jmAhorros);
+
+        jmCaja.setText("Caja");
+        jmCaja.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        jmiPerfil1.setText("Abono de Creditos");
+        jmiPerfil1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPerfil1ActionPerformed(evt);
+            }
+        });
+        jmCaja.add(jmiPerfil1);
+
+        jmiUsuarios1.setText("Desembolso de Creditos");
+        jmiUsuarios1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiUsuarios1ActionPerformed(evt);
+            }
+        });
+        jmCaja.add(jmiUsuarios1);
+
+        jmiNuevoUsuario1.setText("Abono de Ahorros");
+        jmiNuevoUsuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoUsuario1ActionPerformed(evt);
+            }
+        });
+        jmCaja.add(jmiNuevoUsuario1);
+
+        jmiSalir1.setText("Desembolso de Ahorros");
+        jmCaja.add(jmiSalir1);
+
+        jMenuBar1.add(jmCaja);
 
         jmSistema.setText("Sistema");
         jmSistema.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -603,6 +641,23 @@ public class frmEscritorio extends javax.swing.JFrame {
         frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiNuevoUsuarioActionPerformed
 
+    private void jmiPerfil1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPerfil1ActionPerformed
+        frmNuevoAbono frmNuevo = new frmNuevoAbono();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+    }//GEN-LAST:event_jmiPerfil1ActionPerformed
+
+    private void jmiUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUsuarios1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiUsuarios1ActionPerformed
+
+    private void jmiNuevoUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoUsuario1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiNuevoUsuario1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -649,6 +704,7 @@ public class frmEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jmAhorros;
+    private javax.swing.JMenu jmCaja;
     private javax.swing.JMenu jmCreditos;
     private javax.swing.JMenu jmCuentas;
     private javax.swing.JMenu jmEmpresa;
@@ -672,11 +728,15 @@ public class frmEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiNuevoGarantia;
     private javax.swing.JMenuItem jmiNuevoTipoGarantia;
     private javax.swing.JMenuItem jmiNuevoUsuario;
+    private javax.swing.JMenuItem jmiNuevoUsuario1;
     private javax.swing.JMenuItem jmiPerfil;
+    private javax.swing.JMenuItem jmiPerfil1;
     private javax.swing.JMenuItem jmiSalir;
+    private javax.swing.JMenuItem jmiSalir1;
     private javax.swing.JMenuItem jmiSucursal;
     private javax.swing.JMenuItem jmiTipoGarantia;
     private javax.swing.JMenuItem jmiUsuarios;
+    private javax.swing.JMenuItem jmiUsuarios1;
     private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }
