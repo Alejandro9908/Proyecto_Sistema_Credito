@@ -5,19 +5,44 @@
  */
 package vistas.credito;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import static vistas.frmEscritorio.dpnlEscritorio;
+
 /**
  *
  * @author Alejandro
  */
-public class frmMostrarCredito extends javax.swing.JInternalFrame {
+public class frmMostrarCredito extends javax.swing.JInternalFrame implements ActionListener{
 
     /**
      * Creates new form frmMostrarCredito
      */
     public frmMostrarCredito() {
         initComponents();
+        btnAbono.addActionListener(this);
     }
 
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       if(e.getSource()==btnAbono){
+            frmNuevoAbono frmNuevo = new frmNuevoAbono(Integer.parseInt(txtIdCredito.getText()));
+            dpnlEscritorio.add(frmNuevo);
+            Dimension desktopSize = dpnlEscritorio.getSize();
+            Dimension FrameSize = frmNuevo.getSize();
+            frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+            frmNuevo.setVisible(true);
+            
+            
+            frmNuevoAbono.txtIdCredito.setText(txtIdCredito.getText());
+            frmNuevoAbono.txtNCredito.setText(txtNCredito.getText());
+            frmNuevoAbono.txtNCuenta.setText(txtNCuenta.getText());
+            frmNuevoAbono.txtDpi.setText(txtDpi.getText());
+            frmNuevoAbono.txtNombre.setText(txtNombre.getText());
+       }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +69,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
         rbId = new javax.swing.JRadioButton();
         txtNombre = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
-        txtIdCuenta = new javax.swing.JTextField();
+        txtNCredito = new javax.swing.JTextField();
         lblNombre2 = new javax.swing.JLabel();
         txtDpi = new javax.swing.JTextField();
         lblNombre3 = new javax.swing.JLabel();
@@ -70,6 +95,12 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
         btnGarantia = new javax.swing.JButton();
         txtGarantia = new javax.swing.JTextField();
         lblNombre6 = new javax.swing.JLabel();
+        btnAbono = new javax.swing.JButton();
+        btnDesembolso = new javax.swing.JButton();
+        txtNCuenta = new javax.swing.JTextField();
+        lblNombre13 = new javax.swing.JLabel();
+        txtIdCredito = new javax.swing.JTextField();
+        txtIdCuenta = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -171,20 +202,20 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
                 .addGap(43, 43, 43))
         );
 
-        txtNombre.setEnabled(false);
+        txtNombre.setEditable(false);
 
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre.setText("Cliente");
 
-        txtIdCuenta.setEditable(false);
-        txtIdCuenta.addActionListener(new java.awt.event.ActionListener() {
+        txtNCredito.setEditable(false);
+        txtNCredito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdCuentaActionPerformed(evt);
+                txtNCreditoActionPerformed(evt);
             }
         });
 
         lblNombre2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre2.setText("Id cuenta");
+        lblNombre2.setText("No. Credito");
 
         txtDpi.setEditable(false);
         txtDpi.addActionListener(new java.awt.event.ActionListener() {
@@ -203,32 +234,32 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
         lblNombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre8.setText("Capital");
 
-        txtCapital.setEnabled(false);
+        txtCapital.setEditable(false);
 
         lblNombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre9.setText("Interes Mensual");
 
-        txtInteres.setEnabled(false);
+        txtInteres.setEditable(false);
 
         lblNombre7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre7.setText("Plazo");
 
-        txtPlazo.setEnabled(false);
+        txtPlazo.setEditable(false);
 
         lblNombre4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre4.setText("Fecha de corte");
 
-        txtCorte.setEnabled(false);
+        txtCorte.setEditable(false);
 
         lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre1.setText("Fecha de pagos");
 
-        txtPago.setEnabled(false);
+        txtPago.setEditable(false);
 
         lblNombre5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre5.setText("Tasa de mora");
 
-        txtMora.setEnabled(false);
+        txtMora.setEditable(false);
 
         lblNombre10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre10.setText("Monto Total");
@@ -239,20 +270,38 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
         lblNombre12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre12.setText("Monto Restante");
 
-        txtMontoTotal.setEnabled(false);
+        txtMontoTotal.setEditable(false);
 
-        txtMontoPagado.setEnabled(false);
+        txtMontoPagado.setEditable(false);
 
-        txtMontoRestante.setEnabled(false);
+        txtMontoRestante.setEditable(false);
 
         btnGarantia.setBackground(new java.awt.Color(255, 255, 255));
         btnGarantia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnGarantia.setText("Ver Garantía");
 
-        txtGarantia.setEnabled(false);
+        txtGarantia.setEditable(false);
 
         lblNombre6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre6.setText("Garantía");
+
+        btnAbono.setBackground(new java.awt.Color(255, 255, 255));
+        btnAbono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAbono.setText("Nuevo Abono");
+
+        btnDesembolso.setBackground(new java.awt.Color(255, 255, 255));
+        btnDesembolso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnDesembolso.setText("Nuevo Desembolso");
+
+        txtNCuenta.setEditable(false);
+        txtNCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNCuentaActionPerformed(evt);
+            }
+        });
+
+        lblNombre13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre13.setText("No. Cuenta");
 
         javax.swing.GroupLayout pnlIndexLayout = new javax.swing.GroupLayout(pnlIndex);
         pnlIndex.setLayout(pnlIndexLayout);
@@ -269,29 +318,35 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAbono, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDesembolso)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblNombre)
-                        .addGroup(pnlIndexLayout.createSequentialGroup()
-                            .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblNombre2)
-                                .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnlIndexLayout.createSequentialGroup()
-                                    .addGap(29, 29, 29)
-                                    .addComponent(lblNombre3))
-                                .addGroup(pnlIndexLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addComponent(txtNombre)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createSequentialGroup()
                             .addComponent(txtGarantia)
                             .addGap(18, 18, 18)
-                            .addComponent(btnGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblNombre)
+                        .addGroup(pnlIndexLayout.createSequentialGroup()
+                            .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblNombre2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblNombre13)
+                                .addComponent(txtNCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblNombre3)
+                                .addGroup(pnlIndexLayout.createSequentialGroup()
+                                    .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnInformacion)))))
                     .addComponent(lblNombre6))
                 .addGap(18, 18, 18)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,12 +409,14 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
                                     .addGroup(pnlIndexLayout.createSequentialGroup()
                                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(lblNombre2)
-                                            .addComponent(lblNombre3))
+                                            .addComponent(lblNombre3)
+                                            .addComponent(lblNombre13))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(btnInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblNombre))
                                     .addComponent(lblNombre1))
@@ -405,16 +462,33 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReporte)
+                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnReporte)
+                        .addComponent(btnAbono)
+                        .addComponent(btnDesembolso))
                     .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 15, Short.MAX_VALUE)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
+
+        txtIdCredito.setEditable(false);
+        txtIdCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCreditoActionPerformed(evt);
+            }
+        });
+
+        txtIdCuenta.setEditable(false);
+        txtIdCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCuentaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
@@ -422,16 +496,24 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(0, 26, Short.MAX_VALUE))
+                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlBaseLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtIdCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtIdCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -478,18 +560,32 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbIdActionPerformed
 
-    private void txtIdCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCuentaActionPerformed
+    private void txtNCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNCreditoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdCuentaActionPerformed
+    }//GEN-LAST:event_txtNCreditoActionPerformed
 
     private void txtDpiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDpiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDpiActionPerformed
 
+    private void txtIdCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCreditoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdCreditoActionPerformed
+
+    private void txtNCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNCuentaActionPerformed
+
+    private void txtIdCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdCuentaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnAbono;
     public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
+    public static javax.swing.JButton btnDesembolso;
     private javax.swing.JButton btnGarantia;
     private javax.swing.JButton btnInformacion;
     private javax.swing.JButton btnReporte;
@@ -504,6 +600,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre10;
     private javax.swing.JLabel lblNombre11;
     private javax.swing.JLabel lblNombre12;
+    private javax.swing.JLabel lblNombre13;
     private javax.swing.JLabel lblNombre2;
     private javax.swing.JLabel lblNombre3;
     private javax.swing.JLabel lblNombre4;
@@ -521,15 +618,20 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField txtCorte;
     public static javax.swing.JTextField txtDpi;
     public static javax.swing.JTextField txtGarantia;
+    public static javax.swing.JTextField txtIdCredito;
     public static javax.swing.JTextField txtIdCuenta;
     public static javax.swing.JTextField txtInteres;
     public static javax.swing.JTextField txtMontoPagado;
     public static javax.swing.JTextField txtMontoRestante;
     public static javax.swing.JTextField txtMontoTotal;
     public static javax.swing.JTextField txtMora;
+    public static javax.swing.JTextField txtNCredito;
+    public static javax.swing.JTextField txtNCuenta;
     public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtPago;
     public static javax.swing.JTextField txtPlazo;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+    
 }
