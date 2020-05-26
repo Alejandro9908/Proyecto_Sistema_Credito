@@ -160,6 +160,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         setMaximizable(true);
 
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
+        pnlBase.setPreferredSize(new java.awt.Dimension(999, 652));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
         jLabel1.setText("Creditos");
