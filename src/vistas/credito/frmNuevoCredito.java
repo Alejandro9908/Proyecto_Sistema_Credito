@@ -49,7 +49,13 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
    
     
     public void guardarCredito(){
+        if(txtIdC.getText().length()==0 || txtMonto.getText().length()==0 || txtInteres.getText().length()==0 || txtPlazo.getText().length()==0 ||
+           txtFechaCorte.getCalendar()==null || txtFechaPago.getCalendar()==null  ||  txtMora.getText().length()==0   || txtDestino.getText().length()==0 ||
+           txtGarantia.getText().length()==0){
+            
+          JOptionPane.showMessageDialog(null,"Hace falta rellenar campos obligatorios");  
         
+        }else{
         try{
             Credito credito = new Credito();
             credito.setId_cuenta(Integer.parseInt(txtIdC.getText()));
@@ -74,18 +80,37 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
        
             funcion.guardarCredito(credito);
 
-            //limpiar();
-            //frmIndexCargo.btnActualizar.doClick();
+            limpiar();
+            frmIndexCargo.btnActualizar.doClick();
             JOptionPane.showMessageDialog(null,"Datos Guardados Correctamente");
 
 
        }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error:"+e.getMessage()+"\nVerifiqueCarlos"); 
        }
-    
+        }
         
     }
     
+    public void limpiar(){
+    
+        txtIdC.setText("");
+        txtIdCuenta.setText("");
+        txtDpi.setText("");
+        txtNombre.setText("");
+        txtMonto.setText("");
+        txtInteres.setText("");
+        txtPlazo.setText("");
+        txtFechaCorte.setCalendar(null);
+        txtFechaPago.setCalendar(null);
+        txtMora.setText("");
+        txtDestino.setText("");
+        txtIdGarantia.setText("");
+        txtGarantia.setText("");
+        txtDescripcion.setText("");
+        txtValoracion.setText("");
+    
+    }    
     
     
     

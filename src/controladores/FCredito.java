@@ -8,8 +8,11 @@ package controladores;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Credito;
 
 
@@ -82,4 +85,43 @@ public class FCredito {
                 JOptionPane.showMessageDialog(null,"Error al realizar la conexión por"+ e.getMessage() );   
             }    
     }
+    
+     public DefaultTableModel mostrarCredito(String buscar){
+     
+      DefaultTableModel modelo;
+   
+            totalRegistros=0;
+     String [] encabezado ={"ID","NO.CREDITO","NO.CUENTA","ID1","CLIENTE","DPI","DESCRIPCION","GARANTIA","NICK","ASESOR","MONTO","INTERESES","CAPITAL","PAGADO","MONTO RESTANTE","PLAZO","MORA","FECHA DE PAGO","FECHA DE CORTE"};       
+     String [] registros = new String [19];  
+     modelo = new DefaultTableModel(null,encabezado);
+     String sql = buscar;
+     
+     try{
+     
+      Statement st = cn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
+         
+         
+          while(rs.next()){
+          
+           for(int i=0; i <19; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 registros[i] = rs.getString(i+1); 
+               }
+               
+       totalRegistros += 1;
+       modelo.addRow(registros); 
+          
+          }
+          
+          return modelo;
+     
+     }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     }
+     
+     }
 }

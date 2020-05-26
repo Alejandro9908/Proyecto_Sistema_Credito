@@ -373,7 +373,6 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
                                 .addGap(45, 45, 45)
                                 .addComponent(lblNombre4)
                                 .addGap(38, 38, 38)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombre10)
                             .addComponent(lblNombre11)
@@ -518,19 +517,19 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbId;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtCapital;
-    private javax.swing.JTextField txtCorte;
-    private javax.swing.JTextField txtDpi;
-    private javax.swing.JTextField txtGarantia;
-    private javax.swing.JTextField txtIdCuenta;
-    private javax.swing.JTextField txtInteres;
-    private javax.swing.JTextField txtMontoPagado;
-    private javax.swing.JTextField txtMontoRestante;
-    private javax.swing.JTextField txtMontoTotal;
-    private javax.swing.JTextField txtMora;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPago;
-    private javax.swing.JTextField txtPlazo;
+    public static javax.swing.JTextField txtCapital;
+    public static javax.swing.JTextField txtCorte;
+    public static javax.swing.JTextField txtDpi;
+    public static javax.swing.JTextField txtGarantia;
+    public static javax.swing.JTextField txtIdCuenta;
+    public static javax.swing.JTextField txtInteres;
+    public static javax.swing.JTextField txtMontoPagado;
+    public static javax.swing.JTextField txtMontoRestante;
+    public static javax.swing.JTextField txtMontoTotal;
+    public static javax.swing.JTextField txtMora;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtPago;
+    public static javax.swing.JTextField txtPlazo;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
