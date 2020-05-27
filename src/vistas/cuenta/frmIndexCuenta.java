@@ -447,6 +447,7 @@ public class frmIndexCuenta extends javax.swing.JInternalFrame implements Action
         frmMostrar.setVisible(true);
         
         
+        
 
     }//GEN-LAST:event_tblDatosMouseClicked
 

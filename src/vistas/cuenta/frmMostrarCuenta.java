@@ -5,12 +5,19 @@
  */
 package vistas.cuenta;
 
+import controladores.FAhorro;
 import controladores.FCuenta;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelo.Cuenta;
+import vistas.abonoCredito.frmMostrarAbonos;
+import vistas.ahorro.frmMostrarAhorro;
 import vistas.cliente.frmMostrarCliente;
+import vistas.credito.frmMostrarCredito;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -20,14 +27,31 @@ import static vistas.frmEscritorio.dpnlEscritorio;
 public class frmMostrarCuenta extends javax.swing.JInternalFrame implements ActionListener {
 
     
+    DefaultTableModel modelo;
+    FAhorro funcion = new FAhorro();
+    int opcion;
     
     public frmMostrarCuenta(String id) {
         initComponents();
+        String e;
         mostrarDetalles(id);
-        btnInfo.addActionListener(this);
+        e=txtNumeroCuenta.getText();
+        String query="SELECT a.Id_ahorro,b.Numero_cuenta,c.Nombre_ahorro,CONCAT(d.Primer_nombre,' ',d.Segundo_nombre,' ',d.Primer_apellido,' ',\n" +
+                   "d.Segundo_apellido),d.Dpi,CONCAT(a.Nombre,' ',a.Apellido),a.Monto,a.Pago_mensual,a.Intereses,a.Plazo,a.Fecha_final FROM TBL_AHORRO AS a inner join TBL_TIPO_AHORRO AS c \n" +
+                   "on a.Id_tipo_ahorro = c.Id_tipo_ahorro inner join TBL_CUENTA AS b on a.ID_CUENTA = b.Id_cuenta inner join TBL_CLIENTE AS d on\n" +
+                   "b.Id_cliente = d.Id_cliente WHERE b.Numero_cuenta= '"+e+"'";
         
+        String query1="SELECT a.Id_credito,a.Numero_credito,b.Numero_cuenta,a.Id_cuenta,CONCAT(c.Primer_nombre,' ',c.Segundo_nombre,' ',c.Primer_apellido,' ',c.Segundo_apellido),\n" +
+                  "c.Dpi,u.descripcion,j.Nombre_garantia,m.NIckname,CONCAT(e.Primer_nombre,' ',e.Primer_apellido),a.Monto,a.Interes,a.Capital,a.Pagado,a.Capital-a.Pagado,a.Plazo,a.Mora,a.Fecha_pago,a.Fecha_corte\n" +
+                   " FROM TBL_CREDITO AS a inner join TBL_CUENTA AS b on a.Id_cuenta = b.Id_cuenta inner join TBL_CLIENTE AS c on b.Id_cliente = c.Id_cliente inner join TBL_USUARIO AS m \n" +
+                   "on a.Id_usuario = m.Id_usuario inner join TBL_EMPLEADO AS e on m.Id_empleado=e.Id_empleado inner join TBL_GARANTIA AS u on a.Id_garantia = u.Id_garantia\n" +
+                    "inner join TBL_TIPO_GARANTIA AS j on u.Id_tipo_garantia = j.Id_tipo_garantia WHERE b.Numero_cuenta= '"+e+"'";
+        btnInfo.addActionListener(this);
+        mostrar(query);
+        mostrar2(query1);
     }
     
+ 
     
     
      @Override
@@ -83,8 +107,50 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
         txtHora.setText(c.getHora_commit());
         txtUsuario.setText(c.getId_usuario());
         
+        
     }
     
+    
+    
+    
+     private void mostrar(String buscar){    
+        try {
+            modelo = funcion.mostrarAhorros(buscar);
+            
+            tblTelefonos.setModel(modelo);
+            //txtTotal.setText("    " + Integer.toString(funcion.totalRegistros)); 
+            ocultarColumnas(tblTelefonos,1);
+             ocultarColumnas(tblTelefonos,9);
+              ocultarColumnas(tblTelefonos,10);
+             ocultarColumnas(tblTelefonos,3);
+              ocultarColumnas(tblTelefonos,4); 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    }
+    
+     private void mostrar2(String buscar){    
+        try {
+            modelo = funcion.mostrarCreditos(buscar);
+            
+            tblTelefonos1.setModel(modelo);
+            //txtTotal.setText("    " + Integer.toString(funcion.totalRegistros));   
+            ocultarColumnas(tblTelefonos1,3);
+            ocultarColumnas(tblTelefonos1,6);
+            ocultarColumnas(tblTelefonos1,8);
+            ocultarColumnas(tblTelefonos1,2);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    }
+     
+     private void ocultarColumnas(JTable tabla, int columna){
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
+    }
+     
     
     
     
@@ -275,6 +341,11 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
                 "Id", "otroCampo"
             }
         ));
+        tblTelefonos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTelefonosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblTelefonos);
 
         tblTelefonos1.setModel(new javax.swing.table.DefaultTableModel(
@@ -285,6 +356,11 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
                 "Id", "otroCampo"
             }
         ));
+        tblTelefonos1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTelefonos1MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblTelefonos1);
 
         lblNombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -322,17 +398,13 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
         pnlBaseLayout.setHorizontalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(27, 333, Short.MAX_VALUE))
-            .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBaseLayout.createSequentialGroup()
                         .addComponent(pnlFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
-                        .addGap(0, 17, Short.MAX_VALUE)
+                        .addGap(0, 19, Short.MAX_VALUE)
                         .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre3)
                             .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -344,18 +416,22 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
                                         .addComponent(lblNombre9))
                                     .addGap(18, 18, 18)
                                     .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
-                                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18))
                                         .addGroup(pnlBaseLayout.createSequentialGroup()
                                             .addComponent(lblNombre8)
-                                            .addGap(66, 66, 66)))
+                                            .addGap(66, 66, 66))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
+                                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)))
                                     .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblNombre10)
                                         .addComponent(txtUsuario))))
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombre4))
                         .addGap(26, 26, 26))))
+            .addGroup(pnlBaseLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,9 +458,9 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
                     .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar)
-                .addContainerGap())
+                .addGap(61, 61, 61))
         );
 
         getContentPane().add(pnlBase, java.awt.BorderLayout.CENTER);
@@ -423,6 +499,58 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
     private void txtIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdClienteActionPerformed
+
+    private void tblTelefonosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonosMouseClicked
+        frmMostrarAhorro frmMostrar = new frmMostrarAhorro();
+        dpnlEscritorio.add(frmMostrar);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmMostrar.getSize();
+        frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmMostrar.setVisible(true);
+
+        int posicion = tblTelefonos.getSelectedRow();
+        frmMostrarAhorro.txtIdCuenta.setText(tblTelefonos.getValueAt(posicion,1).toString());
+        frmMostrarAhorro.txtDpi.setText(tblTelefonos.getValueAt(posicion,4).toString());
+        frmMostrarAhorro.txtNombre.setText(tblTelefonos.getValueAt(posicion,3).toString());
+        frmMostrarAhorro.txtGarantia.setText(tblTelefonos.getValueAt(posicion,5).toString());
+        frmMostrarAhorro.txtInteres.setText(tblTelefonos.getValueAt(posicion,2).toString());
+        frmMostrarAhorro.txtPlazo.setText(tblTelefonos.getValueAt(posicion,8).toString());
+        frmMostrarAhorro.txtMontoTotal.setText(tblTelefonos.getValueAt(posicion,6).toString());
+        frmMostrarAhorro.txtMontoPagado.setText(tblTelefonos.getValueAt(posicion,7).toString());
+        frmMostrarAhorro.txtMontoRestante.setText(tblTelefonos.getValueAt(posicion,9).toString());
+        frmMostrarAhorro.txtPago.setText(tblTelefonos.getValueAt(posicion,10).toString());
+    }//GEN-LAST:event_tblTelefonosMouseClicked
+
+    private void tblTelefonos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonos1MouseClicked
+         
+        frmMostrarCredito frmMostrar = new frmMostrarCredito();
+        dpnlEscritorio.add(frmMostrar);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmMostrar.getSize();
+        frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmMostrar.setVisible(true);
+
+        int posicion = tblTelefonos1.getSelectedRow();
+        frmMostrarCredito.txtIdCredito.setText(tblTelefonos1.getValueAt(posicion,0).toString());
+        frmMostrarCredito.txtIdCuenta.setText(tblTelefonos1.getValueAt(posicion,3).toString());
+        frmMostrarCredito.txtNCredito.setText(tblTelefonos1.getValueAt(posicion,1).toString());
+        frmMostrarCredito.txtNCuenta.setText(tblTelefonos1.getValueAt(posicion,2).toString());
+        frmMostrarCredito.txtDpi.setText(tblTelefonos1.getValueAt(posicion,5).toString());
+        frmMostrarCredito.txtNombre.setText(tblTelefonos1.getValueAt(posicion,4).toString());
+        frmMostrarCredito.txtGarantia.setText(tblTelefonos1.getValueAt(posicion,6).toString());
+        frmMostrarCredito.txtInteres.setText(tblTelefonos1.getValueAt(posicion,12).toString());
+        frmMostrarCredito.txtCapital.setText(tblTelefonos1.getValueAt(posicion,11).toString());
+        frmMostrarCredito.txtPlazo.setText(tblTelefonos1.getValueAt(posicion,15).toString());
+        frmMostrarCredito.txtMora.setText(tblTelefonos1.getValueAt(posicion,16).toString());
+        frmMostrarCredito.txtCorte.setText(tblTelefonos1.getValueAt(posicion,18).toString());
+        frmMostrarCredito.txtPago.setText(tblTelefonos1.getValueAt(posicion,17).toString());
+        frmMostrarCredito.txtMontoTotal.setText(tblTelefonos1.getValueAt(posicion,10).toString());
+        frmMostrarCredito.txtMontoPagado.setText(tblTelefonos1.getValueAt(posicion,13).toString());
+        frmMostrarCredito.txtMontoRestante.setText(tblTelefonos1.getValueAt(posicion,14).toString());
+        
+        
+        
+    }//GEN-LAST:event_tblTelefonos1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
