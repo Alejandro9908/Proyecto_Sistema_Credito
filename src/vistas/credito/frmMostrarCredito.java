@@ -8,6 +8,7 @@ package vistas.credito;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vistas.cuenta.frmMostrarCuenta;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -22,6 +23,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
     public frmMostrarCredito() {
         initComponents();
         btnAbono.addActionListener(this);
+        btnInformacion.addActionListener(this);
     }
 
     
@@ -41,6 +43,19 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
             frmNuevoAbono.txtNCuenta.setText(txtNCuenta.getText());
             frmNuevoAbono.txtDpi.setText(txtDpi.getText());
             frmNuevoAbono.txtNombre.setText(txtNombre.getText());
+       }
+       
+       if(e.getSource()==btnInformacion){
+           
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarCuenta frmMostrar = new frmMostrarCuenta(txtIdCuenta.getText());
+        dpnlEscritorio.add(frmMostrar);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmMostrar.getSize();
+        frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmMostrar.setVisible(true);
+       
+       
        }
     }
     /**
