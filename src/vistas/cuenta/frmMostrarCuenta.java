@@ -6,20 +6,49 @@
 package vistas.cuenta;
 
 import controladores.FCuenta;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import modelo.Cuenta;
+import vistas.cliente.frmMostrarCliente;
+import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
  *
  * @author Alejandro
  */
-public class frmMostrarCuenta extends javax.swing.JInternalFrame {
+public class frmMostrarCuenta extends javax.swing.JInternalFrame implements ActionListener {
 
     
     
     public frmMostrarCuenta(String id) {
         initComponents();
         mostrarDetalles(id);
+        btnInfo.addActionListener(this);
         
+    }
+    
+    
+    
+     @Override
+    public void actionPerformed(ActionEvent e) {
+    
+        if(btnInfo == e.getSource()){
+        frmMostrarCliente frmMostrar = new frmMostrarCliente();
+        dpnlEscritorio.add(frmMostrar);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmMostrar.getSize();
+        frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmMostrar.setVisible(true);
+        
+        //int posicion = tblDatos.getSelectedRow();
+        frmMostrarCliente.txtId.setText(txtIdCliente.getText());
+        frmMostrarCliente.btnCargarDatos.doClick();
+            
+            
+        }
+    
+    
     }
     
     private void mostrarDetalles(String id){
