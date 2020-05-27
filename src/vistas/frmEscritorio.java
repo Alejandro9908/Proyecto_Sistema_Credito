@@ -20,7 +20,7 @@ import vistas.cliente.frmIndexCliente;
 import vistas.cliente.frmNuevoCliente;
 import vistas.cliente.frmNuevoClienteDOS;
 import vistas.credito.frmIndexCredito;
-import vistas.credito.frmNuevoAbono;
+import vistas.abonoCredito.frmNuevoAbono;
 import vistas.credito.frmNuevoCredito;
 import vistas.cuenta.frmIndexCuenta;
 import vistas.cuenta.frmNuevoCuenta;
@@ -548,7 +548,7 @@ public class frmEscritorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNuevoCuentaActionPerformed
 
     private void jmiCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCreditosActionPerformed
-        frmIndexCredito frmIndex =new frmIndexCredito();
+        frmIndexCredito frmIndex =new frmIndexCredito(1);
         dpnlEscritorio.add(frmIndex);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmIndex.getSize();
@@ -642,12 +642,12 @@ public class frmEscritorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNuevoUsuarioActionPerformed
 
     private void jmiPerfil1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPerfil1ActionPerformed
-       /* frmNuevoAbono frmNuevo = new frmNuevoAbono();
+        frmIndexCredito frmNuevo = new frmIndexCredito(2);
         dpnlEscritorio.add(frmNuevo);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmNuevo.getSize();
         frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-        frmNuevo.setVisible(true);*/
+        frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiPerfil1ActionPerformed
 
     private void jmiUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUsuarios1ActionPerformed
