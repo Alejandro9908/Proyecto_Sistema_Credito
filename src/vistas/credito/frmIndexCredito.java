@@ -15,11 +15,13 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import vistas.abonoCredito.frmMostrarAbonos;
 import vistas.cliente.frmIndexCliente;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -37,9 +39,15 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
                    "on a.Id_usuario = m.Id_usuario inner join TBL_EMPLEADO AS e on m.Id_empleado=e.Id_empleado inner join TBL_GARANTIA AS u on a.Id_garantia = u.Id_garantia\n" +
                     "inner join TBL_TIPO_GARANTIA AS j on u.Id_tipo_garantia = j.Id_tipo_garantia WHERE a.Estado =1";
     
-    
-    public frmIndexCredito() {
+    int opcion;
+    public frmIndexCredito(int opcionr) {
         initComponents();
+        opcion = opcionr;
+        if(opcion == 1){
+            titulo.setText("Creditos");
+        }else if(opcion==2){
+            titulo.setText("Selecionar Credito");
+        }
         mostrar(query);
         ButtonGroup grupoBuscar = new ButtonGroup();
         grupoBuscar.add(rbCuente);
@@ -77,6 +85,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
     
     try{
     
+    if(opcion == 1){
     modelo = funcion.mostrarCredito(buscar);
     tblDatos.setModel(modelo);
     txtTotal.setText("    " + Integer.toString(funcion.totalRegistros)); 
@@ -88,7 +97,46 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
     ocultarColumnas(tblDatos,8);
     ocultarColumnas(tblDatos,9);
     ocultarColumnas(tblDatos,10);
-    ocultarColumnas(tblDatos,11);*/
+    ocultarColumnas(tblDatos,11);
+    */
+    }
+    if(opcion == 2){
+        
+        modelo = funcion.mostrarCredito(buscar);
+        tblDatos.setModel(modelo);
+        txtTotal.setText("    " + Integer.toString(funcion.totalRegistros)); 
+
+        ocultarColumnas(tblDatos,3);
+        ocultarColumnas(tblDatos,6);
+        ocultarColumnas(tblDatos,8);
+        ocultarColumnas(tblDatos,6);
+        ocultarColumnas(tblDatos,7);
+        ocultarColumnas(tblDatos,8);
+        ocultarColumnas(tblDatos,9);
+        ocultarColumnas(tblDatos,10);
+        ocultarColumnas(tblDatos,11);
+        ocultarColumnas(tblDatos,12);
+        ocultarColumnas(tblDatos,13);
+        ocultarColumnas(tblDatos,14);
+        ocultarColumnas(tblDatos,15);
+        ocultarColumnas(tblDatos,16);
+        ocultarColumnas(tblDatos,17);
+        ocultarColumnas(tblDatos,18);
+        TableColumnModel columna = tblDatos.getColumnModel();
+        columna.getColumn(0).setPreferredWidth(50);
+        columna.getColumn(0).setMaxWidth(50);
+        columna.getColumn(0).setMinWidth(50);
+        columna.getColumn(1).setPreferredWidth(150);
+        columna.getColumn(1).setMaxWidth(150);
+        columna.getColumn(1).setMinWidth(150);
+        columna.getColumn(2).setPreferredWidth(150);
+        columna.getColumn(2).setMaxWidth(150);
+        columna.getColumn(2).setMinWidth(150);
+        columna.getColumn(5).setPreferredWidth(150);
+        columna.getColumn(5).setMaxWidth(150);
+        columna.getColumn(5).setMinWidth(150);
+    
+    }
     
     }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
@@ -138,7 +186,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
     private void initComponents() {
 
         pnlBase = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
@@ -162,8 +210,8 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
         pnlBase.setPreferredSize(new java.awt.Dimension(999, 652));
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Creditos");
+        titulo.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        titulo.setText("Creditos");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -263,13 +311,13 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
         );
         pnlIndexLayout.setVerticalGroup(
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -307,7 +355,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
                         .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBaseLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(titulo)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(27, 27, 27))))
@@ -316,7 +364,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addComponent(titulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -370,6 +418,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
      }
     
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
+        if(opcion == 1){
         frmMostrarCredito frmMostrar = new frmMostrarCredito();
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
@@ -394,6 +443,35 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         frmMostrarCredito.txtMontoTotal.setText(tblDatos.getValueAt(posicion,10).toString());
         frmMostrarCredito.txtMontoPagado.setText(tblDatos.getValueAt(posicion,13).toString());
         frmMostrarCredito.txtMontoRestante.setText(tblDatos.getValueAt(posicion,14).toString());
+        }
+        
+        if(opcion ==2){
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarAbonos frmMostrar = new frmMostrarAbonos(Integer.parseInt(tblDatos.getValueAt(posicion,0).toString()));
+        dpnlEscritorio.add(frmMostrar);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmMostrar.getSize();
+        frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmMostrar.setVisible(true);
+
+   
+        
+        frmMostrarAbonos.txtIdCuenta.setText(tblDatos.getValueAt(posicion,3).toString());
+        frmMostrarAbonos.txtNCredito.setText(tblDatos.getValueAt(posicion,1).toString());
+        frmMostrarAbonos.txtNCuenta.setText(tblDatos.getValueAt(posicion,2).toString());
+        frmMostrarAbonos.txtDpi.setText(tblDatos.getValueAt(posicion,5).toString());
+        frmMostrarAbonos.txtNombre.setText(tblDatos.getValueAt(posicion,4).toString());
+      
+        frmMostrarAbonos.txtInteres.setText(tblDatos.getValueAt(posicion,12).toString());
+        frmMostrarAbonos.txtCapital.setText(tblDatos.getValueAt(posicion,11).toString());
+        frmMostrarAbonos.txtPlazo.setText(tblDatos.getValueAt(posicion,15).toString());
+        frmMostrarAbonos.txtMora.setText(tblDatos.getValueAt(posicion,16).toString());
+        frmMostrarAbonos.txtCorte.setText(tblDatos.getValueAt(posicion,18).toString());
+        frmMostrarAbonos.txtPago.setText(tblDatos.getValueAt(posicion,17).toString());
+        frmMostrarAbonos.txtMontoTotal.setText(tblDatos.getValueAt(posicion,10).toString());
+        frmMostrarAbonos.txtMontoPagado.setText(tblDatos.getValueAt(posicion,13).toString());
+        frmMostrarAbonos.txtMontoRestante.setText(tblDatos.getValueAt(posicion,14).toString());
+        }
         
         
         
@@ -405,7 +483,6 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -416,6 +493,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
     private javax.swing.JRadioButton rbCuente;
     private javax.swing.JRadioButton rbNombre;
     private javax.swing.JTable tblDatos;
+    private javax.swing.JLabel titulo;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables

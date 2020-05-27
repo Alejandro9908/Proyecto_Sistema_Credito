@@ -38,10 +38,10 @@ public class FAbonoCredito {
 
             while(rs.next()){
                 registros[0] = Integer.toString(rs.getInt("Id_abono"));
-                registros[1] = Integer.toString(rs.getInt("Capital"));
-                registros[2] = Integer.toString(rs.getInt("Interes"));
-                registros[3] = Integer.toString(rs.getInt("Mora"));
-                registros[4] = Integer.toString(rs.getInt("Total_monto"));
+                registros[1] = Float.toString(rs.getFloat("Capital"));
+                registros[2] = Float.toString(rs.getFloat("Interes"));
+                registros[3] = Float.toString(rs.getFloat("Mora"));
+                registros[4] = Float.toString(rs.getFloat("Total_monto"));
                 registros[5] = rs.getString("fecha_pago");
                 totalRegistros += 1;
                 modelo.addRow(registros);
