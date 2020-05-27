@@ -34,7 +34,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
     FAhorro funcion = new FAhorro();
     
     String query ="SELECT a.Id_ahorro,b.Numero_cuenta,c.Nombre_ahorro,CONCAT(d.Primer_nombre,' ',d.Segundo_nombre,' ',d.Primer_apellido,' ',\n" +
-                   "d.Segundo_apellido),d.Dpi,CONCAT(a.Nombre,' ',a.Apellido),a.Monto,a.Pago_mensual,a.Intereses,a.Plazo,a.Fecha_final FROM TBL_AHORRO AS a inner join TBL_TIPO_AHORRO AS c \n" +
+                   "d.Segundo_apellido),d.Dpi,CONCAT(a.Nombre,' ',a.Apellido),a.Monto,a.Pago_mensual,a.Intereses,a.Plazo,a.Fecha_final,b.Id_cuenta FROM TBL_AHORRO AS a inner join TBL_TIPO_AHORRO AS c \n" +
                    "on a.Id_tipo_ahorro = c.Id_tipo_ahorro inner join TBL_CUENTA AS b on a.ID_CUENTA = b.Id_cuenta inner join TBL_CLIENTE AS d on\n" +
                    "b.Id_cliente = d.Id_cliente WHERE a.Estado=1 AND d.Estado=1";
     
@@ -407,6 +407,8 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         frmMostrarAhorro.txtMontoPagado.setText(tblDatos.getValueAt(posicion,7).toString());
         frmMostrarAhorro.txtMontoRestante.setText(tblDatos.getValueAt(posicion,9).toString());
         frmMostrarAhorro.txtPago.setText(tblDatos.getValueAt(posicion,10).toString());
+        frmMostrarAhorro.txtIdCuenta1.setText(tblDatos.getValueAt(posicion,11).toString());
+        
     }//GEN-LAST:event_tblDatosMouseClicked
 
 

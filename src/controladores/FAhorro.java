@@ -217,8 +217,8 @@ public class FAhorro {
    
             totalRegistros=0;
             
-     String [] encabezado = {"ID","NO.CUENTA","TIPO DE AHORRO","CLIENTE","DPI","BENEFICIARIO","MONTO","PAGO PROGRAMADO","INTERES","PLAZO","FECHA RETIRO"};
-     String [] registros = new String [11];  
+     String [] encabezado = {"ID","NO.CUENTA","TIPO DE AHORRO","CLIENTE","DPI","BENEFICIARIO","MONTO","PAGO PROGRAMADO","INTERES","PLAZO","FECHA RETIRO","ID1"};
+     String [] registros = new String [12];  
      modelo = new DefaultTableModel(null,encabezado);
      String sql = buscar;
      
@@ -230,7 +230,7 @@ public class FAhorro {
          
           while(rs.next()){
           
-           for(int i=0; i <11; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+           for(int i=0; i <12; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
                    
                  registros[i] = rs.getString(i+1); 
                }
@@ -251,5 +251,72 @@ public class FAhorro {
    
    
    }
+   
+   public DefaultTableModel mostrarAhorros(String buscar){
+   
+    DefaultTableModel modelo;
+    String [] encabezado = {"ID","NO.CUENTA","TIPO DE AHORRO","CLIENTE","DPI","BENEFICIARIO","MONTO","PAGO PROGRAMADO","INTERES","PLAZO","FECHA RETIRO"};
+     String [] registros = new String [11];  
+     modelo = new DefaultTableModel(null,encabezado);
+     String sql = buscar;
+     
+   try{
+       
+   Statement st = cn.createStatement();
+   ResultSet rs = st.executeQuery(sql);
+   
+    while(rs.next()){
     
+         for(int i=0; i <11; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 registros[i] = rs.getString(i+1); 
+               }
+        
+         modelo.addRow(registros); 
+    }
+   return modelo;
+   
+   }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     }
+ 
+    
+   }
+   
+    public DefaultTableModel mostrarCreditos(String buscar){
+    
+    DefaultTableModel modelo;
+    String [] encabezado ={"ID","NO.CREDITO","NO.CUENTA","ID1","CLIENTE","DPI","DESCRIPCION","GARANTIA","NICK","ASESOR","MONTO","INTERESES","CAPITAL","PAGADO","MONTO RESTANTE","PLAZO","MORA","FECHA DE PAGO","FECHA DE CORTE"};       
+     String [] registros = new String [19];  
+     modelo = new DefaultTableModel(null,encabezado);
+     String sql = buscar;
+    
+    try{
+    Statement st = cn.createStatement();
+   ResultSet rs = st.executeQuery(sql);
+    while(rs.next()){
+    
+         for(int i=0; i <19; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 registros[i] = rs.getString(i+1); 
+               }
+        
+         modelo.addRow(registros); 
+    
+    }
+     return modelo;
+    
+    }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     }
+    
+    } 
+   
+
 }

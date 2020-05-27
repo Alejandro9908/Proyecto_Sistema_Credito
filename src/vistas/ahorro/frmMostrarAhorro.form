@@ -158,7 +158,11 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Component id="txtPago" min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="txtPago" min="-2" pref="167" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtIdCuenta1" min="-2" pref="102" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -231,6 +235,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtGarantia" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="txtPago" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="txtIdCuenta1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -609,6 +614,17 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Plazo"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtIdCuenta1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdCuenta1ActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
