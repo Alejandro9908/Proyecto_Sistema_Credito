@@ -5,7 +5,6 @@
  */
 package vistas.credito;
 
-import vistas.abonoCredito.frmNuevoAbono;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,33 +22,18 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
      */
     public frmMostrarCredito() {
         initComponents();
-        btnAbono.addActionListener(this);
-        btnInformacion.addActionListener(this);
 
-       
- 
+        btnInformacion.addActionListener(this);
+        btnAbono.addActionListener(this);
+        //SI
     }
 
     
     @Override
     public void actionPerformed(ActionEvent e) {
 
-       if(e.getSource()==btnAbono){
-            frmNuevoAbono frmNuevo = new frmNuevoAbono(Integer.parseInt(txtIdCredito.getText()));
-            dpnlEscritorio.add(frmNuevo);
-            Dimension desktopSize = dpnlEscritorio.getSize();
-            Dimension FrameSize = frmNuevo.getSize();
-            frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-            frmNuevo.setVisible(true);
+
             
-            
-            frmNuevoAbono.txtIdCredito.setText(txtIdCredito.getText());
-            frmNuevoAbono.txtNCredito.setText(txtNCredito.getText());
-            frmNuevoAbono.txtNCuenta.setText(txtNCuenta.getText());
-            frmNuevoAbono.txtDpi.setText(txtDpi.getText());
-            frmNuevoAbono.txtNombre.setText(txtNombre.getText());
-       }
-       
        if(e.getSource()==btnInformacion){
            
         int posicion = tblDatos.getSelectedRow();
@@ -63,6 +47,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
        
        }
       
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,6 +101,8 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         btnGarantia = new javax.swing.JButton();
         txtGarantia = new javax.swing.JTextField();
         lblNombre6 = new javax.swing.JLabel();
+        btnAbono = new javax.swing.JButton();
+        btnDesembolso = new javax.swing.JButton();
         txtNCuenta = new javax.swing.JTextField();
         lblNombre13 = new javax.swing.JLabel();
         txtIdCredito = new javax.swing.JTextField();
@@ -304,6 +291,14 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         lblNombre6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre6.setText("Garantía");
 
+        btnAbono.setBackground(new java.awt.Color(255, 255, 255));
+        btnAbono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAbono.setText("Nuevo Abono");
+
+        btnDesembolso.setBackground(new java.awt.Color(255, 255, 255));
+        btnDesembolso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnDesembolso.setText("Nuevo Desembolso");
+
         txtNCuenta.setEditable(false);
         txtNCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,6 +324,10 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAbono, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDesembolso)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnlIndexLayout.createSequentialGroup()
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,7 +468,10 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReporte)
+                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnReporte)
+                        .addComponent(btnAbono)
+                        .addComponent(btnDesembolso))
                     .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -586,8 +588,10 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnAbono;
     public static javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
+    public static javax.swing.JButton btnDesembolso;
     private javax.swing.JButton btnGarantia;
     private javax.swing.JButton btnInformacion;
     private javax.swing.JButton btnReporte;
@@ -634,5 +638,6 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
     public static javax.swing.JTextField txtPlazo;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
-  
+
+    
 }
