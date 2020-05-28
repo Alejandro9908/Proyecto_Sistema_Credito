@@ -23,6 +23,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import vistas.abonoCredito.frmMostrarAbonos;
 import vistas.cliente.frmIndexCliente;
+import static vistas.credito.frmMostrarCredito.btnactualizarabono;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -442,7 +443,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         frmMostrarCredito.txtPago.setText(tblDatos.getValueAt(posicion,17).toString());
         frmMostrarCredito.txtMontoTotal.setText(tblDatos.getValueAt(posicion,10).toString());
         frmMostrarCredito.txtMontoPagado.setText(tblDatos.getValueAt(posicion,13).toString());
-        frmMostrarCredito.txtMontoRestante.setText(tblDatos.getValueAt(posicion,14).toString());
+        frmMostrarCredito.txtMontoRestante.setText(tblDatos.getValueAt(posicion,14).toString()); btnactualizarabono.doClick();
         }
         
         if(opcion ==2){

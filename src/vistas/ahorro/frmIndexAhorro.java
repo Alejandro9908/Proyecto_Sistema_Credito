@@ -54,9 +54,10 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         }
         
         ButtonGroup grupoBuscar = new ButtonGroup();
-        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbCuente);
         grupoBuscar.add(rbNombre);
-        rbNombre.setSelected(true);
+        rbCuente.setSelected(true);
+        
         
         btnNuevo.addActionListener(this);
         btnBuscar.addActionListener(this);
@@ -152,20 +153,24 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
     
      private void buscarUsuario(String textoBuscar){
      
-     if(rbId.isSelected()==true){
-     
-     
+     if(rbCuente.isSelected()==true){
+      
+         
      mostrar("SELECT a.Id_ahorro,b.Numero_cuenta,c.Nombre_ahorro,CONCAT(d.Primer_nombre,' ',d.Segundo_nombre,' ',d.Primer_apellido,' ',\n" +
-             "d.Segundo_apellido),d.Dpi,CONCAT(a.Nombre,' ',a.Apellido),a.Monto,a.Pago_mensual,a.Intereses,a.Plazo,a.Fecha_final FROM TBL_AHORRO AS a inner join TBL_TIPO_AHORRO AS c \n" +
+             "d.Segundo_apellido),d.Dpi,CONCAT(a.Nombre,' ',a.Apellido),a.Monto,a.Pago_mensual,a.Intereses,a.Plazo,a.Fecha_final,b.Id_cuenta FROM TBL_AHORRO AS a inner join TBL_TIPO_AHORRO AS c \n" +
              "on a.Id_tipo_ahorro = c.Id_tipo_ahorro inner join TBL_CUENTA AS b on a.ID_CUENTA = b.Id_cuenta inner join TBL_CLIENTE AS d on\n" +
              "b.Id_cliente = d.Id_cliente WHERE (b.Numero_cuenta like '%"+textoBuscar+"%') and a.Estado=1 AND d.Estado=1");
      
+     
+     
+     
      }else{
      
-     mostrar("SELECT a.Id_ahorro,b.Numero_cuenta,c.Nombre_ahorro,CONCAT(d.Primer_nombre,' ',d.Segundo_nombre,' ',d.Primer_apellido,' ',\n" +
-             "d.Segundo_apellido),d.Dpi,CONCAT(a.Nombre,' ',a.Apellido),a.Monto,a.Pago_mensual,a.Intereses,a.Plazo,a.Fecha_final FROM TBL_AHORRO AS a inner join TBL_TIPO_AHORRO AS c \n" +
+         mostrar("SELECT a.Id_ahorro,b.Numero_cuenta,c.Nombre_ahorro,CONCAT(d.Primer_nombre,' ',d.Segundo_nombre,' ',d.Primer_apellido,' ',\n" +
+             "d.Segundo_apellido),d.Dpi,CONCAT(a.Nombre,' ',a.Apellido),a.Monto,a.Pago_mensual,a.Intereses,a.Plazo,a.Fecha_final,b.Id_cuenta FROM TBL_AHORRO AS a inner join TBL_TIPO_AHORRO AS c \n" +
              "on a.Id_tipo_ahorro = c.Id_tipo_ahorro inner join TBL_CUENTA AS b on a.ID_CUENTA = b.Id_cuenta inner join TBL_CLIENTE AS d on\n" +
              "b.Id_cliente = d.Id_cliente WHERE (CONCAT(d.Primer_nombre,' ',d.Segundo_nombre,' ',d.Primer_apellido,' ',d.Segundo_apellido) like '%"+textoBuscar+"%') and a.Estado=1 AND d.Estado=1");
+
      
      }
      
@@ -189,8 +194,8 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        rbCuente = new javax.swing.JRadioButton();
         rbNombre = new javax.swing.JRadioButton();
-        rbId = new javax.swing.JRadioButton();
         pnlIndex = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
@@ -232,13 +237,13 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Buscar");
 
+        rbCuente.setBackground(new java.awt.Color(255, 255, 255));
+        rbCuente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbCuente.setText("Numero de Cuenta");
+
         rbNombre.setBackground(new java.awt.Color(255, 255, 255));
         rbNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbNombre.setText("Cliente");
-
-        rbId.setBackground(new java.awt.Color(255, 255, 255));
-        rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbId.setText("Número de Cuenta");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -248,9 +253,9 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rbId)
+                        .addComponent(rbNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbNombre))
+                        .addComponent(rbCuente))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,8 +275,8 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbNombre)
-                    .addComponent(rbId)))
+                    .addComponent(rbCuente)
+                    .addComponent(rbNombre)))
         );
 
         pnlIndex.setBackground(new java.awt.Color(255, 255, 255));
@@ -469,7 +474,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlIndex;
-    private javax.swing.JRadioButton rbId;
+    private javax.swing.JRadioButton rbCuente;
     private javax.swing.JRadioButton rbNombre;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtBuscar;
