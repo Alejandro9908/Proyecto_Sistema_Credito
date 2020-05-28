@@ -42,7 +42,7 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
         
         query = "SELECT Id_abono, Capital, Interes, Mora, Total_monto, fecha_pago FROM TBL_ABONO_CREDITO WHERE Id_credito = '"+idCredito+"' AND fecha_corte <= CAST(GETDATE() AS DATE) AND Estado = 1";
         mostrarAbonos(query);
-       actualizarMora();
+        actualizarMora();
         mostrarAbonos(query);
     }
     
@@ -72,6 +72,7 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
                 fechaPago = tblDatos.getValueAt(i, 5).toString();
                 montoMes = Float.parseFloat(tblDatos.getValueAt(i, 1).toString())+Float.parseFloat(tblDatos.getValueAt(i, 2).toString());
                 funcion.consultaMora(idCredito, idAbono, fechaPago, montoMes);
+                System.out.println("FECHA: "+fechaPago);
             }
       
     }

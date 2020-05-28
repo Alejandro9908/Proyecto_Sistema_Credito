@@ -62,8 +62,7 @@ public class FAbonoCredito {
     
     public void consultaMora(int idCredito,int idAbono, String fechaPago, float montoMes){
         try{
-
-           
+     
             CallableStatement cst = cn.prepareCall("{call ACTUALIZAR_MORA (?,?,?,?)}");
             cst.setInt(1, idCredito);
             cst.setInt(2, idAbono);
@@ -129,6 +128,8 @@ public class FAbonoCredito {
                                                     "Banco_cheque = '"+abonoCredito.getBanco_cheque()+"',\n" +
                                                     "Numero_cheque = '"+abonoCredito.getNumero_cheque()+"',\n" +
                                                     "ID_USUARIO = '"+frmLogin.idUsuarioSystem+"',\n" +
+                                                    "Fecha_commit = CAST(GETDATE() AS DATE),\n" +
+                                                    "Hora_commit = CAST(GETDATE() AS TIME),\n" +
                                                     "Estado = 0\n" +
                                                     "WHERE Id_abono = '"+buscar+"'");
                 st.execute();
