@@ -30,6 +30,7 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
         btnSeleccionarGarantia.addActionListener(this);
         btnSeleccionarCuenta.addActionListener(this);
         btnGuardar.addActionListener(this);
+        btnCancelar.addActionListener(this);
     }
 
     @Override
@@ -44,6 +45,12 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
         }
         if(e.getSource()==btnGuardar){
             guardarCredito();
+        }
+        
+        if(e.getSource()==btnCancelar){
+            
+             cancelar();
+        
         }
     }
    
@@ -113,7 +120,10 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
     }    
     
     
-    
+     public void cancelar(){
+        
+        this.dispose();
+    }
     
     
     

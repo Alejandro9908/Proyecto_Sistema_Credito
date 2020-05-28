@@ -132,7 +132,7 @@ public class FCredito {
          
      DefaultTableModel modelo;
      totalRefistrosA=0;
-     String [] encabezado ={"ID","ID2","CAPITAL","MORA","INTERES","TOTAL MONTO","TIPO DE PAGO","FECHA DE PAGO","FECHA DE CORTE"};
+     String [] encabezado ={"ID","ID2","CAPITAL","MORA","INTERES","TOTAL MONTO","TIPO DE PAGO","FECHA DE PAGO","HORA"};
      String [] registros = new String [9];  
      modelo = new DefaultTableModel(null,encabezado);
      String sql = buscar;
