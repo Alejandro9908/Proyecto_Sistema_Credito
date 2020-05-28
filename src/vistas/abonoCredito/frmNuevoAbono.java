@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import modelo.AbonoCredito;
 import vistas.frmSeleccionar;
 
 /**
@@ -22,23 +23,49 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
     DefaultTableModel modelo;
     FAbonoCredito funcion = new FAbonoCredito();
     String query ="";
+  
+    
     public frmNuevoAbono() {
         initComponents();
+    
         btnGuardar.addActionListener(this);
         btnCancelar.addActionListener(this);
-        txtIdCredito.setVisible(false);
-        cbBanco.setEnabled(false);
-        txtCheque.setEnabled(false);
-        txtEfectivo.setEnabled(true);
-        txtCambio.setEnabled(true);
-   
+        
+        
+            txtIdCredito.setVisible(false);
+            cbBanco.setEnabled(false);
+            txtCheque.setEnabled(false);
+            txtEfectivo.setEnabled(true);
+            txtCambio.setEnabled(true);
+        
         
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(e.getSource() == btnGuardar){
+            AbonoCredito abonoCredito = new AbonoCredito();
+            
+                if(cbFormaPago.getSelectedIndex()==0){
+                    abonoCredito.setFroma_pago("EFECTIVO");
+                    funcion.agregarAbono(abonoCredito, txtIdAbono.getText());
+                }
+                if(cbFormaPago.getSelectedIndex()==1){
+                    abonoCredito.setFroma_pago("CHEQUE");
+                    abonoCredito.setBanco_cheque(cbBanco.getSelectedItem().toString());
+                    abonoCredito.setNumero_cheque(txtCheque.getText());
+                    funcion.agregarAbono(abonoCredito, txtIdAbono.getText());
+                }
+            
+        }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
    
@@ -265,7 +292,7 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
             pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormularioLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(pnlDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -281,7 +308,7 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
         );
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Abono");
+        jLabel1.setText("Abono a credito");
 
         btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
