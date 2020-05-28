@@ -26,6 +26,7 @@ public class FCredito {
     public Connection cn = sqlSERVER.Conectar();
     String sql = "";
     public Integer totalRegistros = 0;
+    public Integer totalRefistrosA = 0;
     
     public void guardarCredito(Credito credito){
            try{  
@@ -124,4 +125,47 @@ public class FCredito {
      }
      
      }
+     
+     
+     public DefaultTableModel mostrarAbono(String buscar){
+     
+         
+     DefaultTableModel modelo;
+     totalRefistrosA=0;
+     String [] encabezado ={"ID","ID2","CAPITAL","MORA","INTERES","TOTAL MONTO","TIPO DE PAGO","FECHA DE PAGO","FECHA DE CORTE"};
+     String [] registros = new String [9];  
+     modelo = new DefaultTableModel(null,encabezado);
+     String sql = buscar;
+      
+     try{
+         
+     Statement st = cn.createStatement();
+     ResultSet rs = st.executeQuery(sql);
+     
+     while(rs.next()){
+     
+       for(int i=0; i <9; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 registros[i] = rs.getString(i+1); 
+                 
+               }
+       
+        totalRefistrosA += 1;
+         modelo.addRow(registros); 
+     
+     
+     }
+     
+     return modelo;
+     
+     }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     }
+     
+     }
+     
+     
 }
