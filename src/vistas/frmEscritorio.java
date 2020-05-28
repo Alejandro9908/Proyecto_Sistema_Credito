@@ -119,7 +119,7 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmCaja = new javax.swing.JMenu();
         jmiPerfil1 = new javax.swing.JMenuItem();
         jmiUsuarios1 = new javax.swing.JMenuItem();
-        jmiNuevoUsuario1 = new javax.swing.JMenuItem();
+        jmiAbonoAhorros = new javax.swing.JMenuItem();
         jmiSalir1 = new javax.swing.JMenuItem();
         jmSistema = new javax.swing.JMenu();
         jmiPerfil = new javax.swing.JMenuItem();
@@ -367,13 +367,13 @@ public class frmEscritorio extends javax.swing.JFrame {
         });
         jmCaja.add(jmiUsuarios1);
 
-        jmiNuevoUsuario1.setText("Abono de Ahorros");
-        jmiNuevoUsuario1.addActionListener(new java.awt.event.ActionListener() {
+        jmiAbonoAhorros.setText("Abono de Ahorros");
+        jmiAbonoAhorros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiNuevoUsuario1ActionPerformed(evt);
+                jmiAbonoAhorrosActionPerformed(evt);
             }
         });
-        jmCaja.add(jmiNuevoUsuario1);
+        jmCaja.add(jmiAbonoAhorros);
 
         jmiSalir1.setText("Desembolso de Ahorros");
         jmCaja.add(jmiSalir1);
@@ -566,7 +566,7 @@ public class frmEscritorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNuevoCreditoActionPerformed
 
     private void jmiAhorrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAhorrosActionPerformed
-        frmIndexAhorro frmIndex =new frmIndexAhorro();
+        frmIndexAhorro frmIndex =new frmIndexAhorro(1);
         dpnlEscritorio.add(frmIndex);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmIndex.getSize();
@@ -654,9 +654,18 @@ public class frmEscritorio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jmiUsuarios1ActionPerformed
 
-    private void jmiNuevoUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoUsuario1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmiNuevoUsuario1ActionPerformed
+    private void jmiAbonoAhorrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAbonoAhorrosActionPerformed
+      
+         frmIndexAhorro frmIndex =new frmIndexAhorro(2);
+        dpnlEscritorio.add(frmIndex);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmIndex.getSize();
+        frmIndex.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmIndex.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_jmiAbonoAhorrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -709,6 +718,7 @@ public class frmEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenu jmCuentas;
     private javax.swing.JMenu jmEmpresa;
     private javax.swing.JMenu jmSistema;
+    private javax.swing.JMenuItem jmiAbonoAhorros;
     private javax.swing.JMenuItem jmiAhorros;
     private javax.swing.JMenuItem jmiCargos;
     private javax.swing.JMenuItem jmiClientes;
@@ -728,7 +738,6 @@ public class frmEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiNuevoGarantia;
     private javax.swing.JMenuItem jmiNuevoTipoGarantia;
     private javax.swing.JMenuItem jmiNuevoUsuario;
-    private javax.swing.JMenuItem jmiNuevoUsuario1;
     private javax.swing.JMenuItem jmiPerfil;
     private javax.swing.JMenuItem jmiPerfil1;
     private javax.swing.JMenuItem jmiSalir;

@@ -21,6 +21,9 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import static vistas.abonoCredito.frmMostrarAbonos.txtIdCredito;
+import static vistas.abonoCredito.frmMostrarAbonos.txtMontoRestante;
+import vistas.abonoCredito.frmNuevoAbonoCapital;
 import vistas.cliente.frmIndexCliente;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -38,9 +41,17 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
                    "on a.Id_tipo_ahorro = c.Id_tipo_ahorro inner join TBL_CUENTA AS b on a.ID_CUENTA = b.Id_cuenta inner join TBL_CLIENTE AS d on\n" +
                    "b.Id_cliente = d.Id_cliente WHERE a.Estado=1 AND d.Estado=1";
     
-    public frmIndexAhorro() {
+    int opcion;
+    public frmIndexAhorro(int opcionr) {
         initComponents();
         mostrar(query);
+        opcion = opcionr;
+        
+         if(opcion == 1){
+            lblTitulo.setText("Cuentas de ahorro");
+        }else if(opcion==2){
+            lblTitulo.setText("Selecionar cuenta de ahorro");
+        }
         
         ButtonGroup grupoBuscar = new ButtonGroup();
         grupoBuscar.add(rbId);
@@ -72,6 +83,10 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         if(e.getSource()==btnReporte){
             Reporte();
         }
+        
+       
+        
+        
     }
     
     private void mostrar(String buscar){ 
@@ -168,7 +183,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
     private void initComponents() {
 
         pnlBase = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
@@ -191,8 +206,8 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
 
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel1.setText("Cuentas de Ahorro");
+        lblTitulo.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        lblTitulo.setText("Cuentas de Ahorro");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -336,7 +351,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
                         .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(pnlIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBaseLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(lblTitulo)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(27, 27, 27))))
@@ -345,7 +360,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -389,7 +404,8 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
-        frmMostrarAhorro frmMostrar = new frmMostrarAhorro();
+       if (opcion==1){
+           frmMostrarAhorro frmMostrar = new frmMostrarAhorro(1);
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
@@ -397,6 +413,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         frmMostrar.setVisible(true);
 
         int posicion = tblDatos.getSelectedRow();
+         frmMostrarAhorro.txtIdAhorroD.setText(tblDatos.getValueAt(posicion,0).toString());
         frmMostrarAhorro.txtIdCuenta.setText(tblDatos.getValueAt(posicion,1).toString());
         frmMostrarAhorro.txtDpi.setText(tblDatos.getValueAt(posicion,4).toString());
         frmMostrarAhorro.txtNombre.setText(tblDatos.getValueAt(posicion,3).toString());
@@ -408,7 +425,34 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         frmMostrarAhorro.txtMontoRestante.setText(tblDatos.getValueAt(posicion,9).toString());
         frmMostrarAhorro.txtPago.setText(tblDatos.getValueAt(posicion,10).toString());
         frmMostrarAhorro.txtIdCuenta1.setText(tblDatos.getValueAt(posicion,11).toString());
+          
+       }
+       
+       if(opcion==2){
+           frmMostrarAhorro frmMostrar = new frmMostrarAhorro(2);
+        dpnlEscritorio.add(frmMostrar);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmMostrar.getSize();
+        frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmMostrar.setVisible(true);
+
+        int posicion = tblDatos.getSelectedRow();
+        frmMostrarAhorro.txtIdAhorroD.setText(tblDatos.getValueAt(posicion,0).toString());
+        frmMostrarAhorro.txtIdCuenta.setText(tblDatos.getValueAt(posicion,1).toString());
+        frmMostrarAhorro.txtDpi.setText(tblDatos.getValueAt(posicion,4).toString());
+        frmMostrarAhorro.txtNombre.setText(tblDatos.getValueAt(posicion,3).toString());
+        frmMostrarAhorro.txtGarantia.setText(tblDatos.getValueAt(posicion,5).toString());
+        frmMostrarAhorro.txtInteres.setText(tblDatos.getValueAt(posicion,2).toString());
+        frmMostrarAhorro.txtPlazo.setText(tblDatos.getValueAt(posicion,8).toString());
+        frmMostrarAhorro.txtMontoTotal.setText(tblDatos.getValueAt(posicion,6).toString());
+        frmMostrarAhorro.txtMontoPagado.setText(tblDatos.getValueAt(posicion,7).toString());
+        frmMostrarAhorro.txtMontoRestante.setText(tblDatos.getValueAt(posicion,9).toString());
+        frmMostrarAhorro.txtPago.setText(tblDatos.getValueAt(posicion,10).toString());
+        frmMostrarAhorro.txtIdCuenta1.setText(tblDatos.getValueAt(posicion,11).toString());
+            
+       }
         
+      
     }//GEN-LAST:event_tblDatosMouseClicked
 
 
@@ -417,12 +461,12 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlIndex;
     private javax.swing.JRadioButton rbId;
