@@ -29,8 +29,8 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         btnactualizarabono.setVisible(false);
         String n;
         n= txtIdCredito.getText();
-        String query="SELECT a.Id_abono,a.Id_credito,a.Capital,a.Mora,a.Interes,a.Total_monto,a.Forma_pago,a.Fecha_corte,a.Fecha_pago \n" +
-                     "FROM TBL_ABONO_CREDITO AS a where a.Id_credito= '"+n+"' AND (a.Estado=0 OR a.Estado=2)";
+        String query="SELECT a.Id_abono,a.Id_credito,a.Capital,a.Mora,a.Interes,a.Total_monto,a.Forma_pago,a.Fecha_commit,a.Hora_commit \n" +
+                     "FROM TBL_ABONO_CREDITO AS a where  a.Id_credito= '"+n+"' AND (a.Estado=0 OR a.Estado=2)";
         btnInformacion.addActionListener(this);
         mostrar(query);
         btnactualizarabono.addActionListener(this);
@@ -64,8 +64,8 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
        if(e.getSource()== btnactualizarabono){
            String n;
         n= txtIdCredito.getText();
-        String query="SELECT a.Id_abono,a.Id_credito,a.Capital,a.Mora,a.Interes,a.Total_monto,a.Forma_pago,a.Fecha_corte,a.Fecha_pago \n" +
-                     "FROM TBL_ABONO_CREDITO AS a where a.Id_credito= '"+n+"' AND (a.Estado=0 OR a.Estado=2)";
+        String query="SELECT a.Id_abono,a.Id_credito,a.Capital,a.Mora,a.Interes,a.Total_monto,a.Forma_pago,a.Fecha_commit,a.Hora_commit \n" +
+                     "FROM TBL_ABONO_CREDITO AS a where  a.Id_credito= '"+n+"' AND (a.Estado=0 OR a.Estado=2)";
         mostrar(query);
         
        
@@ -81,6 +81,14 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
             txtTotal.setText("    " + Integer.toString(funcion.totalRefistrosA));
             //txtTotal.setText("    " + Integer.toString(funcion.totalRegistros)); 
             ocultarColumnas(tblDatosA,1);
+            //ocultarColumnas(tblDatosA,0);
+            //ocultarColumnas(tblDatosA,3);
+            //ocultarColumnas(tblDatosA,4);
+            //ocultarColumnas(tblDatosA,5);
+            //ocultarColumnas(tblDatosA,6);
+            //ocultarColumnas(tblDatosA,7);
+            //ocultarColumnas(tblDatosA,8);
+            //ocultarColumnas(tblDatosA,9);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
         }
@@ -152,6 +160,8 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         btnactualizarabono = new javax.swing.JButton();
         txtTotal1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         txtIdCredito = new javax.swing.JTextField();
         txtIdCuenta = new javax.swing.JTextField();
 
@@ -372,6 +382,12 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Total de Desembolsos");
 
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        jLabel5.setText("Desembolsos");
+
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        jLabel6.setText("Abonos");
+
         javax.swing.GroupLayout pnlIndexLayout = new javax.swing.GroupLayout(pnlIndex);
         pnlIndex.setLayout(pnlIndexLayout);
         pnlIndexLayout.setHorizontalGroup(
@@ -382,15 +398,6 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlIndexLayout.createSequentialGroup()
-                        .addGap(303, 303, 303)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlIndexLayout.createSequentialGroup()
                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlIndexLayout.createSequentialGroup()
@@ -470,8 +477,22 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                             .addGroup(pnlIndexLayout.createSequentialGroup()
                                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(283, 283, 283)
+                                .addComponent(jLabel5)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlIndexLayout.createSequentialGroup()
+                        .addGap(303, 303, 303)
+                        .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addGroup(pnlIndexLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlIndexLayout.createSequentialGroup()
@@ -545,9 +566,13 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReporte)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnReporte)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -683,6 +708,8 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
