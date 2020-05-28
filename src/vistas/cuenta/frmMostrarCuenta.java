@@ -501,7 +501,7 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
     }//GEN-LAST:event_txtIdClienteActionPerformed
 
     private void tblTelefonosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonosMouseClicked
-        frmMostrarAhorro frmMostrar = new frmMostrarAhorro();
+        frmMostrarAhorro frmMostrar = new frmMostrarAhorro(1); //aca daba error
         dpnlEscritorio.add(frmMostrar);
         Dimension desktopSize = dpnlEscritorio.getSize();
         Dimension FrameSize = frmMostrar.getSize();
@@ -509,6 +509,7 @@ public class frmMostrarCuenta extends javax.swing.JInternalFrame implements Acti
         frmMostrar.setVisible(true);
 
         int posicion = tblTelefonos.getSelectedRow();
+        frmMostrarAhorro.txtIdAhorroD.setText(tblTelefonos.getValueAt(posicion,0).toString());
         frmMostrarAhorro.txtIdCuenta.setText(tblTelefonos.getValueAt(posicion,1).toString());
         frmMostrarAhorro.txtDpi.setText(tblTelefonos.getValueAt(posicion,4).toString());
         frmMostrarAhorro.txtNombre.setText(tblTelefonos.getValueAt(posicion,3).toString());
