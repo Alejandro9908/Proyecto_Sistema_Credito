@@ -586,7 +586,7 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         }
         else if(m=="1.45%"){
 
-            String cad = "0.000145";
+            String cad = "0.00145";
             txtisr.setText(cad);
         }
     }//GEN-LAST:event_cbIsrActionPerformed

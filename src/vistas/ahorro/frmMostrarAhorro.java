@@ -5,9 +5,13 @@
  */
 package vistas.ahorro;
 
+import controladores.FAhorro;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import vistas.abonoAhorro.frmNuevoAbonoAhorro;
 import static vistas.abonoCredito.frmMostrarAbonos.txtIdCredito;
 import static vistas.abonoCredito.frmMostrarAbonos.txtMontoRestante;
@@ -24,11 +28,21 @@ import static vistas.frmEscritorio.dpnlEscritorio;
 public class frmMostrarAhorro extends javax.swing.JInternalFrame implements ActionListener{
 
    int opcion;
+   FAhorro funcion = new FAhorro();
+   DefaultTableModel modelo;
+   
     public frmMostrarAhorro(int opcionr) {
         initComponents();
         opcion = opcionr;
         txtIdAhorroD.setVisible(false);
         txtIdCuenta1.setVisible(false);
+        btnactualizar.addActionListener(this);
+        btnactualizar.setVisible(false);
+        String n;
+        n= txtIdAhorroD.getText();
+        String query="SELECT a.Id_abono_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_Commit FROM TBL_ABONO_AHORRO\n" +
+                     "AS a inner join TBL_AHORRO AS b on a.Id_ahorro = b.Id_ahorro where a.Id_ahorro= '"+n+"' and b.Estado=1 ";
+        mostrar(query);
         if(opcion ==1){
             lblTitulo.setText("Detalles de la cuenta de ahorro");
             btnAbonoAhorro.setVisible(false);
@@ -42,7 +56,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
             btnDesembolsoAhorro.setVisible(false);
         }
         
-        
+       
         
         btnInformacion.addActionListener(this);
         btnAbonoAhorro.addActionListener(this);
@@ -78,9 +92,51 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         
     }
     
+    if(e.getSource()==btnactualizar){
+        
+    String n;
+    n= txtIdAhorroD.getText();
+    String query="SELECT a.Id_abono_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_Commit FROM TBL_ABONO_AHORRO\n" +
+    "AS a inner join TBL_AHORRO AS b on a.Id_ahorro = b.Id_ahorro where a.Id_ahorro= '"+n+"' and b.Estado=1 ";    
+     mostrar(query);   
+   
+    }
+    
     
     
     }
+    
+      private void mostrar(String buscar){    
+        try {
+            modelo = funcion.mostrarAbono(buscar);
+            tblDatos.setModel(modelo);
+            
+            txtTotal.setText("    " + Integer.toString(funcion.totalRefistrosA)); 
+            ocultarColumnas(tblDatos,1);
+            //ocultarColumnas(tblDatosA,0);
+            //ocultarColumnas(tblDatosA,3);
+            //ocultarColumnas(tblDatosA,4);
+            //ocultarColumnas(tblDatosA,5);
+            //ocultarColumnas(tblDatosA,6);
+            //ocultarColumnas(tblDatosA,7);
+            //ocultarColumnas(tblDatosA,8);
+            //ocultarColumnas(tblDatosA,9);
+            
+             //calcularTotalAbonos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+        
+    }
+      
+      private void ocultarColumnas(JTable tabla, int columna){
+        
+        tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getColumnModel().getColumn(columna).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMaxWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
+    }
+    
 
    
     @SuppressWarnings("unchecked")
@@ -133,6 +189,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         lblTitulo2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtTotal1 = new javax.swing.JTextField();
+        btnactualizar = new javax.swing.JButton();
         txtIdAhorroD = new javax.swing.JTextField();
 
         setClosable(true);
@@ -347,6 +404,8 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Total de Desembolsos");
 
+        btnactualizar.setText("jButton1");
+
         javax.swing.GroupLayout pnlIndexLayout = new javax.swing.GroupLayout(pnlIndex);
         pnlIndex.setLayout(pnlIndexLayout);
         pnlIndexLayout.setHorizontalGroup(
@@ -406,19 +465,20 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                                     .addGroup(pnlIndexLayout.createSequentialGroup()
                                         .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtIdCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(txtIdCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnactualizar)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlIndexLayout.createSequentialGroup()
                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnlIndexLayout.createSequentialGroup()
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAbonoAhorro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlIndexLayout.createSequentialGroup()
                                 .addComponent(lblTitulo1)
-                                .addGap(24, 24, 24))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAbonoAhorro))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlIndexLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -426,10 +486,10 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(pnlIndexLayout.createSequentialGroup()
                                     .addComponent(lblTitulo2)
-                                    .addGap(197, 197, 197)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnDesembolsoAhorro))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createSequentialGroup()
@@ -489,25 +549,23 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                     .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtIdCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIdCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnactualizar)))
                 .addGap(31, 31, 31)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnReporte)
-                            .addComponent(btnDesembolsoAhorro)
-                            .addComponent(btnAbonoAhorro))
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTitulo1)
-                        .addComponent(lblTitulo2)))
+                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo2)
+                    .addComponent(btnReporte)
+                    .addComponent(btnActualizar)
+                    .addComponent(lblTitulo1)
+                    .addComponent(btnAbonoAhorro)
+                    .addComponent(btnDesembolsoAhorro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 31, Short.MAX_VALUE)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -621,6 +679,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JButton btnGarantia;
     private javax.swing.JButton btnInformacion;
     private javax.swing.JButton btnReporte;
+    public static javax.swing.JButton btnactualizar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

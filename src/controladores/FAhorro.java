@@ -28,6 +28,7 @@ public class FAhorro {
     public Connection cn = sqlSERVER.Conectar();
     String sql = "";
     public Integer totalRegistros = 0;
+    public Integer totalRefistrosA = 0;
     
      public void mostracliente(JTable tabla){
      
@@ -319,6 +320,48 @@ public class FAhorro {
      }
     
     } 
+    
+    
+     public DefaultTableModel mostrarAbono(String buscar){
+     
+    DefaultTableModel modelo;
+    totalRefistrosA=0;
+    String [] registros = new String [5];  
+    String [] encabezado ={"ID","ID1","AHORRO REALIZADO","FECHA","HORA"};
+    modelo = new DefaultTableModel(null,encabezado);
+    String sql = buscar;
+     
+    try{
+        
+        Statement st = cn.createStatement();
+     ResultSet rs = st.executeQuery(sql);
+     
+         while(rs.next()){
+     
+       for(int i=0; i <5; i++){ //SE DEBE EDITAR DEPENDE DE LOS DATOS EN LA TABLA
+                   
+                 registros[i] = rs.getString(i+1); 
+                 
+               }
+       
+        totalRefistrosA += 1;
+         modelo.addRow(registros); 
+     
+     
+     }
+          
+    return modelo;
+    }catch(Exception e){
+         
+     JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+     
+     return null;
+     }
+     
+     
+     
+     }
+    
    
 
 }
