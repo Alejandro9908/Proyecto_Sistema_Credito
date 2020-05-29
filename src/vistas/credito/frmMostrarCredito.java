@@ -5,13 +5,23 @@
  */
 package vistas.credito;
 
+import controladores.Conexion;
 import controladores.FCredito;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import vistas.cuenta.frmMostrarCuenta;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -39,6 +49,8 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         //SI
         txtIdCredito.setVisible(false);
         txtIdCuenta.setVisible(false);
+        
+        btnReporte.addActionListener(this);
        
     }
 
@@ -72,6 +84,31 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
        
        
        }
+       
+       if(e.getSource()==btnReporte){
+           String carre = txtIdCredito.getText();
+            Conexion g = new Conexion();
+           g.Conectar();
+           try{
+               String url = System.getProperty("user.dir");
+               // String ruta = url+"/src/reportes/ReporteEspecificoAlum.jasper";
+               String ruta = "/reportes/ReporteAbonoCredito.jasper";
+               
+               Map parametro = new HashMap();
+               parametro.put("id",carre);
+               
+               InputStream rutaJasper =  frmMostrarCredito.class.getResourceAsStream(ruta);
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaJasper);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametro, g.getConexion());
+               
+               
+                JasperViewer viewer = new JasperViewer(jasperPrint,false);
+               // viewer.setTitle("Reporte UMG");
+                viewer.setVisible(true);
+            }catch(JRException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
       
 
     }
