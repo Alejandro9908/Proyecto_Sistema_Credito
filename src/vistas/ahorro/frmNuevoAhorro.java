@@ -596,16 +596,16 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         n =(String) cbInteres.getSelectedItem();
         if(n=="1%"){
 
-            String cadena = "0.00010";
+            String cadena = "0.0010";
             //JOptionPane.showMessageDialog(null,u);
             txtPlazo.setText(cadena);
         }else if(n=="1.5%"){
 
-            String cadena1 = "0.00015";
+            String cadena1 = "0.0015";
             txtPlazo.setText(cadena1);
         }else if(n=="2%"){
 
-            String cadena2 = "0.0002";
+            String cadena2 = "0.002";
             txtPlazo.setText(cadena2);
         }
     }//GEN-LAST:event_cbInteresActionPerformed
