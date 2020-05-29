@@ -8,10 +8,14 @@ package vistas.ahorro;
 import controladores.FAhorro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import modelo.Ahorro;
+import static org.apache.xalan.lib.ExsltDatetime.date;
 import vistas.credito.*;
+import vistas.empleado.frmMostrarEmpleado;
 import vistas.frmLogin;
 import vistas.frmSeleccionar;
 import static vistas.usuario.frmNuevoUsuario.txtId1;
@@ -42,6 +46,18 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         btnCancelar.addActionListener(this);
         btnSeleccionarCuenta.addActionListener(this);
         btnInteres.addActionListener(this);
+        
+        
+        //Combobox
+        lblPlazo.setVisible(true);
+        txtPago.setVisible(true);
+        quemarFecha();
+        txtFinal.setVisible(true);
+        lblFecha.setVisible(true);
+        
+        
+        
+        
     }
 
     @Override
@@ -84,13 +100,13 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
     
     }
     
-     private void guardarAhorro(){
+     public void guardarAhorro(){
        
        if(txtIdCuenta.getText().length()==0 || txtDpi.getText().length()==0 || txtNombre.getText().length()==0 ||
           cbAhorro.getSelectedItem().toString()=="" || txtPlazo.getText().length()==0 || txtDestino.getText().length()==0 ||
           txtprogramado.getText().length()==0 || txtisr.getText().length()==0  || txtGarantia.getText().length()==0 ||
           txtDescripcion.getText().length()==0 || txtValoracion.getText().length()==0 ||  txtValoracion1.getText().length()==0  ||
-          jComboBox2.getSelectedItem().toString()=="" || txtFinal.getCalendar()==null){
+          jComboBox2.getSelectedItem().toString()==""){
 
            JOptionPane.showMessageDialog(null,"Hace falta rellenar campos obligatorios");
        
@@ -175,7 +191,7 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         pnlFormulario = new javax.swing.JPanel();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        lblNombre1 = new javax.swing.JLabel();
+        lblPlazo = new javax.swing.JLabel();
         txtIdCuenta = new javax.swing.JTextField();
         lblNombre2 = new javax.swing.JLabel();
         lblNombre6 = new javax.swing.JLabel();
@@ -185,7 +201,7 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         lblNombre3 = new javax.swing.JLabel();
         btnSeleccionarCuenta = new javax.swing.JButton();
         txtPago = new javax.swing.JTextField();
-        lblNombre5 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
         lblNombre10 = new javax.swing.JLabel();
         lblNombre11 = new javax.swing.JLabel();
         txtGarantia = new javax.swing.JTextField();
@@ -204,7 +220,7 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         txtFinal = new com.toedter.calendar.JDateChooser();
         btnInteres = new javax.swing.JButton();
         txtprogramado = new javax.swing.JTextField();
-        lblNombre18 = new javax.swing.JLabel();
+        lblProgramado = new javax.swing.JLabel();
         cbInteres = new javax.swing.JComboBox<>();
         cbIsr = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -228,8 +244,8 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
 
         txtNombre.setEnabled(false);
 
-        lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre1.setText("Plazo");
+        lblPlazo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblPlazo.setText("Plazo");
 
         txtIdCuenta.setEditable(false);
         txtIdCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -264,8 +280,8 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         btnSeleccionarCuenta.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnSeleccionarCuenta.setText("Seleccionar");
 
-        lblNombre5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre5.setText("Fecha Retiro");
+        lblFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFecha.setText("Fecha Retiro");
 
         lblNombre10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre10.setText("Monto Ahorrar");
@@ -279,6 +295,11 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         lblNombre13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre13.setText("Telefono");
 
+        cbAhorro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAhorroItemStateChanged(evt);
+            }
+        });
         cbAhorro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbAhorroActionPerformed(evt);
@@ -301,8 +322,10 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
 
         btnInteres.setText("...");
 
-        lblNombre18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNombre18.setText("Monto Programado");
+        txtprogramado.setText("0");
+
+        lblProgramado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblProgramado.setText("Monto Programado");
 
         cbInteres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2%", "1.5%", "1%" }));
         cbInteres.addActionListener(new java.awt.event.ActionListener() {
@@ -345,9 +368,9 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbAhorro, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                .addComponent(lblNombre1)
+                                .addComponent(lblPlazo)
                                 .addGap(239, 239, 239)
-                                .addComponent(lblNombre5)))
+                                .addComponent(lblFecha)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
@@ -382,8 +405,8 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                             .addComponent(lblNombre8)
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
                                 .addComponent(lblNombre10)
-                                .addGap(95, 95, 95)
-                                .addComponent(lblNombre18))
+                                .addGap(182, 182, 182)
+                                .addComponent(lblNombre17))
                             .addComponent(lblNombre14)
                             .addGroup(pnlFormularioLayout.createSequentialGroup()
                                 .addComponent(txtValoracion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -393,16 +416,17 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                                     .addComponent(txtValoracion1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(12, 12, 12)
                         .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addComponent(lblProgramado)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblNombre17)
-                        .addGap(176, 176, 176))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
-                        .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtprogramado, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtprogramado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbIsr, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbIsr, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlFormularioLayout.setVerticalGroup(
@@ -429,13 +453,13 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                     .addComponent(lblNombre7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbInteres, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(btnInteres, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(cbInteres)
+                    .addComponent(btnInteres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbAhorro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre5)
-                    .addComponent(lblNombre1))
+                    .addComponent(lblFecha)
+                    .addComponent(lblPlazo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -443,16 +467,16 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre17)
-                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblNombre10)
-                        .addComponent(lblNombre18)))
+                    .addComponent(lblNombre10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbIsr, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtprogramado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addComponent(lblProgramado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtprogramado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblNombre14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -519,14 +543,14 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                                 .addGap(18, 18, 18)
                                 .addComponent(txtisr, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(159, 159, 159))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -535,7 +559,7 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
                     .addComponent(txtfechaa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtisr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
@@ -547,57 +571,125 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIdCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCuentaActionPerformed
+    private void cbIsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIsrActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdCuentaActionPerformed
+        m = (String) cbIsr.getSelectedItem();
 
-    private void txtDpiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDpiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDpiActionPerformed
+        if(m=="Pago de ISR"){
 
-    private void cbAhorroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAhorroActionPerformed
-        // TODO add your handling code here:
-        String seleccionado = cbAhorro.getSelectedItem().toString();
-       funcion.consultarIdahorro(txtIdahorro, seleccionado);
-        
-    }//GEN-LAST:event_cbAhorroActionPerformed
+            JOptionPane.showMessageDialog(null,"Seleccion el interes de ISR");
+
+        }
+        else if(m=="1.45%"){
+
+            String cad = "0.000145";
+            txtisr.setText(cad);
+        }
+    }//GEN-LAST:event_cbIsrActionPerformed
 
     private void cbInteresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbInteresActionPerformed
         // TODO add your handling code here:
         n =(String) cbInteres.getSelectedItem();
         if(n=="1%"){
-         
-         
+
             String cadena = "0.00010";
             //JOptionPane.showMessageDialog(null,u);
             txtPlazo.setText(cadena);
         }else if(n=="1.5%"){
-        
-          String cadena1 = "0.00015"; 
-          txtPlazo.setText(cadena1);
+
+            String cadena1 = "0.00015";
+            txtPlazo.setText(cadena1);
         }else if(n=="2%"){
-        
-        String cadena2 = "0.0002"; 
-          txtPlazo.setText(cadena2);
+
+            String cadena2 = "0.0002";
+            txtPlazo.setText(cadena2);
         }
     }//GEN-LAST:event_cbInteresActionPerformed
 
-    private void cbIsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIsrActionPerformed
+    private void cbAhorroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAhorroActionPerformed
         // TODO add your handling code here:
-        m = (String) cbIsr.getSelectedItem();
-        
-        if(m=="Pago de ISR"){
-        
-        JOptionPane.showMessageDialog(null,"Seleccion el interes de ISR");  
-        
-        }
-        else if(m=="1.45%"){
-        
-        String cad = "0.000145";
-        txtisr.setText(cad);
-        }
-    }//GEN-LAST:event_cbIsrActionPerformed
+        String seleccionado = cbAhorro.getSelectedItem().toString();
+        funcion.consultarIdahorro(txtIdahorro, seleccionado);
 
+    }//GEN-LAST:event_cbAhorroActionPerformed
+
+    private void cbAhorroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAhorroItemStateChanged
+
+        if(cbAhorro.getSelectedIndex()==0){
+
+            //Plazo fijo
+
+            lblPlazo.setVisible(true);
+            txtPago.setVisible(true);
+            lblFecha.setVisible(true);
+            quemarFecha();
+            txtFinal.setVisible(true);
+
+            txtprogramado.setText("0");
+            txtprogramado.setVisible(true);
+            lblProgramado.setVisible(true);
+
+        }
+
+        if(cbAhorro.getSelectedIndex()==1){
+
+            //Corriente
+
+            lblPlazo.setVisible(false);
+            txtPago.setVisible(false);
+            lblFecha.setVisible(false);
+            quemarFecha();
+            txtFinal.setVisible(false);
+
+            txtprogramado.setText("0");
+            txtprogramado.setVisible(false);
+            lblProgramado.setVisible(false);
+
+        }
+        if(cbAhorro.getSelectedIndex()==2){
+            //Ahorro Programado
+
+            lblPlazo.setVisible(true);
+            txtPago.setVisible(true);
+            lblFecha.setVisible(true);
+            quemarFecha();
+            txtFinal.setVisible(true);
+
+            txtprogramado.setText("0");
+            txtprogramado.setVisible(true);
+            lblProgramado.setVisible(true);
+
+        }
+
+    }//GEN-LAST:event_cbAhorroItemStateChanged
+
+    private void txtDpiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDpiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDpiActionPerformed
+
+    private void txtIdCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdCuentaActionPerformed
+
+    private void quemarFecha(){
+         String fechaNacimiento = "2020-01-01"; //fecha quemada NUNCA USAR PLEASE
+         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fechaNacimiento);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+          txtFinal.setDate(fechaDate);
+        
+    }
+    
+    
+    
+ 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -609,8 +701,8 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
     private javax.swing.JComboBox<String> cbIsr;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblNombre10;
     private javax.swing.JLabel lblNombre11;
     private javax.swing.JLabel lblNombre12;
@@ -619,13 +711,13 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
     private javax.swing.JLabel lblNombre15;
     private javax.swing.JLabel lblNombre16;
     private javax.swing.JLabel lblNombre17;
-    private javax.swing.JLabel lblNombre18;
     private javax.swing.JLabel lblNombre2;
     private javax.swing.JLabel lblNombre3;
-    private javax.swing.JLabel lblNombre5;
     private javax.swing.JLabel lblNombre6;
     private javax.swing.JLabel lblNombre7;
     private javax.swing.JLabel lblNombre8;
+    private javax.swing.JLabel lblPlazo;
+    private javax.swing.JLabel lblProgramado;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlFormulario;
     private javax.swing.JTextField txtDescripcion;
@@ -634,7 +726,7 @@ public class frmNuevoAhorro extends javax.swing.JInternalFrame implements Action
     private com.toedter.calendar.JDateChooser txtFinal;
     private javax.swing.JTextField txtGarantia;
     public static javax.swing.JTextField txtIdCuenta;
-    private javax.swing.JTextField txtIdahorro;
+    public static javax.swing.JTextField txtIdahorro;
     public static javax.swing.JTextField txtIdcliente;
     public static javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPago;

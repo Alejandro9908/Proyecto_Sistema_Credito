@@ -10,8 +10,12 @@ import controladores.FUsuario;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -34,6 +38,36 @@ public class frmLogin extends javax.swing.JFrame implements ActionListener {
         
         
         btnIniciar.addActionListener(this);
+        
+        
+        
+        //JPasswordField mTextField = new JPasswordField();
+         txtContrasena.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+               
+                
+                btnIniciar.doClick();
+            }
+        }
+
+    });
+         
+            btnIniciar.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+               
+                
+                btnIniciar.doClick();
+            }
+        }
+
+    });
+        
+        
+        
         
     }
 
@@ -158,6 +192,12 @@ public class frmLogin extends javax.swing.JFrame implements ActionListener {
         jLabel5.setFont(new java.awt.Font("Adobe Caslon Pro", 0, 24)); // NOI18N
         jLabel5.setText("Contraseña");
 
+        txtContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContrasenaKeyPressed(evt);
+            }
+        });
+
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
@@ -233,6 +273,21 @@ public class frmLogin extends javax.swing.JFrame implements ActionListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtContrasenaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyPressed
+        
+  
+        
+        
+        
+    }//GEN-LAST:event_txtContrasenaKeyPressed
+
+       private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+         btnIniciar.doClick();
+     }
+        } 
+    
+    
     /**
      * @param args the command line arguments
      */
