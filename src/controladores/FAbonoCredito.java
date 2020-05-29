@@ -120,7 +120,7 @@ public class FAbonoCredito {
         }
     }
     
-    public void agregarAbono(AbonoCredito abonoCredito, String buscar){
+    public void agregarAbono(AbonoCredito abonoCredito, String buscar,float total){
         try{
             if(cn!=null){
                 PreparedStatement st = cn.prepareStatement("UPDATE TBL_ABONO_CREDITO SET\n" +
@@ -128,11 +128,13 @@ public class FAbonoCredito {
                                                     "Banco_cheque = '"+abonoCredito.getBanco_cheque()+"',\n" +
                                                     "Numero_cheque = '"+abonoCredito.getNumero_cheque()+"',\n" +
                                                     "ID_USUARIO = '"+frmLogin.idUsuarioSystem+"',\n" +
+                                                    "Total_monto = '"+total+"',\n" +
                                                     "Fecha_commit = CAST(GETDATE() AS DATE),\n" +
                                                     "Hora_commit = CAST(GETDATE() AS TIME),\n" +
                                                     "Estado = 0\n" +
                                                     "WHERE Id_abono = '"+buscar+"'");
                 st.execute();
+                JOptionPane.showMessageDialog(null, "La opereción se ha completado con éxito");
             }else{
                 System.out.println("No es posible completar la operacion");
             }
@@ -163,7 +165,7 @@ public class FAbonoCredito {
             pst.setInt(6,2);
             pst.setInt(7, frmLogin.idUsuarioSystem);
             pst.execute();
-            
+            JOptionPane.showMessageDialog(null, "La opereción se ha completado con éxito");
             }else{
                     JOptionPane.showMessageDialog(null, "Error al guardar el registro");
                 }

@@ -8,6 +8,7 @@ package vistas.abonoCredito;
 import controladores.FAbonoCredito;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import modelo.AbonoCredito;
 import static vistas.abonoCredito.frmNuevoAbono.txtIdAbono;
 
@@ -22,13 +23,49 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
     public frmNuevoAbonoCapital() {
         initComponents();
         btnGuardar.addActionListener(this);
+        btnCancelar.addActionListener(this);
+        txtEfectivo.setEnabled(true);
+        txtEfectivo1.setEnabled(true);
+        txtCambio.setEnabled(false);
+        cbBanco.setEnabled(false);
+        txtCheque.setEnabled(false);
+        
     }
 
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnGuardar){
-            AbonoCredito abonoCredito = new AbonoCredito();
+            float efectivo = Float.parseFloat(txtEfectivo1.getText());
+            float total = Float.parseFloat(txtEfectivo.getText());
+            float cambio;
+            
+            if(cbFormaPago.getSelectedIndex()==0){
+                if(efectivo>=total){
+                    acreditarAbonoCapital();
+                }else{
+                     JOptionPane.showMessageDialog(null,"El monto ingresado no es valido");
+                }
+            }
+            if(cbFormaPago.getSelectedIndex()==1){
+                if(efectivo==total){
+                    acreditarAbonoCapital();
+                }else{
+                     JOptionPane.showMessageDialog(null,"El monto ingresado no es valido");
+                }
+            }
+            
+            dispose();
+            
+        }
+        
+        if(e.getSource()==btnCancelar){
+            this.dispose();
+        }
+    }
+    
+        public void acreditarAbonoCapital(){
+                AbonoCredito abonoCredito = new AbonoCredito();
             
                 if(cbFormaPago.getSelectedIndex()==0){
                     abonoCredito.setId_credito(Integer.parseInt(txtIdCredito.getText()));
@@ -37,16 +74,14 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
                     funcion.agregarAbonoCapital(abonoCredito);
                 }
                 if(cbFormaPago.getSelectedIndex()==1){
+                    abonoCredito.setId_credito(Integer.parseInt(txtIdCredito.getText()));
                     abonoCredito.setFroma_pago("CHEQUE");
                     abonoCredito.setBanco_cheque(cbBanco.getSelectedItem().toString());
                     abonoCredito.setNumero_cheque(txtCheque.getText());
                     abonoCredito.setMonto(Float.parseFloat(txtEfectivo.getText()));
                     funcion.agregarAbonoCapital(abonoCredito);
                 }
-            
         }
-    }
-    
     
     
     
@@ -74,6 +109,8 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
         txtCambio = new javax.swing.JTextField();
         txtCapital = new javax.swing.JTextField();
         lblNombre11 = new javax.swing.JLabel();
+        txtEfectivo1 = new javax.swing.JTextField();
+        lbl5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -107,10 +144,12 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
         lbl2.setText("No. Cheque");
 
         lbl3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl3.setText("Cantidad Efectivo");
+        lbl3.setText("Cantidad a abonar");
 
         lbl4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl4.setText("Cambio");
+
+        txtCambio.setEnabled(false);
 
         txtCapital.setEditable(false);
         txtCapital.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +161,20 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
         lblNombre11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNombre11.setText("Capital Restante");
 
+        txtEfectivo1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtEfectivo1CaretUpdate(evt);
+            }
+        });
+        txtEfectivo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEfectivo1ActionPerformed(evt);
+            }
+        });
+
+        lbl5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl5.setText("Confirma cantidad");
+
         javax.swing.GroupLayout pnlPagoLayout = new javax.swing.GroupLayout(pnlPago);
         pnlPago.setLayout(pnlPagoLayout);
         pnlPagoLayout.setHorizontalGroup(
@@ -129,11 +182,13 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
             .addGroup(pnlPagoLayout.createSequentialGroup()
                 .addGroup(pnlPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl3)
-                    .addComponent(lbl4))
+                    .addComponent(lbl4)
+                    .addComponent(lbl5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtEfectivo, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                    .addComponent(txtCambio)))
+                    .addComponent(txtCambio)
+                    .addComponent(txtEfectivo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
             .addGroup(pnlPagoLayout.createSequentialGroup()
                 .addGroup(pnlPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre10)
@@ -170,11 +225,15 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
                 .addGroup(pnlPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl3))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl4)
-                    .addComponent(txtCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(txtEfectivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl4))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
@@ -191,7 +250,7 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
             .addGroup(pnlFormularioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
@@ -247,7 +306,7 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnGuardar))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlBase, java.awt.BorderLayout.CENTER);
@@ -259,7 +318,8 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
 
         if(cbFormaPago.getSelectedIndex()==0){
             txtEfectivo.setEnabled(true);
-            txtCambio.setEnabled(true);
+            txtEfectivo1.setEnabled(true);
+            txtCambio.setEnabled(false);
             cbBanco.setEnabled(false);
             txtCheque.setEnabled(false);
         }
@@ -267,6 +327,7 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
             cbBanco.setEnabled(true);
             txtCheque.setEnabled(true);
             txtEfectivo.setEnabled(true);
+            txtEfectivo1.setEnabled(true);
             txtCambio.setEnabled(false);
         }
     }//GEN-LAST:event_cbFormaPagoItemStateChanged
@@ -279,6 +340,25 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCapitalActionPerformed
 
+    private void txtEfectivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEfectivo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEfectivo1ActionPerformed
+
+    private void txtEfectivo1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtEfectivo1CaretUpdate
+         if(cbFormaPago.getSelectedIndex()==0){
+            float efectivo = Float.parseFloat(txtEfectivo1.getText());
+            float total = Float.parseFloat(txtEfectivo.getText());
+            float cambio;
+            
+            if(efectivo >= total){
+                cambio = efectivo - total;
+                txtCambio.setText(Float.toString(cambio));
+            }else{
+                txtCambio.setText("NO VALIDO");
+            }
+        }
+    }//GEN-LAST:event_txtEfectivo1CaretUpdate
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -290,6 +370,7 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
     private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lbl5;
     private javax.swing.JLabel lblNombre10;
     private javax.swing.JLabel lblNombre11;
     private javax.swing.JPanel pnlBase;
@@ -299,6 +380,7 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
     public static javax.swing.JTextField txtCapital;
     private javax.swing.JTextField txtCheque;
     private javax.swing.JTextField txtEfectivo;
+    private javax.swing.JTextField txtEfectivo1;
     public static javax.swing.JTextField txtIdCredito;
     // End of variables declaration//GEN-END:variables
 }
