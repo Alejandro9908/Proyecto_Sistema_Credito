@@ -437,6 +437,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtEfectivo">
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtEfectivoCaretUpdate"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbl4">
                   <Properties>
@@ -447,6 +450,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCambio">
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtCambioCaretUpdate"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
