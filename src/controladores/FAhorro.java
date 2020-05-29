@@ -200,7 +200,7 @@ public class FAhorro {
              
                 pst.execute(); 
                 
-                JOptionPane.showMessageDialog(null, "Registro guardado correctamente");
+                //JOptionPane.showMessageDialog(null, "Registro guardado correctamente");
               
           }else{
                 JOptionPane.showMessageDialog(null, "Error al guardar el registro");
