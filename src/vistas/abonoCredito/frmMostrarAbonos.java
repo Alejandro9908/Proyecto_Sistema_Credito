@@ -35,8 +35,10 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
         initComponents();
         id = idCredito;
         btnCargar.addActionListener(this);
+        btnActualizar.addActionListener(this);
         txtIdCredito.setText(Integer.toString(idCredito));
-        
+        txtIdCredito.setVisible(false);
+            txtIdCuenta.setVisible(false);
         //CONSULTAMOS SI NO HAY MAS MESES
         funcion.consultaFecha(idCredito);
         
@@ -59,7 +61,11 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
             frmNuevo.setVisible(true);
             frmNuevoAbonoCapital.txtIdCredito.setText(txtIdCredito.getText());
             frmNuevoAbonoCapital.txtCapital.setText(txtMontoRestante.getText());
-   
+            
+        }
+        
+        if(e.getSource()==btnActualizar){
+            mostrarAbonos(query);
         }
     }
     

@@ -36,7 +36,7 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
             cbBanco.setEnabled(false);
             txtCheque.setEnabled(false);
             txtEfectivo.setEnabled(true);
-            txtCambio.setEnabled(true);
+            txtCambio.setEnabled(false);
         
         
     }
@@ -52,33 +52,37 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
                 if(efectivo>=total){
                     acreditarAbono();
                 }else{
-                     JOptionPane.showMessageDialog(null,"El monto ingresado no es valido"+e);
+                     JOptionPane.showMessageDialog(null,"El monto ingresado no es valido");
                 }
             }
             if(cbFormaPago.getSelectedIndex()==1){
                 if(efectivo==total){
                     acreditarAbono();
                 }else{
-                     JOptionPane.showMessageDialog(null,"El monto ingresado no es valido"+e);
+                     JOptionPane.showMessageDialog(null,"El monto ingresado no es valido");
                 }
             }
-
-            }
+            dispose();
+        }
+        if(e.getSource() == btnCancelar){
+            this.dispose();
+        }
     }
     
     public void acreditarAbono(){
         AbonoCredito abonoCredito = new AbonoCredito();
-            
-                if(cbFormaPago.getSelectedIndex()==0){
-                    abonoCredito.setFroma_pago("EFECTIVO");
-                    funcion.agregarAbono(abonoCredito, txtIdAbono.getText());
-                }
-                if(cbFormaPago.getSelectedIndex()==1){
-                    abonoCredito.setFroma_pago("CHEQUE");
-                    abonoCredito.setBanco_cheque(cbBanco.getSelectedItem().toString());
-                    abonoCredito.setNumero_cheque(txtCheque.getText());
-                    funcion.agregarAbono(abonoCredito, txtIdAbono.getText());
-                }
+        float total;
+        total = Float.parseFloat(txtCapital.getText())+Float.parseFloat(txtIntereses.getText())+Float.parseFloat(txtMora.getText());
+        if(cbFormaPago.getSelectedIndex()==0){
+            abonoCredito.setFroma_pago("EFECTIVO");
+            funcion.agregarAbono(abonoCredito, txtIdAbono.getText(),total);
+        }
+        if(cbFormaPago.getSelectedIndex()==1){
+            abonoCredito.setFroma_pago("CHEQUE");
+            abonoCredito.setBanco_cheque(cbBanco.getSelectedItem().toString());
+            abonoCredito.setNumero_cheque(txtCheque.getText());
+            funcion.agregarAbono(abonoCredito, txtIdAbono.getText(), total);
+       }
     }
     
     
