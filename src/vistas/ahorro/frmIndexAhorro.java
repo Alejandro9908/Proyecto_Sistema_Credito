@@ -24,6 +24,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import static vistas.abonoCredito.frmMostrarAbonos.txtIdCredito;
 import static vistas.abonoCredito.frmMostrarAbonos.txtMontoRestante;
 import vistas.abonoCredito.frmNuevoAbonoCapital;
+import static vistas.ahorro.frmMostrarAhorro.btnactualizar;
 import vistas.cliente.frmIndexCliente;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
@@ -429,7 +430,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         frmMostrarAhorro.txtMontoPagado.setText(tblDatos.getValueAt(posicion,7).toString());
         frmMostrarAhorro.txtMontoRestante.setText(tblDatos.getValueAt(posicion,9).toString());
         frmMostrarAhorro.txtPago.setText(tblDatos.getValueAt(posicion,10).toString());
-        frmMostrarAhorro.txtIdCuenta1.setText(tblDatos.getValueAt(posicion,11).toString());
+        frmMostrarAhorro.txtIdCuenta1.setText(tblDatos.getValueAt(posicion,11).toString()); btnactualizar.doClick();
           
        }
        
@@ -453,7 +454,7 @@ public class frmIndexAhorro extends javax.swing.JInternalFrame implements Action
         frmMostrarAhorro.txtMontoPagado.setText(tblDatos.getValueAt(posicion,7).toString());
         frmMostrarAhorro.txtMontoRestante.setText(tblDatos.getValueAt(posicion,9).toString());
         frmMostrarAhorro.txtPago.setText(tblDatos.getValueAt(posicion,10).toString());
-        frmMostrarAhorro.txtIdCuenta1.setText(tblDatos.getValueAt(posicion,11).toString());
+        frmMostrarAhorro.txtIdCuenta1.setText(tblDatos.getValueAt(posicion,11).toString());btnactualizar.doClick();
             
        }
         
