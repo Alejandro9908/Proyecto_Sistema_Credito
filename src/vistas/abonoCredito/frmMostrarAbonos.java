@@ -40,10 +40,11 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
         //CONSULTAMOS SI NO HAY MAS MESES
         funcion.consultaFecha(idCredito);
         
-        query = "SELECT Id_abono, Capital, Interes, Mora, Total_monto, fecha_pago FROM TBL_ABONO_CREDITO WHERE Id_credito = '"+idCredito+"' AND fecha_corte <= CAST(GETDATE() AS DATE) AND Estado = 1";
+        query = "SELECT Id_abono, Capital, Interes, Mora, (Capital+Interes+mora) as total_monto, fecha_pago FROM TBL_ABONO_CREDITO WHERE Id_credito = '"+idCredito+"' AND fecha_corte <= CAST(GETDATE() AS DATE) AND Estado = 1";
         mostrarAbonos(query);
         actualizarMora();
         mostrarAbonos(query);
+        calcularTotalAbonos();
     }
     
     
@@ -62,6 +63,16 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
         }
     }
     
+    private void calcularTotalAbonos() {
+        float total = 0;
+            if(tblDatos.getRowCount()>0){
+                for (int i = 0; i < tblDatos.getRowCount(); i++) {
+                    total = total + Float.parseFloat(tblDatos.getValueAt(i, 4).toString());
+                }
+                txtTotalAbonos.setText(Float.toString(total));
+            }    
+    }
+    
     public void actualizarMora(){
         int idCredito, idAbono;
             String fechaPago;
@@ -72,7 +83,7 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
                 fechaPago = tblDatos.getValueAt(i, 5).toString();
                 montoMes = Float.parseFloat(tblDatos.getValueAt(i, 1).toString())+Float.parseFloat(tblDatos.getValueAt(i, 2).toString());
                 funcion.consultaMora(idCredito, idAbono, fechaPago, montoMes);
-                System.out.println("FECHA: "+fechaPago);
+                
             }
       
     }
@@ -83,7 +94,7 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
         try{
             modelo = funcion.mostrarAbonos(buscar);
             tblDatos.setModel(modelo);
-            ocultarColumnas(tblDatos,4);
+           
             
             if(tblDatos.getRowCount()<=0){
                 btnCargar.setEnabled(true);
@@ -159,6 +170,8 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
         txtNCuenta = new javax.swing.JTextField();
         lblNombre13 = new javax.swing.JLabel();
         btnCargar = new javax.swing.JButton();
+        txtTotalAbonos = new javax.swing.JTextField();
+        lblNombre14 = new javax.swing.JLabel();
         txtIdCredito = new javax.swing.JTextField();
         txtIdCuenta = new javax.swing.JTextField();
 
@@ -286,6 +299,11 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
         btnCargar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCargar.setText("Abonar a Capital");
 
+        txtTotalAbonos.setEditable(false);
+
+        lblNombre14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNombre14.setText("Total");
+
         javax.swing.GroupLayout pnlIndexLayout = new javax.swing.GroupLayout(pnlIndex);
         pnlIndex.setLayout(pnlIndexLayout);
         pnlIndexLayout.setHorizontalGroup(
@@ -365,6 +383,11 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
                                             .addComponent(lblNombre5)
                                             .addComponent(txtMora, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblNombre14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTotalAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlIndexLayout.setVerticalGroup(
             pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,8 +457,12 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
                         .addComponent(btnCargar))
                     .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTotalAbonos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombre14))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         txtIdCredito.setEditable(false);
@@ -539,6 +566,7 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JLabel lblNombre11;
     private javax.swing.JLabel lblNombre12;
     private javax.swing.JLabel lblNombre13;
+    private javax.swing.JLabel lblNombre14;
     private javax.swing.JLabel lblNombre2;
     private javax.swing.JLabel lblNombre3;
     private javax.swing.JLabel lblNombre4;
@@ -564,7 +592,10 @@ public class frmMostrarAbonos extends javax.swing.JInternalFrame implements Acti
     public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtPago;
     public static javax.swing.JTextField txtPlazo;
+    public static javax.swing.JTextField txtTotalAbonos;
     // End of variables declaration//GEN-END:variables
+
+    
 
     
 }

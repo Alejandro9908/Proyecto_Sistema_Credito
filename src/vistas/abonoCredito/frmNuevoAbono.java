@@ -44,7 +44,30 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnGuardar){
-            AbonoCredito abonoCredito = new AbonoCredito();
+            float efectivo = Float.parseFloat(txtEfectivo.getText());
+            float total = Float.parseFloat(txtTotal.getText());
+            float cambio;
+            
+            if(cbFormaPago.getSelectedIndex()==0){
+                if(efectivo>=total){
+                    acreditarAbono();
+                }else{
+                     JOptionPane.showMessageDialog(null,"El monto ingresado no es valido"+e);
+                }
+            }
+            if(cbFormaPago.getSelectedIndex()==1){
+                if(efectivo==total){
+                    acreditarAbono();
+                }else{
+                     JOptionPane.showMessageDialog(null,"El monto ingresado no es valido"+e);
+                }
+            }
+
+            }
+    }
+    
+    public void acreditarAbono(){
+        AbonoCredito abonoCredito = new AbonoCredito();
             
                 if(cbFormaPago.getSelectedIndex()==0){
                     abonoCredito.setFroma_pago("EFECTIVO");
@@ -56,11 +79,7 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
                     abonoCredito.setNumero_cheque(txtCheque.getText());
                     funcion.agregarAbono(abonoCredito, txtIdAbono.getText());
                 }
-            
-        }
     }
-    
-    
     
     
     
@@ -232,8 +251,20 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
         lbl3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl3.setText("Cantidad Efectivo");
 
+        txtEfectivo.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtEfectivoCaretUpdate(evt);
+            }
+        });
+
         lbl4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl4.setText("Cambio");
+
+        txtCambio.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtCambioCaretUpdate(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlPagoLayout = new javax.swing.GroupLayout(pnlPago);
         pnlPago.setLayout(pnlPagoLayout);
@@ -379,17 +410,36 @@ public class frmNuevoAbono extends javax.swing.JInternalFrame implements ActionL
 
         if(cbFormaPago.getSelectedIndex()==0){
             txtEfectivo.setEnabled(true);
-            txtCambio.setEnabled(true);
+            txtCambio.setEnabled(false);
             cbBanco.setEnabled(false);
             txtCheque.setEnabled(false);
         }
         if(cbFormaPago.getSelectedIndex()==1){
             cbBanco.setEnabled(true);
             txtCheque.setEnabled(true);
-            txtEfectivo.setEnabled(false);
+            txtEfectivo.setEnabled(true);
             txtCambio.setEnabled(false);
         }
     }//GEN-LAST:event_cbFormaPagoItemStateChanged
+
+    private void txtCambioCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCambioCaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCambioCaretUpdate
+
+    private void txtEfectivoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtEfectivoCaretUpdate
+        if(cbFormaPago.getSelectedIndex()==0){
+            float efectivo = Float.parseFloat(txtEfectivo.getText());
+            float total = Float.parseFloat(txtTotal.getText());
+            float cambio;
+            
+            if(efectivo >= total){
+                cambio = efectivo - total;
+                txtCambio.setText(Float.toString(cambio));
+            }else{
+                txtCambio.setText("NO VALIDO");
+            }
+        }
+    }//GEN-LAST:event_txtEfectivoCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
