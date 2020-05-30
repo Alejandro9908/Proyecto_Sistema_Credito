@@ -28,8 +28,7 @@ public class frmNuevoAbonoCapital extends javax.swing.JInternalFrame implements 
         txtEfectivo1.setEnabled(true);
         txtCambio.setEnabled(false);
         cbBanco.setEnabled(false);
-        txtCheque.setEnabled(false);
-        
+        txtCheque.setEnabled(false);      
     }
 
     

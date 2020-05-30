@@ -24,6 +24,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import vistas.abonoCredito.frmMostrarAbonos;
 import vistas.cliente.frmIndexCliente;
 import static vistas.credito.frmMostrarCredito.btnactualizarabono;
+import vistas.desembolsoCredito.frmNuevoDesembolso;
 import static vistas.frmEscritorio.dpnlEscritorio;
 
 /**
@@ -46,7 +47,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         opcion = opcionr;
         if(opcion == 1){
             titulo.setText("Creditos");
-        }else if(opcion==2){
+        }else if(opcion==2 || opcion ==3){
             titulo.setText("Selecionar Credito");
         }
         mostrar(query);
@@ -101,7 +102,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
     ocultarColumnas(tblDatos,11);
     */
     }
-    if(opcion == 2){
+    if(opcion == 2 || opcion ==3){
         
         modelo = funcion.mostrarCredito(buscar);
         tblDatos.setModel(modelo);
@@ -473,6 +474,28 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         frmMostrarAbonos.txtMontoTotal.setText(tblDatos.getValueAt(posicion,10).toString());
         frmMostrarAbonos.txtMontoPagado.setText(tblDatos.getValueAt(posicion,13).toString());
         frmMostrarAbonos.txtMontoRestante.setText(tblDatos.getValueAt(posicion,14).toString());
+        }
+        
+        if(opcion ==3){
+            
+            int posicion = tblDatos.getSelectedRow();
+            frmNuevoDesembolso frmMostrar = new frmNuevoDesembolso(Integer.parseInt(tblDatos.getValueAt(posicion,0).toString()),
+            Float.parseFloat(tblDatos.getValueAt(posicion,10).toString()));
+            dpnlEscritorio.add(frmMostrar);
+            Dimension desktopSize = dpnlEscritorio.getSize();
+            Dimension FrameSize = frmMostrar.getSize();
+            frmMostrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+            frmMostrar.setVisible(true);
+
+            frmNuevoDesembolso.txtIdCuenta.setText(tblDatos.getValueAt(posicion,3).toString());
+            frmNuevoDesembolso.txtNCredito.setText(tblDatos.getValueAt(posicion,1).toString());
+            frmNuevoDesembolso.txtNCuenta.setText(tblDatos.getValueAt(posicion,2).toString());
+            frmNuevoDesembolso.txtDpi.setText(tblDatos.getValueAt(posicion,5).toString());
+            frmNuevoDesembolso.txtNombre.setText(tblDatos.getValueAt(posicion,4).toString());
+     
+            frmNuevoDesembolso.txtCapital.setText(tblDatos.getValueAt(posicion,10).toString());
+           
+ 
         }
         
         

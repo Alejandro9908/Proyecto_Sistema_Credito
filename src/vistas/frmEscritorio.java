@@ -651,7 +651,12 @@ public class frmEscritorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiPerfil1ActionPerformed
 
     private void jmiUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUsuarios1ActionPerformed
-        // TODO add your handling code here:
+        frmIndexCredito frmNuevo = new frmIndexCredito(3);
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
     }//GEN-LAST:event_jmiUsuarios1ActionPerformed
 
     private void jmiAbonoAhorrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAbonoAhorrosActionPerformed
