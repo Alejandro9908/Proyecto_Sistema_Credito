@@ -103,7 +103,6 @@ public class FAbonoCredito {
     }
     
     public void cargarAbono(String fechaCorte, String fechaPago, int idCredito){
-
         try{
 
            

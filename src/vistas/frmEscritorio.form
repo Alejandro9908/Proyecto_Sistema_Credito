@@ -143,14 +143,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCuentasActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiNuevoCuenta">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nueva Cuenta"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiNuevoCuentaActionPerformed"/>
-              </Events>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmCreditos">
@@ -263,16 +255,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiAbonoAhorros">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Abono de Ahorros"/>
+                <Property name="text" type="java.lang.String" value="Transacciones de ahorros"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiAbonoAhorrosActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiSalir1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Desembolso de Ahorros"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

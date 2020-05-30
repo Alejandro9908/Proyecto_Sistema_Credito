@@ -131,7 +131,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
     }
     
     if(e.getSource()==btnactualizar){
-        
+    funcion.actualizarMonto(Integer.parseInt(txtIdAhorroD.getText()));
     String n;
     n= txtIdAhorroD.getText();
     String query="SELECT a.Id_abono_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_Commit FROM TBL_ABONO_AHORRO\n" +
@@ -140,7 +140,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
      
      String query1="SELECT a.Id_desembolso_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_commit FROM TBL_DESEMBOLSO_AHORRO AS\n" +
         "a inner join TBL_AHORRO AS b on a.Id_ahorro=b.Id_ahorro where a.Id_ahorro = '"+n+"' and b.Estado=1";
-      mostrar1(query1);
+    mostrar1(query1);
     }
     
     if(e.getSource()== btnReporte){
@@ -545,10 +545,10 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         });
         jScrollPane2.setViewportView(tblDatos1);
 
-        lblTitulo1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        lblTitulo1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         lblTitulo1.setText("Abonos");
 
-        lblTitulo2.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        lblTitulo2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         lblTitulo2.setText("Desembolsos");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -722,7 +722,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)

@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -402,6 +403,24 @@ public class FAhorro {
     
     
      }
+     
+     
+    public void actualizarMonto(int idAhorro){
+        try{
+
+           
+            CallableStatement cst = cn.prepareCall("{call ACTUARLIZAR_MONTO_AHORRO (?,?)}");
+            cst.setInt(1, idAhorro);
+            cst.setInt(2,2);
+            
+            cst.execute();
+            
+       
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+    
+        }
+    }
 
 
    
