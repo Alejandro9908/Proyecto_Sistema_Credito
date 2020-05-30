@@ -24,6 +24,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import vistas.abonoAhorro.frmNuevoAbonoAhorro;
+import vistas.abonoAhorro.frmNuevoDesembolsoAhorro;
 import static vistas.abonoCredito.frmMostrarAbonos.txtIdCredito;
 import static vistas.abonoCredito.frmMostrarAbonos.txtMontoRestante;
 import vistas.abonoCredito.frmNuevoAbonoCapital;
@@ -75,11 +76,27 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         btnInformacion.addActionListener(this);
         btnAbonoAhorro.addActionListener(this);
         btnReporte.addActionListener(this);
+        btnDesembolsoAhorro.addActionListener(this);
     }
     
      @Override
     public void actionPerformed(ActionEvent e) {
     
+        if(e.getSource() == btnDesembolsoAhorro){
+            frmNuevoDesembolsoAhorro frmNuevo  = new frmNuevoDesembolsoAhorro(
+                    Integer.parseInt(txtIdAhorroD.getText()),
+                    Float.parseFloat(txtMontoTotal.getText()));
+            dpnlEscritorio.add(frmNuevo);
+            Dimension desktopSize = dpnlEscritorio.getSize();
+            Dimension FrameSize = frmNuevo.getSize();
+            frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+            frmNuevo.setVisible(true);
+            
+            frmNuevoDesembolsoAhorro.txtDpi.setText(txtDpi.getText());
+            frmNuevoDesembolsoAhorro.txtNombre.setText(txtNombre.getText());
+            
+        }
+        
     if(e.getSource()==btnInformacion){
            
         int posicion = tblDatos.getSelectedRow();
