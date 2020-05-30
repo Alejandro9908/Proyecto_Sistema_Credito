@@ -42,8 +42,13 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         n= txtIdCredito.getText();
         String query="SELECT a.Id_abono,a.Id_credito,a.Capital,a.Mora,a.Interes,a.Total_monto,a.Forma_pago,a.Fecha_commit,a.Hora_commit \n" +
                      "FROM TBL_ABONO_CREDITO AS a where  a.Id_credito= '"+n+"' AND (a.Estado=0 OR a.Estado=2)";
+        
+        String query1="SELECT a.Id_desembolso,a.Id_credito,a.Monto,a.Fecha_commit,a.Hora_commit FROM TBL_DESEMBOLSO_CREDITO \n" +
+                      "AS a inner join TBL_USUARIO AS b on a.Id_usuario = b.Id_usuario inner join TBL_CREDITO AS c on \n" +
+                      "a.Id_credito = c.Id_credito where a.Id_credito = '"+n+"' AND c.Estado=1";
         btnInformacion.addActionListener(this);
         mostrar(query);
+        mostrar2(query1);
         btnactualizarabono.addActionListener(this);
         btnactualizarabono.doClick();
        // btnAbono.addActionListener(this);
@@ -86,6 +91,12 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         String query="SELECT a.Id_abono,a.Id_credito,a.Capital,a.Mora,a.Interes,a.Total_monto,a.Forma_pago,a.Fecha_commit,a.Hora_commit \n" +
                      "FROM TBL_ABONO_CREDITO AS a where  a.Id_credito= '"+n+"' AND (a.Estado=0 OR a.Estado=2)";
         mostrar(query);
+        
+        
+        String query1="SELECT a.Id_desembolso,a.Id_credito,a.Monto,a.Fecha_commit,a.Hora_commit FROM TBL_DESEMBOLSO_CREDITO \n" +
+                      "AS a inner join TBL_USUARIO AS b on a.Id_usuario = b.Id_usuario inner join TBL_CREDITO AS c on \n" +
+                      "a.Id_credito = c.Id_credito where a.Id_credito = '"+n+"' AND c.Estado=1";
+        mostrar2(query1);
         
        
        
@@ -153,6 +164,32 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         
     }
     
+    private void mostrar2(String buscar){
+    
+    try {
+            modelo = funcion.mostrarDesembolso(buscar);
+            tblDatos.setModel(modelo);
+            
+            txtTotal1.setText("    " + Integer.toString(funcion.totalRegistrosB)); 
+            ocultarColumnas(tblDatos,1);
+            //ocultarColumnas(tblDatosA,0);
+            //ocultarColumnas(tblDatosA,3);
+            //ocultarColumnas(tblDatosA,4);
+            //ocultarColumnas(tblDatosA,5);
+            //ocultarColumnas(tblDatosA,6);
+            //ocultarColumnas(tblDatosA,7);
+            //ocultarColumnas(tblDatosA,8);
+            //ocultarColumnas(tblDatosA,9);
+            
+             calcularTotalAbonos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+    
+    
+    
+    }
+    
     private void ocultarColumnas(JTable tabla, int columna){
         
         tabla.getColumnModel().getColumn(columna).setMaxWidth(0);
@@ -170,7 +207,10 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
 
      }
     
-    
+        mostrar2("SELECT a.Id_desembolso,a.Id_credito,a.Monto,a.Fecha_commit,a.Hora_commit FROM TBL_DESEMBOLSO_CREDITO \n" +
+                      "AS a inner join TBL_USUARIO AS b on a.Id_usuario = b.Id_usuario inner join TBL_CREDITO AS c on \n" +
+                      "a.Id_credito = c.Id_credito where (a.Id_credito like '%"+textoBuscar+"%') and c.Estado=1");
+        
     
     }
     
