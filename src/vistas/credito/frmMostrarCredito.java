@@ -62,6 +62,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         grupoBuscar.add(rbId1);
         rbId1.setSelected(true);
         btnActualizar.addActionListener(this);
+        btnReporte1.addActionListener(this);
        
     }
 
@@ -127,6 +128,34 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
             }
         }
       
+       if(e.getSource()==btnReporte1){
+           
+           String carre = txtIdCredito.getText();
+            Conexion g = new Conexion();
+           g.Conectar();
+           try{
+               String url = System.getProperty("user.dir");
+               // String ruta = url+"/src/reportes/ReporteEspecificoAlum.jasper";
+               String ruta = "/reportes/ReporteDesembolsoCredito.jasper";
+               
+               Map parametro = new HashMap();
+               parametro.put("id",carre);
+               
+               InputStream rutaJasper =  frmMostrarCredito.class.getResourceAsStream(ruta);
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaJasper);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametro, g.getConexion());
+               
+               
+                JasperViewer viewer = new JasperViewer(jasperPrint,false);
+               // viewer.setTitle("Reporte UMG");
+                viewer.setVisible(true);
+            }catch(JRException ex){
+                System.out.println(ex.getMessage());
+            }
+       
+       
+       
+       }
 
     }
     
