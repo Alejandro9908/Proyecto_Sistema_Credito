@@ -51,6 +51,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         mostrar2(query1);
         btnactualizarabono.addActionListener(this);
         btnactualizarabono.doClick();
+        btnActualizar.doClick();
        // btnAbono.addActionListener(this);
         //SI
         txtIdCredito.setVisible(false);
@@ -70,7 +71,12 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
     @Override
     public void actionPerformed(ActionEvent e) {
 
-
+        if(e.getSource()==btnActualizar){
+            float capital = 0;
+            capital = funcion.actualizarCapitalRestante(Integer.parseInt(txtIdCredito.getText()));
+            txtMontoRestante.setText(Float.toString(capital));
+            btnactualizarabono.doClick();
+        }
             
        if(e.getSource()==btnInformacion){
            

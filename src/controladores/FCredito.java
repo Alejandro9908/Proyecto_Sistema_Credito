@@ -211,5 +211,30 @@ public class FCredito {
      }
      
      
+     public float actualizarCapitalRestante(int buscar){
+         float capital = 0;
+        
+    
+        String sql = "SELECT CAPITAL FROM TBL_CREDITO WHERE Id_credito = '"+buscar+"'";
+    
+        try{
+         
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+         
+            while(rs.next()){      
+                capital = rs.getFloat("CAPITAL");
+            }
+         
+            return capital;
+     
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"No se han podido cargar los datos, motivo: "+e);
+            return capital;
+        }
+         
+         
+     }
+     
      
 }
