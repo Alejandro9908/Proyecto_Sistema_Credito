@@ -54,7 +54,12 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         n= txtIdAhorroD.getText();
         String query="SELECT a.Id_abono_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_Commit FROM TBL_ABONO_AHORRO\n" +
                      "AS a inner join TBL_AHORRO AS b on a.Id_ahorro = b.Id_ahorro where a.Id_ahorro= '"+n+"' and b.Estado=1 ";
+        
+        String query1="SELECT a.Id_desembolso_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_commit FROM TBL_DESEMBOLSO_AHORRO AS\n" +
+        "a inner join TBL_AHORRO AS b on a.Id_ahorro=b.Id_ahorro where a.Id_ahorro = '"+n+"' and b.Estado=1";
+       
         mostrar(query);
+        mostrar1(query1);
         if(opcion ==1){
             lblTitulo.setText("Detalles de la cuenta de ahorro");
             btnAbonoAhorro.setVisible(false);
@@ -77,6 +82,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         btnAbonoAhorro.addActionListener(this);
         btnReporte.addActionListener(this);
         btnDesembolsoAhorro.addActionListener(this);
+        btnReporte1.addActionListener(this);
     }
     
      @Override
@@ -130,8 +136,11 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
     n= txtIdAhorroD.getText();
     String query="SELECT a.Id_abono_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_Commit FROM TBL_ABONO_AHORRO\n" +
     "AS a inner join TBL_AHORRO AS b on a.Id_ahorro = b.Id_ahorro where a.Id_ahorro= '"+n+"' and b.Estado=1 ";    
-     mostrar(query);   
-   
+     mostrar(query);  
+     
+     String query1="SELECT a.Id_desembolso_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_commit FROM TBL_DESEMBOLSO_AHORRO AS\n" +
+        "a inner join TBL_AHORRO AS b on a.Id_ahorro=b.Id_ahorro where a.Id_ahorro = '"+n+"' and b.Estado=1";
+      mostrar1(query1);
     }
     
     if(e.getSource()== btnReporte){
@@ -143,6 +152,33 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                String url = System.getProperty("user.dir");
                // String ruta = url+"/src/reportes/ReporteEspecificoAlum.jasper";
                String ruta = "/reportes/ReporteAbonoAhorro.jasper";
+               
+               Map parametro = new HashMap();
+               parametro.put("id",carre);
+               
+               InputStream rutaJasper =  frmMostrarAhorro.class.getResourceAsStream(ruta);
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaJasper);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametro, g.getConexion());
+               
+               
+                JasperViewer viewer = new JasperViewer(jasperPrint,false);
+               // viewer.setTitle("Reporte UMG");
+                viewer.setVisible(true);
+            }catch(JRException ex){
+                System.out.println(ex.getMessage());
+            }
+    
+    
+    }
+    
+    if(e.getSource()== btnReporte1){
+       String carre = txtIdAhorroD.getText();
+       Conexion g = new Conexion();
+       g.Conectar();
+           try{
+               String url = System.getProperty("user.dir");
+               // String ruta = url+"/src/reportes/ReporteEspecificoAlum.jasper";
+               String ruta = "/reportes/ReporteDesembolsoAhorro.jasper";
                
                Map parametro = new HashMap();
                parametro.put("id",carre);
@@ -177,7 +213,9 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
      }else{
          
          
-     
+     mostrar1("SELECT a.Id_desembolso_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_commit FROM TBL_DESEMBOLSO_AHORRO AS\n" +
+         "a inner join TBL_AHORRO AS b on a.Id_ahorro=b.Id_ahorro where (a.Id_desembolso_ahorro like '%"+textoBuscar+"%') and b.Estado=1");     
+         
      }
     
      }
@@ -205,6 +243,31 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         }
         
     }
+      
+    
+     private void mostrar1(String buscar){    
+        try {
+            modelo = funcion.mostrarDesembolso(buscar);
+            tblDatos1.setModel(modelo);
+            
+            txtTotal1.setText("    " + Integer.toString(funcion.totalRefistrosB)); 
+            ocultarColumnas(tblDatos1,1);
+            //ocultarColumnas(tblDatosA,0);
+            //ocultarColumnas(tblDatosA,3);
+            //ocultarColumnas(tblDatosA,4);
+            //ocultarColumnas(tblDatosA,5);
+            //ocultarColumnas(tblDatosA,6);
+            //ocultarColumnas(tblDatosA,7);
+            //ocultarColumnas(tblDatosA,8);
+            //ocultarColumnas(tblDatosA,9);
+            
+             //calcularTotalAbonos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos, motivo: "+ e);
+        }
+        
+    }  
+      
       
       private void ocultarColumnas(JTable tabla, int columna){
         
