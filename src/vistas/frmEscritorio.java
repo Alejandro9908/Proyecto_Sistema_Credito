@@ -34,6 +34,7 @@ import vistas.sucursal.frmIndexSucursal;
 import vistas.sucursal.frmNuevoSucursal;
 import vistas.usuario.frmIndexUsuario;
 import vistas.usuario.frmNuevoUsuario;
+import vistas.usuario.frmPerfil;
 
 /**
  *
@@ -408,6 +409,11 @@ public class frmEscritorio extends javax.swing.JFrame {
         jmSistema.add(jmiNuevoUsuario);
 
         jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
         jmSistema.add(jmiSalir);
 
         jMenuBar1.add(jmSistema);
@@ -429,8 +435,43 @@ public class frmEscritorio extends javax.swing.JFrame {
             
         jmiUsuarios.setEnabled(false);
         jmiNuevoUsuario.setEnabled(false);
+        }
+        else if(frmLogin.permisosSystem.equals("Asesor")){
+            
+        jmiUsuarios.setEnabled(false);
+        jmiNuevoUsuario.setEnabled(false);
+        
+         jmiUsuarios.setEnabled(false);
+        jmiNuevoUsuario.setEnabled(false);
+        
+        jmCuentas.setEnabled(false);
+        jMenu2.setEnabled(false); //para clientes
+        jmEmpresa.setEnabled(false);
+        jmAhorros.setEnabled(false);
+        jmCaja.setEnabled(false);
+        
+        
+        
+        
+        
         
         }
+        
+        else if(frmLogin.permisosSystem.equals("Cajero")){
+            
+        jmiUsuarios.setEnabled(false);
+        jmiNuevoUsuario.setEnabled(false);
+        jmCreditos.setEnabled(false);
+        jmCuentas.setEnabled(false);
+        jMenu2.setEnabled(false); //para clientes
+        jmEmpresa.setEnabled(false);
+        
+      
+        }
+        
+        
+        
+       
            
     }
     
@@ -620,7 +661,23 @@ public class frmEscritorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNuevoTipoGarantiaActionPerformed
 
     private void jmiPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPerfilActionPerformed
-        // TODO add your handling code here:
+       
+         frmPerfil frmNuevo = new frmPerfil();
+        dpnlEscritorio.add(frmNuevo);
+        Dimension desktopSize = dpnlEscritorio.getSize();
+        Dimension FrameSize = frmNuevo.getSize();
+        frmNuevo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frmNuevo.setVisible(true);
+        
+        frmPerfil.txtIdPerfil.setText(String.valueOf(frmLogin.idUsuarioSystem));
+        frmPerfil.txtUsuario.setText(frmLogin.nicknameSystem);
+        frmPerfil.txtPermisos.setText(frmLogin.permisosSystem);
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jmiPerfilActionPerformed
 
     private void jmiUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUsuariosActionPerformed
@@ -671,6 +728,20 @@ public class frmEscritorio extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jmiAbonoAhorrosActionPerformed
+
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
+       
+        frmLogin login = new frmLogin();
+	
+		//login.setSize(380, 365);
+		login.setVisible(true);
+		login.setResizable(false);
+		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                login.setLocationRelativeTo(null);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_jmiSalirActionPerformed
 
     /**
      * @param args the command line arguments

@@ -175,7 +175,7 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame implements Actio
         btnSeleccionar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnSeleccionar.setText("Seleccionar");
 
-        cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Gerente", "Supervisor" }));
+        cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Gerente", "Supervisor", "Asesor", "Cajero" }));
 
         txtId1.setEditable(false);
         txtId1.addActionListener(new java.awt.event.ActionListener() {
