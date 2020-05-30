@@ -444,6 +444,7 @@ public class frmIndexCredito extends javax.swing.JInternalFrame implements Actio
         frmMostrarCredito.txtMontoTotal.setText(tblDatos.getValueAt(posicion,10).toString());
         frmMostrarCredito.txtMontoPagado.setText(tblDatos.getValueAt(posicion,13).toString());
         frmMostrarCredito.txtMontoRestante.setText(tblDatos.getValueAt(posicion,14).toString()); btnactualizarabono.doClick();
+        btnActualizar.doClick();
         }
         
         if(opcion ==2){
