@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteDesembolsoAhorro" language="groovy" pageWidth="550" pageHeight="595" orientation="Landscape" columnWidth="510" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ebc0181-1da0-42d3-b840-ecde3f932f57">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="ffc9c7a7-bce8-4357-959d-cf1c84f5b4bd"/>
+	<parameter name="id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT a.Id_desembolso_ahorro,a.Id_ahorro,a.Monto,c.NIckname,a.Fecha_commit,a.Hora_commit FROM TBL_DESEMBOLSO_AHORRO AS
+a inner join TBL_AHORRO AS b on a.Id_ahorro=b.Id_ahorro inner join TBL_Usuario AS c on a.ID_USUARIO=c.Id_usuario where
+a.Id_ahorro = $P{id} and b.Estado=1]]>
+	</queryString>
+	<field name="Id_desembolso_ahorro" class="java.lang.Object"/>
+	<field name="Id_ahorro" class="java.lang.Object"/>
+	<field name="Monto" class="java.lang.Object"/>
+	<field name="NIckname" class="java.lang.Object"/>
+	<field name="Fecha_commit" class="java.lang.Object"/>
+	<field name="Hora_commit" class="java.lang.Object"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="10" width="510" height="21" forecolor="#B89F7D" backcolor="#70A9C6" uuid="4225a603-9dfe-44ab-ae2e-086f4ebed99c"/>
+					<staticText>
+						<reportElement x="0" y="1" width="54" height="20" uuid="9287c139-0abe-42c4-8151-832c17f26aaf"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ID]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="72" y="1" width="100" height="20" uuid="3d437ad8-b04b-4628-98f1-1cccb6d2bd77"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[MONTO]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="190" y="1" width="100" height="20" uuid="6cc13849-91e7-4ada-b521-51bbdf5ed626"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[FECHA]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="310" y="1" width="100" height="20" uuid="2d3477b1-43b8-4529-ba29-a6e328710c1c"/>
+						<textElement textAlignment="Center">
+							<font isBold="true" isItalic="false"/>
+						</textElement>
+						<text><![CDATA[HORA]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="410" y="0" width="100" height="20" uuid="927f710d-12d8-45fd-8072-66e6d5985f28"/>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[USUARIO]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+		<groupHeader>
+			<band height="8"/>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="555" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="510" height="65" forecolor="#006699" backcolor="#006699" uuid="42133b0d-b8bf-43ac-9b47-184ce98bf166"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="510" height="65" uuid="357dd540-4068-45cb-858f-bc4eb01a2433"/>
+					<textElement textAlignment="Center">
+						<font size="54" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Desembolso Ahorro]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="510" height="1" uuid="78edc7d8-0f18-495f-ac9b-15d9f428ef0a"/>
+			</line>
+			<frame>
+				<reportElement x="0" y="0" width="510" height="28" uuid="c4a7b472-f412-445c-9584-39bc7066eb30"/>
+				<textField>
+					<reportElement x="0" y="0" width="54" height="20" uuid="0f1a1dea-af66-438f-bd6e-c457edcbe5a3"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[""+$F{Id_desembolso_ahorro}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="72" y="0" width="100" height="20" uuid="626ee82b-2443-4b28-8895-a095f96bb874"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[""+$F{Monto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="190" y="0" width="100" height="20" uuid="36ddf936-413c-47f7-aa8f-78e4255e182d"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[""+$F{Fecha_commit}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="310" y="0" width="100" height="20" uuid="ce5386ae-d13e-4255-abee-25d17fef9b15"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[""+$F{Hora_commit}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="410" y="0" width="100" height="20" uuid="22e005eb-49e1-47a0-9ddd-3f6f9e5bba70"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[""+$F{NIckname}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="510" height="1" uuid="bf13c91d-5cd2-485b-84ee-86e67167cb10"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="508" height="16" forecolor="#D0B48E" backcolor="#006699" uuid="6c5b912e-db4e-4f1f-a7a5-0331f8d4c604"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="468" y="0" width="40" height="16" forecolor="#FFFFFF" uuid="218cb880-ab45-4947-997f-1d3d631f5818"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="388" y="0" width="80" height="16" forecolor="#FFFFFF" uuid="b220013d-3b6b-47c4-a64b-79844bead88b"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" uuid="6ca948e8-b7b5-428b-b791-d71433b41b20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
