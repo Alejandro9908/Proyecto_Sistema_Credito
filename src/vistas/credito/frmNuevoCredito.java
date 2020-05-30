@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import modelo.Cargo;
 import modelo.Credito;
 import vistas.cargo.frmIndexCargo;
+import vistas.frmLogin;
 import vistas.frmSeleccionar;
 
 /**
@@ -75,7 +76,7 @@ public class frmNuevoCredito extends javax.swing.JInternalFrame implements Actio
             credito.setMora(Integer.parseInt(txtMora.getText()));
             credito.setDestino(txtDestino.getText());
             credito.setId_empleado(1);
-            credito.setId_usuario(1);
+            credito.setId_usuario(frmLogin.idUsuarioSystem);
             credito.setId_garantia(Integer.parseInt(txtIdGarantia.getText()));
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");   
             java.util.Date utilStartDate = txtFechaCorte.getDate();
