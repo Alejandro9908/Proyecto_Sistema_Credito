@@ -5,13 +5,24 @@
  */
 package vistas.ahorro;
 
+import controladores.Conexion;
 import controladores.FAhorro;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import vistas.abonoAhorro.frmNuevoAbonoAhorro;
 import static vistas.abonoCredito.frmMostrarAbonos.txtIdCredito;
 import static vistas.abonoCredito.frmMostrarAbonos.txtMontoRestante;
@@ -53,13 +64,17 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         }else if(opcion ==2){
             lblTitulo.setText("Transaccion: Ahorros");   
             btnAbonoAhorro.setVisible(true);
-            btnDesembolsoAhorro.setVisible(false);
+            btnDesembolsoAhorro.setVisible(true);
         }
         
        
-        
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbId1);
+        rbId1.setSelected(true);
         btnInformacion.addActionListener(this);
         btnAbonoAhorro.addActionListener(this);
+        btnReporte.addActionListener(this);
     }
     
      @Override
@@ -102,9 +117,54 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
    
     }
     
+    if(e.getSource()== btnReporte){
+    
+    String carre = txtIdAhorroD.getText();
+    Conexion g = new Conexion();
+    g.Conectar();
+    try{
+               String url = System.getProperty("user.dir");
+               // String ruta = url+"/src/reportes/ReporteEspecificoAlum.jasper";
+               String ruta = "/reportes/ReporteAbonoAhorro.jasper";
+               
+               Map parametro = new HashMap();
+               parametro.put("id",carre);
+               
+               InputStream rutaJasper =  frmMostrarAhorro.class.getResourceAsStream(ruta);
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaJasper);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametro, g.getConexion());
+               
+               
+                JasperViewer viewer = new JasperViewer(jasperPrint,false);
+               // viewer.setTitle("Reporte UMG");
+                viewer.setVisible(true);
+            }catch(JRException ex){
+                System.out.println(ex.getMessage());
+            }
     
     
     }
+    
+    
+    
+    }
+    
+     private void buscarAbono(String textoBuscar){
+     
+     if(rbId.isSelected()==true){
+     
+     mostrar("SELECT a.Id_abono_ahorro,a.Id_ahorro,a.Monto,a.Fecha_commit,a.Hora_Commit,c.NIckname FROM TBL_ABONO_AHORRO\n" +
+            "AS a inner join TBL_AHORRO AS b on a.Id_ahorro = b.Id_ahorro inner join TBL_USUARIO AS c on a.ID_USUARIO=c.Id_usuario\n" +
+            "where (a.Id_abono_ahorro like '%"+textoBuscar+"%') and b.Estado=1");
+     
+     }else{
+         
+         
+     
+     }
+    
+     }
+    
     
       private void mostrar(String buscar){    
         try {
@@ -158,6 +218,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         rbId = new javax.swing.JRadioButton();
+        rbId1 = new javax.swing.JRadioButton();
         txtNombre = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         txtIdCuenta = new javax.swing.JTextField();
@@ -190,6 +251,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
         jLabel4 = new javax.swing.JLabel();
         txtTotal1 = new javax.swing.JTextField();
         btnactualizar = new javax.swing.JButton();
+        btnReporte1 = new javax.swing.JButton();
         txtIdAhorroD = new javax.swing.JTextField();
 
         setClosable(true);
@@ -258,12 +320,16 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
 
         rbId.setBackground(new java.awt.Color(255, 255, 255));
         rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbId.setText("Transacción");
+        rbId.setText("Transacción Abono");
         rbId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbIdActionPerformed(evt);
             }
         });
+
+        rbId1.setBackground(new java.awt.Color(255, 255, 255));
+        rbId1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbId1.setText("Transacción Desembolso");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -273,11 +339,13 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(rbId))
+                        .addComponent(rbId)
+                        .addGap(10, 10, 10)
+                        .addComponent(rbId1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 961, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -286,7 +354,9 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(rbId))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbId)
+                    .addComponent(rbId1)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
@@ -406,6 +476,10 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
 
         btnactualizar.setText("jButton1");
 
+        btnReporte1.setBackground(new java.awt.Color(255, 255, 255));
+        btnReporte1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnReporte1.setText("Reporte");
+
         javax.swing.GroupLayout pnlIndexLayout = new javax.swing.GroupLayout(pnlIndex);
         pnlIndex.setLayout(pnlIndexLayout);
         pnlIndexLayout.setHorizontalGroup(
@@ -490,6 +564,8 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                                 .addGroup(pnlIndexLayout.createSequentialGroup()
                                     .addComponent(lblTitulo2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btnDesembolsoAhorro))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIndexLayout.createSequentialGroup()
@@ -560,7 +636,8 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                     .addComponent(btnActualizar)
                     .addComponent(lblTitulo1)
                     .addComponent(btnAbonoAhorro)
-                    .addComponent(btnDesembolsoAhorro))
+                    .addComponent(btnDesembolsoAhorro)
+                    .addComponent(btnReporte1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIndexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -590,7 +667,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBaseLayout.createSequentialGroup()
                         .addComponent(pnlIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 33, Short.MAX_VALUE))
+                        .addGap(0, 29, Short.MAX_VALUE))
                     .addGroup(pnlBaseLayout.createSequentialGroup()
                         .addComponent(lblTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -616,7 +693,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         //buscar();
-        //buscar(txtBuscar.getText());
+        buscarAbono(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
@@ -679,6 +756,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JButton btnGarantia;
     private javax.swing.JButton btnInformacion;
     private javax.swing.JButton btnReporte;
+    private javax.swing.JButton btnReporte1;
     public static javax.swing.JButton btnactualizar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -703,6 +781,7 @@ public class frmMostrarAhorro extends javax.swing.JInternalFrame implements Acti
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlIndex;
     private javax.swing.JRadioButton rbId;
+    private javax.swing.JRadioButton rbId1;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTable tblDatos1;
     private javax.swing.JTextField txtBuscar;

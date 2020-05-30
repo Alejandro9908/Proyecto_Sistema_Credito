@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -51,6 +52,11 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         txtIdCuenta.setVisible(false);
         
         btnReporte.addActionListener(this);
+        ButtonGroup grupoBuscar = new ButtonGroup();
+        grupoBuscar.add(rbId);
+        grupoBuscar.add(rbId1);
+        rbId1.setSelected(true);
+        btnActualizar.addActionListener(this);
        
     }
 
@@ -155,7 +161,18 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         tabla.getTableHeader().getColumnModel().getColumn(columna).setMinWidth(0);
     }
     
+    private void buscarAbonoCredito(String textoBuscar){
+     
+     if(rbId.isSelected()==true){
+         
+         mostrar("SELECT a.Id_abono,a.Id_credito,a.Capital,a.Mora,a.Interes,a.Total_monto,a.Forma_pago,a.Fecha_commit,a.Hora_commit \n" +
+                 "FROM TBL_ABONO_CREDITO AS a where (a.Id_credito like '%"+textoBuscar+"%') AND (a.Estado=0 OR a.Estado=2)");
+
+     }
     
+    
+    
+    }
     
     
     @SuppressWarnings("unchecked")
@@ -177,6 +194,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         jLabel3 = new javax.swing.JLabel();
         rbId = new javax.swing.JRadioButton();
         btnActualizar = new javax.swing.JButton();
+        rbId1 = new javax.swing.JRadioButton();
         txtNombre = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         txtNCredito = new javax.swing.JTextField();
@@ -279,7 +297,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
 
         rbId.setBackground(new java.awt.Color(255, 255, 255));
         rbId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rbId.setText("Transacción");
+        rbId.setText("Transacción de Abonos");
         rbId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbIdActionPerformed(evt);
@@ -290,6 +308,15 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         btnActualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnActualizar.setText("Actualizar");
 
+        rbId1.setBackground(new java.awt.Color(255, 255, 255));
+        rbId1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbId1.setText("Transacción de Desembolsos");
+        rbId1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbId1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -299,7 +326,9 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rbId))
+                        .addComponent(rbId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbId1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,7 +349,9 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(rbId))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbId)
+                            .addComponent(rbId1)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnActualizar)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -548,7 +579,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnReporte1)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 7, Short.MAX_VALUE))
                     .addGroup(pnlIndexLayout.createSequentialGroup()
                         .addGap(303, 303, 303)
                         .addComponent(jLabel2)
@@ -680,7 +711,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
                         .addGap(18, 18, 18)
                         .addComponent(txtIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnlIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -702,7 +733,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         //buscar();
-        //buscar(txtBuscar.getText());
+        buscarAbonoCredito(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
@@ -760,6 +791,10 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
         // TODO add your handling code here:
     }//GEN-LAST:event_tblDatosAMouseClicked
 
+    private void rbId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbId1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbId1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnActualizar;
@@ -796,6 +831,7 @@ public class frmMostrarCredito extends javax.swing.JInternalFrame implements Act
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlIndex;
     private javax.swing.JRadioButton rbId;
+    private javax.swing.JRadioButton rbId1;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTable tblDatosA;
     private javax.swing.JTextField txtBuscar;
